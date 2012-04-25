@@ -25,8 +25,6 @@
 
 			<p>#springMessage("controller") ${time} ms</p>
 
-			<p>$firstName $lastName --- $admin</p>
-
 			<p>$date</p>
 		</div>
 		#parse("footer.vm")
