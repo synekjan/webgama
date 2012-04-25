@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+#parse("include.vm")
+<title>#springMessage("adjustment.navbar")</title>
+</head>
+<body>
+	<div id="wrapper">
+		#parse("header.vm")
+
+		<div id="breadcrumbs">
+			<a href="#springUrl("/")">WebGama</a> > <a href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a> > <a href="#springUrl("/adjustment")"><span class="active">#springMessage("adjustment.interactively")</span></a>
+		</div>
+
+		<div class="left_menu">
+			<ul>
+				<li><a href="#springUrl("/adjustment")">#springMessage("adjustment.interactively")</a></li>
+				<li><a href="#springUrl("/adjustment/xml")">#springMessage("adjustment.from.xml")</a></li>
+			</ul>
+		</div>
+
+		<div id="container">
+
+			<h1>#springMessage("adjustment.navbar")</h1>
+
+			<p>#springMessage("controller") ${time} ms</p>
+
+			<p>$firstName $lastName --- $admin</p>
+
+			<p>$date</p>
+		</div>
+		#parse("footer.vm")
+	</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<div id="header">
+	<div class="logo_wrapper">
+		<div class="logo">
+			<a href="#springUrl("/")"><img border="0"
+				src="#springUrl("/resources/img/webgama_logo.png")" alt="Title" title="WebGama" /></a>
+		</div>
+		<div class="welcome_wrapper">
+		
+			<a href="?locale=cs_CZ">cs_CZ</a> &nbsp; 
+			<a href="?locale=en_GB">en_GB</a> &nbsp;
+			<a href="?locale=en_US">en_US</a> &nbsp; &nbsp;
+			
+			<!-- <a href="#springUrl("/user/logins")">#springMessage("last.login"): $!lastlogin</a> &nbsp; &nbsp; -->
+			  
+			#springMessage("welcome") $authentication.username ( 
+			<a href="#springUrl("/user")">#springMessage("user.settings")</a> | 
+			
+			#if ($admin)
+			<a href="#springUrl("/admin")">Admin</a> |
+			#end
+					
+			<a href="#springUrl("/logout")">#springMessage("logout")</a> ) &nbsp; &nbsp;
+		</div>
+	</div>
+
+	<div class="nav_menu">
+		<ul>
+			<li><a href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a></li>
+			<li><a href="#springUrl("/about")">#springMessage("about.navbar")</a></li>
+		</ul>
+	</div>
+
+</div>

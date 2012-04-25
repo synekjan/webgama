@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+#parse("include.vm")
+<title>#springMessage("about.project")</title>
+</head>
+<body>
+	<div id="wrapper">
+		#parse("header.vm")
+
+		<div id="breadcrumbs">
+			<a href="#springUrl("/")">WebGama</a> > <a href="#springUrl("/about")">#springMessage("about.navbar")</a> > <a href="#springUrl("/about/project")"><span class="active">#springMessage("about.project")</span></a>
+		</div>
+
+		<div class="left_menu">
+			<ul>
+				<li><a href="#springUrl("/about/project")">#springMessage("about.project")</a></li>
+				<li><a href="#springUrl("/about/cvut")">#springMessage("about.organization")</a></li>
+				<li><a href="#springUrl("/about/author")">#springMessage("about.author")</a></li>
+			</ul>
+		</div>
+
+		<div id="container">
+
+			<h3>#springMessage("about.project")</h3>
+
+			<p>IP address: $ip</p>
+			<p>Port: $port</p>
+			<p>Encoding: $encoding</p>
+
+
+
+		</div>
+		#parse("footer.vm")
+	</div>
+</body>
+</html>

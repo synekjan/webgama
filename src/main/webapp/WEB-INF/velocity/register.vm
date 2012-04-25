@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Registration</title>
+</head>
+<body>
+	<h2>Registration</h2>
+
+	<form action="" method="post">
+		<fieldset>
+			<legend>User Information</legend>
+			<table>
+				<tr>
+					<td><label for="username">* Username:</label></td>
+					<td><input type="text" name="username" id="username"></td>
+					<td>#springShowErrors("" "")</td>
+				</tr>
+				<tr>
+					<td><label for="password">* #springMessage("user.password"):</label></td>
+					<td><input id="password" type="password" name="password"></td>
+				</tr>
+				<tr>
+					<td><label for="password2">* #springMessage("user.password.confirm"):</label></td>
+					<td><input id="password2" type="password" name="password2"></td>
+				</tr>
+				<tr>
+					<td><label for="email">* E-mail:</label></td>
+					<td><input id="email" type="email" name="email"></td>
+				</tr>
+				<tr>
+					<td><label for="firstname">#springMessage("user.firstname"):</label></td>
+					<td><input id="firstname" type="text" name="firstName"></td>
+				</tr>
+				<tr>
+					<td><label for="lastname">#springMessage("user.lastname"):</label></td>
+					<td><input id="lastname" type="text" name="lastName"></td>
+				</tr>
+				<tr>
+					<td><label for="telephone">#springMessage("user.telephone"):</label></td>
+					<td><input id="telephone" type="text" name="telephone"></td>
+				</tr>
+			</table>
+		</fieldset>
+		<br>
+		<fieldset>
+			<legend>Address</legend>
+			<table>
+				<tr>
+					<td><label for="street">#springMessage("user.street"):</label></td>
+					<td><input id="street" type="text" name="street"></td>
+				</tr>
+				<tr>
+					<td><label for="number">#springMessage("user.number"):</label></td>
+					<td><input id="number" type="text" name="number"></td>
+				</tr>
+				<tr>
+					<td><label for="city">#springMessage("user.city"):</label></td>
+					<td><input id="city" type="text" name="city"></td>
+				</tr>
+				<tr>
+					<td><label for="zipcode">#springMessage("user.zipcode"):</label></td>
+					<td><input id="zipcode" type="text" name="zipCode"></td>
+				</tr>
+				<tr>
+					<td><label for="state">#springMessage("user.state"):</label></td>
+					<td><input id="state" type="text" name="state"></td>
+				</tr>
+			</table>
+		</fieldset>
+		<table>
+			<tr>
+				<td><input type="reset" value="Reset"> <input type="submit" value="#springMessage("submit")"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

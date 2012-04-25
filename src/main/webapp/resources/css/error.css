@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+
+div#container {
+
+	border: 1px solid gray;
+	text-align: center;
+	font-style: italic;
+}

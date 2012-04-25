@@ -1,0 +1,2 @@
+<link rel="stylesheet" type="text/css" href="#springUrl("/resources/css/default.css")" />
+<link rel="icon" type="image/ico" href="#springUrl("/resources/img/favicon.ico")" />

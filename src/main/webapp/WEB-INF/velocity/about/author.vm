@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+#parse("include.vm")
+<title>#springMessage("about.author")</title>
+</head>
+<body>
+	<div id="wrapper">
+		#parse("header.vm")
+
+		<div id="breadcrumbs">
+			<a href="#springUrl("/")">WebGama</a> > <a href="#springUrl("/about")">#springMessage("about.navbar")</a> > <a href="#springUrl("/about/author")"><span class="active">#springMessage("about.author")</span></a>
+		</div>
+
+		<div class="left_menu">
+			<ul>
+				<li><a href="#springUrl("/about/project")">#springMessage("about.project")</a></li>
+				<li><a href="#springUrl("/about/cvut")">#springMessage("about.organization")</a></li>
+				<li><a href="#springUrl("/about/author")">#springMessage("about.author")</a></li>
+			</ul>
+		</div>
+
+		<div id="container">
+
+			<h3>#springMessage("about.author")</h3>
+
+			<p>Jendik Synků</p>
+
+		</div>
+		#parse("footer.vm")
+	</div>
+</body>
+</html>

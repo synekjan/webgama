@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+#parse("include.vm")
+<title>#springMessage("welcome.title")</title>
+</head>
+<body>
+	<div id="wrapper">
+		#parse("header.vm")
+		<div id="container_index">
+		
+			<h2>#springMessage("header")</h2>
+
+			<p>#springMessage("today.is") $date</p>
+
+			<p>#springMessage("controller") $time ms</p>
+
+		</div>
+		#parse("footer.vm")
+	</div>
+</body>
+</html>

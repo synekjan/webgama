@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+#parse("include.vm")
+<title>#springMessage("welcome.title")</title>
+</head>
+<body>
+	<div id="wrapper">
+		#parse("header.vm")
+
+		<div id="breadcrumbs">
+			<a href="#springUrl("/")">WebGama</a> > <a href="#springUrl("/about")">#springMessage("about.navbar")</a> > <a href="#springUrl("/about/cvut")"><span class="active">#springMessage("about.organization")</span></a>
+		</div>
+
+		<div class="left_menu">
+			<ul>
+				<li><a href="#springUrl("/about/project")">#springMessage("about.project")</a></li>
+				<li><a href="#springUrl("/about/cvut")">#springMessage("about.organization")</a></li>
+				<li><a href="#springUrl("/about/author")">#springMessage("about.author")</a></li>
+			</ul>
+		</div>
+
+		<div id="container">
+
+			<h3>#springMessage("about.organization")</h3>
+			<br>
+			<a href="http://www.cvut.cz">CTU Prague</a>
+			<br>
+			<br>
+			<a href="http://www.fsv.cvut.cz">Faculty of Civil Engineering</a>
+
+
+
+		</div>
+		#parse("footer.vm")
+	</div>
+</body>
+</html>

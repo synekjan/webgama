@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+#parse("include.vm")
+<title>#springMessage("change.password")</title>
+</head>
+<body>
+	<div id="wrapper">
+		#parse("header.vm")
+
+		<div id="breadcrumbs">
+			<a href="#springUrl("/")">WebGama</a> > <a href="#springUrl("/user/info")">#springMessage("user.settings")</a>
+			> <a href="#springUrl("/user/password/change")"><span class="active">#springMessage("change.password")</span></a>
+		</div>
+
+		<div class="left_menu">
+			<ul>
+				<li><a href="#springUrl("/user/info")">#springMessage("user.general.settings")</a></li>
+				<li><a href="#springUrl("/user/password/change")">#springMessage("change.password")</a></li>
+				<li><a href="#springUrl("/user/logins/show")">#springMessage("logins.list")</a></li>
+				<li><a href="#springUrl("/user/delete")">#springMessage("delete.account")</a></li>
+			</ul>
+		</div>
+
+		<div id="container">
+
+			<h2>#springMessage("change.password")</h2>
+
+			<form action="" method="post">
+				<table>
+					<tr>
+						<td>Username:</td>
+						<td>$name</td>
+					</tr>
+					<tr>
+						<td><label for="current_password">#springMessage("user.current.password"):</label></td>
+						<td><input type="password" name="password" id="current_password"></td>
+					</tr>
+					<tr>
+						<td><label for="new_password">#springMessage("user.new.password"):</label></td>
+						<td><input type="password" name="password" id="new_password"></td>
+					</tr>
+					<tr>
+						<td><label for="confirm_new_password">#springMessage("user.confirm.new.password"):</label></td>
+						<td><input type="password" name="password" id="confirm_new_password"></td>
+					</tr>
+					<td><input type="submit" value="#springMessage("change.password.button")"><input type="reset" value="Reset"></td>
+					</tr>
+
+				</table>
+			</form>
+
+
+		</div>
+		#parse("footer.vm")
+	</div>
+</body>
+</html>
