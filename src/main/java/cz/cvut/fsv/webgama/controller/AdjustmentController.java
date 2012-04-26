@@ -1,11 +1,11 @@
 package cz.cvut.fsv.webgama.controller;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,9 +14,6 @@ import org.springframework.web.servlet.mvc.AbstractController;
 
 @Controller
 public class AdjustmentController extends AbstractController {
-
-	@DateTimeFormat
-	private Date date;
 
 	@Override
 	@RequestMapping(value = "/adjustment", method = RequestMethod.GET)
@@ -29,9 +26,13 @@ public class AdjustmentController extends AbstractController {
 
 		request.isUserInRole("ROLE_ADMIN");
 		
-		date = new Date();
+		Date date = new Date();
+		Calendar cal = Calendar.getInstance();
+		
+		
+		
 		mav.addObject("date", date);
-
+		mav.addObject("cal", cal.get(Calendar.MILLISECOND));
 		mav.addObject("admin", request.isUserInRole("ROLE_ADMIN"));
 
 		double time = (double) (System.nanoTime() - startTime) / 1000000;

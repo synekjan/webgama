@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jee="http://www.springframework.org/schema/jee"
 	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+		                http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
 	<bean id="userDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcUserDao">
 		<property name="dataSource" ref="dataSource" />
@@ -13,18 +14,19 @@
 	</bean>
 
 	<!-- Initializes DataSource with connection pooling provided by Apache Commons DBCP -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="jdbc:postgresql://localhost:5432/webgama" />
 		<property name="username" value="synekjan" />
 		<property name="password" value="synekjan" />
-	</bean>
+	</bean> -->
 
-	<!-- <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/postgres" /> -->
+	<!-- Initializes DB Connection Pooling defined in Tomcat's server.xml and context.xml -->
+	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/Postgres" expected-type="javax.sql.DataSource"/>
 
 	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="java:comp/env/jdbc/postgres" />
+		<property name="jndiName" value="java:comp/env/jdbc/Postgres" />
 	</bean> -->
 
 </beans>

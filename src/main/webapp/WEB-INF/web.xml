@@ -83,6 +83,5 @@
 		<error-code>403</error-code>
 		<location>/resources/error403.html</location>
 	</error-page>
-
-
+	
 </web-app>

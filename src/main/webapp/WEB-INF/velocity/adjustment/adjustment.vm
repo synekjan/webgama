@@ -26,6 +26,8 @@
 			<p>#springMessage("controller") ${time} ms</p>
 
 			<p>$date</p>
+			
+			<p>$cal</p>
 		</div>
 		#parse("footer.vm")
 	</div>
