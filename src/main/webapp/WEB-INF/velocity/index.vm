@@ -2,7 +2,7 @@
 <html>
 <head>
 #parse("include.vm")
-<title>#springMessage("welcome.title")</title>
+<title>WebGama Application</title>
 </head>
 <body>
 	<div id="wrapper">

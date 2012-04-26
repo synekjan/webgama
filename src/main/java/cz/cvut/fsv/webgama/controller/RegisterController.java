@@ -31,7 +31,7 @@ public class RegisterController extends AbstractController {
 	protected ModelAndView handleRequestInternal(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		return new ModelAndView("register");
+		return new ModelAndView("/register/register");
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -44,7 +44,14 @@ public class RegisterController extends AbstractController {
 		
 		//mailManager.sendConfirmationEmail(user);
 		
-		return new ModelAndView("redirect:/login");
+		return new ModelAndView("redirect:/register/success");
 	}
+	
+	@RequestMapping(value="/success", method = RequestMethod.GET)
+	protected ModelAndView registerSuccess() {
+		
+		return new ModelAndView("/register/success");
+	}
+	
 
 }

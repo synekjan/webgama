@@ -24,7 +24,7 @@ public class LoginController extends AbstractController {
 		return new ModelAndView("login");
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
+	/*@RequestMapping(method = RequestMethod.POST)
 	protected ModelAndView showForm(HttpServletRequest request) {
 
 		// loginManager.login("pepa", request.getRemoteAddr(), true);
@@ -32,6 +32,6 @@ public class LoginController extends AbstractController {
 		System.out.println("LOGIN POST");
 
 		return new ModelAndView("redirect:/");
-	}
+	}*/
 
 }
