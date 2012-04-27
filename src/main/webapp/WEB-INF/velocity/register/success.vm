@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+#parse("include.vm")
+<title>Registration</title>
+</head>
+<body>
+	<h2>Registration successful</h2>
+	<br>
+	<a href="#springUrl("/")">[back to index]</a>
+
+	
+</body>
+</html>

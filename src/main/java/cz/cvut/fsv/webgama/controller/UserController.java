@@ -51,11 +51,10 @@ public class UserController {
 	}
 
 	@RequestMapping(value = { "", "/info" }, method = RequestMethod.POST)
-	public String modify(@Valid @ModelAttribute UserForm userForm,
-			BindingResult result) {
+	public String modify(@Valid @ModelAttribute("user") UserForm userForm, BindingResult result) {
 
 		if (result.hasErrors()) {
-			return "redirect:/user";
+			return "/user/user";
 		}
 
 		userManager.updateUser(userForm);

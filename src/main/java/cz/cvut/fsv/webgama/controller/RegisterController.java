@@ -2,6 +2,7 @@ package cz.cvut.fsv.webgama.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,15 +31,21 @@ public class RegisterController extends AbstractController {
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView handleRequestInternal(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		
+		UserRegistrationForm user = new UserRegistrationForm();
+		
+		ModelAndView mav = new ModelAndView("/register/register");
+		
+		mav.addObject("user", user);
 
-		return new ModelAndView("/register/register");
+		return mav;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	protected ModelAndView register(HttpServletRequest request,@ModelAttribute UserRegistrationForm userForm, BindingResult result) {
+	protected ModelAndView register(HttpServletRequest request,@Valid @ModelAttribute("user") UserRegistrationForm userForm, BindingResult result) {
 		
 		if (result.hasErrors())
-			return new ModelAndView("/register");
+			return new ModelAndView("/register/register");
 		
 		userManager.registerUser(userForm);
 		

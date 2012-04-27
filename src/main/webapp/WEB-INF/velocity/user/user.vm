@@ -26,7 +26,6 @@
 
 			<h2>#springMessage("user.general.settings")</h2>
 			<br>
-
 			<form action="" method="post">
 				<fieldset>
 					<legend>#springMessage("user.general.settings")</legend>
@@ -38,40 +37,49 @@
 						</tr>
 						<tr>
 							<td><label for="email">E-mail:</label></td>
-							<td><input type="email" name="email" id="email" value="$!user.email"></td>
-							<td></td>
+							<td>#springBind("user") #springFormInput("user.email", "")</td>
+							<td>#springShowErrors("&nbsp", "form_errors")</td>
+						</tr>
+
+						<tr>
+							<td><label for="firstName">#springMessage("user.firstname")</label></td>
+							<td>#springBind("user") #springFormInput("user.firstName", "")</td>
+							<td>#springShowErrors("&nbsp", "form_errors")</td>
 						</tr>
 						<tr>
-							<td><label for="firstname">#springMessage("user.firstname"):</label></td>
-							<td><input type="text" name="firstName" id="firstname" value="$!user.firstName"></td>
+							<td><label for="lastName">#springMessage("user.lastname")</label></td>
+							<td>#springBind("user") #springFormInput("user.lastName", "")</td>
+							<td>#springShowErrors("&nbsp", "form_errors")</td>
 						</tr>
 						<tr>
-							<td><label for="lastname">#springMessage("user.lastname"):</label></td>
-							<td><input type="text" name="lastName" id="lastname" value="$!user.lastName"></td>
-						</tr>
-						<tr>
-							<td><label for="telephone">#springMessage("user.telephone"):</label></td>
-							<td><input type="text" name="telephone" id="telephone" value="$!user.telephone"></td>
+							<td><label for="telephone">#springMessage("user.telephone"):</label></td> <
+							<td>#springFormInput("user.telephone", "")</td>
+							<td>#springShowErrors("&nbsp", "form_errors")</td>
 						</tr>
 						<tr>
 							<td><label for="street">#springMessage("user.street"):</label></td>
-							<td><input type="text" name="street" id="street" value="$!user.street"></td>
+							<td>#springFormInput("user.street", "")</td>
+							<td>#springShowErrors("&nbsp", "form_errors")</td>
 						</tr>
 						<tr>
 							<td><label for="number">#springMessage("user.number"):</label></td>
-							<td><input type="text" name="number" id="number" value="$!user.number"></td>
+							<td>#springFormInput("user.number", "")</td>
+							<td>#springShowErrors("&nbsp", "form_errors")</td>
 						</tr>
 						<tr>
 							<td><label for="city">#springMessage("user.city"):</label></td>
-							<td><input type="text" name="city" id="city" value="$!user.city"></td>
+							<td>#springFormInput("user.city", "")</td>
+							<td>#springShowErrors("&nbsp", "form_errors")</td>
 						</tr>
 						<tr>
-							<td><label for="zipcode">#springMessage("user.zipcode"):</label></td>
-							<td><input type="text" name="zipCode" id="zipcode" value="$!user.zipCode"></td>
+							<td><label for="zipCode">#springMessage("user.zipcode"):</label></td>
+							<td>#springFormInput("user.zipCode", "")</td>
+							<td>#springShowErrors("&nbsp", "form_errors")</td>
 						</tr>
 						<tr>
 							<td><label for="state">#springMessage("user.state"):</label></td>
-							<td><input type="text" name="state" id="state" value="$!user.state"></td>
+							<td>#springFormInput("user.state", "")</td>
+							<td>#springShowErrors("&nbsp", "form_errors")</td>
 						</tr>
 						<tr>
 							<td>#springMessage("user.created"):</td>

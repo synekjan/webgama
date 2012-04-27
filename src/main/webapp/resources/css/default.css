@@ -174,3 +174,9 @@ table.table td {
 	border: 1px solid gray;
 	padding: 3px;
 }
+
+.form_errors {
+	color: red;
+	font-style: italic;
+	font-size: 0.85em;
+}

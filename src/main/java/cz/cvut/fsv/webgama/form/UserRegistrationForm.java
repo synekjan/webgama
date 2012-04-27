@@ -1,29 +1,48 @@
 package cz.cvut.fsv.webgama.form;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class UserRegistrationForm {
 
+	@NotBlank
+	@Length(min = 3, max = 30)
 	private String username;
 
+	@NotBlank
 	private String password;
 
+	@NotBlank
 	private String confirmPassword;
 
+	@Length(max = 30)
 	private String firstName;
 
+	@Length(max = 50)
 	private String lastName;
 
+	@NotBlank
+	@Email
+	@Length(max = 50)
 	private String email;
 
+	@Length(max = 15)
 	private String telephone;
 
+	@Length(max = 50)
 	private String street;
 
+	@Length(max = 20)
 	private String number;
 
+	@Length(max = 50)
 	private String city;
 
+	@Length(max = 30)
 	private String zipCode;
 
+	@Length(max = 50)
 	private String state;
 
 	public String getUsername() {

@@ -1,9 +1,12 @@
+<!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+#parse("include.vm")
 <title>Login</title>
 </head>
 <body>
-<h2>Login:</h2>
+	<h2>Login:</h2>
 
 	<form action="j_spring_security_check" method="post">
 		<table>
@@ -16,12 +19,13 @@
 				<td><input id="password" type="password" name="j_password"></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Login" ></td>
+				<td><input type="submit" value="Login"></td>
 			</tr>
 		</table>
 	</form>
 
-	<a href="#springUrl("/register")">Register</a>
+	<br>
+	<a href="#springUrl("/register")" style="text-decoration: underline;">Register</a>
 
 </body>
 </html>
