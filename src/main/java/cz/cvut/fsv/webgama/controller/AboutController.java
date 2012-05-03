@@ -20,7 +20,6 @@ public class AboutController extends AbstractController {
 
 		ModelAndView mav = new ModelAndView("/about/about");
 
-		mav.addObject("admin", request.isUserInRole("ROLE_ADMIN"));
 		mav.addObject("ip", request.getRemoteAddr());
 		mav.addObject("host", request.getRemoteHost());
 		mav.addObject("port", request.getRemotePort());

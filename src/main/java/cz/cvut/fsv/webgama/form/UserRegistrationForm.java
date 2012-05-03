@@ -1,5 +1,7 @@
 package cz.cvut.fsv.webgama.form;
 
+import javax.validation.constraints.Min;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -11,9 +13,9 @@ public class UserRegistrationForm {
 	private String username;
 
 	@NotBlank
+	@Min(6)
 	private String password;
 
-	@NotBlank
 	private String confirmPassword;
 
 	@Length(max = 30)
@@ -39,6 +41,7 @@ public class UserRegistrationForm {
 	@Length(max = 50)
 	private String city;
 
+	
 	@Length(max = 30)
 	private String zipCode;
 

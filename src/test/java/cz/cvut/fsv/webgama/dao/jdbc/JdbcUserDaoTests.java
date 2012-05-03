@@ -9,6 +9,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 import cz.cvut.fsv.webgama.dao.UserDao;
 import cz.cvut.fsv.webgama.domain.User;
@@ -44,6 +45,7 @@ public class JdbcUserDaoTests {
 	}
 
 	@Test
+	@Ignore
 	public void testInsert() {
 
 		userDao.insert(user);
@@ -52,6 +54,7 @@ public class JdbcUserDaoTests {
 	}
 	
 	@Test
+	@Ignore
 	public void testUserList() {
 		
 		List<User> list = userDao.getUserList();
@@ -62,6 +65,35 @@ public class JdbcUserDaoTests {
 		
 	}
 	
+	@Test
+	public void testUserListByUsername() {
+		
+		List<User> list = userDao.findUsersByUsername("gita");
+		
+		for (User user : list) {
+			System.out.println(user);
+		}
+		
+	}
+	
+	@Test
+	public void testPasswordMatches() {
+		
+		User user = userDao.findUserByUsername("gita");
+		
+		boolean b = new StandardPasswordEncoder().matches("gita", user.getPassword());
+		
+		if (b) {
+			System.out.println("to je stejne");
+		} else {
+			System.out.println("to neni stejne");
+		}
+		
+		
+	}
+	
+	
+		
 	@Ignore("need some data in table")
 	@Test
 	public void testDropUserById() {

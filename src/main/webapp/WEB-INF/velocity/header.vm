@@ -15,7 +15,7 @@
 			#springMessage("welcome") $authentication.username ( 
 			<a href="#springUrl("/user")">#springMessage("user.settings")</a> | 
 			
-			#if ($admin)
+			#if ($authentication.adminRights)
 			<a href="#springUrl("/admin")">Admin</a> |
 			#end
 					
@@ -26,6 +26,7 @@
 	<div class="nav_menu">
 		<ul>
 			<li><a href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a></li>
+			<li><a href="#springUrl("#")">#springMessage("calculations.navbar")</a></li>
 			<li><a href="#springUrl("/about")">#springMessage("about.navbar")</a></li>
 		</ul>
 	</div>

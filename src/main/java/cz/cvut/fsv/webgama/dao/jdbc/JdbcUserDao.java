@@ -49,6 +49,15 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 						user.getEmail(), user.getTelephone(), user.getStreet(),
 						user.getNumber(), user.getCity(), user.getZipCode(),
 						user.getState(), user.getId() });
+
+	}
+	
+	@Override
+	public void updatePassword(User user) {
+		
+		String sql = "UPDATE users SET password=? WHERE id=?";
+		
+		getJdbcTemplate().update(sql, user.getPassword(), user.getId());
 		
 	}
 
@@ -57,6 +66,17 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 		logger.info("Gettings users!");
 		List<User> users = getJdbcTemplate().query("SELECT * FROM users;",
 				new UserMapper());
+
+		return users;
+	}
+
+	@Override
+	public List<User> findUsersByUsername(String username) {
+
+		String sql = "SELECT * FROM users WHERE username = ?";
+
+		List<User> users = getJdbcTemplate().query(sql,
+				new Object[] { username }, new UserMapper());
 
 		return users;
 	}
@@ -77,10 +97,18 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 		String sql = "SELECT * FROM users WHERE username = ?";
 
-		User user = getJdbcTemplate().queryForObject(sql,
-				new Object[] { username }, new UserMapper());
+		User user = getJdbcTemplate().queryForObject(sql, new Object[] { username },
+				new UserMapper());
 
 		return user;
+	}
+
+	@Override
+	public Boolean isUserInDB(User user) {
+
+		// TODO - dodelat
+
+		return null;
 	}
 
 	@Override

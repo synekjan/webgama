@@ -30,8 +30,6 @@ public class IndexController {
 
 		long startTime = System.nanoTime();
 		
-	
-		model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
 		//model.addAttribute("lastlogin", loginManager.getLastLogin(principal.getName()));
 		
 		Date date = new Date();

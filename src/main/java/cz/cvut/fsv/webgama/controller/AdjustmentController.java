@@ -29,11 +29,8 @@ public class AdjustmentController extends AbstractController {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		
-		
-		
 		mav.addObject("date", date);
 		mav.addObject("cal", cal.get(Calendar.MILLISECOND));
-		mav.addObject("admin", request.isUserInRole("ROLE_ADMIN"));
 
 		double time = (double) (System.nanoTime() - startTime) / 1000000;
 

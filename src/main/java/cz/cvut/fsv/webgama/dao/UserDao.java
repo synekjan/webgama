@@ -12,13 +12,21 @@ public interface UserDao {
 	
 	public void update(User user);
 	
+	public void updatePassword(User user);
+	
 	public List<User> getUserList();
+	
+	public List<User> findUsersByUsername(String username);
 	
 	public User findUserById(int id);
 	
 	public User findUserByUsername(String username);
 	
+	public Boolean isUserInDB(User user);
+	
+	//TEMPORARY
 	public void dropLastUser();
+	
 	
 	
 

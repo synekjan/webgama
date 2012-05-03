@@ -26,7 +26,6 @@ public class AdminController {
 		List<User> list = userManager.getUserList();
 
 		model.addAttribute("userList", list);
-		model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
 
 		return "/admin/userlist";
 	}

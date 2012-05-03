@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.AbstractController;
 
 import cz.cvut.fsv.webgama.form.UserRegistrationForm;
 import cz.cvut.fsv.webgama.service.UserManager;
+import cz.cvut.fsv.webgama.validator.UserRegistrationValidator;
 
 @Controller
 @RequestMapping("/register")
@@ -25,6 +26,9 @@ public class RegisterController extends AbstractController {
 	
 	//@Autowired
 	//private MailManager mailManager;
+	
+	@Autowired
+	private UserRegistrationValidator registrationValidator;
 	
 	
 	@Override
@@ -43,6 +47,8 @@ public class RegisterController extends AbstractController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	protected ModelAndView register(HttpServletRequest request,@Valid @ModelAttribute("user") UserRegistrationForm userForm, BindingResult result) {
+		
+		registrationValidator.validate(userForm, result);
 		
 		if (result.hasErrors())
 			return new ModelAndView("/register/register");

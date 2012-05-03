@@ -10,8 +10,7 @@
 		#parse("header.vm")
 
 		<div id="breadcrumbs">
-			<a href="#springUrl("/")">WebGama</a> > <a href="#springUrl("/user/info")">#springMessage("user.settings")</a>
-			> <a href="#springUrl("/user/password/change")"><span class="active">#springMessage("change.password")</span></a>
+			<a href="#springUrl("/")">WebGama</a> > <a href="#springUrl("/user/info")">#springMessage("user.settings")</a> > <a href="#springUrl("/user/password/change")"><span class="active">#springMessage("change.password")</span></a>
 		</div>
 
 		<div class="left_menu">
@@ -31,27 +30,28 @@
 				<table>
 					<tr>
 						<td>Username:</td>
-						<td>$name</td>
+						<td>$user.username</td>
+						<td><input type="hidden" name="username" value="$user.username"></td>
 					</tr>
 					<tr>
-						<td><label for="current_password">#springMessage("user.current.password"):</label></td>
-						<td><input type="password" name="password" id="current_password"></td>
+						<td><label for="oldPassword">#springMessage("user.current.password"):</label></td>
+						<td>#springFormPasswordInput("user.oldPassword", "")</td>
+						<td>#springShowErrors("&nbsp", "form_errors")</td>
 					</tr>
 					<tr>
-						<td><label for="new_password">#springMessage("user.new.password"):</label></td>
-						<td><input type="password" name="password" id="new_password"></td>
+						<td><label for="newPassword">#springMessage("user.new.password"):</label></td>
+						<td>#springFormPasswordInput("user.newPassword", "")</td>
+						<td>#springShowErrors("&nbsp", "form_errors")</td>
 					</tr>
 					<tr>
-						<td><label for="confirm_new_password">#springMessage("user.confirm.new.password"):</label></td>
-						<td><input type="password" name="password" id="confirm_new_password"></td>
+						<td><label for="confirmNewPassword">#springMessage("user.confirm.new.password"):</label></td>
+						<td>#springFormPasswordInput("user.confirmNewPassword", "")</td>
+						<td>#springShowErrors("&nbsp", "form_errors")</td>
 					</tr>
 					<td><input type="submit" value="#springMessage("change.password.button")"><input type="reset" value="Reset"></td>
 					</tr>
-
 				</table>
 			</form>
-
-
 		</div>
 		#parse("footer.vm")
 	</div>

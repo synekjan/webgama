@@ -5,6 +5,7 @@ DROP TABLE authorities;
 DROP TABLE roles;
 DROP TABLE logins;
 DROP FUNCTION user_authority_function() CASCADE;
+DROP TABLE confirmations CASCADE;
 
 CREATE TABLE users (
 id SERIAL PRIMARY KEY,
@@ -98,10 +99,13 @@ success BOOLEAN);
 
 INSERT INTO logins (user_id,ip_address,success) VALUES (1,'172.16.98.48',TRUE);
 
-/*
-CREATE TABLE confirmations (
 
-);*/
+CREATE TABLE confirmations (
+id SERIAL PRIMARY KEY,
+user_id INTEGER NOT NULL REFERENCES users(id),
+conf_id VARCHAR(30) NOT NULL UNIQUE,
+time TIMESTAMP DEFAULT now()
+);
 
 
 
@@ -112,6 +116,8 @@ GRANT ALL ON authorities_id_seq TO synekjan;
 GRANT ALL ON roles TO synekjan;
 GRANT ALL ON logins TO synekjan;
 GRANT ALL ON logins_id_seq TO synekjan;
+GRANT ALL ON confirmations TO synekjan;
+GRANT ALL ON confirmations_id_seq TO synekjan;
 
 
 COMMIT;

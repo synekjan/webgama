@@ -19,8 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cz.cvut.fsv.webgama.domain.User;
 import cz.cvut.fsv.webgama.form.UserForm;
+import cz.cvut.fsv.webgama.form.UserPasswordChangeForm;
 import cz.cvut.fsv.webgama.service.LoginManager;
 import cz.cvut.fsv.webgama.service.UserManager;
+import cz.cvut.fsv.webgama.validator.UserPasswordChangeValidator;
 
 @Controller
 @RequestMapping("/user")
@@ -31,6 +33,9 @@ public class UserController {
 
 	@Autowired
 	private LoginManager loginManager;
+	
+	@Autowired
+	private UserPasswordChangeValidator passwordValidator;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(UserController.class);
@@ -41,7 +46,6 @@ public class UserController {
 
 		User user = userManager.getUser(principal.getName());
 
-		model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
 		model.addAttribute("user", user);
 
 		logger.info("User (" + principal.getName() + ") processed from IP: "
@@ -51,38 +55,44 @@ public class UserController {
 	}
 
 	@RequestMapping(value = { "", "/info" }, method = RequestMethod.POST)
-	public String modify(@Valid @ModelAttribute("user") UserForm userForm, BindingResult result) {
+	public ModelAndView modify(@Valid @ModelAttribute("user") UserForm userForm, BindingResult result) {
 
 		if (result.hasErrors()) {
-			return "/user/user";
+			
+			return new ModelAndView("/user/user");
 		}
 
 		userManager.updateUser(userForm);
 
-		return "redirect:/";
+		return new ModelAndView("redirect:/");
 	}
 
 	@RequestMapping(value = "/password/change", method = RequestMethod.GET)
-	public String changePasswordForm(HttpServletRequest request, Model model,
+	public ModelAndView changePasswordForm(HttpServletRequest request, Model model,
 			Locale locale, Principal principal) {
 
-		// User user = userManager.getUser(principal.getName());
+		ModelAndView mav = new ModelAndView("/user/changepass");
+		
+		UserPasswordChangeForm userForm = new UserPasswordChangeForm();
+		userForm.setUsername(principal.getName());
+	
+		mav.addObject("user", userForm);
 
-		model.addAttribute("name", principal.getName());
-		model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
-
-		return "/user/changepass";
+		return mav;
 	}
 
 	@RequestMapping(value = "/password/change", method = RequestMethod.POST)
-	public String changePassword(@ModelAttribute User user, BindingResult result) {
+	public String changePassword(@Valid @ModelAttribute("user") UserPasswordChangeForm userForm, BindingResult result) {
 
-		// User user = userManager.getUser(principal.getName());
+		passwordValidator.validate(userForm, result);
+		
+		if (result.hasErrors()) {
+			return "/user/changepass";
+		}
+		
+		userManager.changeUserPassword(userForm);
 
-		// logger.info("User (" + principal.getName() + ") processed from IP: "
-		// + request.getRemoteAddr());
-
-		return "redirect:/user";
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = { "/logins", "/logins/show" }, method = RequestMethod.GET)
@@ -93,7 +103,6 @@ public class UserController {
 
 		mav.addObject("loginList",
 				loginManager.getLoginList(principal.getName()));
-		mav.addObject("admin", request.isUserInRole("ROLE_ADMIN"));
 		// mav.addObject("lastlogin",
 		// loginManager.getLastLogin(principal.getName()));
 
@@ -105,8 +114,6 @@ public class UserController {
 			Principal principal) {
 
 		ModelAndView mav = new ModelAndView("/user/delete");
-
-		mav.addObject("admin", request.isUserInRole("ROLE_ADMIN"));
 
 		return mav;
 	}
