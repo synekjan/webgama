@@ -1,7 +1,6 @@
 package cz.cvut.fsv.webgama.form;
 
-import javax.validation.constraints.Min;
-
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class UserPasswordChangeForm {
@@ -12,7 +11,7 @@ public class UserPasswordChangeForm {
 	private String oldPassword;
 	
 	@NotBlank
-	@Min(6)
+	@Length(min=6, message="at least 6 characters")
 	private String newPassword;
 	
 	@NotBlank

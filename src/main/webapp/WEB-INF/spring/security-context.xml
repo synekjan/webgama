@@ -19,6 +19,7 @@
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
 		<intercept-url pattern="/**" access="ROLE_USER" />
 		<form-login login-page="/login" default-target-url="/" />
+		<remember-me/>
 		<logout logout-url="/logout" logout-success-url="/login" />
 	</http>
 

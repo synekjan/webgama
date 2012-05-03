@@ -6,84 +6,91 @@
 <title>Registration</title>
 </head>
 <body>
-	<h2>Registration</h2>
-	<br>
-	<form action="" method="post">
-		<fieldset>
-			<legend>User Information</legend>
+	<div id="wrapper">
+		<div class="logo">
+			<a href="#springUrl("/")"><img border="0" src="#springUrl("/resources/img/webgama_logo.png")" alt="Title" title="WebGama" /></a>
+		</div>
+		<div id="container_index">
+		<h2>Registration</h2>
+		<br>
+		<form action="" method="post" autocomplete="off">
+			<fieldset>
+				<legend>User Information</legend>
+				<table>
+					<tr>
+						<td><label for="username">* Username:</label></td>
+						<td>#springFormInput("user.username", "")</td>
+						<td>#springShowErrors("&nbsp", "form_errors")</td>
+					</tr>
+					<tr>
+						<td><label for="password">* #springMessage("user.password"):</label></td>
+						<td>#springFormPasswordInput("user.password", "")</td>
+						<td>#springShowErrors("&nbsp", "form_errors")</td>
+					</tr>
+					<tr>
+						<td><label for="confirmPassword">* #springMessage("user.password.confirm"):</label></td>
+						<td>#springFormPasswordInput("user.confirmPassword", "")</td>
+						<td>#springShowErrors("&nbsp", "form_errors")</td>
+					</tr>
+					<tr>
+						<td><label for="email">* E-mail:</label></td>
+						<td>#springFormInput("user.email", "")</td>
+						<td>#springShowErrors("&nbsp", "form_errors")</td>
+					</tr>
+					<tr>
+						<td><label for="firstName">#springMessage("user.firstname"):</label></td>
+						<td>#springFormInput("user.firstName", "")</td>
+						<td>#springShowErrors("&nbsp", "form_errors")</td>
+					</tr>
+					<tr>
+						<td><label for="lastName">#springMessage("user.lastname"):</label></td>
+						<td>#springFormInput("user.lastName", "")</td>
+						<td>#springShowErrors("&nbsp", "form_errors")</td>
+					</tr>
+					<tr>
+						<td><label for="telephone">#springMessage("user.telephone"):</label></td>
+						<td>#springFormInput("user.telephone", "")</td>
+						<td>#springShowErrors("&nbsp", "form_errors")</td>
+					</tr>
+				</table>
+			</fieldset>
+			<fieldset>
+				<legend>Address</legend>
+				<table>
+					<tr>
+						<td><label for="street">#springMessage("user.street"):</label></td>
+						<td>#springFormInput("user.street", "")</td>
+						<td>#springShowErrors("&nbsp", "form_errors")</td>
+					</tr>
+					<tr>
+						<td><label for="number">#springMessage("user.number"):</label></td>
+						<td>#springFormInput("user.number", "")</td>
+						<td>#springShowErrors("&nbsp", "form_errors")</td>
+					</tr>
+					<tr>
+						<td><label for="city">#springMessage("user.city"):</label></td>
+						<td>#springFormInput("user.city", "")</td>
+						<td>#springShowErrors("&nbsp", "form_errors")</td>
+					</tr>
+					<tr>
+						<td><label for="zipCode">#springMessage("user.zipcode"):</label></td>
+						<td>#springFormInput("user.zipCode", "")</td>
+						<td>#springShowErrors("&nbsp", "form_errors")</td>
+					</tr>
+					<tr>
+						<td><label for="state">#springMessage("user.state"):</label></td>
+						<td>#springFormInput("user.state", "")</td>
+						<td>#springShowErrors("&nbsp", "form_errors")</td>
+					</tr>
+				</table>
+			</fieldset>
 			<table>
 				<tr>
-					<td><label for="username">* Username:</label></td>
-					<td>#springFormInput("user.username", "")</td>
-					<td>#springShowErrors("&nbsp", "form_errors")</td>
-				</tr>
-				<tr>
-					<td><label for="password">* #springMessage("user.password"):</label></td>
-					<td>#springFormPasswordInput("user.password", "")</td>
-					<td>#springShowErrors("&nbsp", "form_errors")</td>
-				</tr>
-				<tr>
-					<td><label for="confirmPassword">* #springMessage("user.password.confirm"):</label></td>
-					<td>#springFormPasswordInput("user.confirmPassword", "")</td>
-					<td>#springShowErrors("&nbsp", "form_errors")</td>
-				</tr>
-				<tr>
-					<td><label for="email">* E-mail:</label></td>
-					<td>#springFormInput("user.email", "")</td>
-					<td>#springShowErrors("&nbsp", "form_errors")</td>
-				</tr>
-				<tr>
-					<td><label for="firstName">#springMessage("user.firstname"):</label></td>
-					<td>#springFormInput("user.firstName", "")</td>
-					<td>#springShowErrors("&nbsp", "form_errors")</td>
-				</tr>
-				<tr>
-					<td><label for="lastName">#springMessage("user.lastname"):</label></td>
-					<td>#springFormInput("user.lastName", "")</td>
-					<td>#springShowErrors("&nbsp", "form_errors")</td>
-				</tr>
-				<tr>
-					<td><label for="telephone">#springMessage("user.telephone"):</label></td>
-					<td>#springFormInput("user.telephone", "")</td>
-					<td>#springShowErrors("&nbsp", "form_errors")</td>
+					<td><input type="reset" value="Reset"> <input type="submit" value="#springMessage("submit")"></td>
 				</tr>
 			</table>
-		</fieldset>
-		<fieldset>
-			<legend>Address</legend>
-			<table>
-				<tr>
-					<td><label for="street">#springMessage("user.street"):</label></td>
-					<td>#springFormInput("user.street", "")</td>
-					<td>#springShowErrors("&nbsp", "form_errors")</td>
-				</tr>
-				<tr>
-					<td><label for="number">#springMessage("user.number"):</label></td>
-					<td>#springFormInput("user.number", "")</td>
-					<td>#springShowErrors("&nbsp", "form_errors")</td>
-				</tr>
-				<tr>
-					<td><label for="city">#springMessage("user.city"):</label></td>
-					<td>#springFormInput("user.city", "")</td>
-					<td>#springShowErrors("&nbsp", "form_errors")</td>
-				</tr>
-				<tr>
-					<td><label for="zipCode">#springMessage("user.zipcode"):</label></td>
-					<td>#springFormInput("user.zipCode", "")</td>
-					<td>#springShowErrors("&nbsp", "form_errors")</td>
-				</tr>
-				<tr>
-					<td><label for="state">#springMessage("user.state"):</label></td>
-					<td>#springFormInput("user.state", "")</td>
-					<td>#springShowErrors("&nbsp", "form_errors")</td>
-				</tr>
-			</table>
-		</fieldset>
-		<table>
-			<tr>
-				<td><input type="reset" value="Reset"> <input type="submit" value="#springMessage("submit")"></td>
-			</tr>
-		</table>
-	</form>
+		</form>
+		</div>
+	</div>
 </body>
 </html>

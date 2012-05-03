@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 body {
-	font-family: verdana, arial, helvetica, sans-serif;
+	font-family: arial, helvetica, sans-serif;
 	font-size: 12px;
 	background-color: #FBFBFB;
 }
@@ -17,6 +17,7 @@ a {
 }
 
 a:HOVER {
+	text-decoration: underline;
 	color: blue;
 }
 
@@ -105,8 +106,7 @@ div#breadcrumbs a span.active {
 	color: gray;
 }
 
-div.left_menu {
-/* 	height: 300px; */
+div.left_menu { /* 	height: 300px; */
 	width: 150px;
 	margin: 10px;
 	border: 1px solid rgb(204, 204, 204);
@@ -117,7 +117,7 @@ div.left_menu {
 }
 
 div.left_menu ul {
-	font-size: 10px;
+	font-size: 11px;
 	padding: 5px;
 	list-style: none;
 }
@@ -148,6 +148,7 @@ div#container {
 div#container_index {
 	padding: 10px;
 	height: 700px;
+	clear: both;
 }
 
 div#footer {
@@ -179,4 +180,79 @@ table.table td {
 	color: red;
 	font-style: italic;
 	font-size: 0.85em;
+}
+
+div#login_wrapper {
+	margin: 0 auto;
+	width: 600px;
+	margin-top: 55px;
+	font-size: 13px;
+	border-top: 1px solid rgb(204, 204, 204);
+	border-left: 1px solid rgb(204, 204, 204);
+	border-right: 1px solid rgb(204, 204, 204);
+	background-color: white;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border-top: 1px solid rgb(204, 204, 204);
+	border-top: 1px solid rgb(204, 204, 204);
+}
+
+div.registration {
+	float: right;
+	padding: 10px;
+}
+
+span.highlight_link a {
+	color: blue;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+div#login_container {
+	clear: both;
+	background-color: rgb(242, 242, 242);
+	margin-left: 120px;
+	margin-right: 120px;
+	margin-bottom: 30px;
+	margin-top: 20px;
+	padding: 20px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid rgb(204, 204, 204);
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 20px 52px;
+}
+
+div#login_container .text_inputs input {
+	width: 250px;
+	font-size: 11px;
+	height: 17px;
+	border: 1px solid #91B5FF;
+}
+
+div#login_container .login_button input {
+	width: 75px;
+	font-size: 13px;
+	height: 25px;
+	margin-left: 90px;
+}
+
+span.lost_credentials a {
+	color: gray;
+	font-size: 11px;
+	float: right;
+}
+
+div#login_footer {
+	background-color: rgb(225, 225, 225);
+	font-size: 10px;
+	text-align: center;
+	clear: both;
 }
