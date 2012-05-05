@@ -26,6 +26,12 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
+	public void deleteUser(User user) {
+
+		userDao.delete(user);
+	}
+
+	@Override
 	public User getUser(int id) {
 
 		User user = userDao.findUserById(id);
@@ -124,15 +130,15 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public void changeUserPassword(UserPasswordChangeForm userForm) {
-		
+
 		User user = userDao.findUserByUsername(userForm.getUsername());
-		
+
 		StandardPasswordEncoder encoder = new StandardPasswordEncoder();
-		
+
 		user.setPassword(encoder.encode(userForm.getNewPassword()));
-		
+
 		userDao.updatePassword(user);
-		
+
 	}
 
 }

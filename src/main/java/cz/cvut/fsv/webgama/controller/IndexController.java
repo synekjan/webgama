@@ -7,8 +7,6 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +20,7 @@ public class IndexController {
 	@Autowired
 	LoginManager loginManager;	
 	
-	private static final Logger logger = LoggerFactory
-			.getLogger(IndexController.class);
+	/*private static final Logger logger = LoggerFactory.getLogger(IndexController.class);*/
 
 	@RequestMapping("/")
 	public String index(HttpServletRequest request, Model model, Locale locale, Principal principal) {
@@ -38,8 +35,6 @@ public class IndexController {
 		
 		
 		model.addAttribute("date", dateTime);
-
-		logger.info("Welcome in WebGama application!");
 
 		double time = (double) (System.nanoTime() - startTime) / 1000000;
 

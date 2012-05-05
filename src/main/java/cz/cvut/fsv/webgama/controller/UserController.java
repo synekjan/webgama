@@ -6,8 +6,6 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,12 +31,11 @@ public class UserController {
 
 	@Autowired
 	private LoginManager loginManager;
-	
+
 	@Autowired
 	private UserPasswordChangeValidator passwordValidator;
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(UserController.class);
+	/*private static final Logger logger = LoggerFactory.getLogger(UserController.class);*/
 
 	@RequestMapping(value = { "", "/info" }, method = RequestMethod.GET)
 	public String user(HttpServletRequest request, Model model, Locale locale,
@@ -48,17 +45,16 @@ public class UserController {
 
 		model.addAttribute("user", user);
 
-		logger.info("User (" + principal.getName() + ") processed from IP: "
-				+ request.getRemoteAddr());
-
 		return "/user/user";
 	}
 
 	@RequestMapping(value = { "", "/info" }, method = RequestMethod.POST)
-	public ModelAndView modify(@Valid @ModelAttribute("user") UserForm userForm, BindingResult result) {
+	public ModelAndView modify(
+			@Valid @ModelAttribute("user") UserForm userForm,
+			BindingResult result) {
 
 		if (result.hasErrors()) {
-			
+
 			return new ModelAndView("/user/user");
 		}
 
@@ -68,28 +64,30 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/password/change", method = RequestMethod.GET)
-	public ModelAndView changePasswordForm(HttpServletRequest request, Model model,
-			Locale locale, Principal principal) {
+	public ModelAndView changePasswordForm(HttpServletRequest request,
+			Model model, Locale locale, Principal principal) {
 
 		ModelAndView mav = new ModelAndView("/user/changepass");
-		
+
 		UserPasswordChangeForm userForm = new UserPasswordChangeForm();
 		userForm.setUsername(principal.getName());
-	
+
 		mav.addObject("user", userForm);
 
 		return mav;
 	}
 
 	@RequestMapping(value = "/password/change", method = RequestMethod.POST)
-	public String changePassword(@Valid @ModelAttribute("user") UserPasswordChangeForm userForm, BindingResult result) {
+	public String changePassword(
+			@Valid @ModelAttribute("user") UserPasswordChangeForm userForm,
+			BindingResult result) {
 
 		passwordValidator.validate(userForm, result);
-		
+
 		if (result.hasErrors()) {
 			return "/user/changepass";
 		}
-		
+
 		userManager.changeUserPassword(userForm);
 
 		return "redirect:/";
@@ -110,10 +108,21 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView deleteUser(HttpServletRequest request,
-			Principal principal) {
+	public ModelAndView deleteUserForm(HttpServletRequest request, Principal principal) {
 
 		ModelAndView mav = new ModelAndView("/user/delete");
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public ModelAndView deleteUser(Principal principal) {
+
+		User user = userManager.getUser(principal.getName());
+		
+		userManager.deleteUser(user);
+		
+		ModelAndView mav = new ModelAndView("redirect:/logout");
 
 		return mav;
 	}

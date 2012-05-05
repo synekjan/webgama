@@ -6,10 +6,19 @@
 <title>Registration</title>
 </head>
 <body>
-	<h2>Registration successful</h2>
-	<br>
-	<a href="#springUrl("/")">[back to index]</a>
-
-	
+	<div id="dialog_wrapper">
+		<div class="logo">
+			<a href="#springUrl("/")"><img border="0" src="#springUrl("/resources/img/webgama_logo.png")" alt="Title" title="WebGama" /></a>
+		</div>
+		<div class="caption">
+			<h2>Registration</h2>
+		</div>
+		<div id="dialog_container">
+			Registration was successful
+			<br /> <br /> 
+			<a href="#springUrl("/")">[back to index]</a>
+		</div>
+		<div id="login_footer">powered by Spring Security</div>
+	</div>
 </body>
 </html>

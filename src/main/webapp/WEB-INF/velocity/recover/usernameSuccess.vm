@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 #parse("include.vm")
-<title>Recover Username</title>
+<title>Recover Username Successful</title>
 </head>
 <body>
 	<div id="dialog_wrapper">

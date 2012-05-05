@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
 import cz.cvut.fsv.webgama.form.UserRegistrationForm;
-import cz.cvut.fsv.webgama.service.MailManager;
 import cz.cvut.fsv.webgama.service.UserManager;
 import cz.cvut.fsv.webgama.validator.UserRegistrationValidator;
 
@@ -25,8 +24,8 @@ public class RegisterController extends AbstractController {
 	@Autowired
 	private UserManager userManager;
 	
-	@Autowired
-	private MailManager mailManager;
+	//@Autowired
+	//private MailManager mailManager;
 	
 	@Autowired
 	private UserRegistrationValidator registrationValidator;

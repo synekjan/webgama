@@ -108,8 +108,8 @@ div#breadcrumbs a span.active {
 
 div.left_menu { /* 	height: 300px; */
 	width: 150px;
-	margin: 10px;
-	border: 1px solid rgb(204, 204, 204);
+	margin: 5px;
+	/* border: 1px solid rgb(204, 204, 204); */
 	float: left;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -118,21 +118,38 @@ div.left_menu { /* 	height: 300px; */
 
 div.left_menu ul {
 	font-size: 11px;
-	padding: 5px;
+	/* padding: 1px; */
 	list-style: none;
 }
 
 div.left_menu ul li {
-	border-bottom: 1px solid rgb(204, 204, 204);
+	margin: 1px;
+	border: 1px solid rgb(204, 204, 204);
+	border-left: 5px solid rgb(204, 204, 204);
 	padding: 5px;
+	padding-left: 15px;
+}
+
+div.left_menu ul li:HOVER {
+	background-color: rgb(240, 240, 240);
+}
+
+div.left_menu ul span.active_menu li {
+	padding: 4px;
+	padding-left: 5px;
+	font-size: 12px;
+	border-left: 5px solid blue;
+	/* background-color: rgb(240, 240, 240); */
+	border-left: 5px solid blue;
+	padding-left: 5px;
 }
 
 div#container {
 	margin-bottom: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
+	margin-top: 5px;
+	margin-right: 5px;
 	padding: 10px;
-	width: 796px;
+	width: 811px;
 	min-height: 300px;
 	border: 1px solid rgb(204, 204, 204);
 	float: left;
@@ -142,12 +159,12 @@ div#container {
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	/*temporary*/
-	height: 600px;
+	height: 650px;
 }
 
 div#container_index {
 	padding: 10px;
-	height: 700px;
+	height: 650px;
 	clear: both;
 }
 
@@ -255,4 +272,47 @@ div#login_footer {
 	font-size: 10px;
 	text-align: center;
 	clear: both;
+}
+
+div#dialog_wrapper {
+	margin: 0 auto;
+	width: 750px;
+	margin-top: 20px;
+	font-size: 13px;
+	border-top: 1px solid rgb(204, 204, 204);
+	border-left: 1px solid rgb(204, 204, 204);
+	border-right: 1px solid rgb(204, 204, 204);
+	background-color: white;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border-top: 1px solid rgb(204, 204, 204);
+	border-top: 1px solid rgb(204, 204, 204);
+}
+
+div#dialog_container {
+	clear: both;
+	/* background-color: rgb(242, 242, 242); */
+	margin: 10px;
+	padding: 20px;
+	border-top: 1px solid rgb(204, 204, 204);
+}
+
+div.caption {
+	margin-top: 20px;
+}
+
+.register_button input {
+	width: 75px;
+	font-size: 13px;
+	height: 25px;
+	margin-top: 5px;
+	margin-left: 308px;
+}
+
+.blue {
+	color: blue;
 }

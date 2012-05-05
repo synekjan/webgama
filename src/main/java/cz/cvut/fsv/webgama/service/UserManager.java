@@ -11,6 +11,8 @@ public interface UserManager {
 	
 	public void insertUser(User user);
 	
+	public void deleteUser(User user);
+	
 	public User getUser(int id);
 	
 	public User getUser(String username);

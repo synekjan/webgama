@@ -60,6 +60,8 @@ BEGIN
 		RETURN NEW;
 	ELSEIF (TG_OP = 'DELETE') THEN
 		DELETE FROM authorities WHERE user_id = OLD.id;
+		DELETE FROM logins WHERE user_id = OLD.id;
+		DELETE FROM confirmations WHERE user_id = OLD.id;
 		RETURN OLD;
 	END IF;
 	RETURN NULL; --result is ignored since this is an AFTER trigger
@@ -98,6 +100,8 @@ time TIMESTAMP DEFAULT now(),
 success BOOLEAN);
 
 INSERT INTO logins (user_id,ip_address,success) VALUES (1,'172.16.98.48',TRUE);
+INSERT INTO logins (user_id,ip_address,success) VALUES (1,'172.16.98.47',TRUE);
+INSERT INTO logins (user_id,ip_address,success) VALUES (2,'172.16.98.45',TRUE);
 
 
 CREATE TABLE confirmations (

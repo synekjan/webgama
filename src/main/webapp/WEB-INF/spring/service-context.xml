@@ -14,7 +14,7 @@
 		<property name="userDao" ref="userDao" />
 		<property name="loginDao" ref="loginDao" />
 	</bean>
-	
+
 	<bean id="roleManager" class="cz.cvut.fsv.webgama.service.impl.RoleManagerImpl">
 	</bean>
 
@@ -32,27 +32,6 @@
 	<!-- Utils -->
 	<bean class="cz.cvut.fsv.webgama.util.AuthenticatedUserDetails">
 		<property name="userManager" ref="userManager" />
-	</bean>
-	
-	
-	<!-- MAILING Beans -->
-	<bean id="mailManager" class="cz.cvut.fsv.webgama.service.impl.MailManagerImpl">
-		<property name="mailSender" ref="mailSender" />
-		<!-- <property name="userDao" ref="userDao" /> -->
-	</bean>	
-
-	<!-- SMTP server -->
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com" />
-		<property name="port" value="587" />
-		<property name="username" value="webgamaa@gmail.com" />
-		<property name="password" value="hovnokleslo456" />
-		<property name="javaMailProperties">
-			<props>
-				<prop key="mail.smtp.auth">true</prop>
-				<prop key="mail.smtp.starttls.enable">true</prop>
-			</props>
-		</property>
 	</bean>
 
 </beans>
