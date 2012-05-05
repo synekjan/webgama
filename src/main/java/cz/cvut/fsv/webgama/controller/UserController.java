@@ -21,6 +21,7 @@ import cz.cvut.fsv.webgama.form.UserPasswordChangeForm;
 import cz.cvut.fsv.webgama.service.LoginManager;
 import cz.cvut.fsv.webgama.service.UserManager;
 import cz.cvut.fsv.webgama.validator.UserPasswordChangeValidator;
+import cz.cvut.fsv.webgama.validator.UserValidator;
 
 @Controller
 @RequestMapping("/user")
@@ -34,6 +35,9 @@ public class UserController {
 
 	@Autowired
 	private UserPasswordChangeValidator passwordValidator;
+	
+	@Autowired
+	private UserValidator userValidator;
 
 	/*private static final Logger logger = LoggerFactory.getLogger(UserController.class);*/
 
@@ -53,6 +57,8 @@ public class UserController {
 			@Valid @ModelAttribute("user") UserForm userForm,
 			BindingResult result) {
 
+		userValidator.validate(userForm, result);
+		
 		if (result.hasErrors()) {
 
 			return new ModelAndView("/user/user");

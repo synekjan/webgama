@@ -1,5 +1,7 @@
 package cz.cvut.fsv.webgama.util;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,6 +34,12 @@ public class AuthenticatedUserDetails {
 
 		return userManager.hasUserAdminRights(SecurityContextHolder
 				.getContext().getAuthentication().getName());
+	}
+	
+	// Last Login link in header
+	public String getLastLogin() {
+		
+		return new Date().toString();
 	}
 
 }

@@ -7,8 +7,12 @@
 <body>
 	<div id="wrapper">
 		#parse("header.vm")
+		<div class="slideshow">
+			<img alt="slideshow" src="#springUrl("/resources/img/head_bckgr.png")">
+		</div>
 		<div id="container_index">
-		
+
+
 			<h2>#springMessage("header")</h2>
 
 			<p>#springMessage("today.is") $date</p>

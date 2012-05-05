@@ -6,10 +6,10 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import cz.cvut.fsv.webgama.domain.User;
-import cz.cvut.fsv.webgama.form.UserForm;
+import cz.cvut.fsv.webgama.form.UsernameRecoveryForm;
 import cz.cvut.fsv.webgama.service.UserManager;
 
-public class UserValidator implements Validator {
+public class UsernameRecoveryValidator implements Validator {
 
 	private UserManager userManager;
 	
@@ -19,18 +19,20 @@ public class UserValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return UserForm.class.isAssignableFrom(clazz);
+		return UsernameRecoveryForm.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
 		
-		UserForm userForm = (UserForm) target;
+		UsernameRecoveryForm userForm = (UsernameRecoveryForm) target;
 		
 		List<User> list = userManager.getUsersByEmail(userForm.getEmail());
-		if (!list.isEmpty()) {
-			errors.rejectValue("email", "Used", "email address is already used");
+		
+		if (list.isEmpty()) {
+			errors.rejectValue("email", "NotFound", "email address not found");
 		}
+		
 
 	}
 

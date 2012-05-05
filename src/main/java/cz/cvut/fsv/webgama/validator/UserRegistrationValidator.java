@@ -27,12 +27,16 @@ public class UserRegistrationValidator implements Validator {
 
 		UserRegistrationForm userForm = (UserRegistrationForm) target;
 
+		// check if username is not used
+		List<User> list1 = userManager.getUsersByUsername(userForm.getUsername());
+		if (!list1.isEmpty()) {
+			errors.rejectValue("username", "Used", "username is already used");
+		}
 		
-		List<User> list = userManager.getUsersByUsername(userForm.getUsername());
-
-		if (!list.isEmpty()) {
-			errors.rejectValue("username", "Used",
-					"username is already used");
+		// check if email address is not used
+		List<User> list2 = userManager.getUsersByEmail(userForm.getEmail());
+		if (!list2.isEmpty()) {
+			errors.rejectValue("email", "Used", "email address is already used");
 		}
 
 		// checks if passwords are same

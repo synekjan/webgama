@@ -25,8 +25,6 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 						user.getEmail(), user.getTelephone(), user.getStreet(),
 						user.getNumber(), user.getCity(), user.getZipCode(),
 						user.getState() });
-
-		logger.info("User inserted: " + user.getEmail());
 	}
 
 	@Override
@@ -35,7 +33,6 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 		String sql = "DELETE FROM users WHERE id = ?";
 
 		getJdbcTemplate().update(sql, new Object[] { user.getId() });
-
 	}
 
 	@Override
@@ -49,7 +46,6 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 						user.getEmail(), user.getTelephone(), user.getStreet(),
 						user.getNumber(), user.getCity(), user.getZipCode(),
 						user.getState(), user.getId() });
-
 	}
 	
 	@Override
@@ -58,12 +54,11 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 		String sql = "UPDATE users SET password=? WHERE id=?";
 		
 		getJdbcTemplate().update(sql, user.getPassword(), user.getId());
-		
 	}
 
 	@Override
 	public List<User> getUserList() {
-		logger.info("Gettings users!");
+		
 		List<User> users = getJdbcTemplate().query("SELECT * FROM users;",
 				new UserMapper());
 
@@ -78,6 +73,17 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 		List<User> users = getJdbcTemplate().query(sql,
 				new Object[] { username }, new UserMapper());
 
+		return users;
+	}
+	
+	@Override
+	public List<User> findUsersByEmail(String email) {
+		
+		String sql = "SELECT * FROM users WHERE email = ?";
+		
+		List<User> users = getJdbcTemplate().query(sql,
+				new Object[] { email }, new UserMapper());
+		
 		return users;
 	}
 

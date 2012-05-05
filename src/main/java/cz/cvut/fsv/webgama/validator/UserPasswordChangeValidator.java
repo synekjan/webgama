@@ -18,7 +18,7 @@ public class UserPasswordChangeValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return UserPasswordChangeValidator.class.isAssignableFrom(clazz);
+		return UserPasswordChangeForm.class.isAssignableFrom(clazz);
 	}
 
 	@Override

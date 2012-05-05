@@ -14,7 +14,10 @@
 			<h2>Find Username</h2>
 		</div>
 		<div id="dialog_container">
-					
+			<h3>Find username</h3>
+			<p>An email has been successfully sent. Please follow the instructions in the email.</p>
+			<a href="#springUrl("/")">[back to index]</a>
+
 		</div>
 		<div id="login_footer">powered by Spring Security</div>
 	</div>

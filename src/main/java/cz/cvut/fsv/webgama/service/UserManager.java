@@ -21,6 +21,8 @@ public interface UserManager {
 	
 	public List<User> getUsersByUsername(String username);
 	
+	public List<User> getUsersByEmail(String email);
+	
 	public void updateUser(UserForm userForm);
 	
 	public void registerUser(UserRegistrationForm user);

@@ -14,8 +14,8 @@
 			<h2>Registration</h2>
 		</div>
 		<div id="dialog_container">
-			Registration was successful
-			<br /> <br /> 
+			<h3>Registration</h3>		
+			<p>Registration was successful</p>
 			<a href="#springUrl("/")">[back to index]</a>
 		</div>
 		<div id="login_footer">powered by Spring Security</div>

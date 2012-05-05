@@ -10,7 +10,7 @@
 			<a href="?locale=en_GB">en_GB</a> &nbsp;
 			<a href="?locale=en_US">en_US</a> &nbsp; &nbsp;
 			
-			<!-- <a href="#springUrl("/user/logins")">#springMessage("last.login"): $!lastlogin</a> &nbsp; &nbsp; -->
+			<a href="#springUrl("/user/logins")">#if($authentication.lastLogin)#springMessage("last.login"):#end $!authentication.lastLogin</a> &nbsp; &nbsp;
 			  
 			#springMessage("welcome") $authentication.username ( 
 			<a href="#springUrl("/user")">#springMessage("user.settings")</a> | 

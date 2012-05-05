@@ -61,6 +61,14 @@ public class UserManagerImpl implements UserManager {
 
 		return list;
 	}
+	
+	@Override
+	public List<User> getUsersByEmail(String email) {
+		
+		List<User> list = userDao.findUsersByEmail(email);
+		
+		return list;
+	}
 
 	@Override
 	public void updateUser(UserForm userForm) {
@@ -140,5 +148,7 @@ public class UserManagerImpl implements UserManager {
 		userDao.updatePassword(user);
 
 	}
+
+	
 
 }
