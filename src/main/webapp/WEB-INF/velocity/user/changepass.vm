@@ -25,32 +25,36 @@
 		<div id="container">
 
 			<h2>#springMessage("change.password")</h2>
-
+			<br>
 			<form action="" method="post">
-				<table>
-					<tr>
-						<td>Username:</td>
-						<td>$user.username</td>
-						<td><input type="hidden" name="username" value="$user.username"></td>
-					</tr>
-					<tr>
-						<td><label for="oldPassword">#springMessage("user.current.password"):</label></td>
-						<td>#springFormPasswordInput("user.oldPassword", "")</td>
-						<td>#springShowErrors("&nbsp", "form_errors")</td>
-					</tr>
-					<tr>
-						<td><label for="newPassword">#springMessage("user.new.password"):</label></td>
-						<td>#springFormPasswordInput("user.newPassword", "")</td>
-						<td>#springShowErrors("&nbsp", "form_errors")</td>
-					</tr>
-					<tr>
-						<td><label for="confirmNewPassword">#springMessage("user.confirm.new.password"):</label></td>
-						<td>#springFormPasswordInput("user.confirmNewPassword", "")</td>
-						<td>#springShowErrors("&nbsp", "form_errors")</td>
-					</tr>
-					<td><input type="submit" value="#springMessage("change.password.button")"><input type="reset" value="Reset"></td>
-					</tr>
-				</table>
+				<div class="form">
+					<fieldset>
+						<legend>#springMessage("change.password")</legend>
+						<table>
+							<tr>
+								<td>Username:</td>
+								<td>$user.username</td>
+								<td><input type="hidden" name="username" value="$user.username"></td>
+							</tr>
+							<tr>
+								<td><label for="oldPassword">#springMessage("user.current.password"):</label></td>
+								<td>#springFormPasswordInput("user.oldPassword", "")</td>
+								<td>#springShowErrors("&nbsp", "form_errors")</td>
+							</tr>
+							<tr>
+								<td><label for="newPassword">#springMessage("user.new.password"):</label></td>
+								<td>#springFormPasswordInput("user.newPassword", "")</td>
+								<td>#springShowErrors("&nbsp", "form_errors")</td>
+							</tr>
+							<tr>
+								<td><label for="confirmNewPassword">#springMessage("user.confirm.new.password"):</label></td>
+								<td>#springFormPasswordInput("user.confirmNewPassword", "")</td>
+								<td>#springShowErrors("&nbsp", "form_errors")</td>
+							</tr>
+						</table>
+					</fieldset>
+				</div>
+				<br> <input type="submit" value="#springMessage("change.password.button")"><input type="reset" value="Reset">
 			</form>
 		</div>
 		#parse("footer.vm")

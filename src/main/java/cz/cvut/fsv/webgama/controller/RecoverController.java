@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import cz.cvut.fsv.webgama.form.PasswordRecoveryForm;
 import cz.cvut.fsv.webgama.form.UsernameRecoveryForm;
+import cz.cvut.fsv.webgama.service.MailManager;
 import cz.cvut.fsv.webgama.validator.PasswordRecoveryValidator;
 import cz.cvut.fsv.webgama.validator.UsernameRecoveryValidator;
 
@@ -20,6 +21,9 @@ import cz.cvut.fsv.webgama.validator.UsernameRecoveryValidator;
 @RequestMapping("/recover")
 public class RecoverController extends MultiActionController {
 
+	@Autowired
+	private MailManager mailManager;
+	
 	@Autowired
 	private PasswordRecoveryValidator passwordValidator;
 	
@@ -42,6 +46,8 @@ public class RecoverController extends MultiActionController {
 		if (result.hasErrors()) {
 			return new ModelAndView("/recover/username");
 		}
+		
+		mailManager.recoverUsername(userForm);
 
 		return new ModelAndView("redirect:/recover/username/success");
 	}
@@ -70,6 +76,8 @@ public class RecoverController extends MultiActionController {
 		if (result.hasErrors()) {
 			return new ModelAndView("/recover/password");
 		}
+		
+		mailManager.recoverPassword(userForm);
 
 		return new ModelAndView("redirect:/recover/password/success");
 	}

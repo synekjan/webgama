@@ -21,6 +21,11 @@ a:HOVER {
 	color: blue;
 }
 
+fieldset {
+	border: 1px solid silver;
+	background-color: rgb(242, 242, 242);
+}
+
 div#wrapper {
 	margin: 0 auto;
 	width: 1000px;
@@ -315,4 +320,9 @@ div.caption {
 
 .blue {
 	color: blue;
+}
+
+div.form input {
+	border: 1px solid #91B5FF;
+	height: 17px;
 }

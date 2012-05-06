@@ -15,6 +15,7 @@
 		</div>
 		<div id="dialog_container">
 			<form action="" method="post" autocomplete="off">
+				<div class="form">
 				<fieldset>
 					<legend>User Information</legend>
 					<table>
@@ -85,6 +86,7 @@
 						</tr>
 					</table>
 				</fieldset>
+				</div>
 				<div class="register_button">
 					<input type="submit" value="#springMessage("submit")">
 				</div>

@@ -27,73 +27,73 @@
 			<h2>#springMessage("user.general.settings")</h2>
 			<br>
 			<form action="" method="post">
-				<fieldset>
-					<legend>#springMessage("user.general.settings")</legend>
-					<table>
-						<tr>
-							<td>Username:</td>
-							<td>$user.username</td>
-							<td><input type="hidden" name="username" value="$user.username"></td>
-						</tr>
-						<tr>
-							<td><label for="email">E-mail:</label></td>
-							<td>#springBind("user") #springFormInput("user.email", "")</td>
-							<td>#springShowErrors("&nbsp", "form_errors")</td>
-						</tr>
+				<div class="form">
+					<fieldset>
+						<legend>#springMessage("user.general.settings")</legend>
+						<table>
+							<tr>
+								<td>Username:</td>
+								<td>$user.username</td>
+								<td><input type="hidden" name="username" value="$user.username"></td>
+							</tr>
+							<tr>
+								<td><label for="email">E-mail:</label></td>
+								<td>#springBind("user") #springFormInput("user.email", "")</td>
+								<td>#springShowErrors("&nbsp", "form_errors")</td>
+							</tr>
 
-						<tr>
-							<td><label for="firstName">#springMessage("user.firstname")</label></td>
-							<td>#springBind("user") #springFormInput("user.firstName", "")</td>
-							<td>#springShowErrors("&nbsp", "form_errors")</td>
-						</tr>
-						<tr>
-							<td><label for="lastName">#springMessage("user.lastname")</label></td>
-							<td>#springBind("user") #springFormInput("user.lastName", "")</td>
-							<td>#springShowErrors("&nbsp", "form_errors")</td>
-						</tr>
-						<tr>
-							<td><label for="telephone">#springMessage("user.telephone"):</label></td>
-							<td>#springFormInput("user.telephone", "")</td>
-							<td>#springShowErrors("&nbsp", "form_errors")</td>
-						</tr>
-						<tr>
-							<td><label for="street">#springMessage("user.street"):</label></td>
-							<td>#springFormInput("user.street", "")</td>
-							<td>#springShowErrors("&nbsp", "form_errors")</td>
-						</tr>
-						<tr>
-							<td><label for="number">#springMessage("user.number"):</label></td>
-							<td>#springFormInput("user.number", "")</td>
-							<td>#springShowErrors("&nbsp", "form_errors")</td>
-						</tr>
-						<tr>
-							<td><label for="city">#springMessage("user.city"):</label></td>
-							<td>#springFormInput("user.city", "")</td>
-							<td>#springShowErrors("&nbsp", "form_errors")</td>
-						</tr>
-						<tr>
-							<td><label for="zipCode">#springMessage("user.zipcode"):</label></td>
-							<td>#springFormInput("user.zipCode", "")</td>
-							<td>#springShowErrors("&nbsp", "form_errors")</td>
-						</tr>
-						<tr>
-							<td><label for="state">#springMessage("user.state"):</label></td>
-							<td>#springFormInput("user.state", "")</td>
-							<td>#springShowErrors("&nbsp", "form_errors")</td>
-						</tr>
-						<tr>
-							<td>#springMessage("user.created"):</td>
-							<td>$user.created</td>
-						</tr>
-						<tr>
-							<td>#springMessage("user.modified"):</td>
-							<td>$user.modified</td>
-						</tr>
-						<tr>
-							<td><input type="submit" value="#springMessage("submit")"><input type="reset" value="Reset"></td>
-						</tr>
-					</table>
-				</fieldset>
+							<tr>
+								<td><label for="firstName">#springMessage("user.firstname")</label></td>
+								<td>#springBind("user") #springFormInput("user.firstName", "")</td>
+								<td>#springShowErrors("&nbsp", "form_errors")</td>
+							</tr>
+							<tr>
+								<td><label for="lastName">#springMessage("user.lastname")</label></td>
+								<td>#springBind("user") #springFormInput("user.lastName", "")</td>
+								<td>#springShowErrors("&nbsp", "form_errors")</td>
+							</tr>
+							<tr>
+								<td><label for="telephone">#springMessage("user.telephone"):</label></td>
+								<td>#springFormInput("user.telephone", "")</td>
+								<td>#springShowErrors("&nbsp", "form_errors")</td>
+							</tr>
+							<tr>
+								<td><label for="street">#springMessage("user.street"):</label></td>
+								<td>#springFormInput("user.street", "")</td>
+								<td>#springShowErrors("&nbsp", "form_errors")</td>
+							</tr>
+							<tr>
+								<td><label for="number">#springMessage("user.number"):</label></td>
+								<td>#springFormInput("user.number", "")</td>
+								<td>#springShowErrors("&nbsp", "form_errors")</td>
+							</tr>
+							<tr>
+								<td><label for="city">#springMessage("user.city"):</label></td>
+								<td>#springFormInput("user.city", "")</td>
+								<td>#springShowErrors("&nbsp", "form_errors")</td>
+							</tr>
+							<tr>
+								<td><label for="zipCode">#springMessage("user.zipcode"):</label></td>
+								<td>#springFormInput("user.zipCode", "")</td>
+								<td>#springShowErrors("&nbsp", "form_errors")</td>
+							</tr>
+							<tr>
+								<td><label for="state">#springMessage("user.state"):</label></td>
+								<td>#springFormInput("user.state", "")</td>
+								<td>#springShowErrors("&nbsp", "form_errors")</td>
+							</tr>
+							<tr>
+								<td>#springMessage("user.created"):</td>
+								<td>$!user.created</td>
+							</tr>
+							<tr>
+								<td>#springMessage("user.modified"):</td>
+								<td>$!user.modified</td>
+							</tr>
+						</table>
+					</fieldset>
+				</div> <br>
+				<input type="submit" value="#springMessage("submit")"><input type="reset" value="Reset">
 			</form>
 		</div>
 		#parse("footer.vm")
