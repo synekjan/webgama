@@ -91,16 +91,5 @@ public class JdbcUserDaoTests {
 		
 		
 	}
-	
-	
-		
-	@Ignore("need some data in table")
-	@Test
-	public void testDropUserById() {
-		
-		userDao.dropLastUser();
-		
-		
-	}
 
 }

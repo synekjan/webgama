@@ -26,9 +26,10 @@ public class AdjustmentController extends AbstractController {
 
 		request.isUserInRole("ROLE_ADMIN");
 		
-		Date date = new Date();
+		
 		Calendar cal = Calendar.getInstance();
 		
+		Date date = new Date();
 		mav.addObject("date", date);
 		mav.addObject("cal", cal.get(Calendar.MILLISECOND));
 

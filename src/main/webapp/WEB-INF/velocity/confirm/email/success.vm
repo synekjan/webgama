@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 #parse("include.vm")
-<title>Registration</title>
+<title>Recover Password</title>
 </head>
 <body>
 	<div id="dialog_wrapper">
@@ -11,13 +11,13 @@
 			<a href="#springUrl("/")"><img border="0" src="#springUrl("/resources/img/webgama_logo.png")" alt="Title" title="WebGama" /></a>
 		</div>
 		<div class="caption">
-			<h2>Registration</h2>
+			<h2>Email Confirmation</h2>
 		</div>
 		<div id="dialog_container">
-			<h3>Registration</h3>		
-			<p>Registration was successful but your account is not enabled so far.</p>
-			<p>Please confirm your email address by clicking on link we sent to you to enable your account </p>
-			<a href="#springUrl("/")">[back to index]</a>
+			<h3>Email Confirmation</h3>
+			<p>Your email address was successfully confirmed</p>
+
+			<p>Now you can log in at <a style="text-decoration: underline;" href="#springUrl("/login")">login page</a></p>
 		</div>
 		<div id="login_footer">powered by Spring Security</div>
 	</div>

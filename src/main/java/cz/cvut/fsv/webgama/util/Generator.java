@@ -1,5 +1,7 @@
 package cz.cvut.fsv.webgama.util;
 
+import java.util.UUID;
+
 import org.apache.commons.lang.RandomStringUtils;
 
 public class Generator {
@@ -11,6 +13,6 @@ public class Generator {
 	
 	public static String generateConfirmationID() {
 		
-		return null;
+		return UUID.randomUUID().toString();
 	}
 }

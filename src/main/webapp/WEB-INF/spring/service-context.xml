@@ -8,6 +8,7 @@
 	<bean id="userManager" class="cz.cvut.fsv.webgama.service.impl.UserManagerImpl">
 		<property name="userDao" ref="userDao" />
 		<property name="authorityDao" ref="authorityDao" />
+		<property name="mailManager" ref="mailManager" />
 	</bean>
 
 	<bean id="loginManager" class="cz.cvut.fsv.webgama.service.impl.LoginManagerImpl">

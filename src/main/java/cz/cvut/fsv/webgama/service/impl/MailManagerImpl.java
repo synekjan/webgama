@@ -29,16 +29,15 @@ public class MailManagerImpl implements MailManager {
 	}
 
 	@Override
-	public void sendConfirmationEmail(UserRegistrationForm userForm) {
+	public void sendConfirmationEmail(UserRegistrationForm userForm, String uuid, String URL) {
 
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("do-not-reply@gmail.com");
+		message.setFrom("not-reply@gmail.com");
 		message.setTo(userForm.getEmail());
 		message.setSubject("Confirm your email address");
 
-		message.setText("Tohle je potvrzujici email pro uzivatele "
-				+ userForm.getUsername() + " s emailovou adresou: "
-				+ userForm.getEmail());
+		message.setText("Hello " + userForm.getUsername() + ",\n\nyou recently registered new account into WebGama.\n\nTo confirm your email address please click on link below:\n\n"
+				+ URL + "/confirm/email/" + uuid + "\n\nBest regards,\nWebGama Team");
 
 		mailSender.send(message);
 
@@ -46,26 +45,28 @@ public class MailManagerImpl implements MailManager {
 
 	@Override
 	public void recoverPassword(PasswordRecoveryForm userForm) {
-		
+
 		List<User> list = userDao.findUsersByUsername(userForm.getUsername());
-		
+
 		User user = list.get(0);
 		String password = Generator.generatePassword();
-		
+
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setFrom("not-reply@gmail.com");
 		message.setTo(user.getEmail());
 		message.setSubject("WebGama: Password Reset");
-		
+
 		message.setText("Hello,\n\nyou recently requested for the password reset.\n\nThe username for your account is: "
-				+ user.getUsername() + "\n\nNew generated password is: "  + password + "\n\nBest regards\nWebGama Team");
+				+ user.getUsername()
+				+ "\n\nNew generated password is: "
+				+ password + "\n\nBest regards,\nWebGama Team");
 
 		mailSender.send(message);
-		
+
 		user.setPassword(new StandardPasswordEncoder().encode(password));
-		
+
 		userDao.updatePassword(user);
-		
+
 	}
 
 	@Override
@@ -81,7 +82,7 @@ public class MailManagerImpl implements MailManager {
 		message.setSubject("WebGama: Username Reminder");
 
 		message.setText("Hello,\n\nyou recently requested for the username you registered with your account.\n\nThe username for your account is: "
-				+ user.getUsername() + "\n\nBest regards\nWebGama Team");
+				+ user.getUsername() + "\n\nBest regards,\nWebGama Team");
 
 		mailSender.send(message);
 	}

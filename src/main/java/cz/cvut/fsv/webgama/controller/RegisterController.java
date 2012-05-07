@@ -24,9 +24,6 @@ public class RegisterController extends AbstractController {
 	@Autowired
 	private UserManager userManager;
 	
-	//@Autowired
-	//private MailManager mailManager;
-	
 	@Autowired
 	private UserRegistrationValidator registrationValidator;
 	
@@ -53,9 +50,7 @@ public class RegisterController extends AbstractController {
 		if (result.hasErrors())
 			return new ModelAndView("/register/register");
 		
-		userManager.registerUser(userForm);
-		
-		//mailManager.sendConfirmationEmail(userForm);
+		userManager.registerUser(userForm,request);
 		
 		return new ModelAndView("redirect:/register/success");
 	}

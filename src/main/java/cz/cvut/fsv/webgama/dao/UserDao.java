@@ -2,6 +2,7 @@ package cz.cvut.fsv.webgama.dao;
 
 import java.util.List;
 
+import cz.cvut.fsv.webgama.domain.Confirmation;
 import cz.cvut.fsv.webgama.domain.User;
 
 public interface UserDao {
@@ -14,6 +15,8 @@ public interface UserDao {
 	
 	public void updatePassword(User user);
 	
+	public void updateEnabled(User user);
+	
 	public List<User> getUserList();
 	
 	public List<User> findUsersByUsername(String username);
@@ -24,11 +27,14 @@ public interface UserDao {
 	
 	public User findUserByUsername(String username);
 	
+	//TODO
 	public Boolean isUserInDB(User user);
 	
-	//TEMPORARY
-	public void dropLastUser();
+	public void insertConfirmationID(String uuid, Integer user_id);
 	
+	public void deleteConfirmationID(String uuid);
+	
+	public List<Confirmation> findConfirmationsByUUID(String uuid);
 	
 	
 

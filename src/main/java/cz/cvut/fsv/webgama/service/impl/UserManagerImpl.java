@@ -2,22 +2,29 @@ package cz.cvut.fsv.webgama.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 import cz.cvut.fsv.webgama.dao.AuthorityDao;
 import cz.cvut.fsv.webgama.dao.UserDao;
 import cz.cvut.fsv.webgama.domain.Authority;
+import cz.cvut.fsv.webgama.domain.Confirmation;
 import cz.cvut.fsv.webgama.domain.User;
 import cz.cvut.fsv.webgama.form.UserForm;
 import cz.cvut.fsv.webgama.form.UserPasswordChangeForm;
 import cz.cvut.fsv.webgama.form.UserRegistrationForm;
+import cz.cvut.fsv.webgama.service.MailManager;
 import cz.cvut.fsv.webgama.service.UserManager;
+import cz.cvut.fsv.webgama.util.Generator;
 
 public class UserManagerImpl implements UserManager {
 
 	private UserDao userDao;
 
 	private AuthorityDao authorityDao;
+
+	private MailManager mailManager;
 
 	@Override
 	public void insertUser(User user) {
@@ -61,12 +68,12 @@ public class UserManagerImpl implements UserManager {
 
 		return list;
 	}
-	
+
 	@Override
 	public List<User> getUsersByEmail(String email) {
-		
+
 		List<User> list = userDao.findUsersByEmail(email);
-		
+
 		return list;
 	}
 
@@ -90,7 +97,7 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
-	public void registerUser(UserRegistrationForm userForm) {
+	public void registerUser(UserRegistrationForm userForm, HttpServletRequest request) {
 
 		User user = new User();
 
@@ -110,6 +117,14 @@ public class UserManagerImpl implements UserManager {
 
 		userDao.insert(user);
 
+		String uuid = Generator.generateConfirmationID();
+		String URL = request.getRequestURL().toString().replace("/register", "");
+
+		Integer user_id = userDao.findUserByUsername(userForm.getUsername()).getId();
+		userDao.insertConfirmationID(uuid, user_id);
+		
+		mailManager.sendConfirmationEmail(userForm, uuid, URL);
+
 	}
 
 	@Override
@@ -128,14 +143,6 @@ public class UserManagerImpl implements UserManager {
 		return false;
 	}
 
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
-
-	public void setAuthorityDao(AuthorityDao authorityDao) {
-		this.authorityDao = authorityDao;
-	}
-
 	@Override
 	public void changeUserPassword(UserPasswordChangeForm userForm) {
 
@@ -148,7 +155,42 @@ public class UserManagerImpl implements UserManager {
 		userDao.updatePassword(user);
 
 	}
-
 	
+	@Override
+	public boolean isConfirmationIDinDB(String uuid) {
+		
+		List<Confirmation> list = userDao.findConfirmationsByUUID(uuid);
+		
+		if (list.isEmpty())
+			return false;
+			
+		return true;
+	}
+	
+	@Override
+	public void confirmEmailAddress(String uuid) {
+		
+		List<Confirmation> list = userDao.findConfirmationsByUUID(uuid);
+		Confirmation conf = list.get(0);
+		User user = conf.getUser();
+		user.setEnabled(true);
+		
+		userDao.deleteConfirmationID(uuid);
+		userDao.updateEnabled(user);
+	}
+	
+	
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
+	public void setAuthorityDao(AuthorityDao authorityDao) {
+		this.authorityDao = authorityDao;
+	}
+
+	public void setMailManager(MailManager mailManager) {
+		this.mailManager = mailManager;
+	}
 
 }

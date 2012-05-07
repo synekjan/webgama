@@ -42,8 +42,7 @@ public class UserController {
 	/*private static final Logger logger = LoggerFactory.getLogger(UserController.class);*/
 
 	@RequestMapping(value = { "", "/info" }, method = RequestMethod.GET)
-	public String user(HttpServletRequest request, Model model, Locale locale,
-			Principal principal) {
+	public String user(HttpServletRequest request, Model model, Locale locale, Principal principal) {
 
 		User user = userManager.getUser(principal.getName());
 
