@@ -38,7 +38,7 @@
 							</tr>
 							<tr>
 								<td><label for="oldPassword">#springMessage("user.current.password"):</label></td>
-								<td>#springFormPasswordInput("user.oldPassword", "")</td>
+								<td>#springFormPasswordInput("user.oldPassword", 'autocomplete="off"')</td>
 								<td>#springShowErrors("&nbsp", "form_errors")</td>
 							</tr>
 							<tr>

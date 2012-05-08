@@ -26,12 +26,12 @@
 						</tr>
 						<tr>
 							<td><label for="password">* #springMessage("user.password"):</label></td>
-							<td>#springFormPasswordInput("user.password", "")</td>
+							<td>#springFormPasswordInput("user.password", 'autocomplete="off"')</td>
 							<td>#springShowErrors("&nbsp", "form_errors")</td>
 						</tr>
 						<tr>
 							<td><label for="confirmPassword">* #springMessage("user.password.confirm"):</label></td>
-							<td>#springFormPasswordInput("user.confirmPassword", "")</td>
+							<td>#springFormPasswordInput("user.confirmPassword", 'autocomplete="off"')</td>
 							<td>#springShowErrors("&nbsp", "form_errors")</td>
 						</tr>
 						<tr>

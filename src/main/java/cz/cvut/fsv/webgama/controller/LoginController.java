@@ -1,28 +1,29 @@
 package cz.cvut.fsv.webgama.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.AbstractController;
+import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 @Controller
-@RequestMapping("/login")
-public class LoginController extends AbstractController {
+public class LoginController extends MultiActionController {
 
 	/*@Autowired
 	private LoginManager loginManager;*/
 
-	@Override
-	@RequestMapping(method = RequestMethod.GET)
-	protected ModelAndView handleRequestInternal(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login() throws Exception {
 
 		return new ModelAndView("login");
 	}
+	
+	@RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
+	public ModelAndView loginFailed() throws Exception {
+
+		return new ModelAndView("login", "error", true);
+	}
+	
 
 	/*@RequestMapping(method = RequestMethod.POST)
 	protected ModelAndView showForm(HttpServletRequest request) {
