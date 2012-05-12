@@ -36,10 +36,10 @@ public class JdbcLoginDao extends JdbcDaoSupport implements LoginDao {
 
 	@Override
 	public List<Login> getLoginList(User user) {
+		
+		String sql = "SELECT id,ip_address,time,success FROM logins WHERE user_id = ? ORDER BY time DESC";
 
-		List<Login> logins = getJdbcTemplate().query(
-				"SELECT id,ip_address,time,success FROM logins WHERE user_id = "
-						+ user.getId(), new LoginMapper());
+		List<Login> logins = getJdbcTemplate().query(sql,new Object[] {user.getId()}, new LoginMapper());
 
 		return logins;
 	}

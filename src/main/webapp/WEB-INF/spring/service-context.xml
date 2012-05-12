@@ -54,6 +54,7 @@
 	
 	<bean class="cz.cvut.fsv.webgama.util.AuthenticatedUserDetails">
 		<property name="userManager" ref="userManager" />
+		<property name="loginManager" ref="loginManager" />
 	</bean>
 	
 	

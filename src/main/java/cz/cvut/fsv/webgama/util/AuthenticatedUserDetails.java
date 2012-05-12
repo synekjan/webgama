@@ -1,11 +1,13 @@
 package cz.cvut.fsv.webgama.util;
 
-import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import cz.cvut.fsv.webgama.domain.Login;
+import cz.cvut.fsv.webgama.service.LoginManager;
 import cz.cvut.fsv.webgama.service.UserManager;
 
 public class AuthenticatedUserDetails {
@@ -13,8 +15,15 @@ public class AuthenticatedUserDetails {
 	@Autowired
 	private UserManager userManager;
 
+	@Autowired
+	private LoginManager loginManager;
+
 	public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;
+	}
+
+	public void setLoginManager(LoginManager loginManager) {
+		this.loginManager = loginManager;
 	}
 
 	// username exposed in header
@@ -35,11 +44,18 @@ public class AuthenticatedUserDetails {
 		return userManager.hasUserAdminRights(SecurityContextHolder
 				.getContext().getAuthentication().getName());
 	}
-	
+
 	// Last Login link in header
 	public String getLastLogin() {
 		
-		return new Date().toString();
+		List<Login> list = loginManager.getLoginList(SecurityContextHolder
+				.getContext().getAuthentication().getName());
+		
+		if (list.isEmpty()) {
+			return null;
+		}
+		
+		return list.get(0).getTime().toString();
 	}
 
 }
