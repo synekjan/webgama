@@ -32,7 +32,7 @@ public class MailManagerImpl implements MailManager {
 	public void sendConfirmationEmail(UserRegistrationForm userForm, String uuid, String URL) {
 
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("not-reply@gmail.com");
+		message.setFrom("noreply@fsv.cvut.cz");
 		message.setTo(userForm.getEmail());
 		message.setSubject("Confirm your email address");
 
@@ -52,7 +52,7 @@ public class MailManagerImpl implements MailManager {
 		String password = Generator.generatePassword();
 
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("not-reply@gmail.com");
+		message.setFrom("noreply@fsv.cvut.cz");
 		message.setTo(user.getEmail());
 		message.setSubject("WebGama: Password Reset");
 
@@ -77,7 +77,7 @@ public class MailManagerImpl implements MailManager {
 		User user = list.get(0);
 
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("not-reply@gmail.com");
+		message.setFrom("noreply@fsv.cvut.cz");
 		message.setTo(userForm.getEmail());
 		message.setSubject("WebGama: Username Reminder");
 
