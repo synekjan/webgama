@@ -21,6 +21,7 @@
 	</bean>
 	
 	<bean id="mailManager" class="cz.cvut.fsv.webgama.service.impl.MailManagerImpl">
+		<property name="addressFrom" value="noreply@fsv.cvut.cz"></property>
 		<property name="mailSender" ref="mailSender" />
 		<property name="userDao" ref="userDao" />
 	</bean>

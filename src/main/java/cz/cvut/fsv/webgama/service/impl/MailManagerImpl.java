@@ -16,28 +16,26 @@ import cz.cvut.fsv.webgama.util.Generator;
 
 public class MailManagerImpl implements MailManager {
 
+	private String addressFrom;
+
 	private MailSender mailSender;
 
 	private UserDao userDao;
 
-	public void setMailSender(MailSender mailSender) {
-		this.mailSender = mailSender;
-	}
-
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
-
 	@Override
-	public void sendConfirmationEmail(UserRegistrationForm userForm, String uuid, String URL) {
+	public void sendConfirmationEmail(UserRegistrationForm userForm,
+			String uuid, String URL) {
 
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("noreply@fsv.cvut.cz");
+		message.setFrom(addressFrom);
 		message.setTo(userForm.getEmail());
 		message.setSubject("Confirm your email address");
 
-		message.setText("Hello " + userForm.getUsername() + ",\n\nyou recently registered new account into WebGama.\n\nTo confirm your email address please click on link below:\n\n"
-				+ URL + "/confirm/email/" + uuid + "\n\nBest regards,\nWebGama Team");
+		message.setText("Hello "
+				+ userForm.getUsername()
+				+ ",\n\nyou recently registered new account into WebGama.\n\nTo confirm your email address please click on link below:\n\n"
+				+ URL + "/confirm/email/" + uuid
+				+ "\n\nBest regards,\nWebGama Team");
 
 		mailSender.send(message);
 
@@ -52,7 +50,7 @@ public class MailManagerImpl implements MailManager {
 		String password = Generator.generatePassword();
 
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("noreply@fsv.cvut.cz");
+		message.setFrom(addressFrom);
 		message.setTo(user.getEmail());
 		message.setSubject("WebGama: Password Reset");
 
@@ -77,7 +75,7 @@ public class MailManagerImpl implements MailManager {
 		User user = list.get(0);
 
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("noreply@fsv.cvut.cz");
+		message.setFrom(addressFrom);
 		message.setTo(userForm.getEmail());
 		message.setSubject("WebGama: Username Reminder");
 
@@ -86,4 +84,17 @@ public class MailManagerImpl implements MailManager {
 
 		mailSender.send(message);
 	}
+
+	public void setMailSender(MailSender mailSender) {
+		this.mailSender = mailSender;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
+	public void setAddressFrom(String addressFrom) {
+		this.addressFrom = addressFrom;
+	}
+
 }
