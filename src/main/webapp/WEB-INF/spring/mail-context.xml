@@ -4,10 +4,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
 	<!-- ============================= Mail Configuration ============================= -->
-	
+
+	<!-- SMTP server -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.fsv.cvut.cz" />
 		<property name="port" value="25" />
 	</bean>
-	
+
 </beans>
