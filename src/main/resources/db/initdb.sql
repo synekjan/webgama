@@ -28,7 +28,7 @@ date_modified TIMESTAMP DEFAULT now());
 
 CREATE TABLE roles (
 id INTEGER PRIMARY KEY,
-role VARCHAR(25)
+role VARCHAR(25) NOT NULL
 );
 
 INSERT INTO roles VALUES (1,'ROLE_ADMIN');
@@ -38,8 +38,8 @@ INSERT INTO roles VALUES (3,'ROLE_USER');
 
 CREATE TABLE authorities (
 id SERIAL PRIMARY KEY,
-role_id INTEGER REFERENCES roles(id),
-user_id INTEGER REFERENCES users(id)
+role_id INTEGER NOT NULL REFERENCES roles(id),
+user_id INTEGER NOT NULL REFERENCES users(id)
 );
 
 
@@ -94,10 +94,10 @@ INSERT INTO users (username,password,enabled) VALUES ('cepek','65b0c1af77dc3486a
 
 CREATE TABLE logins (
 id SERIAL PRIMARY KEY,
-user_id INTEGER REFERENCES users(id),
-ip_address VARCHAR(15),
-time TIMESTAMP DEFAULT now(),
-success BOOLEAN);
+user_id INTEGER NOT NULL REFERENCES users(id),
+ip_address NOT NULL VARCHAR(15),
+time NOT NULL TIMESTAMP DEFAULT now(),
+success NOT NULL BOOLEAN);
 
 INSERT INTO logins (user_id,ip_address,success) VALUES (1,'172.16.98.48',TRUE);
 INSERT INTO logins (user_id,ip_address,success) VALUES (1,'172.16.98.47',TRUE);
