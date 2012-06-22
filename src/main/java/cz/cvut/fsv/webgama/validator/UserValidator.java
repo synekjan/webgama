@@ -28,7 +28,7 @@ public class UserValidator implements Validator {
 		UserForm userForm = (UserForm) target;
 		
 		List<User> list = userManager.getUsersByEmail(userForm.getEmail());
-		if (!list.isEmpty()) {
+		if (!list.isEmpty() /*&& !userForm.getEmail().equals(list.get(0).getEmail())*/) {
 			errors.rejectValue("email", "Used", "email address is already used");
 		}
 

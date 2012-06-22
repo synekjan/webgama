@@ -36,8 +36,8 @@ public class UserController {
 	@Autowired
 	private UserPasswordChangeValidator passwordValidator;
 	
-	@Autowired
-	private UserValidator userValidator;
+	//@Autowired
+	//private UserValidator userValidator;
 
 	/*private static final Logger logger = LoggerFactory.getLogger(UserController.class);*/
 
@@ -56,7 +56,7 @@ public class UserController {
 			@Valid @ModelAttribute("user") UserForm userForm,
 			BindingResult result) {
 
-		userValidator.validate(userForm, result);
+		//userValidator.validate(userForm, result);
 		
 		if (result.hasErrors()) {
 

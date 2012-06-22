@@ -95,9 +95,9 @@ INSERT INTO users (username,password,enabled) VALUES ('cepek','65b0c1af77dc3486a
 CREATE TABLE logins (
 id SERIAL PRIMARY KEY,
 user_id INTEGER NOT NULL REFERENCES users(id),
-ip_address NOT NULL VARCHAR(15),
-time NOT NULL TIMESTAMP DEFAULT now(),
-success NOT NULL BOOLEAN);
+ip_address VARCHAR(15) NOT NULL,
+time TIMESTAMP NOT NULL DEFAULT now(),
+success BOOLEAN NOT NULL);
 
 INSERT INTO logins (user_id,ip_address,success) VALUES (1,'172.16.98.48',TRUE);
 INSERT INTO logins (user_id,ip_address,success) VALUES (1,'172.16.98.47',TRUE);
