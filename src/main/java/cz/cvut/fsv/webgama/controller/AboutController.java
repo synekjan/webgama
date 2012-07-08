@@ -7,15 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.AbstractController;
+import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 @Controller
 @RequestMapping("/about")
-public class AboutController extends AbstractController {
+public class AboutController extends MultiActionController {
 
-	@Override
 	@RequestMapping(value = {"", "/project"}, method = RequestMethod.GET)
-	protected ModelAndView handleRequestInternal(HttpServletRequest request,
+	protected ModelAndView showAboutProject(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
 		ModelAndView mav = new ModelAndView("/about/about");

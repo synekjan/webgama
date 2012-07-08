@@ -27,9 +27,6 @@ public interface UserDao {
 	
 	public User findUserByUsername(String username);
 	
-	//TODO
-	public Boolean isUserInDB(User user);
-	
 	public void insertConfirmationID(String uuid, Integer user_id);
 	
 	public void deleteConfirmationID(String uuid);

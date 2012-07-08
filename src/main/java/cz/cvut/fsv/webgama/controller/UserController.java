@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import cz.cvut.fsv.webgama.domain.User;
 import cz.cvut.fsv.webgama.form.UserForm;
@@ -21,11 +22,10 @@ import cz.cvut.fsv.webgama.form.UserPasswordChangeForm;
 import cz.cvut.fsv.webgama.service.LoginManager;
 import cz.cvut.fsv.webgama.service.UserManager;
 import cz.cvut.fsv.webgama.validator.UserPasswordChangeValidator;
-import cz.cvut.fsv.webgama.validator.UserValidator;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends MultiActionController {
 
 	@Autowired
 	private UserManager userManager;

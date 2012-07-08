@@ -118,14 +118,6 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 	}
 
 	@Override
-	public Boolean isUserInDB(User user) {
-
-		// TODO - dodelat
-
-		return null;
-	}
-
-	@Override
 	public void insertConfirmationID(String uuid, Integer user_id) {
 
 		String sql = "INSERT INTO confirmations (user_id, uuid) VALUES (?,?)";

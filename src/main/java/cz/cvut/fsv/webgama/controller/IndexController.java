@@ -29,6 +29,7 @@ public class IndexController {
 		
 		//model.addAttribute("lastlogin", loginManager.getLastLogin(principal.getName()));
 		
+		
 		Date date = new Date();
 		DateFormat df = DateFormat.getDateInstance(DateFormat.FULL,locale);
 		String dateTime = df.format(date);

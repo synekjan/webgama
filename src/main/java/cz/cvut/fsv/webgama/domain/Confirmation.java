@@ -5,11 +5,8 @@ import java.util.Date;
 public class Confirmation {
 
 	private Integer id;
-
 	private User user;
-
 	private String uuid;
-
 	private Date time;
 
 	public Integer getId() {

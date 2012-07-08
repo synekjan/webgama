@@ -3,8 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
-	<import resource="dao-context.xml" />
-	<import resource="mail-context.xml" />
+	
 
 	<bean id="userManager" class="cz.cvut.fsv.webgama.service.impl.UserManagerImpl">
 		<property name="userDao" ref="userDao" />
@@ -57,6 +56,11 @@
 	<bean class="cz.cvut.fsv.webgama.util.AuthenticatedUserDetails">
 		<property name="userManager" ref="userManager" />
 		<property name="loginManager" ref="loginManager" />
+	</bean>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<!-- one of the properties available; the maximum file size in bytes -->
+		<!-- <property name="maxUploadSize" value="10000" /> -->
 	</bean>
 	
 </beans>
