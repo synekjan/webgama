@@ -6,6 +6,7 @@ DROP TABLE roles;
 DROP TABLE logins;
 DROP FUNCTION user_authority_function() CASCADE;
 DROP TABLE confirmations CASCADE;
+DROP TABLE inputs CASCADE;
 
 CREATE TABLE users (
 id SERIAL PRIMARY KEY,
@@ -122,6 +123,26 @@ GRANT ALL ON logins TO synekjan;
 GRANT ALL ON logins_id_seq TO synekjan;
 GRANT ALL ON confirmations TO synekjan;
 GRANT ALL ON confirmations_id_seq TO synekjan;
+
+
+
+
+CREATE TABLE inputs (
+id SERIAL PRIMARY KEY,
+user_id INTEGER NOT NULL REFERENCES users(id),
+filename VARCHAR(255) NOT NULL,
+file_content TEXT,
+time TIMESTAMP DEFAULT now()
+);
+
+GRANT ALL ON inputs TO synekjan;
+GRANT ALL ON inputs_id_seq TO synekjan;
+
+
+
+
+
+
 
 
 COMMIT;

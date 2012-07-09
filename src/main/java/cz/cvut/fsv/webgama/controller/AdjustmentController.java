@@ -1,5 +1,6 @@
 package cz.cvut.fsv.webgama.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Calendar;
@@ -7,7 +8,6 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,17 +54,22 @@ public class AdjustmentController extends MultiActionController {
 		
 		if (!file.isEmpty()) {
             //byte[] bytes = file.getBytes();
-            
-            System.out.println(file.getContentType());
-            System.out.println(file.getSize());
-            System.out.println(file.getName());
-            System.out.println(file.getOriginalFilename());
-            
+        
+			//TODO
+			
+			String orgName = file.getOriginalFilename();
+			
+			String path = orgName;
+        
+			File newFile = new File(path);
+			
+			file.transferTo(newFile);
+			
             InputStream in = file.getInputStream();
            
-            String s = IOUtils.toString(in);
+            //String s = IOUtils.toString(in);
             
-            System.out.println(s);
+            
            
             in.close();
             

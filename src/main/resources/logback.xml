@@ -8,12 +8,27 @@
 <!--    http://www.qos.ch/shop/products/professionalSupport         -->
 <!--                                                                -->
 <configuration>
+
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>%-4r %-5p %c --- %m%n</pattern>
+			<pattern>%d %-5level [%thread] %logger{0}: %msg%n</pattern>
 		</encoder>
 	</appender>
+
+
+	<appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+		<connectionSource class="ch.qos.logback.core.db.JNDIConnectionSource">
+      		<!-- please note the "java:comp/env/" prefix -->
+			<jndiLocation>java:comp/env/jdbc/Postgres</jndiLocation>
+		</connectionSource>
+	</appender>
+
+
+
+
+
 	<root level="INFO">
 		<appender-ref ref="stdout" />
+		<!-- <appender-ref ref="DB" /> -->
 	</root>
 </configuration>
