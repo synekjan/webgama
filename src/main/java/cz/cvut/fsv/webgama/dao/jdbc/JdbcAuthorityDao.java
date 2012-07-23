@@ -44,7 +44,7 @@ public class JdbcAuthorityDao extends JdbcDaoSupport implements AuthorityDao {
 		public Authority mapRow(ResultSet rs, int rowNum) throws SQLException {
 
 			Authority authority = new Authority();
-			authority.setId(new Integer(rs.getInt("id")));
+			authority.setId(Integer.valueOf(rs.getInt("id")));
 			authority.setRole(roleDao.findRoleById(rs.getInt("role_id")));
 			authority.setUser(userDao.findUserById(rs.getInt("user_id")));
 			

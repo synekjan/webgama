@@ -53,7 +53,7 @@ public class JdbcLoginDao extends JdbcDaoSupport implements LoginDao {
 
 	}
 
-	private class LoginMapper implements RowMapper<Login> {
+	private static class LoginMapper implements RowMapper<Login> {
 
 		@Override
 		public Login mapRow(ResultSet rs, int rowNum) throws SQLException {

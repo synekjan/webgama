@@ -49,8 +49,7 @@ public class UserManagerImpl implements UserManager {
 	@Override
 	public User getUser(String username) {
 
-		User user = new User();
-		user = userDao.findUserByUsername(username);
+		User user = userDao.findUserByUsername(username);
 
 		return user;
 	}

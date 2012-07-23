@@ -22,7 +22,7 @@ public class JdbcRoleDao extends JdbcDaoSupport implements RoleDao {
 	}
 
 	
-	private class RoleMapper implements RowMapper<Role> {
+	private static class RoleMapper implements RowMapper<Role> {
 
 		@Override
 		public Role mapRow(ResultSet rs, int rowNum) throws SQLException {

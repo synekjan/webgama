@@ -50,7 +50,7 @@ public class JdbcUserDaoTests {
 
 		userDao.insert(user);
 
-		assertEquals(new Integer(32), user.getId());
+		assertEquals(Integer.valueOf(32), user.getId());
 	}
 	
 	@Test

@@ -2,8 +2,6 @@ package cz.cvut.fsv.webgama.domain;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class User {
 
 	private Integer id;
@@ -23,7 +21,7 @@ public class User {
 	private String telephone;
 
 	private String street;
-	
+
 	private String number;
 
 	private String city;
@@ -33,7 +31,7 @@ public class User {
 	private String state;
 
 	private Date created;
-	
+
 	private Date modified;
 
 	public Integer getId() {
@@ -140,7 +138,6 @@ public class User {
 		this.state = state;
 	}
 
-	@DateTimeFormat(style = "-M")
 	public Date getCreated() {
 		return created;
 	}
@@ -149,19 +146,12 @@ public class User {
 		this.created = created;
 	}
 
-	@DateTimeFormat(style = "-M")
 	public Date getModified() {
 		return modified;
 	}
 
 	public void setModified(Date modified) {
 		this.modified = modified;
-	}
-
-	@Override
-	public String toString() {
-
-		return "[" + id + ", " + firstName + " " + lastName + "]";
 	}
 
 }

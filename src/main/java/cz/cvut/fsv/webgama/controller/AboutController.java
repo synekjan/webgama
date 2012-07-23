@@ -24,6 +24,8 @@ public class AboutController extends MultiActionController {
 		mav.addObject("port", request.getRemotePort());
 		mav.addObject("encoding", request.getCharacterEncoding());
 
+		
+		
 		return mav;
 	}
 	

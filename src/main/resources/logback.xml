@@ -16,6 +16,7 @@
 	</appender>
 
 
+	<!-- Appropriate tables need to be created in DB -->
 	<appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
 		<connectionSource class="ch.qos.logback.core.db.JNDIConnectionSource">
       		<!-- please note the "java:comp/env/" prefix -->

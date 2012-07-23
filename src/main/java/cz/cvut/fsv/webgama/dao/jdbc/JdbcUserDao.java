@@ -56,13 +56,12 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 		getJdbcTemplate().update(sql, user.getPassword(), user.getId());
 	}
-	
+
 	public void updateEnabled(User user) {
 		String sql = "UPDATE users set enabled=? WHERE id=?";
-		
+
 		getJdbcTemplate().update(sql, user.getEnabled(), user.getId());
 	}
-	
 
 	@Override
 	public List<User> getUserList() {
@@ -134,19 +133,19 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 		getJdbcTemplate().update(sql, uuid);
 
 	}
-	
+
 	@Override
 	public List<Confirmation> findConfirmationsByUUID(String uuid) {
-		
+
 		String sql = "SELECT * FROM confirmations WHERE uuid = ?";
 
-		List<Confirmation> confirmations = getJdbcTemplate().query(sql, new Object[] { uuid },
-				new ConfirmationMapper());
+		List<Confirmation> confirmations = getJdbcTemplate().query(sql,
+				new Object[] { uuid }, new ConfirmationMapper());
 
 		return confirmations;
 	}
 
-	private class UserMapper implements RowMapper<User> {
+	private static class UserMapper implements RowMapper<User> {
 
 		@Override
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -166,29 +165,28 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 			user.setZipCode(rs.getString("zipcode"));
 			user.setState(rs.getString("state"));
 			user.setCreated(new Date(rs.getTimestamp("date_created").getTime()));
-			user.setModified(new Date(rs.getTimestamp("date_modified")
-					.getTime()));
+			user.setModified(new Date(rs.getTimestamp("date_modified").getTime()));
 
 			return user;
 		}
 	}
-	
-	
+
 	private class ConfirmationMapper implements RowMapper<Confirmation> {
 
 		@Override
-		public Confirmation mapRow(ResultSet rs, int rowNum) throws SQLException {
-			
+		public Confirmation mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
+
 			Confirmation conf = new Confirmation();
-			
+
 			conf.setId(rs.getInt("id"));
 			conf.setUser(findUserById(rs.getInt("user_id")));
 			conf.setUuid(rs.getString("uuid"));
 			conf.setTime(new Date(rs.getTimestamp("time").getTime()));
-			
+
 			return conf;
 		}
-		
+
 	}
 
 }
