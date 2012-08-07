@@ -2,9 +2,9 @@ package cz.cvut.fsv.webgama.dao.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
@@ -164,8 +164,8 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 			user.setCity(rs.getString("city"));
 			user.setZipCode(rs.getString("zipcode"));
 			user.setState(rs.getString("state"));
-			user.setCreated(new Date(rs.getTimestamp("date_created").getTime()));
-			user.setModified(new Date(rs.getTimestamp("date_modified").getTime()));
+			user.setCreated(new DateTime(rs.getTimestamp("date_created").getTime()));
+			user.setModified(new DateTime(rs.getTimestamp("date_modified").getTime()));
 
 			return user;
 		}
@@ -182,7 +182,7 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 			conf.setId(rs.getInt("id"));
 			conf.setUser(findUserById(rs.getInt("user_id")));
 			conf.setUuid(rs.getString("uuid"));
-			conf.setTime(new Date(rs.getTimestamp("time").getTime()));
+			conf.setTime(new DateTime(rs.getTimestamp("time").getTime()));
 
 			return conf;
 		}

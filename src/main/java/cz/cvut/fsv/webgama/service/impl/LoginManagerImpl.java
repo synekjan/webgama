@@ -1,7 +1,8 @@
 package cz.cvut.fsv.webgama.service.impl;
 
-import java.util.Date;
 import java.util.List;
+
+import org.joda.time.DateTime;
 
 import cz.cvut.fsv.webgama.dao.LoginDao;
 import cz.cvut.fsv.webgama.dao.UserDao;
@@ -42,7 +43,7 @@ public class LoginManagerImpl implements LoginManager {
 	}
 
 	@Override
-	public Date getLastLogin(String username) {
+	public DateTime getLastLogin(String username) {
 		
 		Login login = loginDao.getLastLogin(userDao.findUserByUsername(username));
 			

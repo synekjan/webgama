@@ -1,6 +1,6 @@
 package cz.cvut.fsv.webgama.domain;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 public class Login {
 	
@@ -10,7 +10,7 @@ public class Login {
 	
 	private String ip;
 	
-	private Date time;
+	private DateTime time;
 	
 	private Boolean success;
 
@@ -38,11 +38,11 @@ public class Login {
 		this.ip = ip;
 	}
 
-	public Date getTime() {
+	public DateTime getTime() {
 		return time;
 	}
 
-	public void setTime(Date time) {
+	public void setTime(DateTime time) {
 		this.time = time;
 	}
 

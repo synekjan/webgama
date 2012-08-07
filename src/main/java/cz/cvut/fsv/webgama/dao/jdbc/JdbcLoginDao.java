@@ -2,9 +2,9 @@ package cz.cvut.fsv.webgama.dao.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
@@ -61,7 +61,7 @@ public class JdbcLoginDao extends JdbcDaoSupport implements LoginDao {
 			Login login = new Login();
 			login.setId((Integer) rs.getObject("id"));
 			login.setIp(rs.getString("ip_address"));
-			login.setTime(new Date(rs.getTimestamp("time").getTime()));
+			login.setTime(new DateTime(rs.getTimestamp("time").getTime()));
 			login.setSuccess(rs.getBoolean("success"));
 
 			return login;

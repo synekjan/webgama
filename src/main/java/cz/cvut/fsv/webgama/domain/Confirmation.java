@@ -1,13 +1,13 @@
 package cz.cvut.fsv.webgama.domain;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 public class Confirmation {
 
 	private Integer id;
 	private User user;
 	private String uuid;
-	private Date time;
+	private DateTime time;
 
 	public Integer getId() {
 		return id;
@@ -33,11 +33,11 @@ public class Confirmation {
 		this.uuid = uuid;
 	}
 
-	public Date getTime() {
+	public DateTime getTime() {
 		return time;
 	}
 
-	public void setTime(Date time) {
+	public void setTime(DateTime time) {
 		this.time = time;
 	}
 

@@ -1,6 +1,6 @@
 package cz.cvut.fsv.webgama.domain;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 public class User {
 
@@ -30,9 +30,9 @@ public class User {
 
 	private String state;
 
-	private Date created;
+	private DateTime created;
 
-	private Date modified;
+	private DateTime modified;
 
 	public Integer getId() {
 		return id;
@@ -138,20 +138,22 @@ public class User {
 		this.state = state;
 	}
 
-	public Date getCreated() {
+	public DateTime getCreated() {
 		return created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(DateTime created) {
 		this.created = created;
 	}
 
-	public Date getModified() {
+	public DateTime getModified() {
 		return modified;
 	}
 
-	public void setModified(Date modified) {
+	public void setModified(DateTime modified) {
 		this.modified = modified;
 	}
+
+	
 
 }
