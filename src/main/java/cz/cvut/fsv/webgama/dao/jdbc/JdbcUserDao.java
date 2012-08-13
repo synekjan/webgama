@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
@@ -13,7 +15,9 @@ import cz.cvut.fsv.webgama.domain.Confirmation;
 import cz.cvut.fsv.webgama.domain.User;
 
 public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(JdbcUserDao.class);
+	
 	@Override
 	public void insert(User user) {
 
@@ -144,6 +148,19 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 		return confirmations;
 	}
+	
+	@Override
+	public void clearConfirmations() {
+
+		String sql = "DELETE FROM confirmations WHERE time < (now() - 7*'1 day'::interval)";
+		
+		getJdbcTemplate().update(sql);
+		
+		logger.info("Old confirmation records was cleared");
+				
+	}
+	
+	
 
 	private static class UserMapper implements RowMapper<User> {
 
@@ -188,5 +205,7 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 		}
 
 	}
+
+	
 
 }
