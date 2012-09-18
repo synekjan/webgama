@@ -41,9 +41,9 @@
 				authorities-by-username-query="SELECT u.username, r.role 
 				FROM users u 
 				JOIN authorities a 
-				ON u.id = a.user_id 
+				ON u.user_id = a.user_id 
 				JOIN roles r 
-				ON r.id = a.role_id 
+				ON r.role_id = a.role_id 
 				WHERE u.username =  ?" />
 
 		</authentication-provider>

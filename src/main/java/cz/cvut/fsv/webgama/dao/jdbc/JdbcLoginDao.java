@@ -37,7 +37,7 @@ public class JdbcLoginDao extends JdbcDaoSupport implements LoginDao {
 	@Override
 	public List<Login> getLoginList(User user) {
 		
-		String sql = "SELECT id,ip_address,time,success FROM logins WHERE user_id = ? ORDER BY time DESC";
+		String sql = "SELECT login_id,ip_address,time,success FROM logins WHERE user_id = ? ORDER BY time DESC";
 
 		List<Login> logins = getJdbcTemplate().query(sql,new Object[] {user.getId()}, new LoginMapper());
 
@@ -47,7 +47,7 @@ public class JdbcLoginDao extends JdbcDaoSupport implements LoginDao {
 	@Override
 	public Login getLastLogin(User user) {
 
-		String sql = "SELECT id,ip_address,time,success FROM logins WHERE time = (SELECT MAX(time) FROM logins WHERE user_id = ? )";
+		String sql = "SELECT login_id,ip_address,time,success FROM logins WHERE time = (SELECT MAX(time) FROM logins WHERE user_id = ? )";
 
 		return getJdbcTemplate().queryForObject(sql, new Object[] {user.getId()}, new LoginMapper());
 
@@ -59,7 +59,7 @@ public class JdbcLoginDao extends JdbcDaoSupport implements LoginDao {
 		public Login mapRow(ResultSet rs, int rowNum) throws SQLException {
 
 			Login login = new Login();
-			login.setId((Integer) rs.getObject("id"));
+			login.setId((Integer) rs.getObject("login_id"));
 			login.setIp(rs.getString("ip_address"));
 			login.setTime(new DateTime(rs.getTimestamp("time").getTime()));
 			login.setSuccess(rs.getBoolean("success"));

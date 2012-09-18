@@ -1,23 +1,40 @@
 --BEGIN;
 
-
 -- DROPS --
-DROP TABLE users CASCADE;
-DROP TABLE authorities CASCADE;
-DROP TABLE roles CASCADE;
-DROP TABLE logins CASCADE;
-DROP FUNCTION user_authority_function() CASCADE;
-DROP TABLE confirmations CASCADE;
+DROP TABLE directions CASCADE;
+DROP TABLE distances CASCADE;
+DROP TABLE angles CASCADE;
+DROP TABLE slope_distances CASCADE;
+DROP TABLE zenith_angles CASCADE;
+DROP TABLE height_differences CASCADE;
+DROP TABLE observations CASCADE;
+DROP TABLE points CASCADE;
+DROP TABLE networks CASCADE;
 DROP TABLE inputs CASCADE;
 
 
+DROP TABLE outputs CASCADE;
+
+
+DROP TABLE authorities CASCADE;
+DROP TABLE roles CASCADE;
+DROP TABLE logins CASCADE;
+DROP TABLE confirmations CASCADE;
+DROP TABLE users CASCADE;
+DROP FUNCTION user_authority_function() CASCADE;
+
+
+
+/**************************************************************************
+ *************************   U S E R S  P A R T   ************************* 
+ **************************************************************************/
 
 
 
 -------------------------- USERS table ----------------------------------
 
 CREATE TABLE users (
-id SERIAL PRIMARY KEY,
+user_id SERIAL PRIMARY KEY,
 username VARCHAR(30) NOT NULL UNIQUE,
 password VARCHAR(80) NOT NULL,
 enabled BOOLEAN DEFAULT FALSE,
@@ -34,13 +51,9 @@ date_created TIMESTAMP DEFAULT now(),
 date_modified TIMESTAMP DEFAULT now());
 
 
-
-
-
-
 ---------------------- ROLES AND AUTHORITIES ---------------------------------
 CREATE TABLE roles (
-id INTEGER PRIMARY KEY,
+role_id INTEGER PRIMARY KEY,
 role VARCHAR(25) NOT NULL
 );
 
@@ -50,9 +63,9 @@ INSERT INTO roles VALUES (3,'ROLE_USER');
 
 
 CREATE TABLE authorities (
-id SERIAL PRIMARY KEY,
-role_id INTEGER NOT NULL REFERENCES roles(id),
-user_id INTEGER NOT NULL REFERENCES users(id)
+authority_id SERIAL PRIMARY KEY,
+role_id INTEGER NOT NULL REFERENCES roles(role_id),
+user_id INTEGER NOT NULL REFERENCES users(user_id)
 );
 
 --trigger function for automatic insert default user permissions
@@ -61,12 +74,12 @@ RETURNS TRIGGER AS $$
 BEGIN
 	
 	IF (TG_OP = 'INSERT') THEN
-		INSERT INTO authorities (role_id,user_id) VALUES (3,NEW.id);
+		INSERT INTO authorities (role_id,user_id) VALUES (3,NEW.user_id);
 		RETURN NEW;
 	ELSEIF (TG_OP = 'DELETE') THEN
-		DELETE FROM authorities WHERE user_id = OLD.id;
-		DELETE FROM logins WHERE user_id = OLD.id;
-		DELETE FROM confirmations WHERE user_id = OLD.id;
+		DELETE FROM authorities WHERE user_id = OLD.user_id;
+		DELETE FROM logins WHERE user_id = OLD.user_id;
+		DELETE FROM confirmations WHERE user_id = OLD.user_id;
 		RETURN OLD;
 	END IF;
 	RETURN NULL; --result is ignored since this is an AFTER trigger
@@ -83,35 +96,38 @@ BEFORE DELETE ON users FOR EACH ROW
 EXECUTE PROCEDURE user_authority_function();
 
 
-
-
-
-
-
 --------------- LOGINS table -------------------
 
 CREATE TABLE logins (
-id SERIAL PRIMARY KEY,
-user_id INTEGER NOT NULL REFERENCES users(id),
+login_id SERIAL PRIMARY KEY,
+user_id INTEGER NOT NULL REFERENCES users(user_id),
 ip_address VARCHAR(15) NOT NULL,
 time TIMESTAMP NOT NULL DEFAULT now(),
 success BOOLEAN NOT NULL);
 
 
-
-
 --------------- CONFIRMATIONS table ------------------
 
 CREATE TABLE confirmations (
-id SERIAL PRIMARY KEY,
-user_id INTEGER NOT NULL REFERENCES users(id),
+confirmation_id SERIAL PRIMARY KEY,
+user_id INTEGER NOT NULL REFERENCES users(user_id),
 uuid VARCHAR(36) NOT NULL UNIQUE,
 time TIMESTAMP DEFAULT now()
 );
 
 
-
-
+/****************
+ *    RIGHTS    *
+ ****************/
+GRANT ALL ON users TO synekjan;
+GRANT ALL ON users_user_id_seq TO synekjan;
+GRANT ALL ON authorities TO synekjan;
+GRANT ALL ON authorities_authority_id_seq TO synekjan;
+GRANT ALL ON roles TO synekjan;
+GRANT ALL ON logins TO synekjan;
+GRANT ALL ON logins_login_id_seq TO synekjan;
+GRANT ALL ON confirmations TO synekjan;
+GRANT ALL ON confirmations_confirmation_id_seq TO synekjan;
 
 
 
@@ -122,41 +138,176 @@ time TIMESTAMP DEFAULT now()
  ********************  P A R S I N G   X M L   P A R T  ******************* 
  **************************************************************************/
 
+-----  INPUT PART  -----
 
--- INPUT PART --
 
 CREATE TABLE inputs (
-id SERIAL PRIMARY KEY,
-user_id INTEGER NOT NULL REFERENCES users(id),
-filename VARCHAR(255) NOT NULL,
-file_content TEXT,
-time TIMESTAMP DEFAULT now()
+input_id 		SERIAL PRIMARY KEY,
+user_id 		INTEGER NOT NULL REFERENCES users(user_id),
+filename 		VARCHAR(255) NOT NULL,
+file_content 	TEXT,
+algorithm		VARCHAR(12) NOT NULL,
+ang_units		INTEGER NOT NULL,
+latitude		DOUBLE PRECISION NOT NULL,
+ellipsoid		VARCHAR(20),
+version			VARCHAR(10),
+time 			TIMESTAMP DEFAULT now()
+);
+
+
+
+CREATE TABLE networks (
+network_id		SERIAL PRIMARY KEY,
+input_id		INTEGER NOT NULL REFERENCES inputs(input_id),
+axes_xy			VARCHAR(2) NOT NULL,
+angles			VARCHAR(12) NOT NULL,
+epoch			DOUBLE PRECISION NOT NULL,
+description		TEXT,
+sigma_apr		DOUBLE PRECISION NOT NULL,
+conf_pr			DOUBLE PRECISION NOT NULL,
+tol_abs			DOUBLE PRECISION NOT NULL,
+sigma_act		VARCHAR(11),
+update_cc		VARCHAR(3)
+);
+
+
+CREATE TABLE points (
+point_id		SERIAL PRIMARY KEY,
+network_id		INTEGER NOT NULL REFERENCES networks(network_id),
+id				VARCHAR(80) NOT NULL,
+x				DOUBLE PRECISION,
+y				DOUBLE PRECISION,
+z				DOUBLE PRECISION,
+adj_type		VARCHAR(3),
+coord_type		VARCHAR(3)
+);
+
+
+CREATE TABLE observations (
+observation_id 	SERIAL PRIMARY KEY,
+network_id		INTEGER NOT NULL REFERENCES networks(network_id),
+from_id			VARCHAR(80),
+orientation		VARCHAR(20),
+from_dh			DOUBLE PRECISION
+);
+
+
+CREATE TABLE directions (
+direction_id	SERIAL PRIMARY KEY,
+observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
+to_id				VARCHAR(80) NOT NULL,
+val				DOUBLE PRECISION NOT NULL,
+stdev			DOUBLE PRECISION,
+from_dh			DOUBLE PRECISION,
+to_dh			DOUBLE PRECISION
+);
+
+CREATE TABLE distances (
+distance_id		SERIAL PRIMARY KEY,
+observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
+from_id			VARCHAR(80) NOT NULL,
+to_id				VARCHAR(80) NOT NULL,
+val				DOUBLE PRECISION NOT NULL,
+stdev			DOUBLE PRECISION,
+from_dh			DOUBLE PRECISION,
+to_dh			DOUBLE PRECISION
+);
+
+
+CREATE TABLE angles (
+angle_id		SERIAL PRIMARY KEY,
+observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
+from_id			VARCHAR(80) NOT NULL,
+bs				VARCHAR(80) NOT NULL,
+fs				VARCHAR(80) NOT NULL,
+val				DOUBLE PRECISION NOT NULL,
+stdev			DOUBLE PRECISION,
+from_dh			DOUBLE PRECISION,
+bs_dh			DOUBLE PRECISION,
+fs_dh			DOUBLE PRECISION
+);
+
+
+CREATE TABLE slope_distances (
+slope_distance_id	SERIAL PRIMARY KEY,
+observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
+from_id			VARCHAR(80) NOT NULL,
+to_id				VARCHAR(80) NOT NULL,
+val				DOUBLE PRECISION NOT NULL,
+stdev			DOUBLE PRECISION,
+from_dh			DOUBLE PRECISION,
+to_dh			DOUBLE PRECISION
+);
+
+CREATE TABLE zenith_angles (
+zenith_angle_id	SERIAL PRIMARY KEY,
+observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
+from_id			VARCHAR(80) NOT NULL,
+to_id				VARCHAR(80) NOT NULL,
+val				DOUBLE PRECISION NOT NULL,
+stdev			DOUBLE PRECISION,
+from_dh			DOUBLE PRECISION,
+to_dh			DOUBLE PRECISION
+);
+
+CREATE TABLE height_differences (
+height_difference_id	SERIAL PRIMARY KEY,
+observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
+from_id			VARCHAR(80) NOT NULL,
+to_id				VARCHAR(80) NOT NULL,
+val				DOUBLE PRECISION NOT NULL,
+stdev			DOUBLE PRECISION,
+dist			DOUBLE PRECISION
 );
 
 
 
 
+/****************
+ *    RIGHTS    *
+ ****************/
+GRANT ALL ON inputs TO synekjan;
+GRANT ALL ON inputs_input_id_seq TO synekjan;
+GRANT ALL ON networks TO synekjan;
+GRANT ALL ON networks_network_id_seq TO synekjan;
+GRANT ALL ON observations TO synekjan;
+GRANT ALL ON observations_observation_id_seq TO synekjan;
+GRANT ALL ON points TO synekjan;
+GRANT ALL ON points_point_id_seq TO synekjan;
+GRANT ALL ON directions TO synekjan;
+GRANT ALL ON directions_direction_id_seq TO synekjan;
+GRANT ALL ON distances TO synekjan;
+GRANT ALL ON distances_distance_id_seq TO synekjan;
+GRANT ALL ON angles TO synekjan;
+GRANT ALL ON angles_angle_id_seq TO synekjan;
+GRANT ALL ON slope_distances TO synekjan;
+GRANT ALL ON slope_distances_slope_distance_id_seq TO synekjan;
+GRANT ALL ON zenith_angles TO synekjan;
+GRANT ALL ON zenith_angles_zenith_angle_id_seq TO synekjan;
+GRANT ALL ON height_differences TO synekjan;
+GRANT ALL ON height_differences_height_difference_id_seq TO synekjan;
 
 
 
 
 
 
+-----  OUTPUT PART  -----
+
+
+CREATE TABLE outputs (
+output_id 		SERIAL PRIMARY KEY,
+user_id 		INTEGER NOT NULL REFERENCES users(user_id)
+
+);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+/****************
+ *    RIGHTS    *
+ ****************/
+GRANT ALL ON outputs TO synekjan;
+GRANT ALL ON outputs_output_id_seq TO synekjan;
 
 
 
@@ -179,13 +330,11 @@ INSERT INTO users (username,password,enabled,firstname,lastname,email,telephone,
 INSERT INTO users (username,password,enabled) VALUES ('cepek','65b0c1af77dc3486accab0abdb5f0fdb3cf7bdc5003dd9e7594568d732ed72d976de5ff51a25d4e8',TRUE);
 
 INSERT INTO authorities (role_id,user_id) VALUES (1,1);
-INSERT INTO authorities (role_id,user_id) VALUES (3,1);
-
+INSERT INTO authorities (role_id,user_id) VALUES (2,1);
 
 INSERT INTO logins (user_id,ip_address,success) VALUES (1,'172.16.98.48',TRUE);
 INSERT INTO logins (user_id,ip_address,success) VALUES (1,'172.16.98.47',TRUE);
 INSERT INTO logins (user_id,ip_address,success) VALUES (2,'172.16.98.45',TRUE);
-
 
 
 INSERT INTO confirmations VALUES (1,1,'adf','2010-11-11');
@@ -193,20 +342,9 @@ INSERT INTO confirmations VALUES (2,1,'adff','2011-11-11');
 INSERT INTO confirmations VALUES (3,1,'adfadf','2012-08-06');
 INSERT INTO confirmations VALUES (4,1,'adffda','2012-08-07');
 
-/****************
- *    RIGHTS    *
- ****************/
-GRANT ALL ON users TO synekjan;
-GRANT ALL ON users_id_seq TO synekjan;
-GRANT ALL ON authorities TO synekjan;
-GRANT ALL ON authorities_id_seq TO synekjan;
-GRANT ALL ON roles TO synekjan;
-GRANT ALL ON logins TO synekjan;
-GRANT ALL ON logins_id_seq TO synekjan;
-GRANT ALL ON confirmations TO synekjan;
-GRANT ALL ON confirmations_id_seq TO synekjan;
-GRANT ALL ON inputs TO synekjan;
-GRANT ALL ON inputs_id_seq TO synekjan;
+
+
+
 
 
 --COMMIT;

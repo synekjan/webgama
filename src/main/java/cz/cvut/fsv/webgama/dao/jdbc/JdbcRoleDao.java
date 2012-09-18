@@ -14,7 +14,7 @@ public class JdbcRoleDao extends JdbcDaoSupport implements RoleDao {
 	@Override
 	public Role findRoleById(int id) {
 	
-		String sql = "SELECT * FROM roles WHERE id = ?";
+		String sql = "SELECT * FROM roles WHERE role_id = ?";
 		
 		Role role = getJdbcTemplate().queryForObject(sql, new Object[] {id}, new RoleMapper());
 		
@@ -29,7 +29,7 @@ public class JdbcRoleDao extends JdbcDaoSupport implements RoleDao {
 			
 			Role role = new Role();
 			
-			role.setId(rs.getInt("id"));
+			role.setId(rs.getInt("role_id"));
 			role.setName(rs.getString("role"));
 			
 			return role;
