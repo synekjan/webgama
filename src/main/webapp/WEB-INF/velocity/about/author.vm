@@ -25,6 +25,13 @@
 			<h3>#springMessage("about.author")</h3>
 
 			<p>Jendik Synků</p>
+			
+			<p>
+    			Příšerně žluťoučký kůň úpěl ďábelské ódy.
+    			Hleď, toť přízračný kůň v mátožné póze šíleně úpí.
+    			Zvlášť zákeřný učeň s ďolíčky běží podél zóny úlů.
+    			Loď čeří kýlem tůň obzvlášť v Grónské úžině.
+    			Ó, náhlý déšť již zvířil prach a čilá laň teď běží s houfcem gazel k úkrytům. </p>
 
 		</div>
 		#parse("footer.vm")
