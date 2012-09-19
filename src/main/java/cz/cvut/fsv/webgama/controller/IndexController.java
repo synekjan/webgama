@@ -5,9 +5,9 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ import cz.cvut.fsv.webgama.service.LoginManager;
 @Controller
 public class IndexController {
 	
-	@Autowired
+	@Inject
 	LoginManager loginManager;	
 	
 	/*private static final Logger logger = LoggerFactory.getLogger(IndexController.class);*/

@@ -2,7 +2,8 @@ package cz.cvut.fsv.webgama.util;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,10 +13,10 @@ import cz.cvut.fsv.webgama.service.UserManager;
 
 public class AuthenticatedUserDetails {
 
-	@Autowired
+	@Inject
 	private UserManager userManager;
 
-	@Autowired
+	@Inject
 	private LoginManager loginManager;
 
 	public void setUserManager(UserManager userManager) {

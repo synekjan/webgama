@@ -1,10 +1,10 @@
 package cz.cvut.fsv.webgama.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ import cz.cvut.fsv.webgama.service.UserManager;
 @RequestMapping("/confirm/**")
 public class ConfirmController {
 
-	@Autowired
+	@Inject
 	private UserManager userManager;
 
 	private static final Logger logger = LoggerFactory

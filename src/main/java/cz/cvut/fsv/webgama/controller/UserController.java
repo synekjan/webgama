@@ -3,10 +3,10 @@ package cz.cvut.fsv.webgama.controller;
 import java.security.Principal;
 import java.util.Locale;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,16 +27,16 @@ import cz.cvut.fsv.webgama.validator.UserPasswordChangeValidator;
 @RequestMapping("/user")
 public class UserController extends MultiActionController {
 
-	@Autowired
+	@Inject
 	private UserManager userManager;
 
-	@Autowired
+	@Inject
 	private LoginManager loginManager;
 
-	@Autowired
+	@Inject
 	private UserPasswordChangeValidator passwordValidator;
 	
-	//@Autowired
+	//@Inject
 	//private UserValidator userValidator;
 
 	/*private static final Logger logger = LoggerFactory.getLogger(UserController.class);*/

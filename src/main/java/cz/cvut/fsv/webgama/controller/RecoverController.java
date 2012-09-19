@@ -1,8 +1,8 @@
 package cz.cvut.fsv.webgama.controller;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,13 +21,13 @@ import cz.cvut.fsv.webgama.validator.UsernameRecoveryValidator;
 @RequestMapping("/recover")
 public class RecoverController extends MultiActionController {
 
-	@Autowired
+	@Inject
 	private MailManager mailManager;
 	
-	@Autowired
+	@Inject
 	private PasswordRecoveryValidator passwordValidator;
 	
-	@Autowired
+	@Inject
 	private UsernameRecoveryValidator usernameValidator;
 
 	@RequestMapping(value = "/username", method = RequestMethod.GET)

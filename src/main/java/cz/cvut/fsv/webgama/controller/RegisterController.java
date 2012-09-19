@@ -1,10 +1,10 @@
 package cz.cvut.fsv.webgama.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,10 +21,10 @@ import cz.cvut.fsv.webgama.validator.UserRegistrationValidator;
 @RequestMapping("/register")
 public class RegisterController extends MultiActionController {
 
-	@Autowired
+	@Inject
 	private UserManager userManager;
 
-	@Autowired
+	@Inject
 	private UserRegistrationValidator registrationValidator;
 
 	@RequestMapping(method = RequestMethod.GET)
