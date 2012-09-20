@@ -6,7 +6,7 @@ DROP TABLE distances CASCADE;
 DROP TABLE angles CASCADE;
 DROP TABLE slope_distances CASCADE;
 DROP TABLE zenith_angles CASCADE;
-DROP TABLE height_differences CASCADE;
+--DROP TABLE height_differences CASCADE;
 DROP TABLE observations CASCADE;
 DROP TABLE points CASCADE;
 DROP TABLE networks CASCADE;
@@ -166,6 +166,10 @@ description		TEXT,
 sigma_apr		DOUBLE PRECISION NOT NULL,
 conf_pr			DOUBLE PRECISION NOT NULL,
 tol_abs			DOUBLE PRECISION NOT NULL,
+direction_stdev	DOUBLE PRECISION,
+angle_stdev		DOUBLE PRECISION,
+zenith_angle_stdev DOUBLE PRECISION,
+distance_stdev	DOUBLE PRECISION,
 sigma_act		VARCHAR(11),
 update_cc		VARCHAR(3)
 );
@@ -250,6 +254,7 @@ from_dh			DOUBLE PRECISION,
 to_dh			DOUBLE PRECISION
 );
 
+/*
 CREATE TABLE height_differences (
 height_difference_id	SERIAL PRIMARY KEY,
 observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
@@ -258,7 +263,7 @@ to_id				VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,
 stdev			DOUBLE PRECISION,
 dist			DOUBLE PRECISION
-);
+);*/
 
 
 
@@ -284,8 +289,8 @@ GRANT ALL ON slope_distances TO synekjan;
 GRANT ALL ON slope_distances_slope_distance_id_seq TO synekjan;
 GRANT ALL ON zenith_angles TO synekjan;
 GRANT ALL ON zenith_angles_zenith_angle_id_seq TO synekjan;
-GRANT ALL ON height_differences TO synekjan;
-GRANT ALL ON height_differences_height_difference_id_seq TO synekjan;
+--GRANT ALL ON height_differences TO synekjan;
+--GRANT ALL ON height_differences_height_difference_id_seq TO synekjan;
 
 
 
@@ -335,12 +340,6 @@ INSERT INTO authorities (role_id,user_id) VALUES (2,1);
 INSERT INTO logins (user_id,ip_address,success) VALUES (1,'172.16.98.48',TRUE);
 INSERT INTO logins (user_id,ip_address,success) VALUES (1,'172.16.98.47',TRUE);
 INSERT INTO logins (user_id,ip_address,success) VALUES (2,'172.16.98.45',TRUE);
-
-
-INSERT INTO confirmations VALUES (1,1,'adf','2010-11-11');
-INSERT INTO confirmations VALUES (2,1,'adff','2011-11-11');
-INSERT INTO confirmations VALUES (3,1,'adfadf','2012-08-06');
-INSERT INTO confirmations VALUES (4,1,'adffda','2012-08-07');
 
 
 
