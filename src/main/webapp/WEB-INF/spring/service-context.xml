@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
-	
+	<!-- ============================= Managers ============================== -->
 
 	<bean id="userManager" class="cz.cvut.fsv.webgama.service.impl.UserManagerImpl">
 		<property name="userDao" ref="userDao" />
@@ -18,7 +18,7 @@
 
 	<bean id="roleManager" class="cz.cvut.fsv.webgama.service.impl.RoleManagerImpl">
 	</bean>
-	
+
 	<bean id="mailManager" class="cz.cvut.fsv.webgama.service.impl.MailManagerImpl">
 		<property name="addressFrom" value="noreply@fsv.cvut.cz"></property>
 		<property name="mailSender" ref="mailSender" />
@@ -27,12 +27,22 @@
 
 
 
-	<!-- =============================  Validators  ============================== -->
-	
+	<!-- ============================= Parsers ============================== -->
+
+	<bean id="inputParser" class="cz.cvut.fsv.webgama.parser.stax.StAXInputParser">
+
+	</bean>
+
+
+
+
+
+	<!-- ============================= Validators ============================== -->
+
 	<bean class="cz.cvut.fsv.webgama.validator.UserRegistrationValidator">
 		<property name="userManager" ref="userManager" />
 	</bean>
-	
+
 	<bean class="cz.cvut.fsv.webgama.validator.UserValidator">
 		<property name="userManager" ref="userManager" />
 	</bean>
@@ -40,11 +50,11 @@
 	<bean class="cz.cvut.fsv.webgama.validator.UserPasswordChangeValidator">
 		<property name="userManager" ref="userManager" />
 	</bean>
-	
+
 	<bean class="cz.cvut.fsv.webgama.validator.PasswordRecoveryValidator">
 		<property name="userManager" ref="userManager" />
 	</bean>
-	
+
 	<bean class="cz.cvut.fsv.webgama.validator.UsernameRecoveryValidator">
 		<property name="userManager" ref="userManager" />
 	</bean>
@@ -52,15 +62,16 @@
 
 
 	<!-- ============================= Utils ============================= -->
-	
+
 	<bean class="cz.cvut.fsv.webgama.util.AuthenticatedUserDetails">
 		<property name="userManager" ref="userManager" />
 		<property name="loginManager" ref="loginManager" />
 	</bean>
 
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-    	<!-- one of the properties available; the maximum file size in bytes -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- one of the properties available; the maximum file size in bytes -->
 		<!-- <property name="maxUploadSize" value="10000" /> -->
 	</bean>
-	
+
 </beans>
