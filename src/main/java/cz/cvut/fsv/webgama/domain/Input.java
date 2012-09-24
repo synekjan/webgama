@@ -114,4 +114,13 @@ public class Input {
 		this.network = network;
 	}
 
+	@Override
+	public String toString() {
+		return "Input [id=" + id + ", user=" + user + ", filename=" + filename
+				+ ", fileContent=" + fileContent + ", algorithm=" + algorithm
+				+ ", angUnits=" + angUnits + ", latitude=" + latitude
+				+ ", ellipsoid=" + ellipsoid + ", version=" + version
+				+ ", time=" + time + ", network=" + network + "]";
+	}
+
 }

@@ -1,5 +1,6 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Network {
@@ -18,6 +19,8 @@ public class Network {
 	
 	private Double confPr;
 	
+	private Double tolAbs;
+	
 	private String sigmaAct;
 	
 	private String updateCC;
@@ -30,9 +33,9 @@ public class Network {
 	
 	private Double distanceStdev;
 	
-	private List<Point> points;
+	private List<Point> points = new ArrayList<Point>();
 	
-	private List<Observation> observations;
+	private List<Observation> observations = new ArrayList<Observation>();
 
 	public Integer getId() {
 		return id;
@@ -88,6 +91,14 @@ public class Network {
 
 	public void setConfPr(Double confPr) {
 		this.confPr = confPr;
+	}
+
+	public Double getTolAbs() {
+		return tolAbs;
+	}
+
+	public void setTolAbs(Double tolAbs) {
+		this.tolAbs = tolAbs;
 	}
 
 	public String getSigmaAct() {
@@ -152,6 +163,18 @@ public class Network {
 
 	public void setObservations(List<Observation> observations) {
 		this.observations = observations;
+	}
+
+	@Override
+	public String toString() {
+		return "Network [id=" + id + ", axesXY=" + axesXY + ", angles="
+				+ angles + ", epoch=" + epoch + ", description=" + description
+				+ ", sigmaApr=" + sigmaApr + ", confPr=" + confPr + ", tolAbs="
+				+ tolAbs + ", sigmaAct=" + sigmaAct + ", updateCC=" + updateCC
+				+ ", directionStdev=" + directionStdev + ", angleStdev="
+				+ angleStdev + ", zenithAngleStdev=" + zenithAngleStdev
+				+ ", distanceStdev=" + distanceStdev + ", points=" + points
+				+ ", observations=" + observations + "]";
 	}
 
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE gama-local>
+
+<gama-local version="2.0">
+	<network axes-xy="sw" angles="left-handed">
+
+		<description>
+			Ukazka site se dvema merenymi snovami a jednim uhlem na bode B
+		</description>
+
+		<parameters sigma-apr="10" conf-pr="0.95" tol-abs="1000"
+			sigma-act="aposteriori" />
+
+		<points-observations>
+
+			<point id="A" y="0.000" x="0.000" fix="xy" />
+			<point id="B" y="0.000" x="1.000" adj="xy" />
+			<point id="C" y="0.000" x="2.000" fix="xy" />
+			<point id="D" y="1.000" x="1.000" fix="xy" />
+			<point id="E" y="3.000" x="3.000" fix="xy" />
+
+			<obs from="A">
+				<distance to="B" val="0.990" stdev="10.0" />
+			</obs>
+
+			<obs from="C">
+				<distance to="B" val="1.010" stdev="10.0" />
+			</obs>
+
+			<obs from="D">
+				<distance to="B" val="1.010" stdev="10.0" />
+			</obs>
+
+			<obs from="B">
+				<direction to="A" val="30.0000" stdev="20.0" />
+				<direction to="C" val="230.0020" stdev="20.0" />
+				<direction to="D" val="330.0010" stdev="20.0" />
+			</obs>
+
+			<obs from="B">
+				<direction to="A" val="129.9990" stdev="20.0" />
+				<direction to="C" val="330.0010" stdev="20.0" />
+				<direction to="D" val="29.9990" stdev="20.0" />
+				<angle bs="A" fs="D" val="300.0020" stdev="20.0" />
+			</obs>
+
+		</points-observations>
+
+	</network>
+</gama-local>

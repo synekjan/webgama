@@ -166,12 +166,12 @@ description		TEXT,
 sigma_apr		DOUBLE PRECISION NOT NULL,
 conf_pr			DOUBLE PRECISION NOT NULL,
 tol_abs			DOUBLE PRECISION NOT NULL,
+sigma_act		VARCHAR(11),
+update_cc		VARCHAR(3),
 direction_stdev	DOUBLE PRECISION,
 angle_stdev		DOUBLE PRECISION,
 zenith_angle_stdev DOUBLE PRECISION,
-distance_stdev	DOUBLE PRECISION,
-sigma_act		VARCHAR(11),
-update_cc		VARCHAR(3)
+distance_stdev	DOUBLE PRECISION
 );
 
 
@@ -182,8 +182,8 @@ id				VARCHAR(80) NOT NULL,
 x				DOUBLE PRECISION,
 y				DOUBLE PRECISION,
 z				DOUBLE PRECISION,
-adj_type		VARCHAR(3),
-coord_type		VARCHAR(3)
+fix				VARCHAR(3),
+adj				VARCHAR(3)
 );
 
 

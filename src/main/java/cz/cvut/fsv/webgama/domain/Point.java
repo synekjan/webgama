@@ -1,22 +1,20 @@
 package cz.cvut.fsv.webgama.domain;
 
 public class Point {
-	
+
 	private Integer id;
-	
-	private Network network;
-	
+
 	private String name;
-	
+
 	private Double x;
-	
+
 	private Double y;
-	
+
 	private Double z;
-	
-	private String adjType;
-	
-	private String coordType;
+
+	private String fix;
+
+	private String adj;
 
 	public Integer getId() {
 		return id;
@@ -24,14 +22,6 @@ public class Point {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Network getNetwork() {
-		return network;
-	}
-
-	public void setNetwork(Network network) {
-		this.network = network;
 	}
 
 	public String getName() {
@@ -66,20 +56,20 @@ public class Point {
 		this.z = z;
 	}
 
-	public String getAdjType() {
-		return adjType;
+	public String getFix() {
+		return fix;
 	}
 
-	public void setAdjType(String adjType) {
-		this.adjType = adjType;
+	public void setFix(String fix) {
+		this.fix = fix;
 	}
 
-	public String getCoordType() {
-		return coordType;
+	public String getAdj() {
+		return adj;
 	}
 
-	public void setCoordType(String coordType) {
-		this.coordType = coordType;
+	public void setAdj(String adj) {
+		this.adj = adj;
 	}
 
 }
