@@ -5,51 +5,48 @@ import org.hibernate.validator.constraints.NotBlank;
 
 public class UserPasswordChangeForm {
 
-	private String username;
-	
-	@NotBlank
-	private String oldPassword;
-	
-	@NotBlank
-	@Length(min=6, message="at least 6 characters")
-	private String newPassword;
-	
-	@NotBlank
-	private String confirmNewPassword;
+    private String username;
 
-	public String getUsername() {
-		return username;
-	}
+    @NotBlank
+    private String oldPassword;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    @NotBlank
+    @Length(min = 6, message = "at least 6 characters")
+    private String newPassword;
 
-	public String getOldPassword() {
-		return oldPassword;
-	}
+    @NotBlank
+    private String confirmNewPassword;
 
-	public void setOldPassword(String oldPassword) {
-		this.oldPassword = oldPassword;
-	}
+    public String getUsername() {
+	return username;
+    }
 
-	public String getNewPassword() {
-		return newPassword;
-	}
+    public void setUsername(String username) {
+	this.username = username;
+    }
 
-	public void setNewPassword(String newPassword) {
-		this.newPassword = newPassword;
-	}
+    public String getOldPassword() {
+	return oldPassword;
+    }
 
-	public String getConfirmNewPassword() {
-		return confirmNewPassword;
-	}
+    public void setOldPassword(String oldPassword) {
+	this.oldPassword = oldPassword;
+    }
 
-	public void setConfirmNewPassword(String confirmNewPassword) {
-		this.confirmNewPassword = confirmNewPassword;
-	}
-	
-	
-	
-	
+    public String getNewPassword() {
+	return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+	this.newPassword = newPassword;
+    }
+
+    public String getConfirmNewPassword() {
+	return confirmNewPassword;
+    }
+
+    public void setConfirmNewPassword(String confirmNewPassword) {
+	this.confirmNewPassword = confirmNewPassword;
+    }
+
 }

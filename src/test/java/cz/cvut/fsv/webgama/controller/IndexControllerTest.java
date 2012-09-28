@@ -6,12 +6,12 @@ import org.junit.Test;
 
 public class IndexControllerTest {
 
-	@Test
-	public void test() {
-		
-		IndexController controller = new IndexController();
-		assertNotNull(controller);
-		
-	}
+    @Test
+    public void test() {
+
+	IndexController controller = new IndexController();
+	assertNotNull(controller);
+
+    }
 
 }

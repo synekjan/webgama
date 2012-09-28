@@ -3,124 +3,124 @@ package cz.cvut.fsv.webgama.domain;
 import org.joda.time.DateTime;
 
 public class Input {
-	
-	private Integer id;
-	
-	private User user;
-	
-	private String filename;
-	
-	private String fileContent;
-	
-	private String algorithm;
-	
-	private Integer angUnits;
-	
-	private Double latitude;
-	
-	private String ellipsoid;
-	
-	private String version;
-	
-	private DateTime time;
-	
-	private Network network;
 
-	public Integer getId() {
-		return id;
-	}
+    private Integer id;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    private User user;
 
-	public User getUser() {
-		return user;
-	}
+    private String filename;
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    private String fileContent;
 
-	public String getFilename() {
-		return filename;
-	}
+    private String algorithm;
 
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
+    private Integer angUnits;
 
-	public String getFileContent() {
-		return fileContent;
-	}
+    private Double latitude;
 
-	public void setFileContent(String fileContent) {
-		this.fileContent = fileContent;
-	}
+    private String ellipsoid;
 
-	public String getAlgorithm() {
-		return algorithm;
-	}
+    private String version;
 
-	public void setAlgorithm(String algorithm) {
-		this.algorithm = algorithm;
-	}
+    private DateTime time;
 
-	public Integer getAngUnits() {
-		return angUnits;
-	}
+    private Network network;
 
-	public void setAngUnits(Integer angUnits) {
-		this.angUnits = angUnits;
-	}
+    public Integer getId() {
+	return id;
+    }
 
-	public Double getLatitude() {
-		return latitude;
-	}
+    public void setId(Integer id) {
+	this.id = id;
+    }
 
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
+    public User getUser() {
+	return user;
+    }
 
-	public String getEllipsoid() {
-		return ellipsoid;
-	}
+    public void setUser(User user) {
+	this.user = user;
+    }
 
-	public void setEllipsoid(String ellipsoid) {
-		this.ellipsoid = ellipsoid;
-	}
+    public String getFilename() {
+	return filename;
+    }
 
-	public String getVersion() {
-		return version;
-	}
+    public void setFilename(String filename) {
+	this.filename = filename;
+    }
 
-	public void setVersion(String version) {
-		this.version = version;
-	}
+    public String getFileContent() {
+	return fileContent;
+    }
 
-	public DateTime getTime() {
-		return time;
-	}
+    public void setFileContent(String fileContent) {
+	this.fileContent = fileContent;
+    }
 
-	public void setTime(DateTime time) {
-		this.time = time;
-	}
+    public String getAlgorithm() {
+	return algorithm;
+    }
 
-	public Network getNetwork() {
-		return network;
-	}
+    public void setAlgorithm(String algorithm) {
+	this.algorithm = algorithm;
+    }
 
-	public void setNetwork(Network network) {
-		this.network = network;
-	}
+    public Integer getAngUnits() {
+	return angUnits;
+    }
 
-	@Override
-	public String toString() {
-		return "Input [id=" + id + ", user=" + user + ", filename=" + filename
-				+ ", fileContent=" + fileContent + ", algorithm=" + algorithm
-				+ ", angUnits=" + angUnits + ", latitude=" + latitude
-				+ ", ellipsoid=" + ellipsoid + ", version=" + version
-				+ ", time=" + time + ", network=" + network + "]";
-	}
+    public void setAngUnits(Integer angUnits) {
+	this.angUnits = angUnits;
+    }
+
+    public Double getLatitude() {
+	return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+	this.latitude = latitude;
+    }
+
+    public String getEllipsoid() {
+	return ellipsoid;
+    }
+
+    public void setEllipsoid(String ellipsoid) {
+	this.ellipsoid = ellipsoid;
+    }
+
+    public String getVersion() {
+	return version;
+    }
+
+    public void setVersion(String version) {
+	this.version = version;
+    }
+
+    public DateTime getTime() {
+	return time;
+    }
+
+    public void setTime(DateTime time) {
+	this.time = time;
+    }
+
+    public Network getNetwork() {
+	return network;
+    }
+
+    public void setNetwork(Network network) {
+	this.network = network;
+    }
+
+    @Override
+    public String toString() {
+	return "Input [id=" + id + ", user=" + user + ", filename=" + filename
+		+ ", fileContent=" + fileContent + ", algorithm=" + algorithm
+		+ ", angUnits=" + angUnits + ", latitude=" + latitude
+		+ ", ellipsoid=" + ellipsoid + ", version=" + version
+		+ ", time=" + time + ", network=" + network + "]";
+    }
 
 }

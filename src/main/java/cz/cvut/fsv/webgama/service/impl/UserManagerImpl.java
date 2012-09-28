@@ -20,176 +20,177 @@ import cz.cvut.fsv.webgama.util.Generator;
 
 public class UserManagerImpl implements UserManager {
 
-	private UserDao userDao;
+    private UserDao userDao;
 
-	private AuthorityDao authorityDao;
+    private AuthorityDao authorityDao;
 
-	private MailManager mailManager;
+    private MailManager mailManager;
 
-	@Override
-	public void insertUser(User user) {
+    @Override
+    public void insertUser(User user) {
 
-		userDao.insert(user);
-	}
+	userDao.insert(user);
+    }
 
-	@Override
-	public void deleteUser(User user) {
+    @Override
+    public void deleteUser(User user) {
 
-		userDao.delete(user);
-	}
+	userDao.delete(user);
+    }
 
-	@Override
-	public User getUser(int id) {
+    @Override
+    public User getUser(int id) {
 
-		User user = userDao.findUserById(id);
+	User user = userDao.findUserById(id);
 
-		return user;
-	}
+	return user;
+    }
 
-	@Override
-	public User getUser(String username) {
+    @Override
+    public User getUser(String username) {
 
-		User user = userDao.findUserByUsername(username);
+	User user = userDao.findUserByUsername(username);
 
-		return user;
-	}
+	return user;
+    }
 
-	@Override
-	public List<User> getUserList() {
+    @Override
+    public List<User> getUserList() {
 
-		return userDao.getUserList();
-	}
+	return userDao.getUserList();
+    }
 
-	@Override
-	public List<User> getUsersByUsername(String username) {
+    @Override
+    public List<User> getUsersByUsername(String username) {
 
-		List<User> list = userDao.findUsersByUsername(username);
+	List<User> list = userDao.findUsersByUsername(username);
 
-		return list;
-	}
+	return list;
+    }
 
-	@Override
-	public List<User> getUsersByEmail(String email) {
+    @Override
+    public List<User> getUsersByEmail(String email) {
 
-		List<User> list = userDao.findUsersByEmail(email);
+	List<User> list = userDao.findUsersByEmail(email);
 
-		return list;
-	}
+	return list;
+    }
 
-	@Override
-	public void updateUser(UserForm userForm) {
+    @Override
+    public void updateUser(UserForm userForm) {
 
-		User user = userDao.findUserByUsername(userForm.getUsername());
+	User user = userDao.findUserByUsername(userForm.getUsername());
 
-		user.setFirstName(userForm.getFirstName());
-		user.setLastName(userForm.getLastName());
-		user.setEmail(userForm.getEmail());
-		user.setTelephone(userForm.getTelephone());
-		user.setStreet(userForm.getStreet());
-		user.setNumber(userForm.getNumber());
-		user.setCity(userForm.getCity());
-		user.setZipCode(userForm.getZipCode());
-		user.setState(userForm.getState());
+	user.setFirstName(userForm.getFirstName());
+	user.setLastName(userForm.getLastName());
+	user.setEmail(userForm.getEmail());
+	user.setTelephone(userForm.getTelephone());
+	user.setStreet(userForm.getStreet());
+	user.setNumber(userForm.getNumber());
+	user.setCity(userForm.getCity());
+	user.setZipCode(userForm.getZipCode());
+	user.setState(userForm.getState());
 
-		userDao.update(user);
+	userDao.update(user);
 
-	}
+    }
 
-	@Override
-	public void registerUser(UserRegistrationForm userForm, HttpServletRequest request) {
+    @Override
+    public void registerUser(UserRegistrationForm userForm,
+	    HttpServletRequest request) {
 
-		User user = new User();
+	User user = new User();
 
-		user.setUsername(userForm.getUsername());
-		// encodes password with salted-hash
-		user.setPassword(new StandardPasswordEncoder().encode(userForm
-				.getPassword()));
-		user.setFirstName(userForm.getFirstName());
-		user.setLastName(userForm.getLastName());
-		user.setEmail(userForm.getEmail());
-		user.setTelephone(userForm.getTelephone());
-		user.setStreet(userForm.getStreet());
-		user.setNumber(userForm.getNumber());
-		user.setCity(userForm.getCity());
-		user.setZipCode(userForm.getZipCode());
-		user.setState(userForm.getState());
+	user.setUsername(userForm.getUsername());
+	// encodes password with salted-hash
+	user.setPassword(new StandardPasswordEncoder().encode(userForm
+		.getPassword()));
+	user.setFirstName(userForm.getFirstName());
+	user.setLastName(userForm.getLastName());
+	user.setEmail(userForm.getEmail());
+	user.setTelephone(userForm.getTelephone());
+	user.setStreet(userForm.getStreet());
+	user.setNumber(userForm.getNumber());
+	user.setCity(userForm.getCity());
+	user.setZipCode(userForm.getZipCode());
+	user.setState(userForm.getState());
 
-		userDao.insert(user);
+	userDao.insert(user);
 
-		String uuid = Generator.generateConfirmationID();
-		String URL = request.getRequestURL().toString().replace("/register", "");
+	String uuid = Generator.generateConfirmationID();
+	String URL = request.getRequestURL().toString()
+		.replace("/register", "");
 
-		Integer user_id = userDao.findUserByUsername(userForm.getUsername()).getId();
-		userDao.insertConfirmationID(uuid, user_id);
-		
-		mailManager.sendConfirmationEmail(userForm, uuid, URL);
+	Integer user_id = userDao.findUserByUsername(userForm.getUsername())
+		.getId();
+	userDao.insertConfirmationID(uuid, user_id);
 
-	}
+	mailManager.sendConfirmationEmail(userForm, uuid, URL);
 
-	@Override
-	public Boolean hasUserAdminRights(String username) {
+    }
 
-		User user = userDao.findUserByUsername(username);
+    @Override
+    public Boolean hasUserAdminRights(String username) {
 
-		List<Authority> list = authorityDao.getUserAuthorities(user);
+	User user = userDao.findUserByUsername(username);
 
-		for (Authority authority : list) {
+	List<Authority> list = authorityDao.getUserAuthorities(user);
 
-			if ("ROLE_ADMIN".equals(authority.getRole().getName())) {
-				return true;
-			}
-		}
-		return false;
-	}
+	for (Authority authority : list) {
 
-	@Override
-	public void changeUserPassword(UserPasswordChangeForm userForm) {
-
-		User user = userDao.findUserByUsername(userForm.getUsername());
-
-		StandardPasswordEncoder encoder = new StandardPasswordEncoder();
-
-		user.setPassword(encoder.encode(userForm.getNewPassword()));
-
-		userDao.updatePassword(user);
-
-	}
-	
-	@Override
-	public boolean isConfirmationIDinDB(String uuid) {
-		
-		List<Confirmation> list = userDao.findConfirmationsByUUID(uuid);
-		
-		if (list.isEmpty())
-			return false;
-			
+	    if ("ROLE_ADMIN".equals(authority.getRole().getName())) {
 		return true;
+	    }
 	}
-	
-	@Override
-	public void confirmEmailAddress(String uuid) {
-		
-		List<Confirmation> list = userDao.findConfirmationsByUUID(uuid);
-		Confirmation conf = list.get(0);
-		User user = conf.getUser();
-		user.setEnabled(true);
-		
-		userDao.deleteConfirmationID(uuid);
-		userDao.updateEnabled(user);
-	}
-	
-	
+	return false;
+    }
 
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
+    @Override
+    public void changeUserPassword(UserPasswordChangeForm userForm) {
 
-	public void setAuthorityDao(AuthorityDao authorityDao) {
-		this.authorityDao = authorityDao;
-	}
+	User user = userDao.findUserByUsername(userForm.getUsername());
 
-	public void setMailManager(MailManager mailManager) {
-		this.mailManager = mailManager;
-	}
+	StandardPasswordEncoder encoder = new StandardPasswordEncoder();
+
+	user.setPassword(encoder.encode(userForm.getNewPassword()));
+
+	userDao.updatePassword(user);
+
+    }
+
+    @Override
+    public boolean isConfirmationIDinDB(String uuid) {
+
+	List<Confirmation> list = userDao.findConfirmationsByUUID(uuid);
+
+	if (list.isEmpty())
+	    return false;
+
+	return true;
+    }
+
+    @Override
+    public void confirmEmailAddress(String uuid) {
+
+	List<Confirmation> list = userDao.findConfirmationsByUUID(uuid);
+	Confirmation conf = list.get(0);
+	User user = conf.getUser();
+	user.setEnabled(true);
+
+	userDao.deleteConfirmationID(uuid);
+	userDao.updateEnabled(user);
+    }
+
+    public void setUserDao(UserDao userDao) {
+	this.userDao = userDao;
+    }
+
+    public void setAuthorityDao(AuthorityDao authorityDao) {
+	this.authorityDao = authorityDao;
+    }
+
+    public void setMailManager(MailManager mailManager) {
+	this.mailManager = mailManager;
+    }
 
 }

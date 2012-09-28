@@ -6,7 +6,7 @@ import cz.cvut.fsv.webgama.domain.Authority;
 import cz.cvut.fsv.webgama.domain.User;
 
 public interface AuthorityDao {
-	
-	public List<Authority> getUserAuthorities(User user);
+
+    public List<Authority> getUserAuthorities(User user);
 
 }

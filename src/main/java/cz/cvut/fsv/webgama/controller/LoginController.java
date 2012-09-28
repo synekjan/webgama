@@ -9,20 +9,20 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 @Controller
 public class LoginController extends MultiActionController {
 
-	/*
-	 * @Autowired private LoginManager loginManager;
-	 */
+    /*
+     * @Autowired private LoginManager loginManager;
+     */
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login() throws Exception {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView login() throws Exception {
 
-		return new ModelAndView("login");
-	}
+	return new ModelAndView("login");
+    }
 
-	@RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
-	public ModelAndView loginFailed() throws Exception {
+    @RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
+    public ModelAndView loginFailed() throws Exception {
 
-		return new ModelAndView("login", "error", true);
-	}
+	return new ModelAndView("login", "error", true);
+    }
 
 }

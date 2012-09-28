@@ -15,42 +15,42 @@ import cz.cvut.fsv.webgama.domain.User;
 
 public class JdbcAuthorityDao extends JdbcDaoSupport implements AuthorityDao {
 
-	private UserDao userDao;
+    private UserDao userDao;
 
-	private RoleDao roleDao;
+    private RoleDao roleDao;
 
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
+    public void setUserDao(UserDao userDao) {
+	this.userDao = userDao;
+    }
 
-	public void setRoleDao(RoleDao roleDao) {
-		this.roleDao = roleDao;
-	}
+    public void setRoleDao(RoleDao roleDao) {
+	this.roleDao = roleDao;
+    }
+
+    @Override
+    public List<Authority> getUserAuthorities(User user) {
+
+	String sql = "SELECT * FROM authorities WHERE user_id = ?";
+
+	List<Authority> list = getJdbcTemplate().query(sql,
+		new Object[] { user.getId() }, new AuthorityMapper());
+
+	return list;
+    }
+
+    private class AuthorityMapper implements RowMapper<Authority> {
 
 	@Override
-	public List<Authority> getUserAuthorities(User user) {
+	public Authority mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-		String sql = "SELECT * FROM authorities WHERE user_id = ?";
+	    Authority authority = new Authority();
+	    authority.setId(Integer.valueOf(rs.getInt("authority_id")));
+	    authority.setRole(roleDao.findRoleById(rs.getInt("role_id")));
+	    authority.setUser(userDao.findUserById(rs.getInt("user_id")));
 
-		List<Authority> list = getJdbcTemplate().query(sql,
-				new Object[] { user.getId() }, new AuthorityMapper());
-
-		return list;
+	    return authority;
 	}
 
-	private class AuthorityMapper implements RowMapper<Authority> {
-
-		@Override
-		public Authority mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-			Authority authority = new Authority();
-			authority.setId(Integer.valueOf(rs.getInt("authority_id")));
-			authority.setRole(roleDao.findRoleById(rs.getInt("role_id")));
-			authority.setUser(userDao.findUserById(rs.getInt("user_id")));
-			
-			return authority;
-		}
-
-	}
+    }
 
 }

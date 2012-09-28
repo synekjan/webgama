@@ -4,117 +4,116 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-
 public class UserForm {
-	
-	private String username;
 
-	@Length(max = 30)
-	private String firstName;
-	
-	@Length(max = 50)
-	private String lastName;
+    private String username;
 
-	@NotBlank
-	@Email
-	private String email;
+    @Length(max = 30)
+    private String firstName;
 
-	@Length(max = 15)
-	private String telephone;
+    @Length(max = 50)
+    private String lastName;
 
-	@Length(max = 50)
-	private String street;
+    @NotBlank
+    @Email
+    private String email;
 
-	@Length(max = 20)
-	private String number;
+    @Length(max = 15)
+    private String telephone;
 
-	@Length(max = 50)
-	private String city;
+    @Length(max = 50)
+    private String street;
 
-	@Length(max = 30)
-	private String zipCode;
+    @Length(max = 20)
+    private String number;
 
-	@Length(max = 50)
-	private String state;
+    @Length(max = 50)
+    private String city;
 
-	public String getUsername() {
-		return username;
-	}
+    @Length(max = 30)
+    private String zipCode;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    @Length(max = 50)
+    private String state;
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public String getUsername() {
+	return username;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public void setUsername(String username) {
+	this.username = username;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public String getFirstName() {
+	return firstName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public void setFirstName(String firstName) {
+	this.firstName = firstName;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getLastName() {
+	return lastName;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setLastName(String lastName) {
+	this.lastName = lastName;
+    }
 
-	public String getTelephone() {
-		return telephone;
-	}
+    public String getEmail() {
+	return email;
+    }
 
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
+    public void setEmail(String email) {
+	this.email = email;
+    }
 
-	public String getStreet() {
-		return street;
-	}
+    public String getTelephone() {
+	return telephone;
+    }
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
+    public void setTelephone(String telephone) {
+	this.telephone = telephone;
+    }
 
-	public String getNumber() {
-		return number;
-	}
+    public String getStreet() {
+	return street;
+    }
 
-	public void setNumber(String number) {
-		this.number = number;
-	}
+    public void setStreet(String street) {
+	this.street = street;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public String getNumber() {
+	return number;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public void setNumber(String number) {
+	this.number = number;
+    }
 
-	public String getZipCode() {
-		return zipCode;
-	}
+    public String getCity() {
+	return city;
+    }
 
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
+    public void setCity(String city) {
+	this.city = city;
+    }
 
-	public String getState() {
-		return state;
-	}
+    public String getZipCode() {
+	return zipCode;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    public void setZipCode(String zipCode) {
+	this.zipCode = zipCode;
+    }
+
+    public String getState() {
+	return state;
+    }
+
+    public void setState(String state) {
+	this.state = state;
+    }
 
 }

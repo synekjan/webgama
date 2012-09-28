@@ -11,32 +11,30 @@ import cz.cvut.fsv.webgama.domain.Role;
 
 public class JdbcRoleDao extends JdbcDaoSupport implements RoleDao {
 
+    @Override
+    public Role findRoleById(int id) {
+
+	String sql = "SELECT * FROM roles WHERE role_id = ?";
+
+	Role role = getJdbcTemplate().queryForObject(sql, new Object[] { id },
+		new RoleMapper());
+
+	return role;
+    }
+
+    private static class RoleMapper implements RowMapper<Role> {
+
 	@Override
-	public Role findRoleById(int id) {
-	
-		String sql = "SELECT * FROM roles WHERE role_id = ?";
-		
-		Role role = getJdbcTemplate().queryForObject(sql, new Object[] {id}, new RoleMapper());
-		
-		return role;
+	public Role mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+	    Role role = new Role();
+
+	    role.setId(rs.getInt("role_id"));
+	    role.setName(rs.getString("role"));
+
+	    return role;
 	}
 
-	
-	private static class RoleMapper implements RowMapper<Role> {
-
-		@Override
-		public Role mapRow(ResultSet rs, int rowNum) throws SQLException {
-			
-			Role role = new Role();
-			
-			role.setId(rs.getInt("role_id"));
-			role.setName(rs.getString("role"));
-			
-			return role;
-		}
-		
-		
-	}
-	
+    }
 
 }

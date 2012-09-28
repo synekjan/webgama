@@ -16,31 +16,34 @@ import cz.cvut.fsv.webgama.service.LoginManager;
 
 @Controller
 public class IndexController {
-	
-	@Inject
-	LoginManager loginManager;	
-	
-	/*private static final Logger logger = LoggerFactory.getLogger(IndexController.class);*/
 
-	@RequestMapping("/")
-	public String index(HttpServletRequest request, Model model, Locale locale, Principal principal) {
+    @Inject
+    LoginManager loginManager;
 
-		long startTime = System.nanoTime();
-		
-		//model.addAttribute("lastlogin", loginManager.getLastLogin(principal.getName()));
-		
-		
-		Date date = new Date();
-		DateFormat df = DateFormat.getDateInstance(DateFormat.FULL,locale);
-		String dateTime = df.format(date);
-		
-		
-		model.addAttribute("date", dateTime);
+    /*
+     * private static final Logger logger =
+     * LoggerFactory.getLogger(IndexController.class);
+     */
 
-		double time = (double) (System.nanoTime() - startTime) / 1000000;
+    @RequestMapping("/")
+    public String index(HttpServletRequest request, Model model, Locale locale,
+	    Principal principal) {
 
-		model.addAttribute("time", time);
+	long startTime = System.nanoTime();
 
-		return "index";
-	}
+	// model.addAttribute("lastlogin",
+	// loginManager.getLastLogin(principal.getName()));
+
+	Date date = new Date();
+	DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, locale);
+	String dateTime = df.format(date);
+
+	model.addAttribute("date", dateTime);
+
+	double time = (double) (System.nanoTime() - startTime) / 1000000;
+
+	model.addAttribute("time", time);
+
+	return "index";
+    }
 }

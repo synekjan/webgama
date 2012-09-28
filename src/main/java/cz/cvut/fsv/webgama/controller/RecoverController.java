@@ -21,71 +21,74 @@ import cz.cvut.fsv.webgama.validator.UsernameRecoveryValidator;
 @RequestMapping("/recover")
 public class RecoverController extends MultiActionController {
 
-	@Inject
-	private MailManager mailManager;
-	
-	@Inject
-	private PasswordRecoveryValidator passwordValidator;
-	
-	@Inject
-	private UsernameRecoveryValidator usernameValidator;
+    @Inject
+    private MailManager mailManager;
 
-	@RequestMapping(value = "/username", method = RequestMethod.GET)
-	public ModelAndView showUsernameRecovery() {
+    @Inject
+    private PasswordRecoveryValidator passwordValidator;
 
-		UsernameRecoveryForm userForm = new UsernameRecoveryForm();
+    @Inject
+    private UsernameRecoveryValidator usernameValidator;
 
-		return new ModelAndView("/recover/username", "user", userForm);
+    @RequestMapping(value = "/username", method = RequestMethod.GET)
+    public ModelAndView showUsernameRecovery() {
+
+	UsernameRecoveryForm userForm = new UsernameRecoveryForm();
+
+	return new ModelAndView("/recover/username", "user", userForm);
+    }
+
+    @RequestMapping(value = "/username", method = RequestMethod.POST)
+    public ModelAndView recoverUsername(
+	    @Valid @ModelAttribute("user") UsernameRecoveryForm userForm,
+	    BindingResult result) {
+
+	usernameValidator.validate(userForm, result);
+
+	if (result.hasErrors()) {
+	    return new ModelAndView("/recover/username");
 	}
 
-	@RequestMapping(value = "/username", method = RequestMethod.POST)
-	public ModelAndView recoverUsername(@Valid @ModelAttribute("user") UsernameRecoveryForm userForm, BindingResult result) {
+	mailManager.recoverUsername(userForm);
 
-		usernameValidator.validate(userForm, result);
-		
-		if (result.hasErrors()) {
-			return new ModelAndView("/recover/username");
-		}
-		
-		mailManager.recoverUsername(userForm);
+	return new ModelAndView("redirect:/recover/username/success");
+    }
 
-		return new ModelAndView("redirect:/recover/username/success");
+    @RequestMapping(value = "/username/success", method = RequestMethod.GET)
+    public ModelAndView showUsernameRecoverySuccess() {
+
+	return new ModelAndView("/recover/usernameSuccess");
+    }
+
+    // PASSWORD RECOVERY
+    @RequestMapping(value = "/password", method = RequestMethod.GET)
+    public ModelAndView showPasswordRecovery() {
+
+	PasswordRecoveryForm userForm = new PasswordRecoveryForm();
+
+	return new ModelAndView("/recover/password", "user", userForm);
+    }
+
+    @RequestMapping(value = "/password", method = RequestMethod.POST)
+    public ModelAndView recoverPassword(
+	    @Valid @ModelAttribute("user") PasswordRecoveryForm userForm,
+	    BindingResult result) {
+
+	passwordValidator.validate(userForm, result);
+
+	if (result.hasErrors()) {
+	    return new ModelAndView("/recover/password");
 	}
 
-	@RequestMapping(value = "/username/success", method = RequestMethod.GET)
-	public ModelAndView showUsernameRecoverySuccess() {
+	mailManager.recoverPassword(userForm);
 
-		return new ModelAndView("/recover/usernameSuccess");
-	}
+	return new ModelAndView("redirect:/recover/password/success");
+    }
 
-	
-	//PASSWORD RECOVERY
-	@RequestMapping(value = "/password", method = RequestMethod.GET)
-	public ModelAndView showPasswordRecovery() {
+    @RequestMapping(value = "/password/success", method = RequestMethod.GET)
+    public ModelAndView showPasswordRecoverySuccess() {
 
-		PasswordRecoveryForm userForm = new PasswordRecoveryForm();
-
-		return new ModelAndView("/recover/password", "user", userForm);
-	}
-
-	@RequestMapping(value = "/password", method = RequestMethod.POST)
-	public ModelAndView recoverPassword(@Valid @ModelAttribute("user") PasswordRecoveryForm userForm, BindingResult result) {
-
-		passwordValidator.validate(userForm, result);
-		
-		if (result.hasErrors()) {
-			return new ModelAndView("/recover/password");
-		}
-		
-		mailManager.recoverPassword(userForm);
-
-		return new ModelAndView("redirect:/recover/password/success");
-	}
-
-	@RequestMapping(value = "/password/success", method = RequestMethod.GET)
-	public ModelAndView showPasswordRecoverySuccess() {
-
-		return new ModelAndView("/recover/passwordSuccess");
-	}
+	return new ModelAndView("/recover/passwordSuccess");
+    }
 
 }

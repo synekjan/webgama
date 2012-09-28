@@ -3,55 +3,55 @@ package cz.cvut.fsv.webgama.domain;
 import org.joda.time.DateTime;
 
 public class Login {
-	
-	private Integer id;
-	
-	private User user;
-	
-	private String ip;
-	
-	private DateTime time;
-	
-	private Boolean success;
 
-	public Integer getId() {
-		return id;
-	}
+    private Integer id;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    private User user;
 
-	public User getUser() {
-		return user;
-	}
+    private String ip;
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    private DateTime time;
 
-	public String getIp() {
-		return ip;
-	}
+    private Boolean success;
 
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
+    public Integer getId() {
+	return id;
+    }
 
-	public DateTime getTime() {
-		return time;
-	}
+    public void setId(Integer id) {
+	this.id = id;
+    }
 
-	public void setTime(DateTime time) {
-		this.time = time;
-	}
+    public User getUser() {
+	return user;
+    }
 
-	public Boolean getSuccess() {
-		return success;
-	}
+    public void setUser(User user) {
+	this.user = user;
+    }
 
-	public void setSuccess(Boolean success) {
-		this.success = success;
-	}
+    public String getIp() {
+	return ip;
+    }
+
+    public void setIp(String ip) {
+	this.ip = ip;
+    }
+
+    public DateTime getTime() {
+	return time;
+    }
+
+    public void setTime(DateTime time) {
+	this.time = time;
+    }
+
+    public Boolean getSuccess() {
+	return success;
+    }
+
+    public void setSuccess(Boolean success) {
+	this.success = success;
+    }
 
 }
