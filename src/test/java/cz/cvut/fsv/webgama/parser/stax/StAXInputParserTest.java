@@ -1,12 +1,10 @@
 package cz.cvut.fsv.webgama.parser.stax;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.io.InputStream;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.annotation.Timed;
 
@@ -31,7 +29,6 @@ public class StAXInputParserTest {
     @Test
     @Timed(millis = 1000)
     public final void testParseInput() {
-
 	Input input = inputParser.parseInput(inputStream);
 	assertEquals("left-handed", input.getNetwork().getAngles());
 	assertEquals(Double.valueOf(10.0), input.getNetwork().getSigmaApr(),
@@ -42,13 +39,13 @@ public class StAXInputParserTest {
 	Input input2 = inputParser.parseInput(inputStream2);
 	assertEquals(Double.valueOf(0.95), input2.getNetwork().getConfPr(),
 		0.0000001);
-
     }
 
     @Test
-    @Ignore
     public final void testComposeInput() {
-	fail("Not yet implemented"); // TODO
+
+	Input input = inputParser.parseInput(inputStream);
+	inputParser.composeInput(System.out, input);
     }
 
 }

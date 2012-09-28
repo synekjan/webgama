@@ -1,6 +1,7 @@
 package cz.cvut.fsv.webgama.parser;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import cz.cvut.fsv.webgama.domain.Input;
 
@@ -12,6 +13,6 @@ public interface InputParser {
 
     public Input parseInput(InputStream stream);
 
-    public void composeInput();
+    public void composeInput(OutputStream stream, Input input);
 
 }
