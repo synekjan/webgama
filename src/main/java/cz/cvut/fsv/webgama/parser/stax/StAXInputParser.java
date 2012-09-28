@@ -48,9 +48,13 @@ public class StAXInputParser implements InputParser {
 
 	Input input = new Input();
 
+	
+	XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+
 	try {
-	    XMLInputFactory factory = XMLInputFactory.newInstance();
-	    XMLEventReader reader = factory.createXMLEventReader(stream);
+
+	    XMLEventReader eventReader = inputFactory
+		    .createXMLEventReader(stream);
 
 	    Network network = null;
 	    Point point = null;
@@ -61,9 +65,9 @@ public class StAXInputParser implements InputParser {
 	    SlopeDistance slopeDistance = null;
 	    ZenithAngle zenithAngle = null;
 
-	    while (reader.hasNext()) {
+	    while (eventReader.hasNext()) {
 
-		XMLEvent event = reader.nextEvent();
+		XMLEvent event = eventReader.nextEvent();
 
 		switch (event.getEventType()) {
 
