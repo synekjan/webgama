@@ -7,10 +7,10 @@ import cz.cvut.fsv.webgama.domain.User;
 
 public interface LoginDao {
 
-    public void insert(Login login);
+	public void insert(Login login);
 
-    public List<Login> getLoginList(User user);
+	public List<Login> getLoginList(User user);
 
-    public Login getLastLogin(User user);
+	public Login getLastLogin(User user);
 
 }

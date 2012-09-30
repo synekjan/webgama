@@ -2,74 +2,74 @@ package cz.cvut.fsv.webgama.domain;
 
 public class ZenithAngle {
 
-    private Integer id;
+	private Integer id;
 
-    private String from;
+	private String from;
 
-    private String to;
+	private String to;
 
-    private Double val;
+	private Double val;
 
-    private Double stdev;
+	private Double stdev;
 
-    private Double fromDh;
+	private Double fromDh;
 
-    private Double toDh;
+	private Double toDh;
 
-    public Integer getId() {
-	return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-	this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getFrom() {
-	return from;
-    }
+	public String getFrom() {
+		return from;
+	}
 
-    public void setFrom(String from) {
-	this.from = from;
-    }
+	public void setFrom(String from) {
+		this.from = from;
+	}
 
-    public String getTo() {
-	return to;
-    }
+	public String getTo() {
+		return to;
+	}
 
-    public void setTo(String to) {
-	this.to = to;
-    }
+	public void setTo(String to) {
+		this.to = to;
+	}
 
-    public Double getVal() {
-	return val;
-    }
+	public Double getVal() {
+		return val;
+	}
 
-    public void setVal(Double val) {
-	this.val = val;
-    }
+	public void setVal(Double val) {
+		this.val = val;
+	}
 
-    public Double getStdev() {
-	return stdev;
-    }
+	public Double getStdev() {
+		return stdev;
+	}
 
-    public void setStdev(Double stdev) {
-	this.stdev = stdev;
-    }
+	public void setStdev(Double stdev) {
+		this.stdev = stdev;
+	}
 
-    public Double getFromDh() {
-	return fromDh;
-    }
+	public Double getFromDh() {
+		return fromDh;
+	}
 
-    public void setFromDh(Double fromDh) {
-	this.fromDh = fromDh;
-    }
+	public void setFromDh(Double fromDh) {
+		this.fromDh = fromDh;
+	}
 
-    public Double getToDh() {
-	return toDh;
-    }
+	public Double getToDh() {
+		return toDh;
+	}
 
-    public void setToDh(Double toDh) {
-	this.toDh = toDh;
-    }
+	public void setToDh(Double toDh) {
+		this.toDh = toDh;
+	}
 
 }

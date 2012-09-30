@@ -2,94 +2,94 @@ package cz.cvut.fsv.webgama.domain;
 
 public class Angle {
 
-    private Integer id;
+	private Integer id;
 
-    private String from;
+	private String from;
 
-    private String bs;
+	private String bs;
 
-    private String fs;
+	private String fs;
 
-    private Double val;
+	private Double val;
 
-    private Double stdev;
+	private Double stdev;
 
-    private Double fromDh;
+	private Double fromDh;
 
-    private Double bsDh;
+	private Double bsDh;
 
-    private Double fsDh;
+	private Double fsDh;
 
-    public Integer getId() {
-	return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-	this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getFrom() {
-	return from;
-    }
+	public String getFrom() {
+		return from;
+	}
 
-    public void setFrom(String from) {
-	this.from = from;
-    }
+	public void setFrom(String from) {
+		this.from = from;
+	}
 
-    public String getBs() {
-	return bs;
-    }
+	public String getBs() {
+		return bs;
+	}
 
-    public void setBs(String bs) {
-	this.bs = bs;
-    }
+	public void setBs(String bs) {
+		this.bs = bs;
+	}
 
-    public String getFs() {
-	return fs;
-    }
+	public String getFs() {
+		return fs;
+	}
 
-    public void setFs(String fs) {
-	this.fs = fs;
-    }
+	public void setFs(String fs) {
+		this.fs = fs;
+	}
 
-    public Double getVal() {
-	return val;
-    }
+	public Double getVal() {
+		return val;
+	}
 
-    public void setVal(Double val) {
-	this.val = val;
-    }
+	public void setVal(Double val) {
+		this.val = val;
+	}
 
-    public Double getStdev() {
-	return stdev;
-    }
+	public Double getStdev() {
+		return stdev;
+	}
 
-    public void setStdev(Double stdev) {
-	this.stdev = stdev;
-    }
+	public void setStdev(Double stdev) {
+		this.stdev = stdev;
+	}
 
-    public Double getFromDh() {
-	return fromDh;
-    }
+	public Double getFromDh() {
+		return fromDh;
+	}
 
-    public void setFromDh(Double fromDh) {
-	this.fromDh = fromDh;
-    }
+	public void setFromDh(Double fromDh) {
+		this.fromDh = fromDh;
+	}
 
-    public Double getBsDh() {
-	return bsDh;
-    }
+	public Double getBsDh() {
+		return bsDh;
+	}
 
-    public void setBsDh(Double bsDh) {
-	this.bsDh = bsDh;
-    }
+	public void setBsDh(Double bsDh) {
+		this.bsDh = bsDh;
+	}
 
-    public Double getFsDh() {
-	return fsDh;
-    }
+	public Double getFsDh() {
+		return fsDh;
+	}
 
-    public void setFsDh(Double fsDh) {
-	this.fsDh = fsDh;
-    }
+	public void setFsDh(Double fsDh) {
+		this.fsDh = fsDh;
+	}
 
 }

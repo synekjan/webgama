@@ -27,114 +27,114 @@ import cz.cvut.fsv.webgama.validator.UserPasswordChangeValidator;
 @RequestMapping("/user")
 public class UserController extends MultiActionController {
 
-    @Inject
-    private UserManager userManager;
+	@Inject
+	private UserManager userManager;
 
-    @Inject
-    private LoginManager loginManager;
+	@Inject
+	private LoginManager loginManager;
 
-    @Inject
-    private UserPasswordChangeValidator passwordValidator;
+	@Inject
+	private UserPasswordChangeValidator passwordValidator;
 
-    // @Inject
-    // private UserValidator userValidator;
+	// @Inject
+	// private UserValidator userValidator;
 
-    /*
-     * private static final Logger logger =
-     * LoggerFactory.getLogger(UserController.class);
-     */
+	/*
+	 * private static final Logger logger =
+	 * LoggerFactory.getLogger(UserController.class);
+	 */
 
-    @RequestMapping(value = { "", "/info" }, method = RequestMethod.GET)
-    public String user(HttpServletRequest request, Model model, Locale locale,
-	    Principal principal) {
+	@RequestMapping(value = { "", "/info" }, method = RequestMethod.GET)
+	public String user(HttpServletRequest request, Model model, Locale locale,
+			Principal principal) {
 
-	User user = userManager.getUser(principal.getName());
+		User user = userManager.getUser(principal.getName());
 
-	model.addAttribute("user", user);
+		model.addAttribute("user", user);
 
-	return "/user/user";
-    }
-
-    @RequestMapping(value = { "", "/info" }, method = RequestMethod.POST)
-    public ModelAndView modify(
-	    @Valid @ModelAttribute("user") UserForm userForm,
-	    BindingResult result) {
-
-	// userValidator.validate(userForm, result);
-
-	if (result.hasErrors()) {
-
-	    return new ModelAndView("/user/user");
+		return "/user/user";
 	}
 
-	userManager.updateUser(userForm);
+	@RequestMapping(value = { "", "/info" }, method = RequestMethod.POST)
+	public ModelAndView modify(
+			@Valid @ModelAttribute("user") UserForm userForm,
+			BindingResult result) {
 
-	return new ModelAndView("redirect:/");
-    }
+		// userValidator.validate(userForm, result);
 
-    @RequestMapping(value = "/password/change", method = RequestMethod.GET)
-    public ModelAndView changePasswordForm(HttpServletRequest request,
-	    Model model, Locale locale, Principal principal) {
+		if (result.hasErrors()) {
 
-	ModelAndView mav = new ModelAndView("/user/changepass");
+			return new ModelAndView("/user/user");
+		}
 
-	UserPasswordChangeForm userForm = new UserPasswordChangeForm();
-	userForm.setUsername(principal.getName());
+		userManager.updateUser(userForm);
 
-	mav.addObject("user", userForm);
-
-	return mav;
-    }
-
-    @RequestMapping(value = "/password/change", method = RequestMethod.POST)
-    public String changePassword(
-	    @Valid @ModelAttribute("user") UserPasswordChangeForm userForm,
-	    BindingResult result) {
-
-	passwordValidator.validate(userForm, result);
-
-	if (result.hasErrors()) {
-	    return "/user/changepass";
+		return new ModelAndView("redirect:/");
 	}
 
-	userManager.changeUserPassword(userForm);
+	@RequestMapping(value = "/password/change", method = RequestMethod.GET)
+	public ModelAndView changePasswordForm(HttpServletRequest request,
+			Model model, Locale locale, Principal principal) {
 
-	return "redirect:/";
-    }
+		ModelAndView mav = new ModelAndView("/user/changepass");
 
-    @RequestMapping(value = { "/logins", "/logins/show" }, method = RequestMethod.GET)
-    public ModelAndView showLogins(HttpServletRequest request,
-	    Principal principal) {
+		UserPasswordChangeForm userForm = new UserPasswordChangeForm();
+		userForm.setUsername(principal.getName());
 
-	ModelAndView mav = new ModelAndView("/user/loginslist");
+		mav.addObject("user", userForm);
 
-	mav.addObject("loginList",
-		loginManager.getLoginList(principal.getName()));
-	// mav.addObject("lastlogin",
-	// loginManager.getLastLogin(principal.getName()));
+		return mav;
+	}
 
-	return mav;
-    }
+	@RequestMapping(value = "/password/change", method = RequestMethod.POST)
+	public String changePassword(
+			@Valid @ModelAttribute("user") UserPasswordChangeForm userForm,
+			BindingResult result) {
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public ModelAndView deleteUserForm(HttpServletRequest request,
-	    Principal principal) {
+		passwordValidator.validate(userForm, result);
 
-	ModelAndView mav = new ModelAndView("/user/delete");
+		if (result.hasErrors()) {
+			return "/user/changepass";
+		}
 
-	return mav;
-    }
+		userManager.changeUserPassword(userForm);
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ModelAndView deleteUser(Principal principal) {
+		return "redirect:/";
+	}
 
-	User user = userManager.getUser(principal.getName());
+	@RequestMapping(value = { "/logins", "/logins/show" }, method = RequestMethod.GET)
+	public ModelAndView showLogins(HttpServletRequest request,
+			Principal principal) {
 
-	userManager.deleteUser(user);
+		ModelAndView mav = new ModelAndView("/user/loginslist");
 
-	ModelAndView mav = new ModelAndView("redirect:/logout");
+		mav.addObject("loginList",
+				loginManager.getLoginList(principal.getName()));
+		// mav.addObject("lastlogin",
+		// loginManager.getLastLogin(principal.getName()));
 
-	return mav;
-    }
+		return mav;
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView deleteUserForm(HttpServletRequest request,
+			Principal principal) {
+
+		ModelAndView mav = new ModelAndView("/user/delete");
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public ModelAndView deleteUser(Principal principal) {
+
+		User user = userManager.getUser(principal.getName());
+
+		userManager.deleteUser(user);
+
+		ModelAndView mav = new ModelAndView("redirect:/logout");
+
+		return mav;
+	}
 
 }

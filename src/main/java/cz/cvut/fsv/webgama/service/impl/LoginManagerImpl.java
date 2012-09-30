@@ -12,44 +12,44 @@ import cz.cvut.fsv.webgama.service.LoginManager;
 
 public class LoginManagerImpl implements LoginManager {
 
-    private UserDao userDao;
+	private UserDao userDao;
 
-    private LoginDao loginDao;
+	private LoginDao loginDao;
 
-    public void setUserDao(UserDao userDao) {
-	this.userDao = userDao;
-    }
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
 
-    public void setLoginDao(LoginDao loginDao) {
-	this.loginDao = loginDao;
-    }
+	public void setLoginDao(LoginDao loginDao) {
+		this.loginDao = loginDao;
+	}
 
-    @Override
-    public void login(String username, String ip, Boolean success) {
+	@Override
+	public void login(String username, String ip, Boolean success) {
 
-	User user = userDao.findUserByUsername(username);
+		User user = userDao.findUserByUsername(username);
 
-	Login login = new Login();
-	login.setUser(user);
-	login.setIp(ip);
-	login.setSuccess(success);
-	loginDao.insert(login);
+		Login login = new Login();
+		login.setUser(user);
+		login.setIp(ip);
+		login.setSuccess(success);
+		loginDao.insert(login);
 
-    }
+	}
 
-    public List<Login> getLoginList(String username) {
+	public List<Login> getLoginList(String username) {
 
-	return loginDao.getLoginList(userDao.findUserByUsername(username));
-    }
+		return loginDao.getLoginList(userDao.findUserByUsername(username));
+	}
 
-    @Override
-    public DateTime getLastLogin(String username) {
+	@Override
+	public DateTime getLastLogin(String username) {
 
-	Login login = loginDao.getLastLogin(userDao
-		.findUserByUsername(username));
+		Login login = loginDao.getLastLogin(userDao
+				.findUserByUsername(username));
 
-	return login.getTime();
+		return login.getTime();
 
-    }
+	}
 
 }

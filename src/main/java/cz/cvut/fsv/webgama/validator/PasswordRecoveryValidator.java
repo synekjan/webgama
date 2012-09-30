@@ -11,29 +11,29 @@ import cz.cvut.fsv.webgama.service.UserManager;
 
 public class PasswordRecoveryValidator implements Validator {
 
-    private UserManager userManager;
+	private UserManager userManager;
 
-    public void setUserManager(UserManager userManager) {
-	this.userManager = userManager;
-    }
-
-    @Override
-    public boolean supports(Class<?> clazz) {
-	return PasswordRecoveryForm.class.isAssignableFrom(clazz);
-    }
-
-    @Override
-    public void validate(Object target, Errors errors) {
-
-	PasswordRecoveryForm userForm = (PasswordRecoveryForm) target;
-
-	List<User> list = userManager
-		.getUsersByUsername(userForm.getUsername());
-
-	if (list.isEmpty()) {
-	    errors.rejectValue("username", "NotFound", "username not found");
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
 	}
 
-    }
+	@Override
+	public boolean supports(Class<?> clazz) {
+		return PasswordRecoveryForm.class.isAssignableFrom(clazz);
+	}
+
+	@Override
+	public void validate(Object target, Errors errors) {
+
+		PasswordRecoveryForm userForm = (PasswordRecoveryForm) target;
+
+		List<User> list = userManager
+				.getUsersByUsername(userForm.getUsername());
+
+		if (list.isEmpty()) {
+			errors.rejectValue("username", "NotFound", "username not found");
+		}
+
+	}
 
 }

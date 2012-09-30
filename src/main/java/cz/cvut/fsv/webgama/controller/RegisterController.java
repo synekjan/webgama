@@ -21,44 +21,44 @@ import cz.cvut.fsv.webgama.validator.UserRegistrationValidator;
 @RequestMapping("/register")
 public class RegisterController extends MultiActionController {
 
-    @Inject
-    private UserManager userManager;
+	@Inject
+	private UserManager userManager;
 
-    @Inject
-    private UserRegistrationValidator registrationValidator;
+	@Inject
+	private UserRegistrationValidator registrationValidator;
 
-    @RequestMapping(method = RequestMethod.GET)
-    protected ModelAndView showRegistrationForm(HttpServletRequest request,
-	    HttpServletResponse response) throws Exception {
+	@RequestMapping(method = RequestMethod.GET)
+	protected ModelAndView showRegistrationForm(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-	UserRegistrationForm user = new UserRegistrationForm();
+		UserRegistrationForm user = new UserRegistrationForm();
 
-	ModelAndView mav = new ModelAndView("/register/register");
+		ModelAndView mav = new ModelAndView("/register/register");
 
-	mav.addObject("user", user);
+		mav.addObject("user", user);
 
-	return mav;
-    }
+		return mav;
+	}
 
-    @RequestMapping(method = RequestMethod.POST)
-    protected ModelAndView register(HttpServletRequest request,
-	    @Valid @ModelAttribute("user") UserRegistrationForm userForm,
-	    BindingResult result) {
+	@RequestMapping(method = RequestMethod.POST)
+	protected ModelAndView register(HttpServletRequest request,
+			@Valid @ModelAttribute("user") UserRegistrationForm userForm,
+			BindingResult result) {
 
-	registrationValidator.validate(userForm, result);
+		registrationValidator.validate(userForm, result);
 
-	if (result.hasErrors())
-	    return new ModelAndView("/register/register");
+		if (result.hasErrors())
+			return new ModelAndView("/register/register");
 
-	userManager.registerUser(userForm, request);
+		userManager.registerUser(userForm, request);
 
-	return new ModelAndView("redirect:/register/success");
-    }
+		return new ModelAndView("redirect:/register/success");
+	}
 
-    @RequestMapping(value = "/success", method = RequestMethod.GET)
-    protected ModelAndView registerSuccess() {
+	@RequestMapping(value = "/success", method = RequestMethod.GET)
+	protected ModelAndView registerSuccess() {
 
-	return new ModelAndView("/register/success");
-    }
+		return new ModelAndView("/register/success");
+	}
 
 }

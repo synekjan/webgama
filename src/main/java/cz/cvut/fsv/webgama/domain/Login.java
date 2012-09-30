@@ -4,54 +4,54 @@ import org.joda.time.DateTime;
 
 public class Login {
 
-    private Integer id;
+	private Integer id;
 
-    private User user;
+	private User user;
 
-    private String ip;
+	private String ip;
 
-    private DateTime time;
+	private DateTime time;
 
-    private Boolean success;
+	private Boolean success;
 
-    public Integer getId() {
-	return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-	this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public User getUser() {
-	return user;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public void setUser(User user) {
-	this.user = user;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public String getIp() {
-	return ip;
-    }
+	public String getIp() {
+		return ip;
+	}
 
-    public void setIp(String ip) {
-	this.ip = ip;
-    }
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
 
-    public DateTime getTime() {
-	return time;
-    }
+	public DateTime getTime() {
+		return time;
+	}
 
-    public void setTime(DateTime time) {
-	this.time = time;
-    }
+	public void setTime(DateTime time) {
+		this.time = time;
+	}
 
-    public Boolean getSuccess() {
-	return success;
-    }
+	public Boolean getSuccess() {
+		return success;
+	}
 
-    public void setSuccess(Boolean success) {
-	this.success = success;
-    }
+	public void setSuccess(Boolean success) {
+		this.success = success;
+	}
 
 }

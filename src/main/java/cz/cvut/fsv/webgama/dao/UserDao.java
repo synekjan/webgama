@@ -7,32 +7,32 @@ import cz.cvut.fsv.webgama.domain.User;
 
 public interface UserDao {
 
-    public void insert(User user);
+	public void insert(User user);
 
-    public void delete(User user);
+	public void delete(User user);
 
-    public void update(User user);
+	public void update(User user);
 
-    public void updatePassword(User user);
+	public void updatePassword(User user);
 
-    public void updateEnabled(User user);
+	public void updateEnabled(User user);
 
-    public List<User> getUserList();
+	public List<User> getUserList();
 
-    public List<User> findUsersByUsername(String username);
+	public List<User> findUsersByUsername(String username);
 
-    public List<User> findUsersByEmail(String email);
+	public List<User> findUsersByEmail(String email);
 
-    public User findUserById(int id);
+	public User findUserById(int id);
 
-    public User findUserByUsername(String username);
+	public User findUserByUsername(String username);
 
-    public void insertConfirmationID(String uuid, Integer user_id);
+	public void insertConfirmationID(String uuid, Integer user_id);
 
-    public void deleteConfirmationID(String uuid);
+	public void deleteConfirmationID(String uuid);
 
-    public List<Confirmation> findConfirmationsByUUID(String uuid);
+	public List<Confirmation> findConfirmationsByUUID(String uuid);
 
-    public void clearConfirmations();
+	public void clearConfirmations();
 
 }

@@ -19,62 +19,62 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 @Controller
 public class AdjustmentController extends MultiActionController {
 
-    @RequestMapping(value = "/adjustment", method = RequestMethod.GET)
-    protected ModelAndView adjust(HttpServletRequest request) {
+	@RequestMapping(value = "/adjustment", method = RequestMethod.GET)
+	protected ModelAndView adjust(HttpServletRequest request) {
 
-	long startTime = System.nanoTime();
+		long startTime = System.nanoTime();
 
-	ModelAndView mav = new ModelAndView("/adjustment/adjustment");
+		ModelAndView mav = new ModelAndView("/adjustment/adjustment");
 
-	request.isUserInRole("ROLE_ADMIN");
+		request.isUserInRole("ROLE_ADMIN");
 
-	Calendar cal = Calendar.getInstance();
+		Calendar cal = Calendar.getInstance();
 
-	Date date = new Date();
-	mav.addObject("date", date);
-	mav.addObject("cal", cal.get(Calendar.MILLISECOND));
+		Date date = new Date();
+		mav.addObject("date", date);
+		mav.addObject("cal", cal.get(Calendar.MILLISECOND));
 
-	double time = (double) (System.nanoTime() - startTime) / 1000000;
+		double time = (double) (System.nanoTime() - startTime) / 1000000;
 
-	mav.addObject("time", time);
+		mav.addObject("time", time);
 
-	return mav;
+		return mav;
 
-    }
-
-    @RequestMapping(value = "/adjustment/xml", method = RequestMethod.GET)
-    protected ModelAndView showUploadForm() {
-
-	return new ModelAndView("/adjustment/xml/upload");
-    }
-
-    @RequestMapping(value = "/adjustment/xml", method = RequestMethod.POST)
-    protected ModelAndView uploadXML(@RequestParam("file") MultipartFile file)
-	    throws IOException {
-
-	if (!file.isEmpty()) {
-	    // byte[] bytes = file.getBytes();
-
-	    // TODO
-
-	    String orgName = file.getOriginalFilename();
-
-	    String path = orgName;
-
-	    File newFile = new File(path);
-
-	    file.transferTo(newFile);
-
-	    InputStream in = file.getInputStream();
-
-	    // String s = IOUtils.toString(in);
-
-	    in.close();
-
-	    return new ModelAndView("redirect:/adjustment/xml");
-	} else {
-	    return new ModelAndView("/adjustment/xml/upload");
 	}
-    }
+
+	@RequestMapping(value = "/adjustment/xml", method = RequestMethod.GET)
+	protected ModelAndView showUploadForm() {
+
+		return new ModelAndView("/adjustment/xml/upload");
+	}
+
+	@RequestMapping(value = "/adjustment/xml", method = RequestMethod.POST)
+	protected ModelAndView uploadXML(@RequestParam("file") MultipartFile file)
+			throws IOException {
+
+		if (!file.isEmpty()) {
+			// byte[] bytes = file.getBytes();
+
+			// TODO
+
+			String orgName = file.getOriginalFilename();
+
+			String path = orgName;
+
+			File newFile = new File(path);
+
+			file.transferTo(newFile);
+
+			InputStream in = file.getInputStream();
+
+			// String s = IOUtils.toString(in);
+
+			in.close();
+
+			return new ModelAndView("redirect:/adjustment/xml");
+		} else {
+			return new ModelAndView("/adjustment/xml/upload");
+		}
+	}
 
 }

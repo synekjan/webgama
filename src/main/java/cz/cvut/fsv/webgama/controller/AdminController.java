@@ -17,17 +17,17 @@ import cz.cvut.fsv.webgama.service.UserManager;
 @RequestMapping(value = "/admin")
 public class AdminController {
 
-    @Inject
-    UserManager userManager;
+	@Inject
+	UserManager userManager;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public String getUserList(HttpServletRequest request, Model model) {
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String getUserList(HttpServletRequest request, Model model) {
 
-	List<User> list = userManager.getUserList();
+		List<User> list = userManager.getUserList();
 
-	model.addAttribute("userList", list);
+		model.addAttribute("userList", list);
 
-	return "/admin/userlist";
-    }
+		return "/admin/userlist";
+	}
 
 }

@@ -13,30 +13,30 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 @RequestMapping("/about")
 public class AboutController extends MultiActionController {
 
-    @RequestMapping(value = { "", "/project" }, method = RequestMethod.GET)
-    protected ModelAndView showAboutProject(HttpServletRequest request,
-	    HttpServletResponse response) throws Exception {
+	@RequestMapping(value = { "", "/project" }, method = RequestMethod.GET)
+	protected ModelAndView showAboutProject(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-	ModelAndView mav = new ModelAndView("/about/about");
+		ModelAndView mav = new ModelAndView("/about/about");
 
-	mav.addObject("ip", request.getRemoteAddr());
-	mav.addObject("host", request.getRemoteHost());
-	mav.addObject("port", request.getRemotePort());
-	mav.addObject("encoding", request.getCharacterEncoding());
+		mav.addObject("ip", request.getRemoteAddr());
+		mav.addObject("host", request.getRemoteHost());
+		mav.addObject("port", request.getRemotePort());
+		mav.addObject("encoding", request.getCharacterEncoding());
 
-	return mav;
-    }
+		return mav;
+	}
 
-    @RequestMapping(value = "/cvut", method = RequestMethod.GET)
-    protected ModelAndView showAboutCVUT() {
+	@RequestMapping(value = "/cvut", method = RequestMethod.GET)
+	protected ModelAndView showAboutCVUT() {
 
-	return new ModelAndView("/about/cvut");
-    }
+		return new ModelAndView("/about/cvut");
+	}
 
-    @RequestMapping(value = "/author", method = RequestMethod.GET)
-    protected ModelAndView showAboutAuthor() {
+	@RequestMapping(value = "/author", method = RequestMethod.GET)
+	protected ModelAndView showAboutAuthor() {
 
-	return new ModelAndView("/about/author");
-    }
+		return new ModelAndView("/about/author");
+	}
 
 }

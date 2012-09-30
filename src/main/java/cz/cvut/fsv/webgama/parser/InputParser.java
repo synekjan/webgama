@@ -11,8 +11,8 @@ import cz.cvut.fsv.webgama.domain.Input;
  */
 public interface InputParser {
 
-    public Input parseInput(InputStream stream);
+	public Input parseInput(InputStream stream);
 
-    public void composeInput(OutputStream stream, Input input);
+	public void composeInput(OutputStream stream, Input input);
 
 }

@@ -6,13 +6,13 @@ import org.apache.commons.lang.RandomStringUtils;
 
 public class Generator {
 
-    public static String generatePassword() {
+	public static String generatePassword() {
 
-	return RandomStringUtils.random(10, true, true);
-    }
+		return RandomStringUtils.random(10, true, true);
+	}
 
-    public static String generateConfirmationID() {
+	public static String generateConfirmationID() {
 
-	return UUID.randomUUID().toString();
-    }
+		return UUID.randomUUID().toString();
+	}
 }

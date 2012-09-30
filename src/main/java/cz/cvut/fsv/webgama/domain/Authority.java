@@ -2,34 +2,34 @@ package cz.cvut.fsv.webgama.domain;
 
 public class Authority {
 
-    private Integer id;
+	private Integer id;
 
-    private Role role;
+	private Role role;
 
-    private User user;
+	private User user;
 
-    public Integer getId() {
-	return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-	this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Role getRole() {
-	return role;
-    }
+	public Role getRole() {
+		return role;
+	}
 
-    public void setRole(Role role) {
-	this.role = role;
-    }
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
-    public User getUser() {
-	return user;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public void setUser(User user) {
-	this.user = user;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 }
