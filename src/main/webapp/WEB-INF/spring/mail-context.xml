@@ -5,10 +5,26 @@
 
 	<!-- ============================= Mail Configuration ============================= -->
 
-	<!-- SMTP server -->
+	<!-- Faculty SMTP Server -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.fsv.cvut.cz" />
 		<property name="port" value="25" />
 	</bean>
+
+	<!-- Google SMTP Server for testing purposes  -->
+	<!-- <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="webgamaa@gmail.com" />
+		<property name="password" value="hovnokleslo789" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean> -->
+
+
 
 </beans>
