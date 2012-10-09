@@ -6,6 +6,7 @@ import java.io.InputStream;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.test.annotation.Repeat;
 import org.springframework.test.annotation.Timed;
 
 import cz.cvut.fsv.webgama.domain.Input;
@@ -42,6 +43,7 @@ public class StAXInputParserTest {
 	}
 
 	@Test
+	@Repeat(value=100)
 	public final void testComposeInput() {
 
 		Input input = inputParser.parseInput(inputStream);
