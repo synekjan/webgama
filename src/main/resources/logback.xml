@@ -15,7 +15,7 @@
 		</encoder>
 	</appender>
 
-	<!-- Appropriate tables need to be created in DB -->
+	<!-- Appropriate tables need to be created in DB using -->
 	<appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
 		<connectionSource class="ch.qos.logback.core.db.JNDIConnectionSource">
       		<!-- please note the "java:comp/env/" prefix -->
@@ -25,21 +25,19 @@
 
 	<appender name="rollingFile"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/opt/apache-tomcat-7.0.27/logs/webgama.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
      		 <!-- daily rollover -->
-			<fileNamePattern>webgama.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>/opt/apache-tomcat-7.0.27/logs/webgama.%d{yyyy-MM-dd}.log</fileNamePattern>
       		<!-- keep 31 days' worth of history -->
-			<maxHistory>31</maxHistory>
+			<maxHistory>30</maxHistory>
 		</rollingPolicy>
 		<encoder>
 			<pattern>%d %-5level [%thread] %logger{0}: %msg%n</pattern>
 		</encoder>
 	</appender>
 
-
 	<root level="INFO">
-		<appender-ref ref="stdout" />
+		<!-- <appender-ref ref="stdout" /> -->
 		<appender-ref ref="rollingFile" />
 		<!-- <appender-ref ref="DB" /> -->
 	</root>
