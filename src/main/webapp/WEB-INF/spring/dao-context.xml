@@ -4,6 +4,23 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
 		                http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
+	<!-- Initializes DB Connection Pooling defined in Tomcat's server.xml and context.xml -->
+	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/Postgres"
+		expected-type="javax.sql.DataSource" />
+
+	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> 
+		<property name="jndiName" value="java:comp/env/jdbc/Postgres" /> </bean> -->
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+
+
+	<!-- DATA ACCESS OBJECTS -->
+
+	<!-- User management -->
 	<bean id="userDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcUserDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
@@ -22,16 +39,53 @@
 		<property name="userDao" ref="userDao" />
 	</bean>
 
-	<!-- Initializes DB Connection Pooling defined in Tomcat's server.xml and context.xml -->
-	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/Postgres"
-		expected-type="javax.sql.DataSource" />
 
-	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="java:comp/env/jdbc/Postgres" />
-	</bean> -->
+	<!-- ********************
+	     **** INPUT part **** 
+	     ********************-->
+	<bean id="inputDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcInputDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="userDao" ref="userDao" />
+		<property name="networkDao" ref="networkDao" />
+	</bean>
 
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="networkDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcNetworkDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="pointDao" ref="pointDao" />
+		<property name="observationDao" ref="observationDao" />
+	</bean>
+	
+	<bean id="observationDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcObservationDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="directionDao" ref="directionDao" />
+		<property name="distanceDao" ref="distanceDao" />
+		<property name="angleDao" ref="angleDao" />
+		<property name="slopeDistanceDao" ref="slopeDistanceDao" />
+		<property name="zenithAngleDao" ref="zenithAngleDao" />
+	</bean>
+	
+	<bean id="pointDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcPointDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<bean id="directionDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcDirectionDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="distanceDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcDistanceDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="angleDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcAngleDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="slopeDistanceDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcSlopeDistanceDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="zenithAngleDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcZenithAngleDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
 </beans>

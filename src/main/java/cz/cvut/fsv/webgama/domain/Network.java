@@ -1,6 +1,5 @@
 package cz.cvut.fsv.webgama.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Network {
@@ -33,9 +32,9 @@ public class Network {
 
 	private Double distanceStdev;
 
-	private List<Point> points = new ArrayList<Point>();
+	private List<Point> points;
 
-	private List<Observation> observations = new ArrayList<Observation>();
+	private List<Observation> observations;
 
 	public Integer getId() {
 		return id;

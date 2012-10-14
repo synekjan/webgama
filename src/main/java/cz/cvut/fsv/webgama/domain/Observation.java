@@ -1,27 +1,26 @@
 package cz.cvut.fsv.webgama.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Observation {
 
 	private Integer id;
-
+	
 	private String from;
-
+	
 	private String orientation;
-
+	
 	private Double fromDh;
-
-	private List<Direction> directions = new ArrayList<Direction>();
-
-	private List<Distance> distances = new ArrayList<Distance>();
-
-	private List<Angle> angles = new ArrayList<Angle>();
-
-	private List<SlopeDistance> slopeDistances = new ArrayList<SlopeDistance>();
-
-	private List<ZenithAngle> zenithAngles = new ArrayList<ZenithAngle>();
+	
+	private List<Direction> directions;
+	
+	private List<Distance> distances;
+	
+	private List<Angle> angles;
+	
+	private List<SlopeDistance> slopeDistances;
+	
+	private List<ZenithAngle> zenithAngles;
 
 	public Integer getId() {
 		return id;

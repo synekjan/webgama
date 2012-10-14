@@ -1,0 +1,80 @@
+package cz.cvut.fsv.webgama.dao.jdbc;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+
+import cz.cvut.fsv.webgama.dao.PointDao;
+import cz.cvut.fsv.webgama.domain.Network;
+import cz.cvut.fsv.webgama.domain.Point;
+
+public class JdbcPointDao extends JdbcDaoSupport implements PointDao {
+
+	@Override
+	public void insert(Point point, Integer networkId) {
+
+		String sql = "INSERT INTO points (network_id, id, x, y, z, fix, adj) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+		getJdbcTemplate().update(
+				sql,
+				new Object[] { networkId, point.getName(), point.getX(),
+						point.getY(), point.getZ(), point.getFix(),
+						point.getAdj() });
+
+	}
+
+	@Override
+	public void delete(Point point) {
+
+		String sql = "DELETE FROM points WHERE point_id = ?";
+
+		getJdbcTemplate().update(sql, new Object[] { point.getId() });
+	}
+
+	@Override
+	public void update(Point point) {
+
+		String sql = "UPDATE points SET id=?, x=?, y=?, z=?, fix=?, adj=? WHERE point_id=?";
+
+		getJdbcTemplate().update(
+				sql,
+				new Object[] { point.getName(), point.getX(), point.getY(),
+						point.getZ(), point.getFix(), point.getAdj(),
+						point.getId() });
+	}
+
+	@Override
+	public List<Point> findPointsInNetwork(Network network) {
+
+		String sql = "SELECT * FROM points WHERE network_id = ?";
+
+		List<Point> points = getJdbcTemplate().query(sql,
+				new Object[] { network.getId() }, new PointMapper());
+
+		return points;
+	}
+
+	private class PointMapper implements RowMapper<Point> {
+
+		@Override
+		public Point mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+			Point point = new Point();
+
+			point.setId(rs.getInt("point_id"));
+			point.setName(rs.getString("id"));
+			point.setX(rs.getDouble("x"));
+			point.setY(rs.getDouble("y"));
+			point.setZ(rs.getDouble("z"));
+			point.setFix(rs.getString("fix"));
+			point.setAdj(rs.getString("adj"));
+
+			return point;
+		}
+
+	}
+
+}
