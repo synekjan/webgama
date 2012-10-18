@@ -3,6 +3,7 @@ package cz.cvut.fsv.webgama.service.impl;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.springframework.transaction.annotation.Transactional;
 
 import cz.cvut.fsv.webgama.dao.LoginDao;
 import cz.cvut.fsv.webgama.dao.UserDao;
@@ -25,6 +26,7 @@ public class LoginManagerImpl implements LoginManager {
 	}
 
 	@Override
+	@Transactional
 	public void login(String username, String ip, Boolean success) {
 
 		User user = userDao.findUserByUsername(username);
@@ -37,12 +39,15 @@ public class LoginManagerImpl implements LoginManager {
 
 	}
 
+	@Override
+	@Transactional
 	public List<Login> getLoginList(String username) {
 
 		return loginDao.getLoginList(userDao.findUserByUsername(username));
 	}
 
 	@Override
+	@Transactional
 	public DateTime getLastLogin(String username) {
 
 		Login login = loginDao.getLastLogin(userDao

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import cz.cvut.fsv.webgama.dao.AuthorityDao;
 import cz.cvut.fsv.webgama.dao.UserDao;
@@ -77,6 +78,7 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
+	@Transactional
 	public void updateUser(UserForm userForm) {
 
 		User user = userDao.findUserByUsername(userForm.getUsername());
@@ -96,6 +98,7 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
+	@Transactional
 	public void registerUser(UserRegistrationForm userForm,
 			HttpServletRequest request) {
 
@@ -130,6 +133,7 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
+	@Transactional
 	public Boolean hasUserAdminRights(String username) {
 
 		User user = userDao.findUserByUsername(username);
@@ -146,6 +150,7 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
+	@Transactional
 	public void changeUserPassword(UserPasswordChangeForm userForm) {
 
 		User user = userDao.findUserByUsername(userForm.getUsername());
@@ -159,6 +164,7 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
+	@Transactional
 	public boolean isConfirmationIDinDB(String uuid) {
 
 		List<Confirmation> list = userDao.findConfirmationsByUUID(uuid);
@@ -170,6 +176,7 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
+	@Transactional
 	public void confirmEmailAddress(String uuid) {
 
 		List<Confirmation> list = userDao.findConfirmationsByUUID(uuid);

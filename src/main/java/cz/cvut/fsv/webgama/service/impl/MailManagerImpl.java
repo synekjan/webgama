@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import cz.cvut.fsv.webgama.dao.UserDao;
 import cz.cvut.fsv.webgama.domain.User;
@@ -42,6 +43,7 @@ public class MailManagerImpl implements MailManager {
 	}
 
 	@Override
+	@Transactional
 	public void recoverPassword(PasswordRecoveryForm userForm) {
 
 		List<User> list = userDao.findUsersByUsername(userForm.getUsername());
@@ -68,6 +70,7 @@ public class MailManagerImpl implements MailManager {
 	}
 
 	@Override
+	@Transactional
 	public void recoverUsername(UsernameRecoveryForm userForm) {
 
 		List<User> list = userDao.findUsersByEmail(userForm.getEmail());
