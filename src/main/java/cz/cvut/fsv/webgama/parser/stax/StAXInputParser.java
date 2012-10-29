@@ -496,26 +496,23 @@ public class StAXInputParser implements InputParser {
 
 							if ("distance-stdev".equals(attribute.getName()
 									.getLocalPart())) {
-								network.setDistanceStdev(Double
-										.parseDouble(attribute.getValue()));
+								network.setDistanceStdev(attribute.getValue());
 								continue;
 							}
 							if ("direction-stdev".equals(attribute.getName()
 									.getLocalPart())) {
-								network.setDirectionStdev(Double
-										.parseDouble(attribute.getValue()));
+								network.setDirectionStdev(attribute.getValue());
 								continue;
 							}
 							if ("angle-stdev".equals(attribute.getName()
 									.getLocalPart())) {
-								network.setAngleStdev(Double
-										.parseDouble(attribute.getValue()));
+								network.setAngleStdev(attribute.getValue());
 								continue;
 							}
 							if ("zenith-angle-stdev".equals(attribute.getName()
 									.getLocalPart())) {
-								network.setZenithAngleStdev(Double
-										.parseDouble(attribute.getValue()));
+								network.setZenithAngleStdev(attribute
+										.getValue());
 								continue;
 							}
 						}

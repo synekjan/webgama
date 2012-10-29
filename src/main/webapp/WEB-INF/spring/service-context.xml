@@ -20,8 +20,14 @@
 	</bean>
 
 	<bean id="mailManager" class="cz.cvut.fsv.webgama.service.impl.MailManagerImpl">
-		<property name="addressFrom" value="noreply@fsv.cvut.cz"></property>
+		<property name="addressFrom" value="noreply@fsv.cvut.cz" />
 		<property name="mailSender" ref="mailSender" />
+		<property name="userDao" ref="userDao" />
+	</bean>
+
+	<bean id="adjustmentManager" class="cz.cvut.fsv.webgama.service.impl.AdjustmentManagerImpl">
+		<property name="inputDao" ref="inputDao" />
+		<property name="inputParser" ref="inputParser" />
 		<property name="userDao" ref="userDao" />
 	</bean>
 

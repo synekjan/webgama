@@ -1,5 +1,6 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Network {
@@ -24,17 +25,17 @@ public class Network {
 
 	private String updateCC;
 
-	private Double directionStdev;
+	private String directionStdev;
 
-	private Double angleStdev;
+	private String angleStdev;
 
-	private Double zenithAngleStdev;
+	private String zenithAngleStdev;
 
-	private Double distanceStdev;
+	private String distanceStdev;
 
-	private List<Point> points;
+	private List<Point> points = new ArrayList<Point>();
 
-	private List<Observation> observations;
+	private List<Observation> observations = new ArrayList<Observation>();
 
 	public Integer getId() {
 		return id;
@@ -116,35 +117,35 @@ public class Network {
 		this.updateCC = updateCC;
 	}
 
-	public Double getDirectionStdev() {
+	public String getDirectionStdev() {
 		return directionStdev;
 	}
 
-	public void setDirectionStdev(Double directionStdev) {
+	public void setDirectionStdev(String directionStdev) {
 		this.directionStdev = directionStdev;
 	}
 
-	public Double getAngleStdev() {
+	public String getAngleStdev() {
 		return angleStdev;
 	}
 
-	public void setAngleStdev(Double angleStdev) {
+	public void setAngleStdev(String angleStdev) {
 		this.angleStdev = angleStdev;
 	}
 
-	public Double getZenithAngleStdev() {
+	public String getZenithAngleStdev() {
 		return zenithAngleStdev;
 	}
 
-	public void setZenithAngleStdev(Double zenithAngleStdev) {
+	public void setZenithAngleStdev(String zenithAngleStdev) {
 		this.zenithAngleStdev = zenithAngleStdev;
 	}
 
-	public Double getDistanceStdev() {
+	public String getDistanceStdev() {
 		return distanceStdev;
 	}
 
-	public void setDistanceStdev(Double distanceStdev) {
+	public void setDistanceStdev(String distanceStdev) {
 		this.distanceStdev = distanceStdev;
 	}
 

@@ -31,17 +31,17 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 	@Override
 	public void insert(Input input) {
 
-		String sql = "INSERT INTO inputs (user_id, filename, file_content, algorithm, ang_units, latitude, ellipsoid, version, time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO inputs (user_id, filename, file_content, algorithm, ang_units, latitude, ellipsoid, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING input_id";
 
-		getJdbcTemplate().update(
-				sql,
-				new Object[] { input.getUser().getId(), input.getFilename(),
-						input.getFileContent(), input.getAlgorithm(),
-						input.getAngUnits(), input.getLatitude(),
-						input.getEllipsoid(), input.getVersion(),
-						input.getTime() });
+		Object[] params = new Object[] { input.getUser().getId(),
+				input.getFilename(), input.getFileContent(),
+				input.getAlgorithm(), input.getAngUnits(), input.getLatitude(),
+				input.getEllipsoid(), input.getVersion() };
 
-		networkDao.insert(input.getNetwork(), input.getId());
+		// Store last generated value from SERIAL PostgreSQL type [RETURNING syntax]
+		int inputId = getJdbcTemplate().queryForInt(sql, params);
+		
+		networkDao.insert(input.getNetwork(), inputId);
 	}
 
 	@Override

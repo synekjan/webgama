@@ -30,9 +30,9 @@ public class JdbcNetworkDao extends JdbcDaoSupport implements NetworkDao {
 	@Override
 	public void insert(Network network, Integer inputId) {
 
-		String sql = "INSERT INTO networks (input_id, axes_xy, angles, epoch, description, sigma_apr, conf_pr, tol_abs, sigma_act, update_cc, direction_stdev, angle_stdev, zenith_angle_stdev, distance_stdev) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO networks (input_id, axes_xy, angles, epoch, description, sigma_apr, conf_pr, tol_abs, sigma_act, update_cc, direction_stdev, angle_stdev, zenith_angle_stdev, distance_stdev) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING network_id";
 
-		getJdbcTemplate().update(
+		int networkId = getJdbcTemplate().queryForInt(
 				sql,
 				new Object[] { inputId, network.getAxesXY(),
 						network.getAngles(), network.getEpoch(),
@@ -44,11 +44,11 @@ public class JdbcNetworkDao extends JdbcDaoSupport implements NetworkDao {
 						network.getDistanceStdev() });
 
 		for (Point point : network.getPoints()) {
-			pointDao.insert(point, network.getId());
+			pointDao.insert(point, networkId);
 		}
 
 		for (Observation observation : network.getObservations()) {
-			observationDao.insert(observation, network.getId());
+			observationDao.insert(observation, networkId);
 		}
 	}
 
@@ -105,10 +105,10 @@ public class JdbcNetworkDao extends JdbcDaoSupport implements NetworkDao {
 			network.setTolAbs(rs.getDouble("tol_abs"));
 			network.setSigmaAct(rs.getString("sigma_act"));
 			network.setUpdateCC(rs.getString("update_cc"));
-			network.setDirectionStdev(rs.getDouble("direction_stdev"));
-			network.setAngleStdev(rs.getDouble("angle_stdev"));
-			network.setZenithAngleStdev(rs.getDouble("zenith_angle_stdev"));
-			network.setDistanceStdev(rs.getDouble("distance_stdev"));
+			network.setDirectionStdev(rs.getString("direction_stdev"));
+			network.setAngleStdev(rs.getString("angle_stdev"));
+			network.setZenithAngleStdev(rs.getString("zenith_angle_stdev"));
+			network.setDistanceStdev(rs.getString("distance_stdev"));
 			network.setPoints(pointDao.findPointsInNetwork(network));
 			network.setObservations(observationDao
 					.findObservationsInNetwork(network));

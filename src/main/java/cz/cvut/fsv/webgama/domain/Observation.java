@@ -1,5 +1,6 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Observation {
@@ -12,15 +13,15 @@ public class Observation {
 	
 	private Double fromDh;
 	
-	private List<Direction> directions;
+	private List<Direction> directions = new ArrayList<Direction>();
 	
-	private List<Distance> distances;
+	private List<Distance> distances = new ArrayList<Distance>();
 	
-	private List<Angle> angles;
+	private List<Angle> angles = new ArrayList<Angle>();
 	
-	private List<SlopeDistance> slopeDistances;
+	private List<SlopeDistance> slopeDistances = new ArrayList<SlopeDistance>();
 	
-	private List<ZenithAngle> zenithAngles;
+	private List<ZenithAngle> zenithAngles = new ArrayList<ZenithAngle>();
 
 	public Integer getId() {
 		return id;

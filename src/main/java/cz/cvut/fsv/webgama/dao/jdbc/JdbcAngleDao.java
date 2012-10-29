@@ -16,7 +16,7 @@ public class JdbcAngleDao extends JdbcDaoSupport implements AngleDao {
 	@Override
 	public void insert(Angle angle, Integer observationId) {
 
-		String sql = "INSERT INTO angles (observation_id, from_id, bs, fs, val, stdev, from_dh, bs_dh, fs_dh VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO angles (observation_id, from_id, bs, fs, val, stdev, from_dh, bs_dh, fs_dh) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		getJdbcTemplate().update(
 				sql,

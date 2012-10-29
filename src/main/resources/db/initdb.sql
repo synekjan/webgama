@@ -159,19 +159,19 @@ time 			TIMESTAMP DEFAULT now()
 CREATE TABLE networks (
 network_id		SERIAL PRIMARY KEY,
 input_id		INTEGER NOT NULL REFERENCES inputs(input_id),
-axes_xy			VARCHAR(2) NOT NULL,
-angles			VARCHAR(12) NOT NULL,
-epoch			DOUBLE PRECISION NOT NULL,
+axes_xy			VARCHAR(2),
+angles			VARCHAR(12),
+epoch			DOUBLE PRECISION,
 description		TEXT,
-sigma_apr		DOUBLE PRECISION NOT NULL,
-conf_pr			DOUBLE PRECISION NOT NULL,
-tol_abs			DOUBLE PRECISION NOT NULL,
+sigma_apr		DOUBLE PRECISION,
+conf_pr			DOUBLE PRECISION,
+tol_abs			DOUBLE PRECISION,
 sigma_act		VARCHAR(11),
 update_cc		VARCHAR(3),
-direction_stdev	DOUBLE PRECISION,
-angle_stdev		DOUBLE PRECISION,
-zenith_angle_stdev DOUBLE PRECISION,
-distance_stdev	DOUBLE PRECISION
+direction_stdev	VARCHAR(80),
+angle_stdev		VARCHAR(80),
+zenith_angle_stdev VARCHAR(80),
+distance_stdev	VARCHAR(80)
 );
 
 
@@ -209,7 +209,7 @@ to_dh			DOUBLE PRECISION
 CREATE TABLE distances (
 distance_id		SERIAL PRIMARY KEY,
 observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
-from_id			VARCHAR(80) NOT NULL,
+from_id			VARCHAR(80),
 to_id			VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,
 stdev			DOUBLE PRECISION,
@@ -221,7 +221,7 @@ to_dh			DOUBLE PRECISION
 CREATE TABLE angles (
 angle_id		SERIAL PRIMARY KEY,
 observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
-from_id			VARCHAR(80) NOT NULL,
+from_id			VARCHAR(80),
 bs				VARCHAR(80) NOT NULL,
 fs				VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,
@@ -235,7 +235,7 @@ fs_dh			DOUBLE PRECISION
 CREATE TABLE slope_distances (
 slope_distance_id	SERIAL PRIMARY KEY,
 observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
-from_id			VARCHAR(80) NOT NULL,
+from_id			VARCHAR(80),
 to_id			VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,
 stdev			DOUBLE PRECISION,
@@ -246,7 +246,7 @@ to_dh			DOUBLE PRECISION
 CREATE TABLE zenith_angles (
 zenith_angle_id	SERIAL PRIMARY KEY,
 observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
-from_id			VARCHAR(80) NOT NULL,
+from_id			VARCHAR(80),
 to_id			VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,
 stdev			DOUBLE PRECISION,

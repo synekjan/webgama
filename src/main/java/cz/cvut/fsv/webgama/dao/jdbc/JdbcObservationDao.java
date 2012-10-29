@@ -53,32 +53,33 @@ public class JdbcObservationDao extends JdbcDaoSupport implements
 	@Override
 	public void insert(Observation observation, Integer networkId) {
 
-		String sql = "INSERT INTO observations (network_id, from_id, orientation, from_dh) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO observations (network_id, from_id, orientation, from_dh) VALUES (?, ?, ?, ?) RETURNING observation_id";
 
-		getJdbcTemplate()
-				.update(sql,
+		int observationId = getJdbcTemplate()
+				.queryForInt(
+						sql,
 						new Object[] { networkId, observation.getFrom(),
 								observation.getOrientation(),
 								observation.getFromDh() });
 
 		for (Direction direction : observation.getDirections()) {
-			directionDao.insert(direction, observation.getId());
+			directionDao.insert(direction, observationId);
 		}
 
 		for (Distance distance : observation.getDistances()) {
-			distanceDao.insert(distance, observation.getId());
+			distanceDao.insert(distance, observationId);
 		}
 
 		for (Angle angle : observation.getAngles()) {
-			angleDao.insert(angle, observation.getId());
+			angleDao.insert(angle, observationId);
 		}
 
 		for (SlopeDistance slopeDistance : observation.getSlopeDistances()) {
-			slopeDistanceDao.insert(slopeDistance, observation.getId());
+			slopeDistanceDao.insert(slopeDistance, observationId);
 		}
 
 		for (ZenithAngle zenithAngle : observation.getZenithAngles()) {
-			zenithAngleDao.insert(zenithAngle, observation.getId());
+			zenithAngleDao.insert(zenithAngle, observationId);
 		}
 	}
 

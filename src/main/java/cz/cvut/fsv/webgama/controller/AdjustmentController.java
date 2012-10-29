@@ -1,11 +1,9 @@
 package cz.cvut.fsv.webgama.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -16,8 +14,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
+import cz.cvut.fsv.webgama.service.AdjustmentManager;
+
 @Controller
 public class AdjustmentController extends MultiActionController {
+
+	@Inject
+	private AdjustmentManager adjustmentManager;
 
 	@RequestMapping(value = "/adjustment", method = RequestMethod.GET)
 	protected ModelAndView adjust(HttpServletRequest request) {
@@ -25,8 +28,6 @@ public class AdjustmentController extends MultiActionController {
 		long startTime = System.nanoTime();
 
 		ModelAndView mav = new ModelAndView("/adjustment/adjustment");
-
-		request.isUserInRole("ROLE_ADMIN");
 
 		Calendar cal = Calendar.getInstance();
 
@@ -49,29 +50,16 @@ public class AdjustmentController extends MultiActionController {
 	}
 
 	@RequestMapping(value = "/adjustment/xml", method = RequestMethod.POST)
-	protected ModelAndView uploadXML(@RequestParam("file") MultipartFile file)
-			throws IOException {
+	protected ModelAndView uploadXML(@RequestParam("file") MultipartFile file,
+			HttpServletRequest request) {
 
 		if (!file.isEmpty()) {
-			// byte[] bytes = file.getBytes();
 
-			// TODO
+			String username = request.getUserPrincipal().getName();
 
-			String orgName = file.getOriginalFilename();
+			adjustmentManager.adjustFromFile(file, username);
 
-			String path = orgName;
-
-			File newFile = new File(path);
-
-			file.transferTo(newFile);
-
-			InputStream in = file.getInputStream();
-
-			// String s = IOUtils.toString(in);
-
-			in.close();
-
-			return new ModelAndView("redirect:/adjustment/xml");
+			return new ModelAndView("redirect:/");
 		} else {
 			return new ModelAndView("/adjustment/xml/upload");
 		}
