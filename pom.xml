@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cz.cvut.fsv</groupId>
 	<artifactId>webgama</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>webgama</name>
 	<description>Web interface for GNU Gama</description>
@@ -15,8 +15,8 @@
 
 	<!-- Version properties -->
 	<properties>
-		<spring-framework-version>3.1.2.RELEASE</spring-framework-version>
-		<spring-security-version>3.1.2.RELEASE</spring-security-version>
+		<spring-framework-version>3.1.3.RELEASE</spring-framework-version>
+		<spring-security-version>3.1.3.RELEASE</spring-security-version>
 		<java-version>1.6</java-version>
 		<slf4j-version>1.6.1</slf4j-version>
 		<logback-version>1.0.1</logback-version>
@@ -219,6 +219,12 @@
 			<version>1</version>
 		</dependency>
 
+		<!-- Jackson JSON library for conversion to JSON -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.9</version>
+		</dependency>
 
 	</dependencies>
 
