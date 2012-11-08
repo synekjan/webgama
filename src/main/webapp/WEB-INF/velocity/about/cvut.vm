@@ -7,32 +7,20 @@
 <body>
 	<div id="wrapper">
 		#parse("header.vm")
-
-		<div id="breadcrumbs">
-			<a class="blue" href="#springUrl("/")">WebGama</a> > <a href="#springUrl("/about")">#springMessage("about.navbar")</a> > <a href="#springUrl("/about/cvut")"><span class="active">#springMessage("about.organization")</span></a>
-		</div>
-
-		<div class="left_menu">
-			<ul>
-				<li><a href="#springUrl("/about/project")">#springMessage("about.project")</a></li>
-				<span class="active_menu"><li><a href="#springUrl("/about/cvut")">#springMessage("about.organization")</a></li></span>
-				<li><a href="#springUrl("/about/author")">#springMessage("about.author")</a></li>
-			</ul>
-		</div>
-
 		<div id="container">
+			<div class="left_menu">
+				<ul>
+					<li><a href="#springUrl("/about/project")">#springMessage("about.project")</a></li>
+					<span class="active_menu"><li><a href="#springUrl("/about/cvut")">#springMessage("about.organization")</a></li></span>
+					<li><a href="#springUrl("/about/author")">#springMessage("about.author")</a></li>
+				</ul>
+			</div>
 
 			<h3>#springMessage("about.organization")</h3>
-			<br>
-			<a href="http://www.cvut.cz">CTU Prague</a>
-			<br>
-			<br>
+			<br> <a href="http://www.cvut.cz">CTU Prague</a> <br> <br>
 			<a href="http://www.fsv.cvut.cz">Faculty of Civil Engineering</a>
-
-
-
 		</div>
-		#parse("footer.vm")
 	</div>
+	#parse("footer.vm")
 </body>
 </html>

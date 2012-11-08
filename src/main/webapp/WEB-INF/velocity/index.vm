@@ -7,11 +7,8 @@
 <body>
 	<div id="wrapper">
 		#parse("header.vm")
-		<div class="slideshow">
-			<img alt="slideshow" src="#springUrl("/resources/img/head_bckgr.png")">
-		</div>
-		<div id="container_index">
-
+		<div id="container">
+			#parse("navigation.vm")
 
 			<h2>#springMessage("header")</h2>
 
@@ -20,7 +17,7 @@
 			<p>#springMessage("controller") $time ms</p>
 
 		</div>
-		#parse("footer.vm")
 	</div>
+	#parse("footer.vm")
 </body>
 </html>

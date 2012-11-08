@@ -1,34 +1,25 @@
 <div id="header">
-	<div class="logo_wrapper">
-		<div class="logo">
-			<a href="#springUrl("/")"><img border="0"
-				src="#springUrl("/resources/img/webgama_logo.png")" alt="Title" title="WebGama" /></a>
+	<div id="header_inner_wrapper">
+		<div id="logo">
+			<a href="#springUrl("/")">WebGama</a>
 		</div>
-		<div class="welcome_wrapper">
-		
-			<a href="?locale=cs_CZ">cs_CZ</a> &nbsp; 
-			<a href="?locale=en_GB">en_GB</a> &nbsp;
-			<a href="?locale=en_US">en_US</a> &nbsp; &nbsp;
-			
-			<a href="#springUrl("/user/logins")">#if($authentication.lastLogin)#springMessage("last.login"):#end $!authentication.lastLogin</a> &nbsp; &nbsp;
-			  
-			#springMessage("welcome") $authentication.username ( 
-			<a href="#springUrl("/user")">#springMessage("user.settings")</a> | 
-			
-			#if ($authentication.adminRights)
-			<a href="#springUrl("/admin")">Admin</a> |
-			#end
-					
-			<a href="#springUrl("/logout")">#springMessage("logout")</a> ) &nbsp; &nbsp;
+		<div id="header_menu">
+			<!-- <div id="language_wrapper">
+
+				<a href="?locale=cs_CZ">cs_CZ</a> &nbsp; <a href="?locale=en_GB">en_GB</a>
+				&nbsp; <a href="?locale=en_US">en_US</a> &nbsp; &nbsp;
+
+			</div> -->
+			<div id="account_header_wrapper">
+				<div id="account">
+					<a class=active_link href="#">$authentication.username <i class="caret"></i></a>
+					<div id="account_dropdown">
+						<a href="#springUrl("/account")">#springMessage("user.settings")</a> 
+						#if ($authentication.adminRights) <a href="#springUrl("/admin")">Admin Section</a>#end
+						<a href="#springUrl("/logout")">#springMessage("logout")</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-
-	<div class="nav_menu">
-		<ul>
-			<li><a href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a></li>
-			<li><a href="#springUrl("#")">#springMessage("calculations.navbar")</a></li>
-			<li><a href="#springUrl("/about")">#springMessage("about.navbar")</a></li>
-		</ul>
-	</div>
-
 </div>

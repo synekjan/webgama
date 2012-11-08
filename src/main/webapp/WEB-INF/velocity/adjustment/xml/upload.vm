@@ -7,29 +7,28 @@
 <body>
 	<div id="wrapper">
 		#parse("header.vm")
-
-		<div id="breadcrumbs">
-			<a class="blue" href="#springUrl("/")">WebGama</a> > <a href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a> > <a href="#springUrl("/adjustment/xml")"><span class="active">#springMessage("adjustment.from.xml")</span></a>
-		</div>
-
-		<div class="left_menu">
-			<ul>
-				<li><a href="#springUrl("/adjustment")">#springMessage("adjustment.interactively")</a></li>
-				<span class="active_menu"><li><a href="#springUrl("/adjustment/xml")">#springMessage("adjustment.from.xml")</a></li></span>
-			</ul>
-		</div>
-
 		<div id="container">
+		#parse("navigation.vm")
+			<div id="breadcrumbs">
+				<a class="blue" href="#springUrl("/")">WebGama</a> > <a
+					href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a>
+				> <a href="#springUrl("/adjustment/xml")"><span class="active">#springMessage("adjustment.from.xml")</span></a>
+			</div>
+
+			<div class="left_menu">
+				<ul>
+					<li><a href="#springUrl("/adjustment")">#springMessage("adjustment.interactively")</a></li>
+					<span class="active_menu"><li><a href="#springUrl("/adjustment/xml")">#springMessage("adjustment.from.xml")</a></li></span>
+				</ul>
+			</div>
+
 
 
 			<form method="post" action="" enctype="multipart/form-data">
-				<input type="file" name="file" /> 
-				<input type="submit" />
+				<input type="file" name="file" /> <input type="submit" />
 			</form>
-
-
 		</div>
-		#parse("footer.vm")
 	</div>
+	#parse("footer.vm")
 </body>
 </html>

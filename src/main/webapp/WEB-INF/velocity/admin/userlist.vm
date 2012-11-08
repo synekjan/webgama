@@ -8,18 +8,18 @@
 <body>
 	<div id="wrapper">
 		#parse("header.vm")
-		<div id="breadcrumbs">
-			<a href="#springUrl("/")">WebGama</a> > <a href="#springUrl("/admin")">#springMessage("admin.section")</a> > <a href="#springUrl("/admin")"><span class="active">#springMessage("admin.user.list")</span></a>
-		</div>
-
-		<div class="left_menu">
-			<ul>
-				<li><a href="#springUrl("/admin")">#springMessage("admin.user.list")</a></li>
-			</ul>
-		</div>
-
 		<div id="container">
+			#parse("navigation.vm")
+			<div id="breadcrumbs">
+				<a href="#springUrl("/")">WebGama</a> > <a href="#springUrl("/admin")">#springMessage("admin.section")</a>
+				> <a href="#springUrl("/admin")"><span class="active">#springMessage("admin.user.list")</span></a>
+			</div>
 
+			<div class="left_menu">
+				<ul>
+					<li><a href="#springUrl("/admin")">#springMessage("admin.user.list")</a></li>
+				</ul>
+			</div>
 			<table class="table">
 				<thead>
 					<tr>
@@ -57,7 +57,7 @@
 				</tbody>
 			</table>
 		</div>
-		#parse("footer.vm")
 	</div>
+	#parse("footer.vm")
 </body>
 </html>

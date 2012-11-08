@@ -7,22 +7,22 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 @Controller
-public class LoginController extends MultiActionController {
+public class SigninController extends MultiActionController {
 
 	/*
 	 * @Autowired private LoginManager loginManager;
 	 */
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/signin", method = RequestMethod.GET)
 	public ModelAndView login() throws Exception {
 
-		return new ModelAndView("login");
+		return new ModelAndView("signin");
 	}
 
-	@RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
+	@RequestMapping(value = "/signin-failed", method = RequestMethod.GET)
 	public ModelAndView loginFailed() throws Exception {
 
-		return new ModelAndView("login", "error", true);
+		return new ModelAndView("signin", "error", true);
 	}
 
 }

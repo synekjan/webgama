@@ -8,33 +8,26 @@
 	<div id="wrapper">
 		#parse("header.vm")
 
-		<div id="breadcrumbs">
-			<a class="blue" href="#springUrl("/")">WebGama</a> > <a href="#springUrl("/about")">#springMessage("about.navbar")</a> > <a href="#springUrl("/about/author")"><span class="active">#springMessage("about.author")</span></a>
-		</div>
-
-		<div class="left_menu">
-			<ul>
-				<li><a href="#springUrl("/about/project")">#springMessage("about.project")</a></li>
-				<li><a href="#springUrl("/about/cvut")">#springMessage("about.organization")</a></li>
-				<span class="active_menu"><li><a href="#springUrl("/about/author")">#springMessage("about.author")</a></li></span>
-			</ul>
-		</div>
-
 		<div id="container">
+			<div class="left_menu">
+				<ul>
+					<li><a href="#springUrl("/about/project")">#springMessage("about.project")</a></li>
+					<li><a href="#springUrl("/about/cvut")">#springMessage("about.organization")</a></li>
+					<span class="active_menu"><li><a href="#springUrl("/about/author")">#springMessage("about.author")</a></li></span>
+				</ul>
+			</div>
 
 			<h3>#springMessage("about.author")</h3>
 
 			<p>Jendik Synků</p>
-			
-			<p>
-    			Příšerně žluťoučký kůň úpěl ďábelské ódy.
-    			Hleď, toť přízračný kůň v mátožné póze šíleně úpí.
-    			Zvlášť zákeřný učeň s ďolíčky běží podél zóny úlů.
-    			Loď čeří kýlem tůň obzvlášť v Grónské úžině.
-    			Ó, náhlý déšť již zvířil prach a čilá laň teď běží s houfcem gazel k úkrytům. </p>
 
+			<p>Příšerně žluťoučký kůň úpěl ďábelské ódy. Hleď, toť přízračný
+				kůň v mátožné póze šíleně úpí. Zvlášť zákeřný učeň s ďolíčky běží
+				podél zóny úlů. Loď čeří kýlem tůň obzvlášť v Grónské úžině. Ó,
+				náhlý déšť již zvířil prach a čilá laň teď běží s houfcem gazel k
+				úkrytům.</p>
 		</div>
-		#parse("footer.vm")
 	</div>
+	#parse("footer.vm")
 </body>
 </html>

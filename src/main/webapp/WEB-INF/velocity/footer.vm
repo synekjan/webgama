@@ -1,5 +1,19 @@
 <div id="footer">
-	<a href="http://www.springsource.org/" class="footer">powered by Spring</a>
-
+	<div id="footer_inner_wrapper">
+	 	<div id="upper">
+	 		<a href="#springUrl("/about")" class="footer">About</a>
+	 		<a href="#" class="footer">Documentation</a>
+		 	<a href="#" class="footer">Report a bug</a>
+		 	<a href="#" class="footer">Contact & Support</a>
+	 	</div>
+	 	<div id="bottom">
+			<a href="http://www.java.com/" class="footer">Java</a>
+			<a href="http://www.springsource.org/spring-framework" class="footer">Spring Framework</a>
+			<a href="http://www.springsource.org/spring-security" class="footer">Spring Security</a>
+			<a href="http://velocity.apache.org/" class="footer">Apache Velocity</a>
+			<a href="http://jquery.com/" class="footer">jQuery</a>
+			<a href="http://www.gnu.org/software/gama/" class="footer">GNU Gama</a>
+		</div>
+	</div>
 </div>
 

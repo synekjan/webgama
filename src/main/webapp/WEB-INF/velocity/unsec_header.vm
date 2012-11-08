@@ -1,0 +1,15 @@
+<div id="header">
+	<div id="header_inner_wrapper">
+		<div id="logo">
+			<a href="#springUrl("/")">WebGama</a>
+		</div>
+		<div id="header_menu">
+			<div id="sign_header_wrapper">
+				<ul>
+					<li><a href="#springUrl("/register")">#springMessage("login.sign.up")</a></li>
+					<li><a href="#springUrl("/login")">#springMessage("login.sign.in")</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

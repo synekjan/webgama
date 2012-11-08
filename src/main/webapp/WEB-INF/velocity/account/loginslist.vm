@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+#parse("include.vm")
+<title>#springMessage("logins.list")</title>
+</head>
+<body>
+	<div id="wrapper">
+		#parse("header.vm")
+		<div id="container">
+			<div id="account_container">
+				<div class="left_menu">
+					<ul>
+						<li><a href="#springUrl("/account/info")">#springMessage("account.overview")</a></li>
+						<li><a href="#springUrl("/account/info")">#springMessage("user.personal.settings")</a></li>
+						<li><a href="#springUrl("/account/password/change")">#springMessage("change.password")</a></li>
+						<span class="active_menu"><li><a href="#springUrl("/account/logins/show")">#springMessage("logins.list")</a></li></span>
+						<li><a href="#springUrl("/account/delete")">#springMessage("delete.account")</a></li>
+					</ul>
+				</div>
+				<div class="panel">
+					<div class="panel_header">
+						<h2>#springMessage("logins.list")</h2>
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#springMessage("logins.ip.address")</th>
+								<th>#springMessage("logins.time")</th>
+								<th>#springMessage("logins.success")</th>
+							</tr>
+						</thead>
+						<tbody>
+							#foreach ($login in $loginList)
+							<tr>
+								<td>$login.ip</td>
+								<td>$login.time</td>
+								<td>$login.success</td>
+							</tr>
+							#end
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	#parse("footer.vm")
+</body>
+</html>

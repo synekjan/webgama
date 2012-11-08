@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+#parse("include.vm")
+<title>#springMessage("account.overview")</title>
+</head>
+<body>
+	<div id="wrapper">
+		#parse("header.vm")
+
+		<div id="container">
+			<div id="account_container">
+				<div class="left_menu">
+					<ul>
+						<span class="active_menu"><li><a href="#springUrl("/account/info")">#springMessage("account.overview")</a></li></span>
+						<li><a href="#springUrl("/account/personal")">#springMessage("user.personal.settings")</a></li>
+						<li><a href="#springUrl("/account/password/change")">#springMessage("change.password")</a></li>
+						<li><a href="#springUrl("/account/logins/show")">#springMessage("logins.list")</a></li>
+						<li><a href="#springUrl("/account/delete")">#springMessage("delete.account")</a></li>
+					</ul>
+				</div>
+				<div class="panel">
+					<div class="panel_header">
+						<h2>#springMessage("account.overview")</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	#parse("footer.vm")
+</body>
+</html>
