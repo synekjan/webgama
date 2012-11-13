@@ -2,14 +2,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+#parse("unsec_include.vm")
+<title>Welcome to WebGama</title>
 </head>
-<body>
-	<h1>This is welcome page!</h1>
-	<p>
-		Please continue on <a href="#springUrl("/login")">login page</a>
-	</p>
+<body onload="document.f.j_username.focus();">
+	<div id="wrapper">
+		#parse("unsec_header.vm")
+		<div id="container">
+		<h1>WELCOME PAGE</h1>
 	
-	<a href="#springUrl("/user")">test</a>
+		</div>
+	</div>
+	#parse("footer.vm")
 </body>
 </html>

@@ -23,7 +23,6 @@ div#wrapper {
 div#container {
 	width: 960px;
 	margin: 0 auto;
-	/* border: 1px solid #DDDDDD; */
 	padding: 10px;
 	/* -webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -81,26 +80,37 @@ div#header_menu {
 	float: right;
 }
 
-div#language_wrapper {
-	
-}
-
-div#account_header_wrapper {
+.nav {
+	display: block;
 	position: relative;
 }
 
-div#account_header_wrapper #account a.active_link {
+.dropdown {
+	position: relative;
+}
+
+.nav li {
 	display: block;
-	padding: 12px;
-	font-size: 15px;
+	float: left;
+}
+
+.nav li a {
+	display: block;
+	padding: 13px 10px 15px 10px;
+	font-size: 13px;
 	font-weight: bold;
 	text-decoration: none;
 	text-shadow: 0 1px 2px #333333;
 }
 
-div#account_header_wrapper #account a.active_link:HOVER {
+.nav li a:HOVER {
 	background-color: #2B6DAE;
 	text-shadow: 0 0 10px #FFFFFF;
+}
+
+a#account {
+	font-size: 14px;
+	padding: 13px 10px 14px 10px;
 }
 
 .caret {
@@ -115,8 +125,8 @@ div#account_header_wrapper #account a.active_link:HOVER {
 	width: 0;
 }
 
-div#account_dropdown {
-	padding: 10px;
+div#account_dropdown, div#locale_dropdown {
+	padding: 10px 0 10px 0;
 	position: absolute;
 	top: 45px;
 	border: 1px solid #BBBBBB;
@@ -128,35 +138,18 @@ div#account_dropdown {
 	display: none;
 }
 
-div#account_dropdown a {
+div#account_dropdown a, div#locale_dropdown a {
 	font-size: 12px;
 	display: block;
-	padding: 3px;
+	padding: 4px 10px 4px 10px;
+	font-weight: normal;
+	text-shadow: none;
 	line-height: 1.5;
-	color: #4183C4;;
+	color: #4183C4;
 }
 
-div#sign_header_wrapper ul {
-	
-}
-
-div#sign_header_wrapper li {
-	display: inline;
-}
-
-div#sign_header_wrapper a {
-	float: left;
-	padding: 14px;
-	font-size: 13px;
-	font-weight: bold;
-	text-decoration: none;
-	text-shadow: 0 1px 2px #333333;
-	font-size: 13px;
-}
-
-div#sign_header_wrapper a:HOVER {
-	background-color: #2B6DAE;
-	text-shadow: 0 0 10px #FFFFFF;
+div#account_dropdown a:HOVER, div#locale_dropdown a:HOVER {
+	color: #FFFFFF;
 }
 
 /* ------------------------------------   FOOTER   ------------------------------------- */
@@ -167,7 +160,7 @@ div#footer {
 	height: 100px;
 	width: 100%;
 	min-width: 960px;
-	background:
+	clear: both;
 }
 
 div#footer_inner_wrapper {
