@@ -17,16 +17,14 @@ div#wrapper {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-	margin: 0px 0px -100px 0px;
+	margin: 0px 0px -101px 0px;
 }
 
 div#container {
 	width: 960px;
 	margin: 0 auto;
-	padding: 10px;
-	/* -webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px; */
+	padding: 0px 0px 121px 0px;
+
 }
 
 /* HEADER  */
@@ -160,7 +158,6 @@ div#footer {
 	height: 100px;
 	width: 100%;
 	min-width: 960px;
-	clear: both;
 }
 
 div#footer_inner_wrapper {
@@ -177,6 +174,8 @@ div#footer a {
 	padding: 10px;
 	color: #555555;
 }
+
+/* ------------------------- NAV MENU -------------------------------*/
 
 a {
 	text-decoration: none;
@@ -228,11 +227,12 @@ div#account_container {
 }
 
 div#account_container .left_menu {
-	margin-top: 40px;
+	margin: 40px -3px 0 0;
 	width: 160px;
-	color: red;
-	float: left;
+	display: inline-block;
+	position: relative;
 	line-height: 1.5;
+	vertical-align: top;
 }
 
 div#account_container .left_menu li {
@@ -241,7 +241,6 @@ div#account_container .left_menu li {
 
 div#account_container .left_menu li a {
 	margin-right: -1px;
-	border: 1px solid #FFFFFF;
 	display: block;
 	color: #333333;
 	cursor: pointer;
@@ -251,7 +250,6 @@ div#account_container .left_menu li a {
 
 div#account_container .left_menu li a:HOVER {
 	background-color: #F5F5F5;
-	border: 1px solid #DDDDDD;
 }
 
 div#account_container .left_menu li a:ACTIVE {
@@ -262,16 +260,15 @@ div#account_container .left_menu li a:ACTIVE {
 div#account_container .left_menu span.active_menu li a {
 	color: #FFFFFF;
 	background-color: #2B6DAE;
-	border: 1px solid #DDDDDD;
 }
 
 div#account_container .panel {
+	display: inline-block;
 	padding: 20px;
 	border: 1px solid #DDDDDD;
 	background-color: #F5F5F5;
 	min-height: 200px;
 	width: 620px;
-	float: left;
 	line-height: 1.4;
 }
 
