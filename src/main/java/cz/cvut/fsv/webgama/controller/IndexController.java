@@ -1,49 +1,43 @@
 package cz.cvut.fsv.webgama.controller;
 
-import java.security.Principal;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import cz.cvut.fsv.webgama.service.LoginManager;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class IndexController {
 
-	@Inject
-	LoginManager loginManager;
-
-	/*
-	 * private static final Logger logger =
-	 * LoggerFactory.getLogger(IndexController.class);
-	 */
+	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
 	@RequestMapping("/")
-	public String index(HttpServletRequest request, Model model, Locale locale,
-			Principal principal) {
+	public ModelAndView index(HttpServletRequest request, Locale locale) {
 
-		long startTime = System.nanoTime();
+		if (request.getUserPrincipal() != null && request.isUserInRole("ROLE_USER")) {
+			long startTime = System.nanoTime();
 
-		// model.addAttribute("lastlogin",
-		// loginManager.getLastLogin(principal.getName()));
+			Date date = new Date();
+			DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, locale);
+			String dateTime = df.format(date);
+			
+			ModelAndView mav = new ModelAndView("index");
+			mav.addObject("date", dateTime);
+			double time = (double) (System.nanoTime() - startTime) / 1000000;
+			mav.addObject("time", time);
+			return mav;
+			
+		} else {
 
-		Date date = new Date();
-		DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, locale);
-		String dateTime = df.format(date);
+			logger.info("Welcome page was requested from IP: " + request.getRemoteUser());
+			return new ModelAndView("welcome");
+		}
 
-		model.addAttribute("date", dateTime);
-
-		double time = (double) (System.nanoTime() - startTime) / 1000000;
-
-		model.addAttribute("time", time);
-
-		return "index";
 	}
 }

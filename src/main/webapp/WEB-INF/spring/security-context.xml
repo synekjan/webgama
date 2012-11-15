@@ -16,12 +16,13 @@
 	<http pattern="/favicon.ico" security="none" />
 	<http pattern="/signin*" security="none" />
 
-	<http auto-config="true" disable-url-rewriting="true">
+	<http disable-url-rewriting="true">
+		<intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
 		<intercept-url pattern="/**" access="ROLE_USER" />
 		<form-login login-page="/signin" default-target-url="/" authentication-failure-url="/signin-failed" />
 		<remember-me />
-		<logout logout-url="/logout" logout-success-url="/signin" />
+		<logout logout-url="/logout" logout-success-url="/" />
 	</http>
 
 	<!-- ****************** AUTHENTICATION MANAGER ********************** -->
