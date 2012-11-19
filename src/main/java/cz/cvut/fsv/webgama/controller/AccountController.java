@@ -49,6 +49,8 @@ public class AccountController extends MultiActionController {
 
 		ModelAndView mav = new ModelAndView("/account/info");
 		String username = request.getUserPrincipal().getName();
+		User user = userManager.getUser(username);
+		mav.addObject("user", user);
 
 		logger.info("User[" + username + "] checked own account information");
 		return mav;
@@ -59,21 +61,21 @@ public class AccountController extends MultiActionController {
 
 		ModelAndView mav = new ModelAndView("/account/user");
 		String username = request.getUserPrincipal().getName();
-		User user = userManager.getUser(username);
-		mav.addObject("user", user);
+		UserForm userForm = new UserForm(userManager.getUser(username));
+		mav.addObject("user", userForm);
 
 		logger.info("User[" + username + "] checked own personal settings");
 		return mav;
 	}
 
 	@RequestMapping(value = "/personal", method = RequestMethod.POST)
-	public ModelAndView modifyUser(
-			@Valid @ModelAttribute("user") UserForm userForm,
+	public ModelAndView modifyUser(@Valid @ModelAttribute("user") UserForm userForm,
 			BindingResult result, HttpServletRequest request) {
 
 		// userValidator.validate(userForm, result);
 
 		String username = request.getUserPrincipal().getName();
+		userForm.setUsername(username);
 
 		if (result.hasErrors()) {
 
@@ -81,7 +83,7 @@ public class AccountController extends MultiActionController {
 					+ "] was unsuccessful in editing personal informations");
 			return new ModelAndView("/account/user");
 		}
-
+		
 		userManager.updateUser(userForm);
 
 		logger.info("User[" + username
@@ -89,15 +91,15 @@ public class AccountController extends MultiActionController {
 		return new ModelAndView("redirect:/");
 	}
 
+	
+	//CHANGING PASSWORD
 	@RequestMapping(value = "/password/change", method = RequestMethod.GET)
 	public ModelAndView changePasswordForm(HttpServletRequest request,
 			Model model, Locale locale) {
 
 		ModelAndView mav = new ModelAndView("/account/changepass");
 		String username = request.getUserPrincipal().getName();
-		UserPasswordChangeForm userForm = new UserPasswordChangeForm();
-		userForm.setUsername(username);
-		mav.addObject("user", userForm);
+		mav.addObject("user", new UserPasswordChangeForm());
 
 		logger.info("User[" + username + "] thought about changing password");
 		return mav;
@@ -108,8 +110,9 @@ public class AccountController extends MultiActionController {
 			@Valid @ModelAttribute("user") UserPasswordChangeForm userForm,
 			BindingResult result, HttpServletRequest request) {
 
-		passwordValidator.validate(userForm, result);
 		String username = request.getUserPrincipal().getName();
+		userForm.setUsername(username);
+		passwordValidator.validate(userForm, result);
 
 		if (result.hasErrors()) {
 			logger.info("User[" + username

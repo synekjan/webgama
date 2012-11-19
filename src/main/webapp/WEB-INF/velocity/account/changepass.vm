@@ -13,7 +13,7 @@
 				<div class="left_menu">
 					<ul>
 						<li><a href="#springUrl("/account/info")">#springMessage("account.overview")</a></li>
-						<li><a href="#springUrl("/account/info")">#springMessage("user.personal.settings")</a></li>
+						<li><a href="#springUrl("/account/personal")">#springMessage("user.personal.settings")</a></li>
 						<span class="active_menu"><li><a href="#springUrl("/account/password/change")">#springMessage("change.password")</a></li></span>
 						<li><a href="#springUrl("/account/logins/show")">#springMessage("logins.list")</a></li>
 						<li><a href="#springUrl("/account/delete")">#springMessage("delete.account")</a></li>
@@ -28,12 +28,6 @@
 							<fieldset>
 								<legend>#springMessage("change.password")</legend>
 								<table>
-									<tr>
-										<td>Username:</td>
-										<td>$user.username</td>
-										<td><input type="hidden" name="username"
-											value="$user.username"></td>
-									</tr>
 									<tr>
 										<td><label for="oldPassword">#springMessage("user.current.password"):</label></td>
 										<td>#springFormPasswordInput("user.oldPassword",

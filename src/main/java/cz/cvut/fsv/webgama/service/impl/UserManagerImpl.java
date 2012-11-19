@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.joda.time.DateTime;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -85,13 +86,13 @@ public class UserManagerImpl implements UserManager {
 
 		user.setFirstName(userForm.getFirstName());
 		user.setLastName(userForm.getLastName());
-		user.setEmail(userForm.getEmail());
 		user.setTelephone(userForm.getTelephone());
 		user.setStreet(userForm.getStreet());
 		user.setNumber(userForm.getNumber());
 		user.setCity(userForm.getCity());
 		user.setZipCode(userForm.getZipCode());
 		user.setState(userForm.getState());
+		user.setModified(new DateTime());
 
 		userDao.update(user);
 
@@ -158,6 +159,7 @@ public class UserManagerImpl implements UserManager {
 		StandardPasswordEncoder encoder = new StandardPasswordEncoder();
 
 		user.setPassword(encoder.encode(userForm.getNewPassword()));
+		user.setModified(new DateTime());
 
 		userDao.updatePassword(user);
 

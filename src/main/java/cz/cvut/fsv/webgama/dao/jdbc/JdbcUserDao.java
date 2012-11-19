@@ -44,22 +44,22 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 	@Override
 	public void update(User user) {
 
-		String sql = "UPDATE users SET firstname=?, lastname=?, email=?, telephone=?, street=?, number=?, city=?, zipcode=?, state=? WHERE user_id = ?";
+		String sql = "UPDATE users SET firstname=?, lastname=?, email=?, telephone=?, street=?, number=?, city=?, zipcode=?, state=?, date_modified=? WHERE user_id = ?";
 
 		getJdbcTemplate().update(
 				sql,
 				new Object[] { user.getFirstName(), user.getLastName(),
 						user.getEmail(), user.getTelephone(), user.getStreet(),
 						user.getNumber(), user.getCity(), user.getZipCode(),
-						user.getState(), user.getId() });
+						user.getState(), user.getModified().toDate(), user.getId() });
 	}
 
 	@Override
 	public void updatePassword(User user) {
 
-		String sql = "UPDATE users SET password=? WHERE user_id=?";
+		String sql = "UPDATE users SET password=?, date_modified=? WHERE user_id=?";
 
-		getJdbcTemplate().update(sql, user.getPassword(), user.getId());
+		getJdbcTemplate().update(sql, user.getPassword(), user.getModified().toDate(), user.getId());
 	}
 
 	public void updateEnabled(User user) {

@@ -1,8 +1,8 @@
 package cz.cvut.fsv.webgama.form;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
+
+import cz.cvut.fsv.webgama.domain.User;
 
 public class UserForm {
 
@@ -13,10 +13,6 @@ public class UserForm {
 
 	@Length(max = 50)
 	private String lastName;
-
-	@NotBlank
-	@Email
-	private String email;
 
 	@Length(max = 15)
 	private String telephone;
@@ -35,6 +31,21 @@ public class UserForm {
 
 	@Length(max = 50)
 	private String state;
+	
+	public UserForm() {
+	}
+
+	public UserForm(User user) {
+		this.username = user.getUsername();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.telephone = user.getTelephone();
+		this.street = user.getStreet();
+		this.number = user.getNumber();
+		this.city = user.getCity();
+		this.zipCode = user.getZipCode();
+		this.state = user.getState();
+	}
 
 	public String getUsername() {
 		return username;
@@ -58,14 +69,6 @@ public class UserForm {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getTelephone() {
