@@ -2,17 +2,16 @@
 <html>
 <head>
 #parse("include.vm")
-<title>#springMessage("adjustment.navbar")</title>
+<title>WebGama Application</title>
 </head>
 <body>
 	<div id="wrapper">
 		#parse("header.vm")
 		<div id="container">
 			#parse("navigation.vm")
-			<h1>#springMessage("adjustment.navbar")</h1>
-			<p>#springMessage("controller") ${time} ms</p>
-			<p>$date</p>
-			<p>$cal</p>
+
+			<h2>Export</h2>
+
 		</div>
 	</div>
 	#parse("footer.vm")

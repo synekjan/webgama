@@ -1,10 +1,10 @@
 <div class="nav_menu">
 	<ul>
-		<li><a href="#springUrl("/")">Overview</a></li>
+		<li><a href="#springUrl("/overview")">Overview</a></li>
 		<li><a href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a></li>
 		<li><a href="#springUrl("#")">#springMessage("calculations.navbar")</a></li>
-		<li><a href="#springUrl("#")">Upload XML</a></li>
-		<li><a href="#springUrl("#")">Download</a></li>
+		<li><a href="#springUrl("/import/xml")">Import</a></li>
+		<li><a href="#springUrl("/export")">Export</a></li>
 	</ul>
 </div>
 

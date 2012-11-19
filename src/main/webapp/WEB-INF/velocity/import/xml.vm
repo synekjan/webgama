@@ -9,10 +9,10 @@
 		#parse("header.vm")
 		<div id="container">
 			#parse("navigation.vm")
-			<h1>#springMessage("adjustment.navbar")</h1>
-			<p>#springMessage("controller") ${time} ms</p>
-			<p>$date</p>
-			<p>$cal</p>
+			<form method="post" action="" enctype="multipart/form-data">
+				<input type="file" name="file" /> 
+				<input type="submit" />
+			</form>
 		</div>
 	</div>
 	#parse("footer.vm")

@@ -21,7 +21,7 @@
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
 		<intercept-url pattern="/**" access="ROLE_USER" />
 		<form-login login-page="/signin" default-target-url="/" authentication-failure-url="/signin-failed" />
-		<remember-me />
+		<remember-me key="webgama-application" />
 		<logout logout-url="/logout" logout-success-url="/" />
 	</http>
 
