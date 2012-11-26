@@ -8,14 +8,21 @@
 	<div id="wrapper">
 		#parse("header.vm")
 		<div id="container">
-			#parse("navigation.vm")
+			<div class="nav_menu">
+				<ul>
+					<li><a class="active" href="#springUrl("/overview")">Overview</a></li>
+					<li><a href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a></li>
+					<li><a href="#springUrl("/import/xml")">Import</a></li>
+					<li><a href="#springUrl("/export")">Export</a></li>
+				</ul>
+			</div>
+			<div id="content">
+				<h2>#springMessage("header")</h2>
 
-			<h2>#springMessage("header")</h2>
+				<p>#springMessage("today.is") $date</p>
 
-			<p>#springMessage("today.is") $date</p>
-
-			<p>#springMessage("controller") $time ms</p>
-
+				<p>#springMessage("controller") $time ms</p>
+			</div>
 		</div>
 	</div>
 	#parse("footer.vm")

@@ -6,12 +6,12 @@
 		<div id="header_menu">
 			<ul class="nav">
 				<li class="dropdown">
-					<a id="locales" class="dropdown-toggle" href="#">#springMessage("language") <i class="caret"></i></a>
+					<a id="locales" class="dropdown-toggle" href>#springMessage("language") <i class="caret"></i></a>
 					<div id="locale_dropdown">
 						<a href="?locale=cs_CZ">#springMessage('czech.republic')</a> <a href="?locale=en_GB">#springMessage('great.britain')</a> <a href="?locale=en_US">#springMessage('united.states')</a>
 					</div></li>
 				<li class="dropdown">
-					<a id="account" class="dropdown-toggle" href="#">$authentication.username <i class="caret"></i></a>
+					<a id="account" class="dropdown-toggle" href>$authentication.username <i class="caret"></i></a>
 					<div id="account_dropdown">
 						<a href="#springUrl("/account")">#springMessage("user.settings")</a> #if ($authentication.adminRights) <a href="#springUrl("/admin")">Admin Section</a>#end
 						<a href="#springUrl("/logout")">#springMessage("logout")</a>

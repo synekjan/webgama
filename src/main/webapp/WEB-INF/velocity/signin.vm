@@ -25,9 +25,7 @@
 							<div class="form_errors">$SPRING_SECURITY_LAST_EXCEPTION.message</div>
 							#end <input type='checkbox' name='_spring_security_remember_me' id="_spring_security_remember_me"><label for="_spring_security_remember_me">#springMessage("keep.me.logged.in")</label><br />
 							<br />
-							<div class="login_button">
-								<input title="Please click here to sign" type="submit" value="#springMessage("login.sign.in")">
-							</div>
+								<input class="submit_btn" title="Please click here to sign" type="submit" value="#springMessage("login.sign.in")">
 						</form>
 					</div>
 				</div>

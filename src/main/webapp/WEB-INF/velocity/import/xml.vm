@@ -8,11 +8,19 @@
 	<div id="wrapper">
 		#parse("header.vm")
 		<div id="container">
-			#parse("navigation.vm")
-			<form method="post" action="" enctype="multipart/form-data">
-				<input type="file" name="file" /> 
-				<input type="submit" />
-			</form>
+			<div class="nav_menu">
+				<ul>
+					<li><a href="#springUrl("/overview")">Overview</a></li>
+					<li><a href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a></li>
+					<li><a class="active" href="#springUrl("/import/xml")">Import</a></li>
+					<li><a href="#springUrl("/export")">Export</a></li>
+				</ul>
+			</div>
+			<div id="content">
+				<form method="post" action="" enctype="multipart/form-data">
+					<input type="file" name="file" /> <input type="submit" />
+				</form>
+			</div>
 		</div>
 	</div>
 	#parse("footer.vm")

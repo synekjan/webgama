@@ -13,7 +13,7 @@
 				<div class="left_menu">
 					<ul>
 						<li><a href="#springUrl("/account/info")">#springMessage("account.overview")</a></li>
-						<li><a href="#springUrl("/account/info")">#springMessage("user.personal.settings")</a></li>
+						<li><a href="#springUrl("/account/personal")">#springMessage("user.personal.settings")</a></li>
 						<li><a href="#springUrl("/account/password/change")">#springMessage("change.password")</a></li>
 						<li><a href="#springUrl("/account/logins/show")">#springMessage("logins.list")</a></li>
 						<span class="active_menu"><li><a href="#springUrl("/account/delete")">#springMessage("delete.account")</a></li></span>
@@ -24,7 +24,7 @@
 						<h2>#springMessage("delete.account")</h2>
 					</div>
 					<form action="" method="post">
-						<input type="submit" value="#springMessage("delete.account.button")">
+						<input class="submit_btn" type="submit" value="#springMessage("delete.account.button")">
 					</form>
 				</div>
 			</div>

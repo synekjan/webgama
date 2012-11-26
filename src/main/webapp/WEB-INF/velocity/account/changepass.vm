@@ -48,8 +48,8 @@
 								</table>
 							</fieldset>
 						</div>
-						<br> <input type="submit" value="#springMessage("change.password.button")"><input
-							type="reset" value="Reset">
+						<br> <input class="submit_btn" type="submit" value="#springMessage("change.password.button")">
+						<input type="reset" value="Reset">
 					</form>
 				</div>
 			</div>
