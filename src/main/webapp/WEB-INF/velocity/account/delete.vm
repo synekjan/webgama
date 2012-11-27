@@ -19,7 +19,7 @@
 						<span class="active_menu"><li><a href="#springUrl("/account/delete")">#springMessage("delete.account")</a></li></span>
 					</ul>
 				</div>
-				<div class="panel">
+				<div id="delete" class="panel">
 					<div class="panel_header">
 						<h2>#springMessage("delete.account")</h2>
 					</div>

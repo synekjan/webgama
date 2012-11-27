@@ -273,10 +273,35 @@ div#account_container .panel {
 	display: inline-block;
 	padding: 20px;
 	border: 1px solid #DDDDDD;
-	background: url("../img/download.png") no-repeat scroll 95% 100% #F5F5F5;
+	background: #F5F5F5;
 	min-height: 200px;
 	width: 620px;
 	line-height: 1.4;
+}
+
+div#account_container div#info {
+	background: url("../img/info_symbol.png") no-repeat scroll 95% 100%
+		#F5F5F5;
+}
+
+div#account_container div#user {
+	background: url("../img/user_symbol.png") no-repeat scroll 95% 100%
+		#F5F5F5;
+}
+
+div#account_container div#changepass {
+	background: url("../img/key_symbol.png") no-repeat scroll 95% 100%
+		#F5F5F5;
+}
+
+div#account_container div#loginslist {
+	background: url("../img/login_symbol.png") no-repeat scroll 95% 100%
+		#F5F5F5;
+}
+
+div#account_container div#delete {
+	background: url("../img/bin_symbol.png") no-repeat scroll 95% 100%
+		#F5F5F5;
 }
 
 div#account_container .panel_header {
@@ -301,7 +326,7 @@ legend {
 	font-size: 14px;
 }
 
-input[type=text],input[type=password],textarea,select {
+input[type=text],input[type=password],select {
 	border: 1px solid #BBBBBB;
 	border-radius: 1px 1px 1px 1px;
 	color: #555555;
@@ -312,6 +337,13 @@ input[type=text],input[type=password],textarea,select {
 	margin-bottom: 9px;
 	padding: 4px;
 	width: 210px;
+}
+
+textarea {
+	border: 1px solid #BBBBBB;
+	border-radius: 1px 1px 1px 1px;
+	display: inline-block;
+	color: #555555;
 }
 
 input[type=text]:focus,input[type=password]:focus,textarea:focus {

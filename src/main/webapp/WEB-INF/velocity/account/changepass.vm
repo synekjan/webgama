@@ -19,7 +19,7 @@
 						<li><a href="#springUrl("/account/delete")">#springMessage("delete.account")</a></li>
 					</ul>
 				</div>
-				<div class="panel">
+				<div id="changepass" class="panel">
 					<div class="panel_header">
 						<h2>#springMessage("change.password")</h2>
 					</div>

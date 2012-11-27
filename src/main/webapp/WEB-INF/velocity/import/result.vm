@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+#parse("include.vm")
+<title>#springMessage("adjustment.navbar")</title>
+</head>
+<body>
+	<div id="wrapper">
+		#parse("header.vm")
+		<div id="container">
+			<div class="nav_menu">
+				<ul>
+					<li><a href="#springUrl("/overview")">Overview</a></li>
+					<li><a href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a></li>
+					<li><a class="active" href="#springUrl("/import/xml")">Import</a></li>
+					<li><a href="#springUrl("/export")">Export</a></li>
+				</ul>
+			</div>
+			<div id="content">
+				<textarea rows="20" cols="100" readonly>$result</textarea>
+			</div>
+		</div>
+	</div>
+	#parse("footer.vm")
+</body>
+</html>

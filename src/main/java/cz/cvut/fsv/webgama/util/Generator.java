@@ -15,4 +15,9 @@ public class Generator {
 
 		return UUID.randomUUID().toString();
 	}
+	
+	public static String generateFilename() {
+		
+		return RandomStringUtils.random(6, true, true);
+	}
 }

@@ -15,6 +15,7 @@ import cz.cvut.fsv.webgama.dao.UserDao;
 import cz.cvut.fsv.webgama.domain.Input;
 import cz.cvut.fsv.webgama.parser.InputParser;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
+import cz.cvut.fsv.webgama.service.ProcessManager;
 
 public class AdjustmentManagerImpl implements AdjustmentManager {
 
@@ -24,6 +25,33 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 	private InputDao inputDao;
 	private InputParser inputParser;
 	private UserDao userDao;
+	private ProcessManager processManager;
+
+	@Override
+	@Transactional
+	public String adjustFromFile(MultipartFile file, String username) {
+		Input input = null;
+		try {
+			input = inputParser.parseInput(file.getInputStream());
+			input.setUser(userDao.findUserByUsername(username));
+			// Google Guava InputStream to String
+			String stringFromStream = CharStreams
+					.toString(new InputStreamReader(file.getInputStream(),
+							"UTF-8"));
+			input.setFileContent(stringFromStream);
+			input.setFilename(file.getOriginalFilename());
+			input.setAlgorithm("svd");
+			input.setAngUnits(400);
+			input.setLatitude(0.0);
+
+			inputDao.insert(input);
+
+		} catch (IOException e) {
+			logger.error("Error during converting MultipartFile to InputStream");
+		}
+		
+		return processManager.runExternalGama(input, username);
+	}
 
 	public void setInputDao(InputDao inputDao) {
 		this.inputDao = inputDao;
@@ -37,26 +65,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		this.userDao = userDao;
 	}
 
-	@Override
-	@Transactional
-	public void adjustFromFile(MultipartFile file, String username) {
-
-		try {
-			Input input = inputParser.parseInput(file.getInputStream());
-			input.setUser(userDao.findUserByUsername(username));
-			//Google Guava InputStream to String
-			String stringFromStream = CharStreams.toString(new InputStreamReader(file.getInputStream(),"UTF-8"));
-			input.setFileContent(stringFromStream);
-			input.setFilename(file.getOriginalFilename());
-			input.setAlgorithm("svd");
-			input.setAngUnits(400);
-			input.setLatitude(0.0);
-
-			inputDao.insert(input);
-
-		} catch (IOException e) {
-			logger.error("Error during converting MultipartFile to InputStream");
-			e.printStackTrace();
-		}
+	public void setProcessManager(ProcessManager processManager) {
+		this.processManager = processManager;
 	}
 }

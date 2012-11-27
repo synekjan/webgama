@@ -33,12 +33,22 @@ public class ImportController extends MultiActionController {
 
 			String username = request.getUserPrincipal().getName();
 
-			adjustmentManager.adjustFromFile(file, username);
-
-			return new ModelAndView("redirect:/");
+			String result = adjustmentManager.adjustFromFile(file, username);
+			ModelAndView mav = new ModelAndView("/import/result");
+			mav.addObject("result", result);
+			
+			return mav;
 		} else {
 			return new ModelAndView("/import/xml");
 		}
 	}
+	
+	
+	/*@RequestMapping(value = "/import/result", method = RequestMethod.GET)
+	protected ModelAndView success(HttpServletRequest request) {
+		
+		return new ModelAndView("/import/result");
+	}*/
+	
 
 }

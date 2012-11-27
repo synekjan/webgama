@@ -5,7 +5,7 @@
 		</div>
 		<div id="header_menu">
 			<ul class="nav">
-				<li class="dropdown"><a id="locales" class="dropdown-toggle" href>#springMessage("language") <i class="caret"></i></a>
+				<li class="dropdown"><a id="locales" class="dropdown-toggle" href>#springMessage("localization") <i class="caret"></i></a>
 					<div id="locale_dropdown">
 						<a href="?locale=cs_CZ">#springMessage('czech.republic')</a> <a href="?locale=en_GB">#springMessage('great.britain')</a> <a href="?locale=en_US">#springMessage('united.states')</a>
 					</div></li>

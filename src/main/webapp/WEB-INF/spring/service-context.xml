@@ -29,6 +29,11 @@
 		<property name="inputDao" ref="inputDao" />
 		<property name="inputParser" ref="inputParser" />
 		<property name="userDao" ref="userDao" />
+		<property name="processManager" ref="processManager" />
+	</bean>
+
+	<bean id="processManager" class="cz.cvut.fsv.webgama.service.impl.ProcessManagerImpl">
+		<property name="gamaFilePath" value="/opt/apache-tomcat-7.0.27/bin/gama-local" />
 	</bean>
 
 
@@ -50,7 +55,7 @@
 	</bean>
 
 	<bean class="cz.cvut.fsv.webgama.validator.UserValidator">
-		
+
 	</bean>
 
 	<bean class="cz.cvut.fsv.webgama.validator.UserPasswordChangeValidator">
