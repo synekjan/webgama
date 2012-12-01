@@ -33,7 +33,7 @@
 	</bean>
 
 	<bean id="processManager" class="cz.cvut.fsv.webgama.service.impl.ProcessManagerImpl">
-		<property name="gamaFilePath" value="/opt/apache-tomcat-7.0.27/bin/gama-local" />
+		<property name="gamaFilePath" value="${gama.filepath}" />
 	</bean>
 
 
