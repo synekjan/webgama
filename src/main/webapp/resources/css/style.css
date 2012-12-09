@@ -56,7 +56,7 @@ div#header a {
 
 div#logo {
 	float: left;
-	margin: 8px 0 0 8px;
+	margin: 8px 0 0 0px;
 	font-weight: bold;
 	text-decoration: none;
 }
@@ -100,8 +100,7 @@ div#header_menu {
 	text-shadow: 0 1px 2px #333333;
 }
 
-.nav li a:HOVER {
-	background-color: #2B6DAE;
+.nav li a:HOVER { /* background-color: #2B6DAE; */
 	text-shadow: 0 0 10px #FFFFFF;
 }
 
@@ -122,14 +121,14 @@ a#account {
 	width: 0;
 }
 
-div#account_dropdown,div#locale_dropdown {
+div#account_dropdown, div#locale_dropdown {
 	padding: 10px 0 10px 0;
 	position: absolute;
 	top: 45px;
 	border: 1px solid #BBBBBB;
 	background-color: #FFFFFF;
-	min-width: 120px;
-	z-index: 1000;
+	min-width: 110px;
+	z-index: 100;
 	right: 0;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	display: none;
@@ -138,7 +137,7 @@ div#account_dropdown,div#locale_dropdown {
 div#account_dropdown a,div#locale_dropdown a {
 	font-size: 12px;
 	display: block;
-	padding: 4px 10px 4px 10px;
+	padding: 2px 8px 2px 8px;
 	font-weight: normal;
 	text-shadow: none;
 	line-height: 1.5;
@@ -147,6 +146,7 @@ div#account_dropdown a,div#locale_dropdown a {
 
 div#account_dropdown a:HOVER,div#locale_dropdown a:HOVER {
 	color: #FFFFFF;
+	background-color: #2B6DAE;
 }
 
 /* ------------------------------------   FOOTER   ------------------------------------- */
@@ -207,7 +207,8 @@ div.nav_menu ul li a {
 	margin: 0px 5px;
 	float: left;
 	color: #555555;
-	border-bottom: 3px solid #DDDDDD;
+	border-bottom: 3px outset silver;
+	border-right: 5px outset transparent;
 	float: left;
 }
 
@@ -276,6 +277,7 @@ div#account_container .panel {
 	background: #F5F5F5;
 	min-height: 200px;
 	width: 620px;
+	border-radius: 4px 4px 4px 4px;
 	line-height: 1.4;
 }
 
@@ -304,14 +306,14 @@ div#account_container div#delete {
 		#F5F5F5;
 }
 
-div#account_container .panel_header {
+.panel_header {
 	border-bottom: 1px solid #BBBBBB;
 	padding-bottom: 10px;
 	margin-bottom: 15px;
 }
 
-div#account_container .panel_header h2 {
-	font: 28px "Droid Serif", Arial, sans-serif;
+.panel_header h2 {
+	font: 28px "Droid Sans", Arial, sans-serif;
 }
 
 fieldset {
@@ -353,19 +355,43 @@ input[type=text]:focus,input[type=password]:focus,textarea:focus {
 	outline: 0 none;
 }
 
-input.submit_btn {
+input[type=submit],input[type=reset] {
+	background-color: #CCCCCC;
+	background-image: linear-gradient(#EEEEEE, #CCCCCC);
+	background-repeat: repeat-x;
 	border: 1px solid #BBBBBB;
-	border-radius: 3px;
-	padding: 5px 15px;
-	color: #FFFFFF;
-	background-color: #2B6DAE;
-	font-weight: bold;
+	border-radius: 4px 4px 4px 4px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 	font-size: 13px;
-	text-shadow: 0 1px 2px #333333;
+	color: #444444;
+	padding: 4px 10px;
+}
+
+input.submit_btn {
+	background-color: #2B6DAE;
+	background-image: linear-gradient(#5A9CDD, #2062A3);
+	background-repeat: repeat-x;
+	border: 1px solid #51A0B3;
+	border-radius: 4px 4px 4px 4px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+	color: #FFFFFF;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 4px 10px;
+	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+input.submit_btn:HOVER {
+	background-color: #328FC9;
+	background-image: linear-gradient(#66C7E5, #328FC9);
+	background-repeat: repeat-x;
 }
 
 input.submit_btn:ACTIVE {
-	background-color: blue;
+	background-color: #185D93;
+	background-image: linear-gradient(#40A7C1, #185D93);
+	background-repeat: repeat-x;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) inset;
 }
 
 .form_button {
@@ -378,4 +404,99 @@ input.submit_btn:ACTIVE {
 	font-style: italic;
 	font-size: 0.85em;
 	font-style: italic;
+}
+
+div#slides {
+	margin: 0px auto;
+	width: 800px;
+	padding: 20px;
+	text-align: center;
+	padding: 20px;
+}
+
+.slides_container {
+	width: 800px;
+	height: 400px;
+}
+
+.slides_container div {
+	width: 800px;
+	height: 400px;
+	display: block;
+}
+
+.slide {
+	text-align: left;
+	padding: 20px;
+	height: 300px;
+	width: 700px;
+}
+
+.register_container {
+	margin: 20px 0px;
+	padding: 20px 0px;
+	text-align: center;
+}
+
+#signup_btn {
+	background-color: #4C8B36;
+	background-image: linear-gradient(#69D344, #4C8B36);
+	background-repeat: repeat-x;
+	border: 1px solid #74BB5A #74BB5A #509338;
+	border-radius: 4px 4px 4px 4px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+	color: #FFFFFF;
+	display: inline-block;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 15px 30px;
+	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+#signup_btn:HOVER {
+	background-color: #60B044;
+	background-image: linear-gradient(#8ADD6D, #60B044);
+	background-repeat: repeat-x;
+	border-color: #4A993E;
+	text-decoration: none;
+}
+
+#signup_btn:ACTIVE {
+	background-color: #4C8B36;
+	background-image: linear-gradient(#69D344, #4C8B36);
+	background-repeat: repeat-x;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+}
+
+#import_container {
+	margin: 20px auto;
+	padding: 20px;
+	border: 1px solid #DDDDDD;
+	position: relative;
+	background: url("../img/upload.png") no-repeat scroll 95% 100% #F5F5F5;
+	min-height: 200px;
+	width: 700px;
+	border-radius: 4px 4px 4px 4px;
+}
+
+#login_container {
+	margin: 40px auto;
+	padding: 20px;
+	border: 1px solid #DDDDDD;
+	position: relative;
+	background: url("../img/login.png") no-repeat scroll 95% 100% #F5F5F5;
+	min-height: 200px;
+	width: 600px;
+	border-radius: 4px 4px 4px 4px;
+}
+
+#signup_container {
+	margin: 20px auto;
+	padding: 20px;
+	border: 1px solid #DDDDDD;
+	position: relative;
+	background: url("../img/signup.png") no-repeat scroll 95% 100% #F5F5F5;
+	min-height: 200px;
+	width: 800px;
+	border-radius: 4px 4px 4px 4px;
 }

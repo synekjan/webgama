@@ -1,6 +1,7 @@
 package cz.cvut.fsv.webgama.controller;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -51,6 +52,9 @@ public class AccountController extends MultiActionController {
 		String username = request.getUserPrincipal().getName();
 		User user = userManager.getUser(username);
 		mav.addObject("user", user);
+		
+		Date date = user.getCreated().toDate();
+		mav.addObject("date", date);
 
 		logger.info("User[" + username + "] checked own account information");
 		return mav;

@@ -2,28 +2,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-#parse("include.vm")
-<title>Recover Username</title>
+#parse("unsec_include.vm")
+<title>Registration</title>
 </head>
 <body>
-	<div id="dialog_wrapper">
-		<div class="logo">
-			<a href="#springUrl("/")"><img border="0" src="#springUrl("/resources/img/webgama_logo.png")" alt="Title" title="WebGama" /></a>
+	<div id="wrapper">
+		#parse("unsec_header.vm")
+		<div id="container">
+			<div id="signup_container">
+				<div class="panel_header">
+					<h2>Find Username</h2>
+				</div>
+				<div id="dialog_container">
+					<h3>Find Username</h3>
+					<p>Please enter the email address you registered with. Your
+						username will be sent to this email address shortly.</p>
+
+					<form action="" method="post">
+						<label for="email">Email:</label> #springFormInput("user.email",
+						"") #springShowErrors("&nbsp", "form_errors") <br> <br>
+						<input type="submit" value="Find">
+					</form>
+				</div>
+			</div>
 		</div>
-		<div class="caption">
-			<h2>Find Username</h2>
-		</div>
-		<div id="dialog_container">
-			<h3>Find Username</h3>
-			<p>Please enter the email address you registered with. Your username will be sent to this email address shortly.</p>
-					
-			<form action="" method="post">
-				<label for="email">Email:</label> #springFormInput("user.email", "") #springShowErrors("&nbsp", "form_errors") <br>
-				<br>
-				<input type="submit" value="Find">
-			</form>		
-		</div>
-		<div id="login_footer">powered by Spring Security</div>
 	</div>
+	#parse("footer.vm")
 </body>
 </html>

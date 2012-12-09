@@ -2,24 +2,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-#parse("include.vm")
+#parse("unsec_include.vm")
 <title>Registration</title>
 </head>
 <body>
-	<div id="dialog_wrapper">
-		<div class="logo">
-			<a href="#springUrl("/")"><img border="0" src="#springUrl("/resources/img/webgama_logo.png")" alt="Title" title="WebGama" /></a>
+	<div id="wrapper">
+		#parse("unsec_header.vm")
+		<div id="container">
+			<div id="signup_container">
+				<div class="panel_header">
+					<h2>Registration</h2>
+				</div>
+				<div id="dialog_container">
+					<p>Registration was successful but your account is not enabled
+						so far.</p>
+					<p>Please confirm your email address by clicking on link we
+						sent to you to enable your account</p>
+					<a href="#springUrl("/")">[back to index]</a>
+				</div>
+				
+			</div>
 		</div>
-		<div class="caption">
-			<h2>Registration</h2>
-		</div>
-		<div id="dialog_container">
-			<h3>Registration</h3>		
-			<p>Registration was successful but your account is not enabled so far.</p>
-			<p>Please confirm your email address by clicking on link we sent to you to enable your account </p>
-			<a href="#springUrl("/")">[back to index]</a>
-		</div>
-		<div id="login_footer">powered by Spring Security</div>
 	</div>
+	#parse("footer.vm")
 </body>
 </html>
