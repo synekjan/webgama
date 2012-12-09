@@ -17,9 +17,15 @@
 				</ul>
 			</div>
 			<div id="content">
-				<form method="post" action="" enctype="multipart/form-data">
-					<input type="file" name="file" /> <input type="submit" />
-				</form>
+				<div id="import_container">
+					<div class="panel_header">
+						<h2>Import XML</h2>
+					</div>
+					<form method="post" action="" enctype="multipart/form-data">
+						<input type="file" name="file" /> <br> <br> <input
+							class="submit_btn" type="submit" />
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

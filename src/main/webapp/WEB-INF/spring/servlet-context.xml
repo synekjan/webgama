@@ -12,13 +12,14 @@
 	<!-- Location where Spring MVC annotations is scanned -->
 	<context:component-scan base-package="cz.cvut.fsv.webgama.controller" />
 	<context:component-scan base-package="cz.cvut.fsv.webgama.util" />
-	
+
 	<!-- Properties file -->
 	<context:property-placeholder location="classpath:/app.properties" />
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources/ directory -->
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources/ directory -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-	
+
 	<!-- Mapping for simpler styling error pages -->
 	<mvc:resources mapping="/css/**" location="/resources/css/" />
 
@@ -27,15 +28,16 @@
 
 	<!-- Configures Handler Interceptors -->
 	<mvc:interceptors>
-		<!-- Changes the locale when a 'locale' request parameter is sent; e.g. /?locale=cs -->
+		<!-- Changes the locale when a 'locale' request parameter is sent; e.g. 
+			/?locale=cs -->
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
 	</mvc:interceptors>
 
 	<!-- Saves a locale change using a cookie -->
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
-	
-	
+
+
 	<!-- Application Message Bundle -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -66,6 +68,9 @@
 		<property name="suffix" value=".vm" />
 		<property name="exposeSpringMacroHelpers" value="true" />
 		<property name="exposeSessionAttributes" value="true" />
+		<property name="dateToolAttribute">
+			<value>dateTool</value>
+		</property>
 		<property name="attributes">
 			<map>
 				<entry key="authentication">

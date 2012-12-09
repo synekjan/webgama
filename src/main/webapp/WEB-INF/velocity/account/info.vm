@@ -31,7 +31,7 @@
 						</tr>
 						<tr>
 							<td>#springMessage("user.created"):</td>
-							<td>$!user.created</td>
+							<td>$dateTool.format("yyyy-MM-dd HH:mm:ss",$date)</td>
 						</tr>
 						<tr>
 							<td>#springMessage("user.modified"):</td>

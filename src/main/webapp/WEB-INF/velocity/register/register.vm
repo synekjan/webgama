@@ -9,25 +9,34 @@
 	<div id="wrapper">
 		#parse("unsec_header.vm")
 		<div id="container">
-			<div id="account_container">
+			<div id="signup_container">
+				<div class="panel_header">
+					<h2>Registration</h2>
+				</div>
 				<form action="" method="post" autocomplete="off">
 					<div class="form">
 						<fieldset>
 							<legend>User Information</legend>
 							<table>
 								<tr>
-									<td><label for="username">* #springMessage("user.username"):</label></td>
-									<td>#springFormInput("user.username", 'placeholder="Username"')</td>
+									<td><label for="username">*
+											#springMessage("user.username"):</label></td>
+									<td>#springFormInput("user.username",
+										'placeholder="Username"')</td>
 									<td>#springShowErrors("&nbsp", "form_errors")</td>
 								</tr>
 								<tr>
-									<td><label for="password">* #springMessage("user.password"):</label></td>
-									<td>#springFormPasswordInput("user.password", 'placeholder="Password" autocomplete="off"')</td>
+									<td><label for="password">*
+											#springMessage("user.password"):</label></td>
+									<td>#springFormPasswordInput("user.password",
+										'placeholder="Password" autocomplete="off"')</td>
 									<td>#springShowErrors("&nbsp", "form_errors")</td>
 								</tr>
 								<tr>
-									<td><label for="confirmPassword">* #springMessage("user.password.confirm"):</label></td>
-									<td>#springFormPasswordInput("user.confirmPassword", 'placeholder="Password" autocomplete="off"')</td>
+									<td><label for="confirmPassword">*
+											#springMessage("user.password.confirm"):</label></td>
+									<td>#springFormPasswordInput("user.confirmPassword",
+										'placeholder="Password" autocomplete="off"')</td>
 									<td>#springShowErrors("&nbsp", "form_errors")</td>
 								</tr>
 								<tr>
