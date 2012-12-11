@@ -17,27 +17,18 @@
 				</ul>
 			</div>
 			<div id="content">
-				<h1 style="font-size: 20px;">Wizard Form</h1>
+				<h1>#springMessage("adjustment.navbar")</h1>
 				<p>#springMessage("controller") ${time} ms</p>
-				<a id="ajax_btn" href>GetJSON</a> <a id="ajax_reset" href>Reset</a>
-				<div id="ajax_result"></div>
+				<br>
+				<ul>
+					<li><a href="#springUrl("/adjustment/wizard/new")">Wizard</a></li>
+					<li><a href="#springUrl("/adjustment/onepage/new")">One Page</a></li>
+					<li><a href="#springUrl("/import/xml")">Import XML</a></li>
+				</ul>
+
 			</div>
 		</div>
 	</div>
 	#parse("footer.vm")
-	<script>
-		function doAjaxGet() {
-			jQuery.ajax({
-				type : 'GET',
-				url : '#springUrl("/adjustment/index")',
-				dataType : 'html',
-				async : true,
-				success : function(result) {
-					jQuery('#ajax_result').slideUp(100).html(result).slideDown(
-							300);
-				}
-			});
-		}
-	</script>
 </body>
 </html>

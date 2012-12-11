@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-#parse("unsec_include.vm")
+#parse("include.vm")
 <script src="#springUrl("/resources/js/lib/slides.min.jquery.js")"></script>
 <script>
 	jQuery(function() {
@@ -19,7 +19,7 @@
 </head>
 <body>
 	<div id="wrapper">
-		#parse("unsec_header.vm")
+		#parse("header.vm")
 		<div id="container">
 			<div id="slides">
 				<div class="slides_container">

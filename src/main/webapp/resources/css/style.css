@@ -5,9 +5,9 @@ html,body {
 }
 
 body {
-	background-color: #FFFFFF;
+	background-color: #FCFCFC;
 	color: #333333;
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: "Open Sans", Helvetica, Arial, sans-serif;
 	font-size: 13px;
 	line-height: 1.3;
 }
@@ -121,13 +121,13 @@ a#account {
 	width: 0;
 }
 
-div#account_dropdown, div#locale_dropdown {
+div#account_dropdown,div#locale_dropdown {
 	padding: 10px 0 10px 0;
 	position: absolute;
 	top: 45px;
 	border: 1px solid #BBBBBB;
 	background-color: #FFFFFF;
-	min-width: 110px;
+	min-width: 120px;
 	z-index: 100;
 	right: 0;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -152,7 +152,7 @@ div#account_dropdown a:HOVER,div#locale_dropdown a:HOVER {
 /* ------------------------------------   FOOTER   ------------------------------------- */
 div#footer {
 	background: url("../img/cvut_logo_mono.png") no-repeat scroll center
-		35px #F5F5F5;
+		35px #F1F1F1;
 	border-top: 1px solid #DDDDDD;
 	height: 100px;
 	width: 100%;
@@ -189,7 +189,7 @@ div.nav_menu {
 	padding: 0 0 10px 0;
 	border-bottom: 1px solid #DDDDDD;
 	margin: 10px 0 10px 0;
-	height: 25px;
+	height: 19px;
 }
 
 div.nav_menu ul {
@@ -203,19 +203,19 @@ div.nav_menu ul li {
 }
 
 div.nav_menu ul li a {
-	padding: 3px 5px;
+	padding: 5px 8px;
 	margin: 0px 5px;
 	float: left;
-	color: #555555;
-	border-bottom: 3px outset silver;
-	border-right: 5px outset transparent;
+	color: #888888;
+	border-bottom: 3px solid #888888;
+	border-right: 6px outset transparent;
 	float: left;
 }
 
 div.nav_menu ul li a:HOVER {
 	text-decoration: none;
-	color: #111111;
-	border-bottom: 3px solid #111111;
+	color: #444444;
+	border-bottom: 3px solid #444444;
 }
 
 div.nav_menu ul li a.active {
@@ -257,7 +257,7 @@ div#account_container .left_menu li a {
 }
 
 div#account_container .left_menu li a:HOVER {
-	background-color: #F5F5F5;
+	background-color: #F1F1F1;
 }
 
 div#account_container .left_menu li a:ACTIVE {
@@ -274,46 +274,46 @@ div#account_container .panel {
 	display: inline-block;
 	padding: 20px;
 	border: 1px solid #DDDDDD;
-	background: #F5F5F5;
+	background: #F1F1F1;
 	min-height: 200px;
-	width: 620px;
+	width: 680px;
 	border-radius: 4px 4px 4px 4px;
 	line-height: 1.4;
 }
 
 div#account_container div#info {
 	background: url("../img/info_symbol.png") no-repeat scroll 95% 100%
-		#F5F5F5;
+		#F1F1F1;
 }
 
 div#account_container div#user {
 	background: url("../img/user_symbol.png") no-repeat scroll 95% 100%
-		#F5F5F5;
+		#F1F1F1;
 }
 
 div#account_container div#changepass {
 	background: url("../img/key_symbol.png") no-repeat scroll 95% 100%
-		#F5F5F5;
+		#F1F1F1;
 }
 
 div#account_container div#loginslist {
 	background: url("../img/login_symbol.png") no-repeat scroll 95% 100%
-		#F5F5F5;
+		#F1F1F1;
 }
 
 div#account_container div#delete {
 	background: url("../img/bin_symbol.png") no-repeat scroll 95% 100%
-		#F5F5F5;
+		#F1F1F1;
 }
 
 .panel_header {
-	border-bottom: 1px solid #BBBBBB;
+	border-bottom: 1px solid #DDDDDD;
 	padding-bottom: 10px;
 	margin-bottom: 15px;
 }
 
 .panel_header h2 {
-	font: 28px "Droid Sans", Arial, sans-serif;
+	font: 28px 'PT Sans Narrow', Arial, sans-serif;
 }
 
 fieldset {
@@ -473,7 +473,7 @@ div#slides {
 	padding: 20px;
 	border: 1px solid #DDDDDD;
 	position: relative;
-	background: url("../img/upload.png") no-repeat scroll 95% 100% #F5F5F5;
+	background: url("../img/upload.png") no-repeat scroll 95% 100% #F1F1F1;
 	min-height: 200px;
 	width: 700px;
 	border-radius: 4px 4px 4px 4px;
@@ -484,7 +484,7 @@ div#slides {
 	padding: 20px;
 	border: 1px solid #DDDDDD;
 	position: relative;
-	background: url("../img/login.png") no-repeat scroll 95% 100% #F5F5F5;
+	background: url("../img/login.png") no-repeat scroll 95% 100% #F1F1F1;
 	min-height: 200px;
 	width: 600px;
 	border-radius: 4px 4px 4px 4px;
@@ -495,8 +495,26 @@ div#slides {
 	padding: 20px;
 	border: 1px solid #DDDDDD;
 	position: relative;
-	background: url("../img/signup.png") no-repeat scroll 95% 100% #F5F5F5;
+	background: url("../img/signup.png") no-repeat scroll 95% 100% #F1F1F1;
 	min-height: 200px;
 	width: 800px;
 	border-radius: 4px 4px 4px 4px;
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: bold;
+	font-weight: 700;
+	src: local('Open Sans Bold'), local('OpenSans-Bold'),
+		url(http://themes.googleusercontent.com/static/fonts/opensans/v6/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff)
+		format('woff');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Open Sans'), local('OpenSans'),
+		url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff)
+		format('woff');
 }

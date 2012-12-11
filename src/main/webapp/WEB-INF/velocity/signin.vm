@@ -2,12 +2,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-#parse("unsec_include.vm")
+#parse("include.vm")
 <title>Login</title>
 </head>
 <body onload="document.f.j_username.focus();">
 	<div id="wrapper">
-		#parse("unsec_header.vm")
+		#parse("header.vm")
 		<div id="container">
 			<div id="login_container">
 				<div class="panel_header">

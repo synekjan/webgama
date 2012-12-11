@@ -10,14 +10,15 @@
 	<!-- URLs which not under security -->
 	<http pattern="/resources/**" security="none" />
 	<http pattern="/css/**" security="none" />
-	<http pattern="/register/**" security="none" />
-	<http pattern="/recover/**" security="none" />
-	<http pattern="/confirm/**" security="none" />
 	<http pattern="/favicon.ico" security="none" />
-	<http pattern="/signin*" security="none" />
-
+	
 	<http disable-url-rewriting="true">
-		<intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+		<intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/register/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/recover/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/confirm/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/about/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/signin*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
 		<intercept-url pattern="/**" access="ROLE_USER" />
 		<form-login login-page="/signin" default-target-url="/" authentication-failure-url="/signin-failed" />

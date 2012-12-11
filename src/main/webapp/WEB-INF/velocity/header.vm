@@ -3,6 +3,7 @@
 		<div id="logo">
 			<a href="#springUrl("/")">WebGama</a>
 		</div>
+		#if ($SPRING_SECURITY_CONTEXT.authentication.isAuthenticated())
 		<div id="header_menu">
 			<ul class="nav">
 				<li class="dropdown">
@@ -18,5 +19,17 @@
 					</div></li>
 			</ul>
 		</div>
+		#else
+		<div id="header_menu">
+			<ul class="nav">
+				<li class="dropdown"><a id="locales" class="dropdown-toggle" href>#springMessage("localization") <i class="caret"></i></a>
+					<div id="locale_dropdown">
+						<a href="?locale=cs_CZ">#springMessage('czech.republic')</a> <a href="?locale=en_GB">#springMessage('great.britain')</a> <a href="?locale=en_US">#springMessage('united.states')</a>
+					</div></li>
+				<li><a href="#springUrl("/register")">#springMessage("login.sign.up")</a></li>
+				<li><a href="#springUrl("/signin")">#springMessage("login.sign.in")</a></li>
+			</ul>
+		</div>
+		#end
 	</div>
 </div>

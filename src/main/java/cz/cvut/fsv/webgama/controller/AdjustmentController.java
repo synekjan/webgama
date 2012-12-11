@@ -23,17 +23,18 @@ import cz.cvut.fsv.webgama.service.UserManager;
 
 
 @Controller
+@RequestMapping("/adjustment")
 public class AdjustmentController extends MultiActionController {
 
 	@Inject
 	private UserManager userManager;
 	
 	
-	@RequestMapping(value = "/adjustment", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	protected ModelAndView adjust(HttpServletRequest request) {
 
 		long startTime = System.nanoTime();
-		ModelAndView mav = new ModelAndView("/adjustment/adjustment");
+		ModelAndView mav = new ModelAndView("/adjustment/index");
 		Calendar cal = Calendar.getInstance();
 
 		Date date = new Date();
@@ -46,7 +47,7 @@ public class AdjustmentController extends MultiActionController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/adjustment/{name}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{name}", method = RequestMethod.GET)
 	protected @ResponseBody User getJSON(@PathVariable String name) {
 		
 		User user = userManager.getUser(name);
@@ -54,7 +55,7 @@ public class AdjustmentController extends MultiActionController {
 		return user;
 	}
 	
-	@RequestMapping(value = "/adjustment/index", method = RequestMethod.GET)
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	protected ModelAndView index(HttpServletRequest request, Locale locale, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("adjustment/test");
