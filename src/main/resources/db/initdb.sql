@@ -6,9 +6,14 @@ DROP TABLE distances CASCADE;
 DROP TABLE angles CASCADE;
 DROP TABLE slope_distances CASCADE;
 DROP TABLE zenith_angles CASCADE;
---DROP TABLE height_differences CASCADE;
+DROP TABLE height_differences CASCADE;
+DROP TABLE vectors CASCADE;
+DROP TABLE coordinates CASCADE;
+DROP TABLE alternative_observations CASCADE;
 DROP TABLE observations CASCADE;
 DROP TABLE points CASCADE;
+DROP TABLE covmat_values CASCADE;
+DROP TABLE covmats CASCADE;
 DROP TABLE networks CASCADE;
 DROP TABLE inputs CASCADE;
 
@@ -174,7 +179,6 @@ zenith_angle_stdev VARCHAR(80),
 distance_stdev	VARCHAR(80)
 );
 
-
 CREATE TABLE points (
 point_id		SERIAL PRIMARY KEY,
 network_id		INTEGER NOT NULL REFERENCES networks(network_id),
@@ -186,13 +190,67 @@ fix				VARCHAR(3),
 adj				VARCHAR(3)
 );
 
+CREATE TABLE covmats (
+covmat_id 		SERIAL PRIMARY KEY,
+dim 			INTEGER NOT NULL,
+band 			INTEGER NOT NULL
+);
+
+CREATE TABLE covmat_values (
+covmat_value_id SERIAL PRIMARY KEY,
+covmat_id 		INTEGER NOT NULL REFERENCES covmats(covmat_id),
+rind 			INTEGER NOT NULL,
+cind 			INTEGER NOT NULL,
+val 			DOUBLE PRECISION
+);
+
+CREATE TABLE alternative_observations (
+alternative_observation_id SERIAL PRIMARY KEY,
+network_id		INTEGER NOT NULL REFERENCES networks(network_id),
+tagname			VARCHAR(20) NOT NULL check (tagname in ('coordinates', 'vectors', 'height-differences')),
+covmat_id		INTEGER REFERENCES covmats(covmat_id)
+);
+
+CREATE TABLE height_differences (
+height_difference_id SERIAL PRIMARY KEY,
+alternative_observation_id INTEGER NOT NULL REFERENCES alternative_observations(alternative_observation_id),
+from_id			VARCHAR(80) NOT NULL,
+to_id			VARCHAR(80) NOT NULL,
+val				DOUBLE PRECISION NOT NULL,
+stdev			DOUBLE PRECISION,
+dist			DOUBLE PRECISION
+);
+
+CREATE TABLE vectors (
+vector_id 		SERIAL PRIMARY KEY,
+alternative_observation_id INTEGER NOT NULL REFERENCES alternative_observations(alternative_observation_id),
+from_id			VARCHAR(80) NOT NULL,
+to_id			VARCHAR(80) NOT NULL,
+dx				DOUBLE PRECISION NOT NULL,
+dy				DOUBLE PRECISION NOT NULL,
+dz				DOUBLE PRECISION NOT NULL,
+from_dh			DOUBLE PRECISION,
+to_dh			DOUBLE PRECISION
+);
+
+CREATE TABLE coordinates (
+coordinate_id	SERIAL PRIMARY KEY,
+alternative_observation_id INTEGER NOT NULL REFERENCES alternative_observations(alternative_observation_id),
+id				VARCHAR(80) NOT NULL,
+x				DOUBLE PRECISION,
+y				DOUBLE PRECISION,
+z				DOUBLE PRECISION
+);
+
+
 
 CREATE TABLE observations (
 observation_id 	SERIAL PRIMARY KEY,
 network_id		INTEGER NOT NULL REFERENCES networks(network_id),
 from_id			VARCHAR(80),
 orientation		VARCHAR(20),
-from_dh			DOUBLE PRECISION
+from_dh			DOUBLE PRECISION,
+covmat_id		INTEGER REFERENCES covmats(covmat_id)
 );
 
 
@@ -254,17 +312,6 @@ from_dh			DOUBLE PRECISION,
 to_dh			DOUBLE PRECISION
 );
 
-/*
-CREATE TABLE height_differences (
-height_difference_id	SERIAL PRIMARY KEY,
-observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
-from_id			VARCHAR(80) NOT NULL,
-to_id			VARCHAR(80) NOT NULL,
-val				DOUBLE PRECISION NOT NULL,
-stdev			DOUBLE PRECISION,
-dist			DOUBLE PRECISION
-);*/
-
 
 
 
@@ -289,9 +336,18 @@ GRANT ALL ON slope_distances TO synekjan;
 GRANT ALL ON slope_distances_slope_distance_id_seq TO synekjan;
 GRANT ALL ON zenith_angles TO synekjan;
 GRANT ALL ON zenith_angles_zenith_angle_id_seq TO synekjan;
---GRANT ALL ON height_differences TO synekjan;
---GRANT ALL ON height_differences_height_difference_id_seq TO synekjan;
-
+GRANT ALL ON height_differences TO synekjan;
+GRANT ALL ON height_differences_height_difference_id_seq TO synekjan;
+GRANT ALL ON coordinates TO synekjan;
+GRANT ALL ON coordinates_coordinate_id_seq TO synekjan;
+GRANT ALL ON vectors TO synekjan;
+GRANT ALL ON vectors_vector_id_seq TO synekjan;
+GRANT ALL ON covmats TO synekjan;
+GRANT ALL ON covmats_covmat_id_seq TO synekjan;
+GRANT ALL ON covmat_values TO synekjan;
+GRANT ALL ON covmat_values_covmat_value_id_seq TO synekjan;
+GRANT ALL ON alternative_observations TO synekjan;
+GRANT ALL ON alternative_observations_alternative_observation_id_seq TO synekjan;
 
 
 
@@ -340,9 +396,6 @@ INSERT INTO authorities (role_id,user_id) VALUES (2,1);
 INSERT INTO logins (user_id,ip_address,success) VALUES (1,'172.16.98.48',TRUE);
 INSERT INTO logins (user_id,ip_address,success) VALUES (1,'172.16.98.47',TRUE);
 INSERT INTO logins (user_id,ip_address,success) VALUES (2,'172.16.98.45',TRUE);
-
-
-
 
 
 

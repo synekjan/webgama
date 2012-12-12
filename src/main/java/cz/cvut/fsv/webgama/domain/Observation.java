@@ -6,21 +6,23 @@ import java.util.List;
 public class Observation {
 
 	private Integer id;
-	
+
 	private String from;
-	
+
 	private String orientation;
-	
+
 	private Double fromDh;
-	
+
+	private CovMat covMat;
+
 	private List<Direction> directions = new ArrayList<Direction>();
-	
+
 	private List<Distance> distances = new ArrayList<Distance>();
-	
+
 	private List<Angle> angles = new ArrayList<Angle>();
-	
+
 	private List<SlopeDistance> slopeDistances = new ArrayList<SlopeDistance>();
-	
+
 	private List<ZenithAngle> zenithAngles = new ArrayList<ZenithAngle>();
 
 	public Integer getId() {
@@ -53,6 +55,14 @@ public class Observation {
 
 	public void setFromDh(Double fromDh) {
 		this.fromDh = fromDh;
+	}
+
+	public CovMat getCovMat() {
+		return covMat;
+	}
+
+	public void setCovMat(CovMat covMat) {
+		this.covMat = covMat;
 	}
 
 	public List<Direction> getDirections() {
