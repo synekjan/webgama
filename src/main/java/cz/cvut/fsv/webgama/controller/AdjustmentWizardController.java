@@ -2,7 +2,6 @@ package cz.cvut.fsv.webgama.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 @Controller
-@Scope("session")
 @RequestMapping("/adjustment/wizard")
 public class AdjustmentWizardController extends MultiActionController {
 	

@@ -31,11 +31,11 @@
 						</tr>
 						<tr>
 							<td>#springMessage("user.created"):</td>
-							<td>$dateTool.format("yyyy-MM-dd HH:mm:ss",$date)</td>
+							<td>$dateTool.format("yyyy-MM-dd HH:mm:ss.SSS, EE",$user.created.toDate())</td>
 						</tr>
 						<tr>
 							<td>#springMessage("user.modified"):</td>
-							<td>$!user.modified</td>
+							<td>$dateTool.format("yyyy-MM-dd HH:mm:ss.SSS, EE MMMM",$user.modified.toDate())</td>
 						</tr>
 					</table>
 				</div>

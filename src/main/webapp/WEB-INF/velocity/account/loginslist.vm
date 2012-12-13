@@ -35,7 +35,7 @@
 							#foreach ($login in $loginList)
 							<tr>
 								<td>$login.ip</td>
-								<td>$login.time</td>
+								<td>$dateTool.format("yyyy-MM-dd HH:mm:ss",$login.time.toDate())</td>
 								<td>$login.success</td>
 							</tr>
 							#end
