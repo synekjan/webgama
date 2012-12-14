@@ -23,6 +23,13 @@
 					<div class="panel_header">
 						<h2>#springMessage("delete.account")</h2>
 					</div>
+					<p>Are you really sure to deactive your account and all your
+						calculations?</p>
+					<br>
+					<p>Your account will be kept for 14 days and then will be
+						completely deleted. You can always reactive your account during
+						this period.</p>
+					<br>
 					<form action="" method="post">
 						<input class="submit_btn" type="submit" value="#springMessage("delete.account.button")">
 					</form>

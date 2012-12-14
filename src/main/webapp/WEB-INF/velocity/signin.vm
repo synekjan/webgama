@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 #parse("include.vm")
-<title>Login</title>
+<title>Log in - WebGama</title>
 </head>
 <body onload="document.f.j_username.focus();">
 	<div id="wrapper">
@@ -13,21 +13,21 @@
 				<div class="panel_header">
 					<h2>Log In</h2>
 				</div>
-				<form name="f" action="j_spring_security_check" method="post">
+				#if ($error)
+				<div class="error">$SPRING_SECURITY_LAST_EXCEPTION.message</div>
+				#end
+				<form action="j_spring_security_check" method="post">
 					<div class="text_inputs">
-						<label for="username">#springMessage("user.username")</label><br>
+						<label for="username">#springMessage("user.username")</label> <br>
 						<input title="Please enter a Username" id="username" type="text"
-							name="j_username"><br> <span
-							class="lost_credentials"><a href="#springUrl("/recover/username")">#springMessage("forgot.username")</a></span>
-						<br> <label for="password">#springMessage("user.password")</label>
-						<br> <input title="Please enter your password" id="password"
-							type="password" name="j_password"> <br> <span
-							class="lost_credentials"><a href="#springUrl("/recover/password")">#springMessage("forgot.password")</a></span>
+							name="j_username"> <br> <label for="password">#springMessage("user.password")</label>
 						<br>
+						<input title="Please enter your password" id="password"
+							type="password" name="j_password"> <br> Forgot <a
+							href="#springUrl("/recover/username")">username</a> or <a
+							href="#springUrl("/recover/password")">password</a>? <br>
 					</div>
-					#if ($error)
-					<div class="form_errors">$SPRING_SECURITY_LAST_EXCEPTION.message</div>
-					#end <input type='checkbox' name='_spring_security_remember_me'
+					<input type='checkbox' name='_spring_security_remember_me'
 						id="_spring_security_remember_me"><label
 						for="_spring_security_remember_me">#springMessage("keep.me.logged.in")</label><br />
 					<br /> <input class="submit_btn" title="Please click here to sign"

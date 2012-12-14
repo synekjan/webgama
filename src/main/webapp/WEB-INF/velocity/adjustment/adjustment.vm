@@ -12,13 +12,16 @@
 				<ul>
 					<li><a href="#springUrl("/overview")">Overview</a></li>
 					<li><a class="active" href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a></li>
+					<li><a href="#springUrl("/calculation")">Calculations</a></li>
 					<li><a href="#springUrl("/import/xml")">Import</a></li>
 					<li><a href="#springUrl("/export")">Export</a></li>
 				</ul>
 			</div>
 			<div id="content">
-				<h1>#springMessage("adjustment.navbar")</h1>
-				<p>#springMessage("controller") ${time} ms</p>
+				<div class="panel_header">
+					<h2>#springMessage("adjustment.navbar")</h2>
+				</div>
+				<p>Choose one of the following possibilities and start NEW adjustment:</p>
 				<br>
 				<ul>
 					<li><a href="#springUrl("/adjustment/wizard/new")">Wizard</a></li>

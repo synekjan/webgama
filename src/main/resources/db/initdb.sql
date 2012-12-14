@@ -148,7 +148,7 @@ GRANT ALL ON confirmations_confirmation_id_seq TO synekjan;
 
 CREATE TABLE inputs (
 input_id 		SERIAL PRIMARY KEY,
-user_id 		INTEGER NOT NULL REFERENCES users(user_id),
+user_id 		INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
 filename 		VARCHAR(255) NOT NULL,
 file_content 	TEXT,
 algorithm		VARCHAR(12) NOT NULL,
@@ -163,7 +163,7 @@ time 			TIMESTAMP DEFAULT now()
 
 CREATE TABLE networks (
 network_id		SERIAL PRIMARY KEY,
-input_id		INTEGER NOT NULL REFERENCES inputs(input_id),
+input_id		INTEGER NOT NULL REFERENCES inputs(input_id) ON DELETE CASCADE,
 axes_xy			VARCHAR(2),
 angles			VARCHAR(12),
 epoch			DOUBLE PRECISION,
@@ -181,7 +181,7 @@ distance_stdev	VARCHAR(80)
 
 CREATE TABLE points (
 point_id		SERIAL PRIMARY KEY,
-network_id		INTEGER NOT NULL REFERENCES networks(network_id),
+network_id		INTEGER NOT NULL REFERENCES networks(network_id) ON DELETE CASCADE,
 id				VARCHAR(80) NOT NULL,
 x				DOUBLE PRECISION,
 y				DOUBLE PRECISION,
@@ -198,7 +198,7 @@ band 			INTEGER NOT NULL
 
 CREATE TABLE covmat_values (
 covmat_value_id SERIAL PRIMARY KEY,
-covmat_id 		INTEGER NOT NULL REFERENCES covmats(covmat_id),
+covmat_id 		INTEGER NOT NULL REFERENCES covmats(covmat_id) ON DELETE CASCADE,
 rind 			INTEGER NOT NULL,
 cind 			INTEGER NOT NULL,
 val 			DOUBLE PRECISION
@@ -206,14 +206,14 @@ val 			DOUBLE PRECISION
 
 CREATE TABLE alternative_observations (
 alternative_observation_id SERIAL PRIMARY KEY,
-network_id		INTEGER NOT NULL REFERENCES networks(network_id),
+network_id		INTEGER NOT NULL REFERENCES networks(network_id) ON DELETE CASCADE,
 tagname			VARCHAR(20) NOT NULL check (tagname in ('coordinates', 'vectors', 'height-differences')),
 covmat_id		INTEGER REFERENCES covmats(covmat_id)
 );
 
 CREATE TABLE height_differences (
 height_difference_id SERIAL PRIMARY KEY,
-alternative_observation_id INTEGER NOT NULL REFERENCES alternative_observations(alternative_observation_id),
+alternative_observation_id INTEGER NOT NULL REFERENCES alternative_observations(alternative_observation_id) ON DELETE CASCADE,
 from_id			VARCHAR(80) NOT NULL,
 to_id			VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,
@@ -223,7 +223,7 @@ dist			DOUBLE PRECISION
 
 CREATE TABLE vectors (
 vector_id 		SERIAL PRIMARY KEY,
-alternative_observation_id INTEGER NOT NULL REFERENCES alternative_observations(alternative_observation_id),
+alternative_observation_id INTEGER NOT NULL REFERENCES alternative_observations(alternative_observation_id) ON DELETE CASCADE,
 from_id			VARCHAR(80) NOT NULL,
 to_id			VARCHAR(80) NOT NULL,
 dx				DOUBLE PRECISION NOT NULL,
@@ -235,7 +235,7 @@ to_dh			DOUBLE PRECISION
 
 CREATE TABLE coordinates (
 coordinate_id	SERIAL PRIMARY KEY,
-alternative_observation_id INTEGER NOT NULL REFERENCES alternative_observations(alternative_observation_id),
+alternative_observation_id INTEGER NOT NULL REFERENCES alternative_observations(alternative_observation_id) ON DELETE CASCADE,
 id				VARCHAR(80) NOT NULL,
 x				DOUBLE PRECISION,
 y				DOUBLE PRECISION,
@@ -246,7 +246,7 @@ z				DOUBLE PRECISION
 
 CREATE TABLE observations (
 observation_id 	SERIAL PRIMARY KEY,
-network_id		INTEGER NOT NULL REFERENCES networks(network_id),
+network_id		INTEGER NOT NULL REFERENCES networks(network_id) ON DELETE CASCADE,
 from_id			VARCHAR(80),
 orientation		VARCHAR(20),
 from_dh			DOUBLE PRECISION,
@@ -256,7 +256,7 @@ covmat_id		INTEGER REFERENCES covmats(covmat_id)
 
 CREATE TABLE directions (
 direction_id	SERIAL PRIMARY KEY,
-observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
+observation_id	INTEGER NOT NULL REFERENCES observations(observation_id) ON DELETE CASCADE,
 to_id			VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,
 stdev			DOUBLE PRECISION,
@@ -266,7 +266,7 @@ to_dh			DOUBLE PRECISION
 
 CREATE TABLE distances (
 distance_id		SERIAL PRIMARY KEY,
-observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
+observation_id	INTEGER NOT NULL REFERENCES observations(observation_id) ON DELETE CASCADE,
 from_id			VARCHAR(80),
 to_id			VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,
@@ -278,7 +278,7 @@ to_dh			DOUBLE PRECISION
 
 CREATE TABLE angles (
 angle_id		SERIAL PRIMARY KEY,
-observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
+observation_id	INTEGER NOT NULL REFERENCES observations(observation_id) ON DELETE CASCADE,
 from_id			VARCHAR(80),
 bs				VARCHAR(80) NOT NULL,
 fs				VARCHAR(80) NOT NULL,
@@ -292,7 +292,7 @@ fs_dh			DOUBLE PRECISION
 
 CREATE TABLE slope_distances (
 slope_distance_id	SERIAL PRIMARY KEY,
-observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
+observation_id	INTEGER NOT NULL REFERENCES observations(observation_id) ON DELETE CASCADE,
 from_id			VARCHAR(80),
 to_id			VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,
@@ -303,7 +303,7 @@ to_dh			DOUBLE PRECISION
 
 CREATE TABLE zenith_angles (
 zenith_angle_id	SERIAL PRIMARY KEY,
-observation_id	INTEGER NOT NULL REFERENCES observations(observation_id),
+observation_id	INTEGER NOT NULL REFERENCES observations(observation_id) ON DELETE CASCADE,
 from_id			VARCHAR(80),
 to_id			VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,

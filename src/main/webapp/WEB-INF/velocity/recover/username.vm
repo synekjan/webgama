@@ -14,7 +14,6 @@
 					<h2>Find Username</h2>
 				</div>
 				<div id="dialog_container">
-					<h3>Find Username</h3>
 					<p>Please enter the email address you registered with. Your
 						username will be sent to this email address shortly.</p>
 

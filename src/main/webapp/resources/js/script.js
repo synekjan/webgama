@@ -35,5 +35,8 @@ $(document).ready(function() {
 		$('#ajax_result').html("");
 		return false;
 	});
+	$('.success, .error').delay(3000).hide("blind", {direction: "horizontal"},1000);
+	
+	
 
 });

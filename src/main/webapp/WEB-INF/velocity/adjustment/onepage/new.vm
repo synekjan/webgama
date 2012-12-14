@@ -12,6 +12,7 @@
 				<ul>
 					<li><a href="#springUrl("/overview")">Overview</a></li>
 					<li><a class="active" href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a></li>
+					<li><a href="#springUrl("/calculation")">Calculations</a></li>
 					<li><a href="#springUrl("/import/xml")">Import</a></li>
 					<li><a href="#springUrl("/export")">Export</a></li>
 				</ul>

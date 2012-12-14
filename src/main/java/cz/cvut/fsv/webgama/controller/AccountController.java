@@ -59,7 +59,7 @@ public class AccountController extends MultiActionController {
 	@RequestMapping(value = "/personal", method = RequestMethod.GET)
 	public ModelAndView modifyUserForm(HttpServletRequest request, Locale locale) {
 
-		ModelAndView mav = new ModelAndView("/account/user");
+		ModelAndView mav = new ModelAndView("/account/personal/personal");
 		String username = request.getUserPrincipal().getName();
 		UserForm userForm = new UserForm(userManager.getUser(username));
 		mav.addObject("user", userForm);
@@ -68,8 +68,9 @@ public class AccountController extends MultiActionController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/personal", method = RequestMethod.POST)
-	public ModelAndView modifyUser(@Valid @ModelAttribute("user") UserForm userForm,
+	@RequestMapping(value = { "/personal", "/personal/success" }, method = RequestMethod.POST)
+	public ModelAndView modifyUser(
+			@Valid @ModelAttribute("user") UserForm userForm,
 			BindingResult result, HttpServletRequest request) {
 
 		// userValidator.validate(userForm, result);
@@ -81,23 +82,34 @@ public class AccountController extends MultiActionController {
 
 			logger.info("User[" + username
 					+ "] was unsuccessful in editing personal informations");
-			return new ModelAndView("/account/user");
+			return new ModelAndView("/account/personal/personal");
 		}
-		
+
 		userManager.updateUser(userForm);
 
 		logger.info("User[" + username
 				+ "] successfully updated personal information");
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/account/personal/success");
 	}
 
-	
-	//CHANGING PASSWORD
+	@RequestMapping(value = "/personal/success", method = RequestMethod.GET)
+	public ModelAndView successUserChange(HttpServletRequest request,
+			Locale locale) {
+
+		ModelAndView mav = new ModelAndView("/account/personal/success");
+		String username = request.getUserPrincipal().getName();
+		UserForm userForm = new UserForm(userManager.getUser(username));
+		mav.addObject("user", userForm);
+
+		return mav;
+	}
+
+	// CHANGING PASSWORD
 	@RequestMapping(value = "/password/change", method = RequestMethod.GET)
 	public ModelAndView changePasswordForm(HttpServletRequest request,
 			Model model, Locale locale) {
 
-		ModelAndView mav = new ModelAndView("/account/changepass");
+		ModelAndView mav = new ModelAndView("/account/password/change");
 		String username = request.getUserPrincipal().getName();
 		mav.addObject("user", new UserPasswordChangeForm());
 
@@ -105,7 +117,7 @@ public class AccountController extends MultiActionController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/password/change", method = RequestMethod.POST)
+	@RequestMapping(value = { "/password/change", "/password/change/success" }, method = RequestMethod.POST)
 	public ModelAndView changePassword(
 			@Valid @ModelAttribute("user") UserPasswordChangeForm userForm,
 			BindingResult result, HttpServletRequest request) {
@@ -117,14 +129,26 @@ public class AccountController extends MultiActionController {
 		if (result.hasErrors()) {
 			logger.info("User[" + username
 					+ "] was unsuccessful in changing his/her password");
-			return new ModelAndView("/account/changepass");
+			return new ModelAndView("/account/password/change");
 		}
 
 		userManager.changeUserPassword(userForm);
 
 		logger.info("User[" + username
 				+ "] successfully changed account password");
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/account/password/change/success");
+	}
+
+	@RequestMapping(value = "/password/change/success", method = RequestMethod.GET)
+	public ModelAndView successPasswordChange(HttpServletRequest request,
+			Model model, Locale locale) {
+
+		ModelAndView mav = new ModelAndView("/account/password/success");
+		String username = request.getUserPrincipal().getName();
+		mav.addObject("user", new UserPasswordChangeForm());
+
+		logger.info("User[" + username + "] thought about changing password");
+		return mav;
 	}
 
 	@RequestMapping(value = { "/logins", "/logins/show" }, method = RequestMethod.GET)
@@ -144,7 +168,7 @@ public class AccountController extends MultiActionController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView deleteUserForm(HttpServletRequest request) {
 
-		ModelAndView mav = new ModelAndView("/account/delete");
+		ModelAndView mav = new ModelAndView("/account/delete/delete");
 		String username = request.getUserPrincipal().getName();
 
 		logger.info("User[" + username + "] thought about deleting account");

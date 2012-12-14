@@ -12,6 +12,7 @@
 				<ul>
 					<li><a href="#springUrl("/overview")">Overview</a></li>
 					<li><a class="active" href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a></li>
+					<li><a href="#springUrl("/calculation")">Calculations</a></li>
 					<li><a href="#springUrl("/import/xml")">Import</a></li>
 					<li><a href="#springUrl("/export")">Export</a></li>
 				</ul>
@@ -33,8 +34,9 @@
 				dataType : 'html',
 				async : true,
 				success : function(result) {
-					jQuery('#ajax_result').slideUp(100).html(result).slideDown(
-							300);
+					jQuery('#ajax_result').hide("drop", { direction: "left" }, 500, function() {jQuery('#ajax_result').html(result);});
+					jQuery('#ajax_result').show("drop", { direction: "right" }, 500);
+					return false;
 				}
 			});
 		}

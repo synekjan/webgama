@@ -34,7 +34,7 @@ public class AdjustmentController extends MultiActionController {
 	protected ModelAndView adjust(HttpServletRequest request) {
 
 		long startTime = System.nanoTime();
-		ModelAndView mav = new ModelAndView("/adjustment/index");
+		ModelAndView mav = new ModelAndView("/adjustment/adjustment");
 		Calendar cal = Calendar.getInstance();
 
 		Date date = new Date();

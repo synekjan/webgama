@@ -38,7 +38,7 @@ public class IndexController {
 		} else {
 
 			logger.info("Welcome page was requested from IP: "
-					+ request.getRemoteAddr());
+					+ request.getRemoteHost());
 			return new ModelAndView("welcome");
 		}
 	}

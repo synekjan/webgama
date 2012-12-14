@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+#parse("include.vm")
+<title>#springMessage("user.personal.settings")</title>
+</head>
+<body>
+	<div id="wrapper">
+		#parse("header.vm")
+
+		<div id="container">
+			<div id="account_container">
+				<div class="left_menu">
+					<ul>
+						<li><a href="#springUrl("/account/info")">#springMessage("account.overview")</a></li>
+						<span class="active_menu"><li><a href="#springUrl("/account/personal")">#springMessage("user.personal.settings")</a></li></span>
+						<li><a href="#springUrl("/account/password/change")">#springMessage("change.password")</a></li>
+						<li><a href="#springUrl("/account/logins/show")">#springMessage("logins.list")</a></li>
+						<li><a href="#springUrl("/account/delete")">#springMessage("delete.account")</a></li>
+					</ul>
+				</div>
+				<div id="user" class="panel">
+					<div class="panel_header">
+						<h2>#springMessage("user.personal.settings")</h2>
+					</div>
+					<div class="success">User was successfully modified</div>
+					<form action="" method="post">
+						<div class="form">
+							<fieldset>
+								<legend>#springMessage("user.personal.settings")</legend>
+								<table>
+									<tr>
+										<td><label for="firstName">#springMessage("user.firstname"):</label></td>
+										<td>#springBind("user")
+											#springFormInput("user.firstName", "")</td>
+										<td>#springShowErrors("&nbsp", "form_errors")</td>
+									</tr>
+									<tr>
+										<td><label for="lastName">#springMessage("user.lastname"):</label></td>
+										<td>#springBind("user") #springFormInput("user.lastName",
+											"")</td>
+										<td>#springShowErrors("&nbsp", "form_errors")</td>
+									</tr>
+									<tr>
+										<td><label for="telephone">#springMessage("user.telephone"):</label></td>
+										<td>#springFormInput("user.telephone", "")</td>
+										<td>#springShowErrors("&nbsp", "form_errors")</td>
+									</tr>
+								</table>
+							</fieldset>
+							<fieldset>
+								<legend>Address</legend>
+								<table>
+									<tr>
+										<td><label for="street">#springMessage("user.street"):</label></td>
+										<td>#springFormInput("user.street", "")</td>
+										<td>#springShowErrors("&nbsp", "form_errors")</td>
+									</tr>
+									<tr>
+										<td><label for="number">#springMessage("user.number"):</label></td>
+										<td>#springFormInput("user.number", "")</td>
+										<td>#springShowErrors("&nbsp", "form_errors")</td>
+									</tr>
+									<tr>
+										<td><label for="city">#springMessage("user.city"):</label></td>
+										<td>#springFormInput("user.city", "")</td>
+										<td>#springShowErrors("&nbsp", "form_errors")</td>
+									</tr>
+									<tr>
+										<td><label for="zipCode">#springMessage("user.zipcode"):</label></td>
+										<td>#springFormInput("user.zipCode", "")</td>
+										<td>#springShowErrors("&nbsp", "form_errors")</td>
+									</tr>
+									<tr>
+										<td><label for="state">#springMessage("user.state"):</label></td>
+										<td>#springFormInput("user.state", "")</td>
+										<td>#springShowErrors("&nbsp", "form_errors")</td>
+									</tr>
+								</table>
+							</fieldset>
+						</div>
+						<div class="form_button">
+							<input class="submit_btn" type="submit" value="#springMessage("submit")">
+							<input type="reset" value="Reset">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	#parse("footer.vm")
+</body>
+</html>

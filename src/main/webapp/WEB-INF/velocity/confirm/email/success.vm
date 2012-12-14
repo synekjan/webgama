@@ -9,18 +9,13 @@
 	<div id="wrapper">
 		#parse("header.vm")
 		<div id="container">
-			<div id="account_container">
-				<div class="caption">
+			<div id="signup_container">
+				<div class="panel_header">
 					<h2>Email Confirmation</h2>
 				</div>
 				<div id="dialog_container">
-					<h3>Email Confirmation</h3>
 					<p>Your email address was successfully confirmed</p>
-
-					<p>
-						Now you can log in at <a style="text-decoration: underline;"
-							href="#springUrl("/login")">login page</a>
-					</p>
+					<p>Now you can log in at <a href="#springUrl("/login")">login page</a></p>
 				</div>
 			</div>
 		</div>
