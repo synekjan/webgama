@@ -18,15 +18,62 @@
 				</ul>
 			</div>
 			<div id="content">
-				<h1 style="font-size: 20px;">One page input form</h1>
-				<p>#springMessage("controller") ${time} ms</p>
-				
-				<div style="min-height: 2000px;"></div>
+				<div class="panel_header">
+					<h2>Adjustment Form</h2>
+				</div>
+				#springBind("input.*")#if(${status.error})
+				<div class="error">Form has errors</div>
+				#end
+				<form action="" method="post">
+					<div class="form">
+						<fieldset>
+							<legend>General Settings</legend>
+							<table>
+								<tr>
+									<td><label for="axesXY">axes XY:</label></td>
+									<td>#springFormInput("input.axesXY","")</td>
+									<td>#springShowErrors("&nbsp", "form_errors")</td>
+								</tr>
+								<tr>
+									<td><label for="angles">Angles:</label></td>
+									<td>#springFormInput("input.angles","")</td>
+									<td>#springShowErrors("&nbsp", "form_errors")</td>
+								</tr>
+								<tr>
+									<td><label for="epoch">Epoch:</label></td>
+									<td>#springFormInput("input.epoch", "")</td>
+									<td>#springShowErrors("&nbsp", "form_errors")</td>
+								</tr>
+							</table>
+						</fieldset>
+						<fieldset>
+							<legend>Points</legend>
+							<table>
+								#foreach ($point in $input.points)
+								<tr>
+									<td><label for="point">Point:</label></td>
+									<td><input type="text" name="points[${foreach.index}].x"
+										value="$!point.x" placeholder="X" /></td>
+									<td><input type="text" name="points[${foreach.index}].y"
+										value="$!point.y" placeholder="Y" /></td>
+									<td><input type="text" name="points[${foreach.index}].z"
+										value="$!point.z" placeholder="Z" /></td>
+
+								</tr>
+								#end
+							</table>
+						</fieldset>
+						`
+
+					</div>
+					<div class="form_button">
+						<input class="submit_btn" type="submit" value="#springMessage("submit")">
+						<input type="reset" value="Reset">
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
-	#parse("footer.vm")
-	
-	#parse("toolbar.vm")
+	#parse("footer.vm") #parse("toolbar.vm")
 </body>
 </html>

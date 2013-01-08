@@ -214,6 +214,7 @@ div.nav_menu ul li a {
 	margin: 0px 5px;
 	float: left;
 	color: #999999;
+	text-shadow: 0 1px 0 #FFFFFF;
 	border-bottom: 3px solid transparent;
 	border-right: 6px outset transparent;
 	transition: all 0.5s;
