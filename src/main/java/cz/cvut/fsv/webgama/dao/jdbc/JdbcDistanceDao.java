@@ -58,7 +58,7 @@ public class JdbcDistanceDao extends JdbcDaoSupport implements DistanceDao {
 		return distances;
 	}
 
-	private class DistanceMapper implements RowMapper<Distance> {
+	private static class DistanceMapper implements RowMapper<Distance> {
 
 		@Override
 		public Distance mapRow(ResultSet rs, int rowNum) throws SQLException {

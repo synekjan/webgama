@@ -1,0 +1,13 @@
+<div class="testicek">
+Dnes je $date
+<br>
+Normalni datum je: $dateTime<br>
+<input type="text" />
+<br>
+Nahodne cislo: $cislo
+<br>
+Pridano ajaxem
+<br>
+<br>
+$input.algorithm
+</div>

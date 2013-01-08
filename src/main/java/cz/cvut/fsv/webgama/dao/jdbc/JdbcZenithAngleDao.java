@@ -60,7 +60,7 @@ public class JdbcZenithAngleDao extends JdbcDaoSupport implements
 		return zenithAngles;
 	}
 
-	private class ZenithAngleMapper implements RowMapper<ZenithAngle> {
+	private static class ZenithAngleMapper implements RowMapper<ZenithAngle> {
 
 		@Override
 		public ZenithAngle mapRow(ResultSet rs, int rowNum) throws SQLException {

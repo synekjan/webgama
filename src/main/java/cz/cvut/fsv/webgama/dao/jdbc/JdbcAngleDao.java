@@ -57,7 +57,7 @@ public class JdbcAngleDao extends JdbcDaoSupport implements AngleDao {
 		return angles;
 	}
 
-	private class AngleMapper implements RowMapper<Angle> {
+	private static class AngleMapper implements RowMapper<Angle> {
 
 		@Override
 		public Angle mapRow(ResultSet rs, int rowNum) throws SQLException {

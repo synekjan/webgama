@@ -56,7 +56,7 @@ public class JdbcDirectionDao extends JdbcDaoSupport implements DirectionDao {
 		return directions;
 	}
 
-	private class DirectionMapper implements RowMapper<Direction> {
+	private static class DirectionMapper implements RowMapper<Direction> {
 
 		@Override
 		public Direction mapRow(ResultSet rs, int rowNum) throws SQLException {

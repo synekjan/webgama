@@ -23,8 +23,7 @@
 						<h2>Import XML</h2>
 					</div>
 					<form method="post" action="" enctype="multipart/form-data">
-						<input type="file" name="file" /> <br> <br> <input
-							class="submit_btn" type="submit" />
+						<input type="file" name="file" /> <br> <br> <input class="submit_btn" type="submit" />
 					</form>
 				</div>
 			</div>

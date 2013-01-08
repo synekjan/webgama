@@ -57,7 +57,7 @@ public class JdbcPointDao extends JdbcDaoSupport implements PointDao {
 		return points;
 	}
 
-	private class PointMapper implements RowMapper<Point> {
+	private static class PointMapper implements RowMapper<Point> {
 
 		@Override
 		public Point mapRow(ResultSet rs, int rowNum) throws SQLException {

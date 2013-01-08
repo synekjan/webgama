@@ -60,7 +60,7 @@ public class JdbcSlopeDistanceDao extends JdbcDaoSupport implements
 		return slopeDistances;
 	}
 
-	private class DistanceMapper implements RowMapper<SlopeDistance> {
+	private static class DistanceMapper implements RowMapper<SlopeDistance> {
 
 		@Override
 		public SlopeDistance mapRow(ResultSet rs, int rowNum)

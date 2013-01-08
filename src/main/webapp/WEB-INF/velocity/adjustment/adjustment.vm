@@ -23,7 +23,7 @@
 				</div>
 				<p>Choose one of the following possibilities and start NEW adjustment:</p>
 				<br>
-				<ul>
+				<ul class="adjustment_choose">
 					<li><a href="#springUrl("/adjustment/wizard/new")">Wizard</a></li>
 					<li><a href="#springUrl("/adjustment/onepage/new")">One Page</a></li>
 					<li><a href="#springUrl("/import/xml")">Import XML</a></li>

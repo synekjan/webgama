@@ -8,7 +8,7 @@ public class CovMat {
 	
 	private Integer band;
 	
-	private Double[][] val;
+	//private Double[][] val;
 
 	public Integer getId() {
 		return id;
@@ -34,12 +34,12 @@ public class CovMat {
 		this.band = band;
 	}
 
-	public Double[][] getVal() {
+	/*public Double[][] getVal() {
 		return val;
 	}
 
 	public void setVal(Double[][] val) {
 		this.val = val;
-	}
+	}*/
 
 }

@@ -30,7 +30,7 @@
 		function doAjaxGet() {
 			jQuery.ajax({
 				type : 'GET',
-				url : '#springUrl("/adjustment/index")',
+				url : '#springUrl("/adjustment/wizard/index")',
 				dataType : 'html',
 				async : true,
 				success : function(result) {

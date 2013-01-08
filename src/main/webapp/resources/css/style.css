@@ -63,14 +63,17 @@ div#logo {
 
 div#logo a {
 	font-size: 20px;
-	text-shadow: 0 2px 3px #333333;
+	text-shadow: 0 -1px 1px #333333;
 	font-weight: bold;
 	text-decoration: none;
-	font-weight: bold;
+	transition: text-shadow 1s;
+	-moz-transition: text-shadow 1s; /* Firefox 4 */
+	-webkit-transition: text-shadow 1s; /* Safari and Chrome */
+	-o-transition: text-shadow 1s; /* Opera */
 }
 
 div#logo a:HOVER {
-	text-shadow: 0 0 10px #FFFFFF;
+	text-shadow: 0 -1px 1px #AAAAAA, 0 0 20px #FFFFFF;
 }
 
 div#header_menu {
@@ -96,7 +99,12 @@ div#header_menu {
 	padding: 11px 10px 15px 10px;
 	font-size: 12px;
 	text-decoration: none;
-	text-shadow: 0 1px 2px #333333;
+	text-shadow: 0 -1px 1px #333333;
+	cursor: pointer;
+	transition: text-shadow 1s;
+	-moz-transition: text-shadow 1s; /* Firefox 4 */
+	-webkit-transition: text-shadow 1s; /* Safari and Chrome */
+	-o-transition: text-shadow 1s; /* Opera */
 }
 
 .nav li a.bold {
@@ -208,6 +216,10 @@ div.nav_menu ul li a {
 	color: #999999;
 	border-bottom: 3px solid transparent;
 	border-right: 6px outset transparent;
+	transition: all 0.5s;
+	-moz-transition: all 0.5s; /* Firefox 4 */
+	-webkit-transition: all 0.5s; /* Safari and Chrome */
+	-o-transition: all 0.5s; /* Opera */
 }
 
 div.nav_menu ul li a:HOVER {
@@ -324,7 +336,6 @@ fieldset {
 legend {
 	padding: 0px 10px;
 	margin: 0 0 0 -25px;
-	
 	font: 15px "Jura";
 }
 
@@ -356,15 +367,23 @@ input[type=text]:focus,input[type=password]:focus,textarea:focus {
 }
 
 input[type=submit],input[type=reset] {
-	background-color: #CCCCCC;
-	background-image: linear-gradient(#EEEEEE, #CCCCCC);
+	background-color: #FAFAFA;
+	background-image: linear-gradient(to bottom, #FCFCFC, #D5D5D5);
 	background-repeat: repeat-x;
-	border: 1px solid #BBBBBB;
+	border: 1px solid #CCCCCC;
 	border-radius: 4px 4px 4px 4px;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
 	font-size: 13px;
 	color: #444444;
 	padding: 4px 10px;
+}
+
+input[type=submit]:HOVER,input[type=reset]:HOVER {
+	border: 1px solid #AAAAAA;
+}
+
+input[type=submit]:ACTIVE,input[type=reset]:ACTIVE {
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) inset;
 }
 
 input.submit_btn {
@@ -373,7 +392,7 @@ input.submit_btn {
 	background-repeat: repeat-x;
 	border: 1px solid #51A0B3;
 	border-radius: 4px 4px 4px 4px;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
 	color: #FFFFFF;
 	font-size: 13px;
 	font-weight: bold;
@@ -523,13 +542,38 @@ div.success {
 div.warning {
 	color: #9F6000;
 	background-color: #FEEFB3;
-	border-color: #EFB050; 
+	border-color: #EFB050;
 }
 
 div.error {
 	color: #D8000C;
 	background-color: #FED1D1;
 	border-color: #E3A198;
+}
+
+ul.adjustment_choose a {
+	margin: 20px;
+	width: 400px;
+	height: 200px;
+	border: 1px solid #DDDDDD;
+	float: left;
+}
+
+div.side_toolbar {
+	position: fixed;
+	width: 150px;
+	height: 300px;
+	top: 200px;
+	left: 0;
+	border: 1px solid #BBBBBB;
+	background-color: #FFFFFF;
+	z-index: 100;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	
+	transition: all 1s;
+	-moz-transition: all 1s; /* Firefox 4 */
+	-webkit-transition: all 1s; /* Safari and Chrome */
+	-o-transition: all 1s; /* Opera */
 }
 
 @font-face {

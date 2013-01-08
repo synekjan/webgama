@@ -1,0 +1,7 @@
+<div class="panel_header">
+	<h2>#springMessage("change.password")</h2>
+</div>
+<form>
+	<label>Test:</label> <input type="text" value="Test"> <br>
+	<input type="submit" value="Previous"> <input type="submit" value="Next">
+</form>
