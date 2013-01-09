@@ -21,14 +21,23 @@
 				<div class="panel_header">
 					<h2>#springMessage("adjustment.navbar")</h2>
 				</div>
-				<p>Choose one of the following possibilities and start NEW adjustment:</p>
-				<br>
-				<ul class="adjustment_choose">
-					<li><a href="#springUrl("/adjustment/wizard/new")">Wizard</a></li>
-					<li><a href="#springUrl("/adjustment/onepage/new")">One Page</a></li>
-					<li><a href="#springUrl("/import/xml")">Import XML</a></li>
-				</ul>
-
+				<p>Choose one of the following options and start NEW adjustment:</p>
+				<div id="options">
+					<ul class="adjustment_choose">
+						<li><a class="wizard" href="#springUrl("/adjustment/wizard/new")">Wizard
+								<div>Interactive guide through whole adjustment process</div>
+						</a></li>
+						<li><a class="onepage" href="#springUrl("/adjustment/onepage/new")">One
+								Page
+								<div>One page form for quick completion</div>
+						</a></li>
+						<li><a class="import" href="#springUrl("/import/xml")">Import
+								XML
+								<div>Upload completed GNU Gama XML feed</div>
+						</a></li>
+					</ul>
+					<div style="clear: both;"></div>
+				</div>
 			</div>
 		</div>
 	</div>

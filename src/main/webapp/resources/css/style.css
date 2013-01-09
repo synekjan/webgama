@@ -552,25 +552,67 @@ div.error {
 	border-color: #E3A198;
 }
 
+div#options {
+	margin: 0 auto;
+	padding-top: 20px;
+	width: 730px;
+}
+
 ul.adjustment_choose a {
-	margin: 20px;
-	width: 400px;
-	height: 200px;
-	border: 1px solid #DDDDDD;
+	margin: 10px;
+	width: 320px;
+	padding: 20px 0 0 20px;
+	height: 120px;
+	border: 1px solid #CCCCCC;
+	border-radius: 4px 4px 4px 4px;
 	float: left;
+	text-decoration: none;
+	font-size: 25px;
+	font-family: Jura, sans-serif;
+	color: #777777;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+ul.adjustment_choose a:HOVER {
+	border-color: #AAAAAA;
+	color: #333333;
+}
+
+ul.adjustment_choose a:ACTIVE {
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4) inset;
+	padding-top: 22px;
+	height: 118px;
+}
+
+ul.adjustment_choose a div {
+	font-size: 13px;
+	font-family: 'Open Sans', sans-serif;
+	margin-left: 5px;
+	width: 200px;
+}
+
+ul.adjustment_choose a.wizard {
+	background: url("../img/wizard.png") no-repeat scroll 97% 100% #F1F1F1;
+}
+
+ul.adjustment_choose a.onepage {
+	background: url("../img/onepage.png") no-repeat scroll 97% 100% #F1F1F1;
+}
+
+ul.adjustment_choose a.import {
+	background: url("../img/import.png") no-repeat scroll 97% 100% #F1F1F1;
 }
 
 div.side_toolbar {
 	position: fixed;
 	width: 150px;
-	height: 300px;
+	height: 350px;
 	top: 200px;
 	left: 0;
 	border: 1px solid #BBBBBB;
 	background-color: #FFFFFF;
 	z-index: 100;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-	
 	transition: all 1s;
 	-moz-transition: all 1s; /* Firefox 4 */
 	-webkit-transition: all 1s; /* Safari and Chrome */
