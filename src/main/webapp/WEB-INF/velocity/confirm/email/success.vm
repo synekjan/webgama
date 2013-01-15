@@ -15,7 +15,7 @@
 				</div>
 				<div id="dialog_container">
 					<p>Your email address was successfully confirmed</p>
-					<p>Now you can log in at <a href="#springUrl("/login")">login page</a></p>
+					<p>Now you can log in at <a href="#springUrl("/signin")">login page</a></p>
 				</div>
 			</div>
 		</div>

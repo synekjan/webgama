@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -12,8 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import cz.cvut.fsv.webgama.service.UserManager;
+
 @Controller
 public class IndexController {
+	
+	@Inject
+	private UserManager userManager;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(IndexController.class);
@@ -36,10 +42,12 @@ public class IndexController {
 			return mav;
 
 		} else {
+			
+			int userCount = userManager.getUserCount();
 
 			logger.info("Welcome page was requested from IP: "
 					+ request.getRemoteHost());
-			return new ModelAndView("welcome");
+			return new ModelAndView("welcome", "userCount", userCount);
 		}
 	}
 

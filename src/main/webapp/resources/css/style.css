@@ -4,8 +4,8 @@ html,body {
 	height: 100%;
 }
 
-body {
-	background-color: #FCFCFC;
+body { /* background-color: #FCFCFC; */
+	background-color: #FFF;
 	color: #333333;
 	font-family: "Open Sans", Helvetica, Arial, sans-serif;
 	font-size: 13px;
@@ -30,14 +30,10 @@ div#container {
 div#header {
 	height: 40px;
 	background-color: #2B6DAE;
-	background: -moz-linear-gradient(top, #4A8CCD, #2062A3) repeat scroll 0
-		0 #2B6DAE;
-	background: -ms-linear-gradient(top, #4A8CCD, #2062A3) repeat scroll 0 0
-		#2B6DAE;
-	background: -webkit-linear-gradient(top, #4A8CCD, #2062A3) repeat scroll
-		0 0 #2B6DAE;
-	background: -o-linear-gradient(top, #333, #222) repeat scroll 0 0
-		#2B6DAE;
+	background: -moz-linear-gradient(top, #4A8CCD, #2062A3) repeat scroll 0 0 #2B6DAE;
+	background: -ms-linear-gradient(top, #4A8CCD, #2062A3) repeat scroll 0 0 #2B6DAE;
+	background: -webkit-linear-gradient(top, #4A8CCD, #2062A3) repeat scroll 0 0 #2B6DAE;
+	background: -o-linear-gradient(top, #333, #222) repeat scroll 0 0 #2B6DAE;
 	background: linear-gradient(top, #333, #222) repeat scroll 0 0 #2B6DAE;
 	box-shadow: 0 1px 2px #777777;
 	-moz-box-shadow: 0 2px 4px #AAAAAA;
@@ -66,10 +62,10 @@ div#logo a {
 	text-shadow: 0 -1px 1px #333333;
 	font-weight: bold;
 	text-decoration: none;
-	transition: text-shadow 1s;
-	-moz-transition: text-shadow 1s; /* Firefox 4 */
-	-webkit-transition: text-shadow 1s; /* Safari and Chrome */
-	-o-transition: text-shadow 1s; /* Opera */
+	transition: text-shadow 0.5s;
+	-moz-transition: text-shadow 0.5s; /* Firefox 4 */
+	-webkit-transition: text-shadow 0.5s; /* Safari and Chrome */
+	-o-transition: text-shadow 0.5s; /* Opera */
 }
 
 div#logo a:HOVER {
@@ -158,8 +154,7 @@ div#account_dropdown a:HOVER,div#locale_dropdown a:HOVER {
 
 /* ------------------------------------   FOOTER   ------------------------------------- */
 div#footer {
-	background: url("../img/cvut_logo_mono.png") no-repeat scroll center
-		35px #F1F1F1;
+	background: url("../img/cvut_logo_mono.png") no-repeat scroll center 35px #F1F1F1;
 	border-top: 1px solid #DDDDDD;
 	height: 100px;
 	width: 100%;
@@ -294,28 +289,23 @@ div#account_container .panel {
 }
 
 div#account_container div#info {
-	background: url("../img/info_symbol.png") no-repeat scroll 95% 100%
-		#F1F1F1;
+	background: url("../img/info_symbol.png") no-repeat scroll 95% 100% #F1F1F1;
 }
 
 div#account_container div#user {
-	background: url("../img/user_symbol.png") no-repeat scroll 95% 100%
-		#F1F1F1;
+	background: url("../img/user_symbol.png") no-repeat scroll 95% 100% #F1F1F1;
 }
 
 div#account_container div#changepass {
-	background: url("../img/key_symbol.png") no-repeat scroll 95% 100%
-		#F1F1F1;
+	background: url("../img/key_symbol.png") no-repeat scroll 95% 100% #F1F1F1;
 }
 
 div#account_container div#loginslist {
-	background: url("../img/login_symbol.png") no-repeat scroll 95% 100%
-		#F1F1F1;
+	background: url("../img/login_symbol.png") no-repeat scroll 95% 100% #F1F1F1;
 }
 
 div#account_container div#delete {
-	background: url("../img/bin_symbol.png") no-repeat scroll 95% 100%
-		#F1F1F1;
+	background: url("../img/bin_symbol.png") no-repeat scroll 95% 100% #F1F1F1;
 }
 
 .panel_header {
@@ -362,8 +352,7 @@ textarea {
 
 input[type=text]:focus,input[type=password]:focus,textarea:focus {
 	border-color: rgba(82, 168, 236, 0.8);
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px
-		rgba(82, 168, 236, 0.6);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6);
 	outline: 0 none;
 }
 
@@ -424,36 +413,11 @@ input.submit_btn:ACTIVE {
 	font-style: italic;
 }
 
-div#slides {
-	margin: 0px auto;
-	width: 800px;
-	padding: 20px;
-	text-align: center;
-	padding: 20px;
-}
-
-.slides_container {
-	width: 800px;
-	height: 400px;
-}
-
-.slides_container div {
-	width: 800px;
-	height: 400px;
-	display: block;
-}
-
-.slide {
-	text-align: left;
-	padding: 20px;
-	height: 300px;
-	width: 700px;
-}
-
 .register_container {
-	margin: 20px 0px;
+	margin: 40px 0px 20px 0px;
 	padding: 20px 0px;
 	text-align: center;
+	border-top: 1px solid #DDDDDD;
 }
 
 #signup_btn {
@@ -570,7 +534,8 @@ ul.adjustment_choose a {
 	font-size: 25px;
 	font-family: Jura, sans-serif;
 	color: #777777;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+	text-shadow: 0 1px 0 #FFFFFF;
 }
 
 ul.adjustment_choose a:HOVER {
@@ -592,15 +557,16 @@ ul.adjustment_choose a div {
 }
 
 ul.adjustment_choose a.wizard {
-	background: url("../img/wizard.png") no-repeat scroll 97% 100% #F1F1F1;
+	background: url("../img/wizard.png") no-repeat scroll 97% 100% #F5F5F5;
+	back
 }
 
 ul.adjustment_choose a.onepage {
-	background: url("../img/onepage.png") no-repeat scroll 97% 100% #F1F1F1;
+	background: url("../img/onepage.png") no-repeat scroll 97% 100% #F5F5F5;
 }
 
 ul.adjustment_choose a.import {
-	background: url("../img/import.png") no-repeat scroll 97% 100% #F1F1F1;
+	background: url("../img/import.png") no-repeat scroll 97% 100% #F5F5F5;
 }
 
 div.side_toolbar {
@@ -617,6 +583,161 @@ div.side_toolbar {
 	-moz-transition: all 1s; /* Firefox 4 */
 	-webkit-transition: all 1s; /* Safari and Chrome */
 	-o-transition: all 1s; /* Opera */
+}
+
+div#wizard_panel {
+	width: 860px;
+	margin: 0 auto;
+	padding: 10px;
+	border: 1px solid #DDDDDD;
+	background-color: #F1F1F1;
+	border-radius: 3px 3px 3px 3px;
+	border: 1px solid #DDDDDD;
+}
+
+div#wizard_header {
+	border-bottom: 1px solid #DDDDDD;
+	padding: 10px;
+}
+
+div#wizard_header h3 {
+	font-size: 22px;
+	font-family: Jura, sans-serif;
+}
+
+div#wizard_form {
+	
+}
+
+div#wizard_buttons {
+	border-top: 1px solid #DDDDDD;
+	padding: 10px 10px;
+}
+
+.next_btn,.previous_btn {
+	display: inline-block;
+	cursor: pointer;
+	padding: 8px 10px;
+	border: 1px solid #CCCCCC;
+	background-color: #FAFAFA;
+	background-image: linear-gradient(to bottom, #FCFCFC, #D5D5D5);
+	background-repeat: repeat-x;
+	min-width: 80px;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.next_btn {
+	border-radius: 3px 15px 15px 3px;
+	float: right;
+}
+
+.previous_btn {
+	border-radius: 15px 3px 3px 15px;
+}
+
+/* ---------------------- WELCOME PAGE HEADING -------------------*/
+#heading {
+	margin: 20px;
+	padding: 20px;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+#heading h1 {
+	text-align: center;
+	font-size: 25px;
+	font-family: Jura, sans-serif;
+	font-size: 25px;
+}
+
+/* --------------------------- SLIDESHOW -------------------------*/
+div#slides {
+	margin: 0px auto;
+	width: 940px;
+	position: relative;
+}
+
+.slides_container { /* 	margin: 0px auto; */
+	width: 940px;
+	height: 400px;
+	/* border: 1px solid silver; */
+}
+
+.slides_container div.slide {
+	width: 940px;
+	height: 400px;
+	display: block;
+}
+
+.slide .image {
+	width: 600px;
+	float: left;
+}
+
+.slide .text {
+	width: 260px;
+	float: left;
+	height: 320px;
+	padding: 80px 40px 0px 40px;
+	padding-left: 20px;
+}
+
+.slide .text h1 {
+	font-weight: bold;
+	font-size: 20px;
+	padding: 10px 0;
+}
+
+#slides div.prev {
+	background: url("../img/arrow-left.png") no-repeat scroll 0 0 transparent;
+	top: 50%;
+	left: 0;
+}
+
+#slides div.next {
+	background: url("../img/arrow-right.png") no-repeat scroll 0 0 transparent;
+	top: 50%;
+	right: 0;
+}
+
+#slides div.prev,#slides div.next {
+	position: absolute;
+	height: 36px;
+	text-indent: -8000px;
+	width: 20px;
+	z-index: 100;
+}
+
+#slides div.prev:HOVER,#slides div.next:HOVER {
+	background-position: 0 -36px;
+}
+
+#slides div.prev:ACTIVE,#slides div.next:ACTIVE {
+	background-position: 0 -72px;
+}
+
+ul.pagination {
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	z-index: 100;
+}
+
+ul.pagination li a {
+	background-color: #CCCCCC;
+	cursor: pointer;
+	display: inline-block;
+	border-radius: 6px 6px 6px 6px;
+	height: 12px;
+	margin: 0 3px;
+	width: 12px;
+	text-indent: -8000px;
+	transition: color 0.5s ease-in 0s;
+}
+
+.pagination li.current a {
+	background-color: #328FC9;
 }
 
 @font-face {
@@ -642,6 +763,5 @@ div.side_toolbar {
 	font-style: normal;
 	font-weight: 400;
 	src: local('Jura Regular'), local('Jura-Regular'),
-		url(http://themes.googleusercontent.com/static/fonts/jura/v4/ikSpnlk15P9I9D4KtDGQVQ.woff)
-		format('woff');
+		url(http://themes.googleusercontent.com/static/fonts/jura/v4/ikSpnlk15P9I9D4KtDGQVQ.woff) format('woff');
 }

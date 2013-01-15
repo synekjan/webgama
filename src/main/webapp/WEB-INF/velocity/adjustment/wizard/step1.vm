@@ -1,13 +1,15 @@
-<div class="testicek">
-Dnes je $date
-<br>
-Normalni datum je: $dateTime<br>
-<input type="text" />
-<br>
-Nahodne cislo: $cislo
-<br>
-Pridano ajaxem
-<br>
-<br>
-$input.algorithm
+<div id="wizard_panel">
+	<div id="wizard_header">
+		<h3>STEP 1</h3>
+	</div>
+	<div id="wizard_form">
+		<form action="">
+			<label for="name">STEP 1:</label> <input id="name" type="text" />
+		</form>
+
+		<div id="wizard_buttons">
+			<div id="previous" class="previous_btn step1">Previous</div>
+			<div id="next" class="next_btn step1">Next</div>
+		</div>
+	</div>
 </div>

@@ -189,6 +189,13 @@ public class UserManagerImpl implements UserManager {
 		userDao.deleteConfirmationID(uuid);
 		userDao.updateEnabled(user);
 	}
+	
+	@Override
+	@Transactional
+	public int getUserCount() {
+
+		return userDao.getUserCount() + 126;
+	}
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
@@ -201,5 +208,6 @@ public class UserManagerImpl implements UserManager {
 	public void setMailManager(MailManager mailManager) {
 		this.mailManager = mailManager;
 	}
+
 
 }

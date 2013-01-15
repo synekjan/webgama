@@ -37,5 +37,7 @@ public interface UserManager {
 	public boolean isConfirmationIDinDB(String uuid);
 
 	public void confirmEmailAddress(String uuid);
+	
+	public int getUserCount();
 
 }

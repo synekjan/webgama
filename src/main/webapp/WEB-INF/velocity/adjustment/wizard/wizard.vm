@@ -18,28 +18,36 @@
 				</ul>
 			</div>
 			<div id="content">
-				<h1 style="font-size: 20px;">Wizard Form</h1>
-				<p>#springMessage("controller") ${time} ms</p>
-				<a id="ajax_btn" href>GetJSON</a> <a id="ajax_reset" href>Reset</a>
-				<div id="ajax_result"></div>
+				<div class="panel_header">
+					<h2>#springMessage("adjustment.navbar")</h2>
+				</div>
+				<div id="wizard">
+					<div id="wizard_panel">
+						<div id="wizard_header">
+							<h3>General Settings</h3>
+						</div>
+						<div id="wizard_breadcrumbs"></div>
+						<div id="wizard_form">
+
+							<p>This is only test!</p>
+
+
+							<div id="wizard_buttons">
+								<div id="previous" class="previous_btn step1">Previous</div>
+								<div id="next" class="next_btn step1">Next</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	#parse("footer.vm")
 	<script>
-		function doAjaxGet() {
-			jQuery.ajax({
-				type : 'GET',
-				url : '#springUrl("/adjustment/wizard/index")',
-				dataType : 'html',
-				async : true,
-				success : function(result) {
-					jQuery('#ajax_result').hide("drop", { direction: "left" }, 500, function() {jQuery('#ajax_result').html(result);});
-					jQuery('#ajax_result').show("drop", { direction: "right" }, 500);
-					return false;
-				}
-			});
-		}
+	$(document).on("click", "#next", function() {
+		wizardAjaxPost("#springURl("/adjustment/wizard/step2")");
+		return false;
+	});
 	</script>
 </body>
 </html>

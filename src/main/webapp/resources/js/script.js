@@ -13,11 +13,13 @@ $(document).ready(function() {
 		return false;
 	});
 
-	$('#account_dropdown').click(function(e) { // not hide when click on dropdown
+	$('#account_dropdown').click(function(e) { // not hide when click on
+		// dropdown
 		e.stopPropagation();
 	});
 
-	$('#locale_dropdown').click(function(e) { // not hide when click on dropdown
+	$('#locale_dropdown').click(function(e) { // not hide when click on
+		// dropdown
 		e.stopPropagation();
 	});
 
@@ -26,17 +28,32 @@ $(document).ready(function() {
 		$('#locale_dropdown').slideUp(200);
 	});
 
-	$('#ajax_btn').click(function() {
-		doAjaxGet();
-		return false;
-	});
-	
 	$('#ajax_reset').click(function() {
 		$('#ajax_result').html("");
 		return false;
 	});
-	$('.success, .error').delay(3000).hide("blind", {direction: "horizontal"},1000);
-	
-	
+	$('.success, .error').delay(3000).hide("blind", {
+		direction : "horizontal"
+	}, 1000);
 
 });
+
+function wizardAjaxPost(stepUrl) {
+	jQuery.ajax({
+		type : 'POST',
+		url : stepUrl,
+		dataType : 'html',
+		async : true,
+		success : function(result) {
+			jQuery('#wizard').hide("drop", {
+				direction : "left"
+			}, 500, function() {
+				jQuery('#wizard').html(result);
+			});
+			jQuery('#wizard').show("drop", {
+				direction : "right"
+			}, 500);
+			return false;
+		}
+	});
+}

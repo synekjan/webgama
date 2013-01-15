@@ -1,14 +1,11 @@
 package cz.cvut.fsv.webgama.controller;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.joda.time.DateTime;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,13 +22,13 @@ public class AdjustmentWizardController extends MultiActionController implements
 	
 	private static final long serialVersionUID = 5171649431095330184L;
 	
-	private Input input;
+	private Input input = new Input();
 
 	@RequestMapping(value = {"", "new"}, method = RequestMethod.GET)
 	protected ModelAndView newInput(HttpServletRequest request) {
 
 		long startTime = System.nanoTime();
-		ModelAndView mav = new ModelAndView("/adjustment/wizard/new");
+		ModelAndView mav = new ModelAndView("/adjustment/wizard/wizard");
 
 		double time = (double) (System.nanoTime() - startTime) / 1000000;
 		mav.addObject("time", time);
@@ -42,22 +39,40 @@ public class AdjustmentWizardController extends MultiActionController implements
 		return mav;
 	}
 	
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	protected ModelAndView index(HttpServletRequest request, Locale locale, HttpServletResponse response) {
+	@RequestMapping(value = "/step1", method = RequestMethod.POST)
+	protected ModelAndView step1(HttpServletRequest request, Locale locale, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("adjustment/wizard/step1");
+		
+		mav.addObject("input", input);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/step2", method = RequestMethod.POST)
+	protected ModelAndView step2(HttpServletRequest request, Locale locale, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("adjustment/wizard/step2");
 		
-		Date date = new Date();
-		DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, locale);
-		String dateTime = df.format(date);
-
-		mav.addObject("date", dateTime);
+		mav.addObject("input", input);
 		
-		DateTime date1 = new DateTime();
-		mav.addObject("dateTime", date1);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/step3", method = RequestMethod.POST)
+	protected ModelAndView step3(HttpServletRequest request, Locale locale, HttpServletResponse response) {
 		
-		double cislo = Math.random();
-		mav.addObject("cislo", cislo);
+		ModelAndView mav = new ModelAndView("adjustment/wizard/step3");
+		
+		mav.addObject("input", input);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/step4", method = RequestMethod.POST)
+	protected ModelAndView step4(HttpServletRequest request, Locale locale, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("adjustment/wizard/step4");
 		
 		mav.addObject("input", input);
 		

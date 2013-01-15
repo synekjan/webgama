@@ -76,6 +76,14 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 		return users;
 	}
+	
+	@Override
+	public int getUserCount() {
+		
+		String sql = "SELECT COUNT(user_id) FROM users";
+		
+		return getJdbcTemplate().queryForInt(sql);
+	}
 
 	@Override
 	public List<User> findUsersByUsername(String username) {
@@ -204,7 +212,5 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 			return conf;
 		}
-
 	}
-
 }
