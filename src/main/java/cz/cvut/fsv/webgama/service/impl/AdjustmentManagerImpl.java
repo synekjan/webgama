@@ -2,6 +2,7 @@ package cz.cvut.fsv.webgama.service.impl;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,8 +50,15 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		} catch (IOException e) {
 			logger.error("Error during converting MultipartFile to InputStream");
 		}
-		
+
 		return processManager.runExternalGama(input, username);
+	}
+
+	@Transactional
+	@Override
+	public List<Input> getInputsbyUsername(String username) {
+
+		return inputDao.findInputsByUser(userDao.findUserByUsername(username));
 	}
 
 	public void setInputDao(InputDao inputDao) {
@@ -68,4 +76,12 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 	public void setProcessManager(ProcessManager processManager) {
 		this.processManager = processManager;
 	}
+
+	@Transactional
+	@Override
+	public int getInputCountbyUsername(String username) {
+		
+		return inputDao.getInputCountByUser(userDao.findUserByUsername(username));
+	}
+
 }

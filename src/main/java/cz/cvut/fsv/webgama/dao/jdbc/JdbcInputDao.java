@@ -38,9 +38,10 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 				input.getAlgorithm(), input.getAngUnits(), input.getLatitude(),
 				input.getEllipsoid(), input.getVersion() };
 
-		// Store last generated value from SERIAL PostgreSQL type [RETURNING syntax]
+		// Store last generated value from SERIAL PostgreSQL type [RETURNING
+		// syntax]
 		int inputId = getJdbcTemplate().queryForInt(sql, params);
-		
+
 		networkDao.insert(input.getNetwork(), inputId);
 	}
 
@@ -85,6 +86,15 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 				new Object[] { user.getId() }, new InputMapper());
 
 		return inputs;
+	}
+
+	@Override
+	public int getInputCountByUser(User user) {
+
+		String sql = "SELECT COUNT(input_id) FROM inputs WHERE user_id = ?";
+
+		return getJdbcTemplate()
+				.queryForInt(sql, new Object[] { user.getId() });
 	}
 
 	private class InputMapper implements RowMapper<Input> {

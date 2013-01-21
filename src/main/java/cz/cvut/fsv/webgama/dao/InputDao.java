@@ -16,5 +16,7 @@ public interface InputDao {
 	public List<Input> getInputList();
 	
 	public List<Input> findInputsByUser(User user);
+	
+	public int getInputCountByUser(User user);
 
 }

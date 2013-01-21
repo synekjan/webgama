@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import cz.cvut.fsv.webgama.domain.User;
 import cz.cvut.fsv.webgama.form.UserForm;
 import cz.cvut.fsv.webgama.form.UserPasswordChangeForm;
+import cz.cvut.fsv.webgama.service.AdjustmentManager;
 import cz.cvut.fsv.webgama.service.LoginManager;
 import cz.cvut.fsv.webgama.service.UserManager;
 import cz.cvut.fsv.webgama.validator.UserPasswordChangeValidator;
@@ -34,6 +35,9 @@ public class AccountController extends MultiActionController {
 
 	@Inject
 	private LoginManager loginManager;
+	
+	@Inject
+	private AdjustmentManager adjustmentManager;
 
 	@Inject
 	private UserPasswordChangeValidator passwordValidator;
@@ -51,6 +55,7 @@ public class AccountController extends MultiActionController {
 		String username = request.getUserPrincipal().getName();
 		User user = userManager.getUser(username);
 		mav.addObject("user", user);
+		mav.addObject("userInputCount", adjustmentManager.getInputCountbyUsername(username));
 
 		logger.info("User[" + username + "] checked own account information");
 		return mav;

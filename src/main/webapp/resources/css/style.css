@@ -20,10 +20,10 @@ div#wrapper {
 	margin: 0px 0px -101px 0px;
 }
 
-div#container {
+div#container,div#welcome_container {
 	width: 960px;
 	margin: 0 auto;
-	padding: 0px 0px 121px 0px;
+	padding: 0px 0px 111px 0px;
 }
 
 /* HEADER  */
@@ -34,16 +34,15 @@ div#header {
 	background: -ms-linear-gradient(top, #4A8CCD, #2062A3) repeat scroll 0 0 #2B6DAE;
 	background: -webkit-linear-gradient(top, #4A8CCD, #2062A3) repeat scroll 0 0 #2B6DAE;
 	background: -o-linear-gradient(top, #333, #222) repeat scroll 0 0 #2B6DAE;
-	background: linear-gradient(top, #333, #222) repeat scroll 0 0 #2B6DAE;
+	background: linear-gradient(top, #69D344, #4C8B36) repeat scroll 0 0 #2B6DAE;
 	box-shadow: 0 1px 2px #777777;
 	-moz-box-shadow: 0 2px 4px #AAAAAA;
 	-webkit-box-shadow: 0 2px 4px #AAAAAA;
-	margin-bottom: 10px;
 }
 
 div#header_inner_wrapper,div#footer_inner_wrapper {
 	width: 960px;
-	margin: 0 auto;
+	margin: 0px auto;
 }
 
 div#header a {
@@ -330,7 +329,7 @@ legend {
 	font: 15px "Jura";
 }
 
-input[type=text],input[type=password],select {
+input[type=text],input[type=password] {
 	border: 1px solid #BBBBBB;
 	border-radius: 1px 1px 1px 1px;
 	color: #555555;
@@ -414,15 +413,22 @@ input.submit_btn:ACTIVE {
 }
 
 .register_container {
-	margin: 40px 0px 20px 0px;
-	padding: 20px 0px;
+	margin-top: 20px;
+	padding: 30px 0px;
 	text-align: center;
 	border-top: 1px solid #DDDDDD;
+	border-bottom: 1px solid #DDDDDD;
+	background-color: #F5F5F5;
+	padding: 30px 0px;
 }
 
 #signup_btn {
 	background-color: #4C8B36;
 	background-image: linear-gradient(#69D344, #4C8B36);
+	background-image: -moz-linear-gradient(top, #69D344, #4C8B36);
+	background-image: -ms-linear-gradient(top, #69D344, #4C8B36);
+	background-image: -webkit-linear-gradient(top, #69D344, #4C8B36);
+	background-image: -o-linear-gradient(top, #69D344, #4C8B36);
 	background-repeat: repeat-x;
 	border: 1px solid #74BB5A #74BB5A #509338;
 	border-radius: 4px 4px 4px 4px;
@@ -540,7 +546,7 @@ ul.adjustment_choose a {
 
 ul.adjustment_choose a:HOVER {
 	border-color: #AAAAAA;
-	color: #333333;
+	color: #111111;
 }
 
 ul.adjustment_choose a:ACTIVE {
@@ -558,7 +564,6 @@ ul.adjustment_choose a div {
 
 ul.adjustment_choose a.wizard {
 	background: url("../img/wizard.png") no-repeat scroll 97% 100% #F5F5F5;
-	back
 }
 
 ul.adjustment_choose a.onepage {
@@ -569,7 +574,7 @@ ul.adjustment_choose a.import {
 	background: url("../img/import.png") no-repeat scroll 97% 100% #F5F5F5;
 }
 
-div.side_toolbar {
+div#side_toolbar {
 	position: fixed;
 	width: 150px;
 	height: 350px;
@@ -577,12 +582,12 @@ div.side_toolbar {
 	left: 0;
 	border: 1px solid #BBBBBB;
 	background-color: #FFFFFF;
-	z-index: 100;
+	z-index: 50;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-	transition: all 1s;
-	-moz-transition: all 1s; /* Firefox 4 */
-	-webkit-transition: all 1s; /* Safari and Chrome */
-	-o-transition: all 1s; /* Opera */
+	/* transition: all 1s;
+	-moz-transition: all 1s; Firefox 4
+	-webkit-transition: all 1s; Safari and Chrome
+	-o-transition: all 1s; Opera */
 }
 
 div#wizard_panel {
@@ -639,8 +644,8 @@ div#wizard_buttons {
 
 /* ---------------------- WELCOME PAGE HEADING -------------------*/
 #heading {
-	margin: 20px;
 	padding: 20px;
+	background-color: #F5F5F5;
 	border-bottom: 1px solid #DDDDDD;
 }
 
@@ -658,10 +663,9 @@ div#slides {
 	position: relative;
 }
 
-.slides_container { /* 	margin: 0px auto; */
+.slides_container {
 	width: 940px;
 	height: 400px;
-	/* border: 1px solid silver; */
 }
 
 .slides_container div.slide {
@@ -691,22 +695,23 @@ div#slides {
 
 #slides div.prev {
 	background: url("../img/arrow-left.png") no-repeat scroll 0 0 transparent;
-	top: 50%;
 	left: 0;
 }
 
 #slides div.next {
 	background: url("../img/arrow-right.png") no-repeat scroll 0 0 transparent;
-	top: 50%;
 	right: 0;
 }
 
 #slides div.prev,#slides div.next {
 	position: absolute;
+	top: 50%;
+	margin-top: -20px;
 	height: 36px;
 	text-indent: -8000px;
 	width: 20px;
 	z-index: 100;
+	height: 36px;
 }
 
 #slides div.prev:HOVER,#slides div.next:HOVER {
@@ -724,20 +729,34 @@ ul.pagination {
 	z-index: 100;
 }
 
+ul.pagination li {
+	float: left;
+}
+
 ul.pagination li a {
 	background-color: #CCCCCC;
 	cursor: pointer;
-	display: inline-block;
-	border-radius: 6px 6px 6px 6px;
+	display: block;
+	float: left;
 	height: 12px;
 	margin: 0 3px;
 	width: 12px;
 	text-indent: -8000px;
 	transition: color 0.5s ease-in 0s;
+	border-radius: 6px 6px 6px 6px;
 }
 
 .pagination li.current a {
 	background-color: #328FC9;
+}
+
+ul.pagination li a:HOVER {
+	background-color: #52AFE9;
+}
+
+/* ---------------- WELCOME PAGE  --------------------- */
+div#welcome_container {
+	padding: 40px 0 141px 0;
 }
 
 @font-face {

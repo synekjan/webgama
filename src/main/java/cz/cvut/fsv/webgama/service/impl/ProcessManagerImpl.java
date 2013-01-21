@@ -33,10 +33,12 @@ public class ProcessManagerImpl implements ProcessManager {
 		commands.add(gamaFilePath);
 
 		// creates temporary filename
-		StringBuilder sb = new StringBuilder(username);
+		StringBuilder sb = new StringBuilder("webgama");
+		sb.append("-");
+		sb.append(username);
 		sb.append("-");
 		sb.append(Generator.generateFilename());
-		sb.append(".xml");
+		sb.append(".wxml");
 		String filename = sb.toString();
 		String filePath = "/tmp/" + filename;
 

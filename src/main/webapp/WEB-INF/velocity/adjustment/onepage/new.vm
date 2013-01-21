@@ -44,6 +44,13 @@
 									<td>#springFormInput("input.epoch", "")</td>
 									<td>#springShowErrors("&nbsp", "form_errors")</td>
 								</tr>
+								<tr>
+									<td><label for="sigma-act">SigmaAct:</label></td>
+									<td><select id="sigma-act" name="sigmaAct">
+											<option value="aposteriori">Aposteriori</option>
+											<option selected="selected" value="apriori">Apriori</option>
+									</select></td>
+								</tr>
 							</table>
 						</fieldset>
 						<fieldset>

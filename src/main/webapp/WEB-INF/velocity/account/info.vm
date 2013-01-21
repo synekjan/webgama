@@ -30,6 +30,10 @@
 							<td>$user.username</td>
 						</tr>
 						<tr>
+							<td>#springMessage("calculations"):</td>
+							<td><a href="#springUrl("/calculation")">$userInputCount calculations</a></td>
+						</tr>
+						<tr>
 							<td>#springMessage("user.created"):</td>
 							<td>$dateTool.format("yyyy-MM-dd HH:mm:ss",$user.created.toDate())</td>
 						</tr>

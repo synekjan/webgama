@@ -1,4 +1,4 @@
-<div class="side_toolbar">
+<div id="side_toolbar" class="resizable draggable">
 	<h3>Toolbar</h3>
 </div>
 <script>
@@ -13,4 +13,7 @@ $(document).ready(function() {
     });
      
 });
+
+$(".draggable").draggable();
+
 </script>

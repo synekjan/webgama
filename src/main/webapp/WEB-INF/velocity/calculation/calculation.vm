@@ -21,9 +21,31 @@
 				<div class="panel_header">
 					<h2>Calculations</h2>
 				</div>
+				<div id="accordion">
+					#foreach ($input in $inputList)
+					<h3>$input.id [$dateTool.format("yyyy-MM-dd
+						HH:mm:ss",$input.time.toDate())]</h3>
+					<div>
+						<p>Cras dictum. Pellentesque habitant morbi tristique senectus et
+						netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum
+						primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+						Aenean lacinia mauris vel est.
+						</p>
+						<p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim
+							consequat lectus. Class aptent taciti sociosqu ad litora torquent
+							per conubia nostra, per inceptos himenaeos.</p>
+					</div>
+					#end
+
+				</div>
 			</div>
 		</div>
 	</div>
 	#parse("footer.vm")
+	<script>
+		$(function() {
+			$("#accordion").accordion();
+		});
+	</script>
 </body>
 </html>

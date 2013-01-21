@@ -52,13 +52,15 @@ public class AdjustmentPageController extends MultiActionController {
 			return new ModelAndView("/adjustment/onepage/new");
 		}
 		
-		for (Point point : adjustmentForm.getPoints()) {
+		System.out.println(adjustmentForm.getSigmaAct());
+		
+		/*for (Point point : adjustmentForm.getPoints()) {
 			
 			System.out.println(point.getX());
 			System.out.println(point.getY());
 			System.out.println(point.getZ());
 			System.out.println("----------------------------");
-		}
+		}*/
 
 		return new ModelAndView("redirect:/calculation");
 	}

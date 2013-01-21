@@ -29,23 +29,29 @@
 						<div id="wizard_breadcrumbs"></div>
 						<div id="wizard_form">
 
-							<p>This is only test!</p>
+							<form action="">
+								<label for="name">STEP 1:</label> <input id="name" name="name"
+									type="text" />
 
-
-							<div id="wizard_buttons">
-								<div id="previous" class="previous_btn step1">Previous</div>
-								<div id="next" class="next_btn step1">Next</div>
-							</div>
+								<div id="wizard_buttons">
+									<div id="previous" class="previous_btn step1">Previous</div>
+									<div id="next" class="next_btn step1">Next</div>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	#parse("footer.vm")
+	#parse("footer.vm") #parse("toolbar.vm")
 	<script>
-	$(document).on("click", "#next", function() {
-		wizardAjaxPost("#springURl("/adjustment/wizard/step2")");
+	jQuery(document).on("click", "#next", function() {
+		wizardAjaxPostNext("#springUrl("/adjustment/wizard/step2")");
+		return false;
+	});
+	jQuery(document).on("click", "#previous", function() {
+		wizardAjaxPostPrevious("#springUrl("/adjustment/wizard/step4")");
 		return false;
 	});
 	</script>

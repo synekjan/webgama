@@ -32,13 +32,10 @@ $(document).ready(function() {
 		$('#ajax_result').html("");
 		return false;
 	});
-	$('.success, .error').delay(3000).hide("blind", {
-		direction : "horizontal"
-	}, 1000);
-
+	$('.success, .error').delay(5000).hide(1000);
 });
 
-function wizardAjaxPost(stepUrl) {
+function wizardAjaxPostNext(stepUrl) {
 	jQuery.ajax({
 		type : 'POST',
 		url : stepUrl,
@@ -57,3 +54,26 @@ function wizardAjaxPost(stepUrl) {
 		}
 	});
 }
+
+function wizardAjaxPostPrevious(stepUrl) {
+	jQuery.ajax({
+		type : 'POST',
+		url : stepUrl,
+		dataType : 'html',
+		async : true,
+		success : function(result) {
+			jQuery('#wizard').hide("drop", {
+				direction : "right"
+			}, 500, function() {
+				jQuery('#wizard').html(result);
+			});
+			jQuery('#wizard').show("drop", {
+				direction : "left"
+			}, 500);
+			return false;
+		}
+	});
+}
+
+
+
