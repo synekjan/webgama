@@ -16,8 +16,14 @@ public class Generator {
 		return UUID.randomUUID().toString();
 	}
 	
-	public static String generateFilename() {
+	public static String generateFilename(String username) {
 		
-		return RandomStringUtils.random(6, true, true);
+		StringBuilder sb = new StringBuilder("webgama");
+		sb.append("-");
+		sb.append(username);
+		sb.append("-");
+		sb.append(RandomStringUtils.random(6, true, true));
+		sb.append(".wxml");
+		return sb.toString();
 	}
 }

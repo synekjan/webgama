@@ -79,6 +79,9 @@
 		<property name="loginManager" ref="loginManager" />
 	</bean>
 
+	<bean id="fileEraser" class="cz.cvut.fsv.webgama.util.FileEraser">
+	</bean>
+
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- one of the properties available; the maximum file size in bytes -->
