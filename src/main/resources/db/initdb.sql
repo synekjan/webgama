@@ -149,6 +149,7 @@ GRANT ALL ON confirmations_confirmation_id_seq TO synekjan;
 CREATE TABLE inputs (
 input_id 		SERIAL PRIMARY KEY,
 user_id 		INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+name			VARCHAR(80) NOT NULL,
 filename 		VARCHAR(255) NOT NULL,
 file_content 	TEXT,
 algorithm		VARCHAR(12) NOT NULL,

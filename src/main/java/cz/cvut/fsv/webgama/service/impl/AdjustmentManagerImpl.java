@@ -39,6 +39,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 			String stringFromStream = CharStreams
 					.toString(new InputStreamReader(file.getInputStream(),
 							"UTF-8"));
+			input.setName("Import-" + file.getOriginalFilename());
 			input.setFileContent(stringFromStream);
 			input.setFilename(file.getOriginalFilename());
 			input.setAlgorithm("svd");
@@ -80,8 +81,9 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 	@Transactional
 	@Override
 	public int getInputCountbyUsername(String username) {
-		
-		return inputDao.getInputCountByUser(userDao.findUserByUsername(username));
+
+		return inputDao.getInputCountByUser(userDao
+				.findUserByUsername(username));
 	}
 
 }

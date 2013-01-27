@@ -31,10 +31,10 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 	@Override
 	public void insert(Input input) {
 
-		String sql = "INSERT INTO inputs (user_id, filename, file_content, algorithm, ang_units, latitude, ellipsoid, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING input_id";
+		String sql = "INSERT INTO inputs (user_id, name, filename, file_content, algorithm, ang_units, latitude, ellipsoid, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING input_id";
 
 		Object[] params = new Object[] { input.getUser().getId(),
-				input.getFilename(), input.getFileContent(),
+				input.getName(), input.getFilename(), input.getFileContent(),
 				input.getAlgorithm(), input.getAngUnits(), input.getLatitude(),
 				input.getEllipsoid(), input.getVersion() };
 
@@ -56,15 +56,15 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 	@Override
 	public void update(Input input) {
 
-		String sql = "UPDATE inputs SET user_id=?, filename=?, file_content=?, algorithm=?, ang_units=?, latitude=?, ellipsoid=?, version=?, time=? WHERE input_id = ?";
+		String sql = "UPDATE inputs SET user_id=?, name=? filename=?, file_content=?, algorithm=?, ang_units=?, latitude=?, ellipsoid=?, version=?, time=? WHERE input_id = ?";
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { input.getUser().getId(), input.getFilename(),
-						input.getFileContent(), input.getAlgorithm(),
-						input.getAngUnits(), input.getLatitude(),
-						input.getEllipsoid(), input.getVersion(),
-						input.getTime(), input.getId() });
+				new Object[] { input.getUser().getId(), input.getName(),
+						input.getFilename(), input.getFileContent(),
+						input.getAlgorithm(), input.getAngUnits(),
+						input.getLatitude(), input.getEllipsoid(),
+						input.getVersion(), input.getTime(), input.getId() });
 	}
 
 	@Override
@@ -106,6 +106,7 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 
 			input.setId(rs.getInt("input_id"));
 			input.setUser(userDao.findUserById(rs.getInt("user_id")));
+			input.setName(rs.getString("name"));
 			input.setFilename(rs.getString("filename"));
 			input.setFileContent(rs.getString("file_content"));
 			input.setAlgorithm(rs.getString("algorithm"));

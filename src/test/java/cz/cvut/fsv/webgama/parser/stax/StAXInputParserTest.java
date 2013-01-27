@@ -1,6 +1,6 @@
 package cz.cvut.fsv.webgama.parser.stax;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.InputStream;
 
@@ -47,7 +47,8 @@ public class StAXInputParserTest {
 	public final void testComposeInput() {
 
 		Input input = inputParser.parseInput(inputStream);
-		inputParser.composeInput(System.out, input);
+		assertNotNull(input);
+		/*inputParser.composeInput(System.out, input);*/
 	}
 
 }

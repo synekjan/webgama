@@ -759,6 +759,28 @@ div#welcome_container {
 	padding: 40px 0 141px 0;
 }
 
+/* ACCORDION  */
+#accordion {
+	
+}
+
+#accordion .ui-accordion-content {
+	background-color: #f5f5f5;
+	color: #777;
+	padding: 10px;
+	border: 1px solid #777;
+	border-top: 0;
+}
+
+#accordion .ui-accordion-header {
+	background-color: #ccc;
+	margin-top: 2px;
+	padding: 10px;
+	border: 1px solid #777;
+	padding: 10px;
+	border-radius: 4px 4px 0px 0px;
+}
+
 @font-face {
 	font-family: 'Open Sans';
 	font-style: normal;

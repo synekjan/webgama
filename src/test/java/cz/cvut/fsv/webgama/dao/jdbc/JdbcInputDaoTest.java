@@ -3,6 +3,7 @@ package cz.cvut.fsv.webgama.dao.jdbc;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class JdbcInputDaoTest {
@@ -23,21 +24,25 @@ public class JdbcInputDaoTest {
 	}
 
 	@Test
+	@Ignore
 	public void testDelete() {
 		fail("Not yet implemented");
 	}
 
 	@Test
+	@Ignore
 	public void testUpdate() {
 		fail("Not yet implemented");
 	}
 
 	@Test
+	@Ignore
 	public void testGetInputList() {
 		fail("Not yet implemented");
 	}
 
 	@Test
+	@Ignore
 	public void testFindInputsByUser() {
 		fail("Not yet implemented");
 	}

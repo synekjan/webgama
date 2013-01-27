@@ -1,12 +1,18 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.io.Serializable;
+
 import org.joda.time.DateTime;
 
-public class Input {
+public class Input implements Serializable {
+
+	private static final long serialVersionUID = -5648997304219980815L;
 
 	private Integer id;
 
 	private User user;
+
+	private String name;
 
 	private String filename;
 
@@ -44,6 +50,14 @@ public class Input {
 
 	public String getFilename() {
 		return filename;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setFilename(String filename) {
