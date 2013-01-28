@@ -13,7 +13,7 @@ public class JdbcInputDaoTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		//db = new EmbeddedDatabaseBuilder().addDefaultScripts().build(); //TODO HSQL db
+		//db = new EmbeddedDatabaseBuilder().addDefaultScripts().build();
 		
 	}
 

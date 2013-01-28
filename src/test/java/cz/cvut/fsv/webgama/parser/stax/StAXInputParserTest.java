@@ -1,6 +1,7 @@
 package cz.cvut.fsv.webgama.parser.stax;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.InputStream;
 
@@ -16,6 +17,7 @@ public class StAXInputParserTest {
 
 	private InputStream inputStream = null;
 	private InputStream inputStream2 = null;
+	private InputStream inputStream3 = null;
 	private InputParser inputParser = null;
 
 	@Before
@@ -24,7 +26,7 @@ public class StAXInputParserTest {
 		inputStream = this.getClass()
 				.getResourceAsStream("dve-osnovy-uhel.xml");
 		inputStream2 = this.getClass().getResourceAsStream("seq-dsuloha-d.xml");
-
+		inputStream3 = this.getClass().getResourceAsStream("tst-tetrahedron-1.gkf");
 	}
 
 	@Test
@@ -46,9 +48,10 @@ public class StAXInputParserTest {
 	@Repeat(value=100)
 	public final void testComposeInput() {
 
-		Input input = inputParser.parseInput(inputStream);
+		Input input = inputParser.parseInput(inputStream2);
+		Input input3 = inputParser.parseInput(inputStream3);
 		assertNotNull(input);
-		/*inputParser.composeInput(System.out, input);*/
+		inputParser.composeInput(System.out, input3);
 	}
 
 }

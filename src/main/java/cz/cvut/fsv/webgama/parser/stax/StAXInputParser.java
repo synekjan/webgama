@@ -16,6 +16,7 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
+import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
@@ -23,14 +24,19 @@ import javax.xml.stream.events.XMLEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cz.cvut.fsv.webgama.domain.AlternativeObservation;
 import cz.cvut.fsv.webgama.domain.Angle;
+import cz.cvut.fsv.webgama.domain.Coordinate;
+import cz.cvut.fsv.webgama.domain.CovMat;
 import cz.cvut.fsv.webgama.domain.Direction;
 import cz.cvut.fsv.webgama.domain.Distance;
+import cz.cvut.fsv.webgama.domain.HeightDifference;
 import cz.cvut.fsv.webgama.domain.Input;
 import cz.cvut.fsv.webgama.domain.Network;
 import cz.cvut.fsv.webgama.domain.Observation;
 import cz.cvut.fsv.webgama.domain.Point;
 import cz.cvut.fsv.webgama.domain.SlopeDistance;
+import cz.cvut.fsv.webgama.domain.Vector;
 import cz.cvut.fsv.webgama.domain.ZenithAngle;
 import cz.cvut.fsv.webgama.parser.InputParser;
 
@@ -58,11 +64,21 @@ public class StAXInputParser implements InputParser {
 			Network network = null;
 			Point point = null;
 			Observation observation = null;
+			AlternativeObservation alternativeObservation = null;
 			Direction direction = null;
 			Distance distance = null;
 			Angle angle = null;
 			SlopeDistance slopeDistance = null;
 			ZenithAngle zenithAngle = null;
+			Coordinate coordinate = null;
+			Vector vector = null;
+			HeightDifference heightDifference = null;
+			CovMat covMat = null;
+
+			// current entered element
+			String currentTagName = null;
+			// description builder
+			StringBuilder descriptionBuilder = new StringBuilder();
 
 			while (eventReader.hasNext()) {
 
@@ -318,6 +334,7 @@ public class StAXInputParser implements InputParser {
 
 					if ("obs".equals(startElement.getName().getLocalPart())) {
 						observation = new Observation();
+						currentTagName = "obs";
 
 						@SuppressWarnings("unchecked")
 						Iterator<Attribute> attributes = startElement
@@ -348,42 +365,83 @@ public class StAXInputParser implements InputParser {
 					}
 
 					if ("point".equals(startElement.getName().getLocalPart())) {
-						point = new Point();
 
-						@SuppressWarnings("unchecked")
-						Iterator<Attribute> attributes = startElement
-								.getAttributes();
-						while (attributes.hasNext()) {
-							Attribute attribute = attributes.next();
+						if (!("coordinates".equals(currentTagName))) {
 
-							if ("id".equals(attribute.getName().getLocalPart())) {
-								point.setName(attribute.getValue());
-								continue;
+							point = new Point();
+
+							@SuppressWarnings("unchecked")
+							Iterator<Attribute> attributes = startElement
+									.getAttributes();
+							while (attributes.hasNext()) {
+								Attribute attribute = attributes.next();
+
+								if ("id".equals(attribute.getName()
+										.getLocalPart())) {
+									point.setName(attribute.getValue());
+									continue;
+								}
+								if ("x".equals(attribute.getName()
+										.getLocalPart())) {
+									point.setX(Double.parseDouble(attribute
+											.getValue()));
+									continue;
+								}
+								if ("y".equals(attribute.getName()
+										.getLocalPart())) {
+									point.setY(Double.parseDouble(attribute
+											.getValue()));
+									continue;
+								}
+								if ("z".equals(attribute.getName()
+										.getLocalPart())) {
+									point.setZ(Double.parseDouble(attribute
+											.getValue()));
+									continue;
+								}
+								if ("fix".equals(attribute.getName()
+										.getLocalPart())) {
+									point.setFix(attribute.getValue());
+									continue;
+								}
+								if ("adj".equals(attribute.getName()
+										.getLocalPart())) {
+									point.setAdj(attribute.getValue());
+									continue;
+								}
 							}
-							if ("x".equals(attribute.getName().getLocalPart())) {
-								point.setX(Double.parseDouble(attribute
-										.getValue()));
-								continue;
-							}
-							if ("y".equals(attribute.getName().getLocalPart())) {
-								point.setY(Double.parseDouble(attribute
-										.getValue()));
-								continue;
-							}
-							if ("z".equals(attribute.getName().getLocalPart())) {
-								point.setZ(Double.parseDouble(attribute
-										.getValue()));
-								continue;
-							}
-							if ("fix"
-									.equals(attribute.getName().getLocalPart())) {
-								point.setFix(attribute.getValue());
-								continue;
-							}
-							if ("adj"
-									.equals(attribute.getName().getLocalPart())) {
-								point.setAdj(attribute.getValue());
-								continue;
+						} else {
+							coordinate = new Coordinate();
+
+							@SuppressWarnings("unchecked")
+							Iterator<Attribute> attributes = startElement
+									.getAttributes();
+							while (attributes.hasNext()) {
+								Attribute attribute = attributes.next();
+
+								if ("id".equals(attribute.getName()
+										.getLocalPart())) {
+									coordinate.setName(attribute.getValue());
+									continue;
+								}
+								if ("x".equals(attribute.getName()
+										.getLocalPart())) {
+									coordinate.setX(Double
+											.parseDouble(attribute.getValue()));
+									continue;
+								}
+								if ("y".equals(attribute.getName()
+										.getLocalPart())) {
+									coordinate.setY(Double
+											.parseDouble(attribute.getValue()));
+									continue;
+								}
+								if ("z".equals(attribute.getName()
+										.getLocalPart())) {
+									coordinate.setZ(Double
+											.parseDouble(attribute.getValue()));
+									continue;
+								}
 							}
 						}
 
@@ -439,6 +497,7 @@ public class StAXInputParser implements InputParser {
 
 					if ("description".equals(startElement.getName()
 							.getLocalPart())) {
+						currentTagName = "description";
 
 						continue;
 					}
@@ -519,36 +578,139 @@ public class StAXInputParser implements InputParser {
 						continue;
 					}
 
-					// TODO
+					// TODO -- DOPLNIT COVMAT PARSOVANI
 					if ("cov-mat".equals(startElement.getName().getLocalPart())) {
 
+						covMat = new CovMat();
+
+						if (currentTagName.equals("obs")) {
+
+						} else if (currentTagName.equals("height-differences")) {
+
+						} else if (currentTagName.equals("coordinates")) {
+
+						} else if (currentTagName.equals("vectors")) {
+
+						} else {
+							logger.debug("Unrecognized CovMat parent node");
+						}
+
 						continue;
 					}
-					// TODO
+
 					if ("height-differences".equals(startElement.getName()
 							.getLocalPart())) {
+						alternativeObservation = new AlternativeObservation();
+						alternativeObservation.setTagname("height-differences");
+						currentTagName = "height-differences";
 
 						continue;
 					}
-					// TODO
+
 					if ("dh".equals(startElement.getName().getLocalPart())) {
+						heightDifference = new HeightDifference();
+
+						@SuppressWarnings("unchecked")
+						Iterator<Attribute> attributes = startElement
+								.getAttributes();
+						while (attributes.hasNext()) {
+							Attribute attribute = attributes.next();
+
+							if ("from".equals(attribute.getName()
+									.getLocalPart())) {
+								heightDifference.setFrom(attribute.getValue());
+								continue;
+							}
+							if ("to".equals(attribute.getName().getLocalPart())) {
+								heightDifference.setTo(attribute.getValue());
+								continue;
+							}
+							if ("val"
+									.equals(attribute.getName().getLocalPart())) {
+								heightDifference.setVal(Double
+										.parseDouble(attribute.getValue()));
+								continue;
+							}
+							if ("stdev".equals(attribute.getName()
+									.getLocalPart())) {
+								heightDifference.setStdev(Double
+										.parseDouble(attribute.getValue()));
+								continue;
+							}
+							if ("dist".equals(attribute.getName()
+									.getLocalPart())) {
+								heightDifference.setDist(Double
+										.parseDouble(attribute.getValue()));
+								continue;
+							}
+						}
 
 						continue;
 					}
-					// TODO
+
 					if ("coordinates".equals(startElement.getName()
 							.getLocalPart())) {
+						alternativeObservation = new AlternativeObservation();
+						alternativeObservation.setTagname("coordinates");
+						currentTagName = "coordinates";
 
 						continue;
 					}
-					// TODO
+
 					if ("vectors".equals(startElement.getName().getLocalPart())) {
+						alternativeObservation = new AlternativeObservation();
+						alternativeObservation.setTagname("vectors");
+						currentTagName = "vectors";
 
 						continue;
 					}
-					// TODO
-					if ("vec".equals(startElement.getName().getLocalPart())) {
 
+					if ("vec".equals(startElement.getName().getLocalPart())) {
+						vector = new Vector();
+
+						@SuppressWarnings("unchecked")
+						Iterator<Attribute> attributes = startElement
+								.getAttributes();
+						while (attributes.hasNext()) {
+							Attribute attribute = attributes.next();
+
+							if ("from".equals(attribute.getName()
+									.getLocalPart())) {
+								vector.setFrom(attribute.getValue());
+								continue;
+							}
+							if ("to".equals(attribute.getName().getLocalPart())) {
+								vector.setTo(attribute.getValue());
+								continue;
+							}
+							if ("dx".equals(attribute.getName().getLocalPart())) {
+								vector.setDx(Double.parseDouble(attribute
+										.getValue()));
+								continue;
+							}
+							if ("dy".equals(attribute.getName().getLocalPart())) {
+								vector.setDy(Double.parseDouble(attribute
+										.getValue()));
+								continue;
+							}
+							if ("dz".equals(attribute.getName().getLocalPart())) {
+								vector.setDz(Double.parseDouble(attribute
+										.getValue()));
+								continue;
+							}
+							if ("from_dh".equals(attribute.getName()
+									.getLocalPart())) {
+								vector.setFromDh(Double.parseDouble(attribute
+										.getValue()));
+								continue;
+							}
+							if ("to_dh".equals(attribute.getName()
+									.getLocalPart())) {
+								vector.setToDh(Double.parseDouble(attribute
+										.getValue()));
+								continue;
+							}
+						}
 						continue;
 					}
 
@@ -588,7 +750,14 @@ public class StAXInputParser implements InputParser {
 					}
 
 					if ("point".equals(endElement.getName().getLocalPart())) {
-						network.getPoints().add(point);
+
+						if (!("coordinates".equals(currentTagName))) {
+							network.getPoints().add(point);
+						} else {
+							alternativeObservation.getCoordinates().add(
+									coordinate);
+						}
+
 						continue;
 					}
 
@@ -611,6 +780,9 @@ public class StAXInputParser implements InputParser {
 					if ("description".equals(endElement.getName()
 							.getLocalPart())) {
 
+						network.setDescription(descriptionBuilder.toString()
+								.trim());
+
 						continue;
 					}
 
@@ -626,36 +798,55 @@ public class StAXInputParser implements InputParser {
 						continue;
 					}
 
-					// TODO
+					// TODO -MATICE
 					if ("cov-mat".equals(endElement.getName().getLocalPart())) {
 
+						if (currentTagName.equals("obs")) {
+							observation.setCovMat(covMat);
+						} else if (currentTagName.equals("height-differences")) {
+							alternativeObservation.setCovMat(covMat);
+						} else if (currentTagName.equals("coordinates")) {
+							alternativeObservation.setCovMat(covMat);
+						} else if (currentTagName.equals("vectors")) {
+							alternativeObservation.setCovMat(covMat);
+						} else {
+							logger.debug("Unrecognized CovMat parent node");
+						}
 						continue;
 					}
-					// TODO
+
 					if ("height-differences".equals(endElement.getName()
 							.getLocalPart())) {
-
+						network.getAlternativeObservations().add(
+								alternativeObservation);
+						currentTagName = null;
 						continue;
 					}
-					// TODO
+
 					if ("dh".equals(endElement.getName().getLocalPart())) {
-
+						alternativeObservation.getHeightDifferences().add(
+								heightDifference);
 						continue;
 					}
-					// TODO
+
 					if ("coordinates".equals(endElement.getName()
 							.getLocalPart())) {
+						network.getAlternativeObservations().add(
+								alternativeObservation);
+						currentTagName = null;
 
 						continue;
 					}
-					// TODO
+
 					if ("vectors".equals(endElement.getName().getLocalPart())) {
-
+						network.getAlternativeObservations().add(
+								alternativeObservation);
+						currentTagName = null;
 						continue;
 					}
-					// TODO
-					if ("vec".equals(endElement.getName().getLocalPart())) {
 
+					if ("vec".equals(endElement.getName().getLocalPart())) {
+						alternativeObservation.getVectors().add(vector);
 						continue;
 					}
 
@@ -664,10 +855,17 @@ public class StAXInputParser implements InputParser {
 
 					break;
 
-				case XMLStreamConstants.PROCESSING_INSTRUCTION:
+				case XMLStreamConstants.CHARACTERS:
+
+					Characters characters = event.asCharacters();
+
+					if ("description".equals(currentTagName)) {
+						descriptionBuilder.append(characters.getData());
+					}
+
 					break;
 
-				case XMLStreamConstants.CHARACTERS:
+				case XMLStreamConstants.PROCESSING_INSTRUCTION:
 					break;
 
 				case XMLStreamConstants.COMMENT:
@@ -1004,7 +1202,7 @@ public class StAXInputParser implements InputParser {
 
 				// ZENITH ANGLES
 				for (ZenithAngle zenithAngle : obs.getZenithAngles()) {
-					// <distance>
+					// <z-angle>
 					eventWriter.add(eventFactory.createStartElement("", "",
 							"z-angle"));
 					if (zenithAngle.getFrom() != null) {
@@ -1027,7 +1225,7 @@ public class StAXInputParser implements InputParser {
 						eventWriter.add(eventFactory.createAttribute("to_dh",
 								zenithAngle.getToDh().toString()));
 					}
-					// </distance>
+					// </z-angle>
 					eventWriter.add(eventFactory.createEndElement("", "",
 							"z-angle"));
 					eventWriter.add(endLine);
@@ -1036,6 +1234,157 @@ public class StAXInputParser implements InputParser {
 				// </obs>
 				eventWriter.add(eventFactory.createEndElement("", "", "obs"));
 				eventWriter.add(endLine);
+			}
+
+			// ALTERNATIVE OBSERVATION
+			for (AlternativeObservation alternativeObservation : input
+					.getNetwork().getAlternativeObservations()) {
+
+				switch (alternativeObservation.getTagname()) {
+
+				// COORDINATES
+				case "coordinates":
+
+					// <coordinates>
+					eventWriter.add(endLine);
+					eventWriter.add(eventFactory.createStartElement("", "",
+							"coordinates"));
+					eventWriter.add(endLine);
+					for (Coordinate coordinate : alternativeObservation
+							.getCoordinates()) {
+
+						// <point>
+						eventWriter.add(eventFactory.createStartElement("", "",
+								"point"));
+						eventWriter.add(eventFactory.createAttribute("id",
+								coordinate.getName()));
+						if (coordinate.getX() != null) {
+							eventWriter.add(eventFactory.createAttribute("x",
+									coordinate.getX().toString()));
+						}
+						if (coordinate.getY() != null) {
+							eventWriter.add(eventFactory.createAttribute("y",
+									coordinate.getY().toString()));
+						}
+						if (coordinate.getZ() != null) {
+							eventWriter.add(eventFactory.createAttribute("z",
+									coordinate.getZ().toString()));
+						}
+						// </point>
+						eventWriter.add(eventFactory.createEndElement("", "",
+								"point"));
+						eventWriter.add(endLine);
+					}
+
+					// TODO - tady doplnit MATICI
+					// </coordinates>
+					eventWriter.add(eventFactory.createEndElement("", "",
+							"coordinates"));
+					eventWriter.add(endLine);
+
+					break;
+
+				// HEIGHT-DIFFERENCES
+				case "height-differences":
+
+					// <height-differences>
+					eventWriter.add(endLine);
+					eventWriter.add(eventFactory.createStartElement("", "",
+							"height-differences"));
+					eventWriter.add(endLine);
+
+					for (HeightDifference heightDifference : alternativeObservation
+							.getHeightDifferences()) {
+
+						// <dh>
+						eventWriter.add(eventFactory.createStartElement("", "",
+								"dh"));
+						eventWriter.add(eventFactory.createAttribute("from",
+								heightDifference.getFrom()));
+						eventWriter.add(eventFactory.createAttribute("to",
+								heightDifference.getTo()));
+						eventWriter.add(eventFactory.createAttribute("val",
+								heightDifference.getVal().toString()));
+
+						if (heightDifference.getStdev() != null) {
+							eventWriter.add(eventFactory.createAttribute(
+									"stdev", heightDifference.getStdev()
+											.toString()));
+						}
+						if (heightDifference.getDist() != null) {
+							eventWriter.add(eventFactory.createAttribute(
+									"dist", heightDifference.getDist()
+											.toString()));
+						}
+
+						// </dh>
+						eventWriter.add(eventFactory.createEndElement("", "",
+								"dh"));
+						eventWriter.add(endLine);
+
+					}
+
+					// TODO - tady doplnit MATICI
+					// </height-differences>
+					eventWriter.add(eventFactory.createEndElement("", "",
+							"height-differences"));
+					eventWriter.add(endLine);
+
+					break;
+
+				// VECTORS
+				case "vectors":
+
+					// <vectors>
+					eventWriter.add(endLine);
+					eventWriter.add(eventFactory.createStartElement("", "",
+							"vectors"));
+					eventWriter.add(endLine);
+
+					for (Vector vector : alternativeObservation.getVectors()) {
+
+						// <vec>
+						eventWriter.add(eventFactory.createStartElement("", "",
+								"vec"));
+						eventWriter.add(eventFactory.createAttribute("from",
+								vector.getFrom()));
+						eventWriter.add(eventFactory.createAttribute("to",
+								vector.getTo()));
+						eventWriter.add(eventFactory.createAttribute("dx",
+								vector.getDx().toString()));
+						eventWriter.add(eventFactory.createAttribute("dy",
+								vector.getDy().toString()));
+						eventWriter.add(eventFactory.createAttribute("dz",
+								vector.getDz().toString()));
+
+						if (vector.getFromDh() != null) {
+							eventWriter.add(eventFactory.createAttribute(
+									"from_dh", vector.getFromDh().toString()));
+						}
+						if (vector.getToDh() != null) {
+							eventWriter.add(eventFactory.createAttribute(
+									"to_dh", vector.getToDh().toString()));
+						}
+
+						// </vec>
+						eventWriter.add(eventFactory.createEndElement("", "",
+								"vec"));
+						eventWriter.add(endLine);
+
+					}
+
+					// TODO - tady doplnit MATICI
+					// </vectors>
+					eventWriter.add(eventFactory.createEndElement("", "",
+							"vectors"));
+					eventWriter.add(endLine);
+
+					break;
+				default:
+					logger.error("Unrecognized alternative observation tag name");
+					break;
+				}
+
 			}
 
 			// </points-observations>

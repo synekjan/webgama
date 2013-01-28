@@ -37,7 +37,7 @@ public class Network {
 
 	private List<Observation> observations = new ArrayList<Observation>();
 
-	private List<AlternativeObservation> alternativeObservation = new ArrayList<AlternativeObservation>();
+	private List<AlternativeObservation> alternativeObservations = new ArrayList<AlternativeObservation>();
 
 	public Integer getId() {
 		return id;
@@ -167,13 +167,13 @@ public class Network {
 		this.observations = observations;
 	}
 
-	public List<AlternativeObservation> getAlternativeObservation() {
-		return alternativeObservation;
+	public List<AlternativeObservation> getAlternativeObservations() {
+		return alternativeObservations;
 	}
 
-	public void setAlternativeObservation(
-			List<AlternativeObservation> alternativeObservation) {
-		this.alternativeObservation = alternativeObservation;
+	public void setAlternativeObservations(
+			List<AlternativeObservation> alternativeObservations) {
+		this.alternativeObservations = alternativeObservations;
 	}
 
 }
