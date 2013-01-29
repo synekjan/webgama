@@ -6,9 +6,11 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
+import cz.cvut.fsv.webgama.dao.AlternativeObservationDao;
 import cz.cvut.fsv.webgama.dao.NetworkDao;
 import cz.cvut.fsv.webgama.dao.ObservationDao;
 import cz.cvut.fsv.webgama.dao.PointDao;
+import cz.cvut.fsv.webgama.domain.AlternativeObservation;
 import cz.cvut.fsv.webgama.domain.Input;
 import cz.cvut.fsv.webgama.domain.Network;
 import cz.cvut.fsv.webgama.domain.Observation;
@@ -18,6 +20,7 @@ public class JdbcNetworkDao extends JdbcDaoSupport implements NetworkDao {
 
 	private PointDao pointDao;
 	private ObservationDao observationDao;
+	private AlternativeObservationDao alternativeObservationDao;
 
 	public void setPointDao(PointDao pointDao) {
 		this.pointDao = pointDao;
@@ -25,6 +28,11 @@ public class JdbcNetworkDao extends JdbcDaoSupport implements NetworkDao {
 
 	public void setObservationDao(ObservationDao observationDao) {
 		this.observationDao = observationDao;
+	}
+
+	public void setAlternativeObservationDao(
+			AlternativeObservationDao alternativeObservationDao) {
+		this.alternativeObservationDao = alternativeObservationDao;
 	}
 
 	@Override
@@ -50,6 +58,12 @@ public class JdbcNetworkDao extends JdbcDaoSupport implements NetworkDao {
 		for (Observation observation : network.getObservations()) {
 			observationDao.insert(observation, networkId);
 		}
+
+		for (AlternativeObservation alternativeObservation : network
+				.getAlternativeObservations()) {
+			alternativeObservationDao.insert(alternativeObservation, networkId);
+		}
+
 	}
 
 	@Override

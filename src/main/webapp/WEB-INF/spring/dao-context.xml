@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
-	<!-- Initializes DB Connection Pooling defined in Tomcat's server.xml and context.xml -->
+	<!-- Initializes DB Connection Pooling defined in Tomcat's server.xml and 
+		context.xml -->
 	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/Postgres"
 		expected-type="javax.sql.DataSource" />
 
 	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> 
 		<property name="jndiName" value="java:comp/env/jdbc/Postgres" /> </bean> -->
-		
-	<tx:annotation-driven transaction-manager="transactionManager"/>	
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -45,9 +45,7 @@
 	</bean>
 
 
-	<!-- ********************
-	     **** INPUT part **** 
-	     ********************-->
+	<!-- ******************** **** INPUT part **** ******************** -->
 	<bean id="inputDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcInputDao">
 		<property name="dataSource" ref="dataSource" />
 		<property name="userDao" ref="userDao" />
@@ -58,8 +56,9 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="pointDao" ref="pointDao" />
 		<property name="observationDao" ref="observationDao" />
+		<property name="alternativeObservationDao" ref="alternativeObservationDao" />
 	</bean>
-	
+
 	<bean id="observationDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcObservationDao">
 		<property name="dataSource" ref="dataSource" />
 		<property name="directionDao" ref="directionDao" />
@@ -68,29 +67,49 @@
 		<property name="slopeDistanceDao" ref="slopeDistanceDao" />
 		<property name="zenithAngleDao" ref="zenithAngleDao" />
 	</bean>
-	
+
 	<bean id="pointDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcPointDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<bean id="directionDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcDirectionDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<bean id="distanceDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcDistanceDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<bean id="angleDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcAngleDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<bean id="slopeDistanceDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcSlopeDistanceDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<bean id="zenithAngleDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcZenithAngleDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
+	<bean id="alternativeObservationDao"
+		class="cz.cvut.fsv.webgama.dao.jdbc.JdbcAlternativeObservationDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="coordinateDao" ref="coordinateDao" />
+		<property name="heightDifferenceDao" ref="heightDifferenceDao" />
+		<property name="vectorDao" ref="vectorDao" />
+	</bean>
+
+	<bean id="coordinateDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcCoordinateDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="heightDifferenceDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcHeightDifferenceDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="vectorDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcVectorDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
 </beans>
