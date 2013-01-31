@@ -1,4 +1,9 @@
 $(document).ready(function() {
+	
+	// show success box when form is successfully updated
+	if(location.search == "?success=true"){
+		  $('div.success').show();
+		}
 
 	// DROPDOWN MENU behaviour
 	$('a#account').click(function() {

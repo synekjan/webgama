@@ -23,8 +23,7 @@
 				</div>
 				<div id="accordion">
 					#foreach ($input in $inputList)
-					<h3>$input.name [$dateTool.format("yyyy-MM-dd
-						HH:mm:ss",$input.time.toDate())]</h3>
+					<h3>$input.name <span class="time">$dateTool.format("yyyy-MM-dd HH:mm:ss",$input.time.toDate())</span></h3> 
 					<div>
 						<p>Cras dictum. Pellentesque habitant morbi tristique senectus et
 						netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum

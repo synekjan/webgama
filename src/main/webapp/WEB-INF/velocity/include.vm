@@ -7,3 +7,14 @@
 <script src="#springUrl("/resources/js/script.js")"></script>
 <!-- <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/redmond/jquery-ui.css" />
 -->
+#macro( showElementErrors )
+#if(${status.error})
+<div class="form_element_errors">
+<ul>
+#foreach($error in $status.errorMessages)
+<li>$error</li>
+#end
+</ul>
+</div>
+#end
+#end

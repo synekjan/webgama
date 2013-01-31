@@ -16,87 +16,86 @@
 				#springBind("user.*")#if(${status.error})
 				<div class="error">Form has erros</div>
 				#end
+				<div class="form_hints">
+					<b>Bold</b> indicates required field
+				</div>
 				<form action="" method="post" autocomplete="off">
 					<div class="form">
 						<fieldset>
 							<legend>User Information</legend>
-							<table>
-								<tr>
-									<td><label for="username">*
-											#springMessage("user.username"):</label></td>
-									<td>#springFormInput("user.username",
-										'placeholder="Username"')</td>
-									<td>#springShowErrors("&nbsp", "form_errors")</td>
-								</tr>
-								<tr>
-									<td><label for="password">*
-											#springMessage("user.password"):</label></td>
-									<td>#springFormPasswordInput("user.password",
-										'placeholder="Password" autocomplete="off"')</td>
-									<td>#springShowErrors("&nbsp", "form_errors")</td>
-								</tr>
-								<tr>
-									<td><label for="confirmPassword">*
-											#springMessage("user.password.confirm"):</label></td>
-									<td>#springFormPasswordInput("user.confirmPassword",
-										'placeholder="Password" autocomplete="off"')</td>
-									<td>#springShowErrors("&nbsp", "form_errors")</td>
-								</tr>
-								<tr>
-									<td><label for="email">* E-mail:</label></td>
-									<td>#springFormInput("user.email", 'placeholder="E-mail"')</td>
-									<td>#springShowErrors("&nbsp", "form_errors")</td>
-								</tr>
-								<tr>
-									<td><label for="firstName">#springMessage("user.firstname"):</label></td>
-									<td>#springFormInput("user.firstName", "")</td>
-									<td>#springShowErrors("&nbsp", "form_errors")</td>
-								</tr>
-								<tr>
-									<td><label for="lastName">#springMessage("user.lastname"):</label></td>
-									<td>#springFormInput("user.lastName", "")</td>
-									<td>#springShowErrors("&nbsp", "form_errors")</td>
-								</tr>
-								<tr>
-									<td><label for="telephone">#springMessage("user.telephone"):</label></td>
-									<td>#springFormInput("user.telephone", "")</td>
-									<td>#springShowErrors("&nbsp", "form_errors")</td>
-								</tr>
-							</table>
+
+							<div class="form_element">
+								<label for="username" class="required">#springMessage("user.username"):</label>
+								<div class="input">#springFormInput("user.username", '')
+									#showElementErrors()</div>
+							</div>
+							<div class="form_element">
+								<label for="email" class="required">E-mail:</label>
+								<div class="input">#springFormInput("user.email", '')
+									#showElementErrors()</div>
+							</div>
+							<div class="form_element">
+								<label for="password" class="required">#springMessage("user.password"):</label>
+								<div class="input">#springFormPasswordInput("user.password",
+									'autocomplete="off"') #showElementErrors()</div>
+							</div>
+							<div class="form_element">
+								<label for="confirmPassword" class="required">
+									#springMessage("user.password.confirm"):</label>
+								<div class="input">#springFormPasswordInput("user.confirmPassword",
+									'autocomplete="off"') #showElementErrors()</div>
+							</div>
+						</fieldset>
+						<fieldset>
+							<legend>Personal Information</legend>
+							<div class="form_element">
+								<label for="firstName">#springMessage("user.firstname"):</label>
+								<div class="input">#springFormInput("user.firstName", "")
+									#showElementErrors()</div>
+							</div>
+							<div class="form_element">
+								<label for="lastName">#springMessage("user.lastname"):</label>
+								<div class="input">#springFormInput("user.lastName", "")
+									#showElementErrors()</div>
+							</div>
+							<div class="form_element">
+								<label for="telephone">#springMessage("user.telephone"):</label>
+								<div class="input">#springFormInput("user.telephone", "")
+									#showElementErrors()</div>
+							</div>
 						</fieldset>
 						<fieldset>
 							<legend>Address</legend>
-							<table>
-								<tr>
-									<td><label for="street">#springMessage("user.street"):</label></td>
-									<td>#springFormInput("user.street", "")</td>
-									<td>#springShowErrors("&nbsp", "form_errors")</td>
-								</tr>
-								<tr>
-									<td><label for="number">#springMessage("user.number"):</label></td>
-									<td>#springFormInput("user.number", "")</td>
-									<td>#springShowErrors("&nbsp", "form_errors")</td>
-								</tr>
-								<tr>
-									<td><label for="city">#springMessage("user.city"):</label></td>
-									<td>#springFormInput("user.city", "")</td>
-									<td>#springShowErrors("&nbsp", "form_errors")</td>
-								</tr>
-								<tr>
-									<td><label for="zipCode">#springMessage("user.zipcode"):</label></td>
-									<td>#springFormInput("user.zipCode", "")</td>
-									<td>#springShowErrors("&nbsp", "form_errors")</td>
-								</tr>
-								<tr>
-									<td><label for="state">#springMessage("user.state"):</label></td>
-									<td>#springFormInput("user.state", "")</td>
-									<td>#springShowErrors("&nbsp", "form_errors")</td>
-								</tr>
-							</table>
+							<div class="form_element">
+								<label for="street">#springMessage("user.street"):</label>
+								<div class="input">#springFormInput("user.street", "")
+									#showElementErrors()</div>
+							</div>
+							<div class="form_element">
+								<label for="number">#springMessage("user.number"):</label>
+								<div class="input">#springFormInput("user.number", "")
+									#showElementErrors()</div>
+							</div>
+							<div class="form_element">
+								<label for="city">#springMessage("user.city"):</label>
+								<div class="input">#springFormInput("user.city", "")
+									#showElementErrors()</div>
+							</div>
+							<div class="form_element">
+								<label for="zipCode">#springMessage("user.zipcode"):</label>
+								<div class="input">#springFormInput("user.zipCode", "")
+									#showElementErrors()</div>
+							</div>
+							<div class="form_element">
+								<label for="state">#springMessage("user.state"):</label>
+								<div class="input">#springFormInput("user.state", "")
+									#showElementErrors()</div>
+							</div>
 						</fieldset>
 					</div>
-					<div class="register_button">
-						<input class="submit_btn" type="submit" value="#springMessage('submit')" />
+					<div class="form_buttons">
+						<input class="submit_btn" type="submit" value="#springMessage('submit')" >
+						<input type="reset" value="Reset">
 					</div>
 				</form>
 			</div>

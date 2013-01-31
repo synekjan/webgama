@@ -282,7 +282,7 @@ div#account_container .panel {
 	border: 1px solid #DDDDDD;
 	background: #F1F1F1;
 	min-height: 200px;
-	width: 680px;
+	width: 720px;
 	border-radius: 4px 4px 4px 4px;
 	line-height: 1.4;
 }
@@ -317,10 +317,20 @@ div#account_container div#delete {
 	font: 30px "Jura", Arial, sans-serif;
 }
 
+.form_hints {
+	border-top: 1px solid #DDD;
+	padding: 10px;
+}
+
+.form_hints p {
+	padding: 5px;
+}
+
+/* ------------------ FORMS ------------------ */
 fieldset {
-	font-weight: bold;
 	border-top: 1px solid #DDDDDD;
-	padding: 10px 0px 10px 40px;
+	padding-left: 40px;
+	text-shadow: 1px 1px 0 #FFFFFF;
 }
 
 legend {
@@ -329,17 +339,96 @@ legend {
 	font: 15px "Jura";
 }
 
+.form_element {
+	width: 380px;
+	margin: 10px 0px 10px 0px; 
+	display: inline-block;
+	vertical-align: top;
+}
+
+.form_element label, .account_form_element label {  
+	width: 140px;
+	display: inline-block;
+	text-align: right;
+	color: #555;
+	padding-top: 6px;
+	vertical-align: top;
+}
+
+.account_form_element label {
+	width: 160px;
+}
+
+.account_form_element {
+	width: 520px;
+	margin: 10px 0px 10px 0px; 
+}
+
+.form_element label.required, .account_form_element label.required {
+	font-weight: bold;
+}
+
+.form_element .input {
+	width: 220px;
+	display: inline-block;
+	margin-left: 10px
+}
+
+.account_form_element .input {
+	width: 320px;
+	display: inline-block;
+	margin-left: 30px
+}
+
+.account_form_element .information {
+	width: 320px;
+	display: inline-block;
+	margin-left: 30px;
+	padding-top: 6px;
+}
+
+
+div.form_element_errors {
+	width: 95%;
+	display: inline-block;
+	font-size: 0.85em;
+	color: #D8000C;
+	background-color: #FED1D1;
+	border: 1px solid #E3A198;
+	/* padding: 3px; */
+	border-radius: 0px 0px 3px 3px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	margin-left: 5px;
+	z-index: 0;
+}
+
+.account_form_element div.form_element_errors {
+	margin-left: 8px;
+}
+
+div.form_element_errors ul {
+	list-style-type: disc;
+	padding: 4px 8px 4px 20px;
+}
+
+div.form_element_errors li {
+	padding: 2px;
+	text-shadow: none;
+	
+}
+
 input[type=text],input[type=password] {
 	border: 1px solid #BBBBBB;
 	border-radius: 1px 1px 1px 1px;
 	color: #555555;
 	display: inline-block;
 	font-size: 13px;
-	height: 15px;
+	height: 28px;
 	line-height: 15px;
-	margin-bottom: 9px;
-	padding: 4px;
-	width: 210px;
+	width: 100%;
+	border-radius: 3px 3px 3px 3px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	z-index: 5;
 }
 
 textarea {
@@ -365,6 +454,15 @@ input[type=submit],input[type=reset] {
 	font-size: 13px;
 	color: #444444;
 	padding: 4px 10px;
+	text-shadow: 1px 1px 0 #FFFFFF;
+}
+
+input[type=checkbox] {
+	margin: 0;
+}
+
+label.checkbox_label {
+	vertical-align: top;
 }
 
 input[type=submit]:HOVER,input[type=reset]:HOVER {
@@ -400,9 +498,14 @@ input.submit_btn:ACTIVE {
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) inset;
 }
 
-.form_button {
+.form_buttons {
 	border-top: 1px solid #DDDDDD;
-	padding: 10px 0 0 30px;
+	padding: 20px 0 0 30px;
+	margin-top: 30px;
+}
+
+.form_buttons div {
+	margin: 0 auto;
 }
 
 .form_errors {
@@ -468,13 +571,14 @@ input.submit_btn:ACTIVE {
 }
 
 #login_container {
-	margin: 40px auto;
+	margin: 60px auto;
 	padding: 20px;
 	border: 1px solid #DDDDDD;
 	position: relative;
-	background: url("../img/login.png") no-repeat scroll 95% 100% #F1F1F1;
+	background-color: #F1F1F1;
+	/* background: url("../img/login.png") no-repeat scroll 95% 100% #F1F1F1; */
 	min-height: 200px;
-	width: 600px;
+	width: 400px;
 	border-radius: 4px 4px 4px 4px;
 }
 
@@ -483,9 +587,9 @@ input.submit_btn:ACTIVE {
 	padding: 20px;
 	border: 1px solid #DDDDDD;
 	position: relative;
+	min-height: 170px;
 	background: url("../img/signup.png") no-repeat scroll 95% 100% #F1F1F1;
-	min-height: 200px;
-	width: 800px;
+	width: 860px;
 	border-radius: 4px 4px 4px 4px;
 }
 
@@ -508,6 +612,7 @@ div.success {
 	color: #4F8A10;
 	background-color: #DFF2BF;
 	border-color: #8FCA50;
+	display:none
 }
 
 div.warning {
@@ -779,6 +884,10 @@ div#welcome_container {
 	border: 1px solid #777;
 	padding: 10px;
 	border-radius: 4px 4px 0px 0px;
+}
+
+#accordion span.time {
+	float: right;
 }
 
 @font-face {

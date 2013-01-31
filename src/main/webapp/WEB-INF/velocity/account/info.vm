@@ -24,24 +24,28 @@
 					<div class="panel_header">
 						<h2>#springMessage("account.overview")</h2>
 					</div>
-					<table>
-						<tr>
-							<td>#springMessage("user.username"):</td>
-							<td>$user.username</td>
-						</tr>
-						<tr>
-							<td>#springMessage("calculations"):</td>
-							<td><a href="#springUrl("/calculation")">$userInputCount calculations</a></td>
-						</tr>
-						<tr>
-							<td>#springMessage("user.created"):</td>
-							<td>$dateTool.format("yyyy-MM-dd HH:mm:ss",$user.created.toDate())</td>
-						</tr>
-						<tr>
-							<td>#springMessage("user.modified"):</td>
-							<td>$dateTool.format("yyyy-MM-dd HH:mm:ss",$user.modified.toDate())</td>
-						</tr>
-					</table>
+
+					<div class="account_form_element">
+						<label>#springMessage("user.username"):</label>
+						<div class="information">$user.username</div>
+					</div>
+					<div class="account_form_element">
+						<label>#springMessage("calculations"):</label>
+						<div class="information">
+							<a href="#springUrl("/calculation")">$userInputCount
+								calculations</a>
+						</div>
+					</div>
+					<div class="account_form_element">
+						<label>#springMessage("user.created"):</label>
+						<div class="information">$dateTool.format("yyyy-MM-dd
+							HH:mm:ss",$user.created.toDate())</div>
+					</div>
+					<div class="account_form_element">
+						<label>#springMessage("user.modified"):</label>
+						<div class="information">$dateTool.format("yyyy-MM-dd
+							HH:mm:ss",$user.modified.toDate())</div>
+					</div>
 				</div>
 			</div>
 		</div>

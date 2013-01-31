@@ -67,8 +67,10 @@ public class JdbcAlternativeObservationDao extends JdbcDaoSupport implements
 			for (Vector vector : alternativeObservation.getVectors()) {
 				vectorDao.insert(vector, alternativeObservationId);
 			}
+			break;
 		default:
-			logger.error("Unrecognized alternative observation during inserting");
+			logger.error("Unrecognized alternative observation during inserting - "
+					+ alternativeObservation.getTagname());
 			break;
 		}
 	}

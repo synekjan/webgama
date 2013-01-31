@@ -73,7 +73,7 @@ public class AccountController extends MultiActionController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/personal", "/personal/success" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/personal" }, method = RequestMethod.POST)
 	public ModelAndView modifyUser(
 			@Valid @ModelAttribute("user") UserForm userForm,
 			BindingResult result, HttpServletRequest request) {
@@ -94,10 +94,10 @@ public class AccountController extends MultiActionController {
 
 		logger.info("User[" + username
 				+ "] successfully updated personal information");
-		return new ModelAndView("redirect:/account/personal/success");
+		return new ModelAndView("redirect:/account/personal?success=true");
 	}
 
-	@RequestMapping(value = "/personal/success", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/personal/success", method = RequestMethod.GET)
 	public ModelAndView successUserChange(HttpServletRequest request,
 			Locale locale) {
 
@@ -107,7 +107,7 @@ public class AccountController extends MultiActionController {
 		mav.addObject("user", userForm);
 
 		return mav;
-	}
+	}*/
 
 	// CHANGING PASSWORD
 	@RequestMapping(value = "/password/change", method = RequestMethod.GET)
@@ -122,7 +122,7 @@ public class AccountController extends MultiActionController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/password/change", "/password/change/success" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/password/change" }, method = RequestMethod.POST)
 	public ModelAndView changePassword(
 			@Valid @ModelAttribute("user") UserPasswordChangeForm userForm,
 			BindingResult result, HttpServletRequest request) {
@@ -141,10 +141,10 @@ public class AccountController extends MultiActionController {
 
 		logger.info("User[" + username
 				+ "] successfully changed account password");
-		return new ModelAndView("redirect:/account/password/change/success");
+		return new ModelAndView("redirect:/account/password/change?success=true");
 	}
 
-	@RequestMapping(value = "/password/change/success", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/password/change/success", method = RequestMethod.GET)
 	public ModelAndView successPasswordChange(HttpServletRequest request,
 			Model model, Locale locale) {
 
@@ -154,7 +154,7 @@ public class AccountController extends MultiActionController {
 
 		logger.info("User[" + username + "] thought about changing password");
 		return mav;
-	}
+	}*/
 
 	@RequestMapping(value = { "/logins", "/logins/show" }, method = RequestMethod.GET)
 	public ModelAndView showLogins(HttpServletRequest request,
