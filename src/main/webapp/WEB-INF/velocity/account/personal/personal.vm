@@ -33,17 +33,17 @@
 							<fieldset>
 								<legend>#springMessage("user.personal.settings")</legend>
 								<table>
-									<div class="account_form_element">
+									<div class="large_form_element">
 										<label for="firstName">#springMessage("user.firstname"):</label>
 										<div class="input">
 											#springFormInput("user.firstName", "") #showElementErrors()</div>
 									</div>
-									<div class="account_form_element">
+									<div class="large_form_element">
 										<label for="lastName">#springMessage("user.lastname"):</label>
 										<div class="input">
 											#springFormInput("user.lastName","") #showElementErrors()</div>
 									</div>
-									<div class="account_form_element">
+									<div class="large_form_element">
 										<label for="telephone">#springMessage("user.telephone"):</label>
 										<div class="input">#springFormInput("user.telephone",
 											"") #showElementErrors()</div>
@@ -53,27 +53,27 @@
 							<fieldset>
 								<legend>Address</legend>
 								<table>
-									<div class="account_form_element">
+									<div class="large_form_element">
 										<label for="street">#springMessage("user.street"):</label>
 										<div class="input">#springFormInput("user.street",
 											"") #showElementErrors()</div>
 									</div>
-									<div class="account_form_element">
+									<div class="large_form_element">
 										<label for="number">#springMessage("user.number"):</label>
 										<div class="input">#springFormInput("user.number",
 											"") #showElementErrors()</div>
 									</div>
-									<div class="account_form_element">
+									<div class="large_form_element">
 										<label for="city">#springMessage("user.city"):</label>
 										<div class="input">#springFormInput("user.city",
 											"") #showElementErrors()</div>
 									</div>
-									<div class="account_form_element">
+									<div class="large_form_element">
 										<label for="zipCode">#springMessage("user.zipcode"):</label>
 										<div class="input">#springFormInput("user.zipCode",
 											"") #showElementErrors()</div>
 									</div>
-									<div class="account_form_element">
+									<div class="large_form_element">
 										<label for="state">#springMessage("user.state"):</label>
 										<div class="input">#springFormInput("user.state",
 											"") #showElementErrors()</div>

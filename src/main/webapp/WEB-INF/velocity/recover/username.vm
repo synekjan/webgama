@@ -18,7 +18,7 @@
 						username will be sent to this email address shortly.</p>
 					<br>
 					<form action="" method="post">
-						<div class="account_form_element">
+						<div class="large_form_element">
 							<label for="email">Email:</label>
 							<div class="input">#springFormInput("user.email", "")
 								#showElementErrors()</div>

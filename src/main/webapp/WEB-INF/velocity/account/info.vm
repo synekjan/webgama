@@ -25,23 +25,23 @@
 						<h2>#springMessage("account.overview")</h2>
 					</div>
 
-					<div class="account_form_element">
+					<div class="large_form_element">
 						<label>#springMessage("user.username"):</label>
 						<div class="information">$user.username</div>
 					</div>
-					<div class="account_form_element">
+					<div class="large_form_element">
 						<label>#springMessage("calculations"):</label>
 						<div class="information">
 							<a href="#springUrl("/calculation")">$userInputCount
 								calculations</a>
 						</div>
 					</div>
-					<div class="account_form_element">
+					<div class="large_form_element">
 						<label>#springMessage("user.created"):</label>
 						<div class="information">$dateTool.format("yyyy-MM-dd
 							HH:mm:ss",$user.created.toDate())</div>
 					</div>
-					<div class="account_form_element">
+					<div class="large_form_element">
 						<label>#springMessage("user.modified"):</label>
 						<div class="information">$dateTool.format("yyyy-MM-dd
 							HH:mm:ss",$user.modified.toDate())</div>

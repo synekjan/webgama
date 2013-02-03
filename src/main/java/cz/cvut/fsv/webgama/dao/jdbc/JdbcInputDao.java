@@ -80,7 +80,7 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 	@Override
 	public List<Input> findInputsByUser(User user) {
 
-		String sql = "SELECT * FROM inputs WHERE user_id = ?";
+		String sql = "SELECT * FROM inputs WHERE user_id = ? ORDER BY time DESC";
 
 		List<Input> inputs = getJdbcTemplate().query(sql,
 				new Object[] { user.getId() }, new InputMapper());

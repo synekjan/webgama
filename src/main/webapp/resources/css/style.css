@@ -339,15 +339,26 @@ legend {
 	font: 15px "Jura";
 }
 
-.form_element {
-	width: 380px;
-	margin: 10px 0px 10px 0px; 
+.small_form_element,.medium_form_element,.large_form_element {
+	margin: 10px 0px 10px 0px;
 	display: inline-block;
 	vertical-align: top;
 }
 
-.form_element label, .account_form_element label {  
-	width: 140px;
+.small_form_element {
+	width: 280px;
+}
+
+.medium_form_element {
+	width: 380px;
+}
+
+.large_form_element {
+	width: 520px;
+	margin: 10px 0px 10px 0px;
+}
+
+.small_form_element label,.medium_form_element label,.large_form_element label {
 	display: inline-block;
 	text-align: right;
 	color: #555;
@@ -355,38 +366,46 @@ legend {
 	vertical-align: top;
 }
 
-.account_form_element label {
+.small_form_element label {
+	width: 120px;
+}
+
+.medium_form_element label {
+	width: 140px;
+}
+
+.large_form_element label {
 	width: 160px;
 }
 
-.account_form_element {
-	width: 520px;
-	margin: 10px 0px 10px 0px; 
-}
-
-.form_element label.required, .account_form_element label.required {
+label.required {
 	font-weight: bold;
 }
 
-.form_element .input {
+.small_form_element .input {
+	width: 120px;
+	display: inline-block;
+	margin-left: 10px
+}
+
+.medium_form_element .input {
 	width: 220px;
 	display: inline-block;
 	margin-left: 10px
 }
 
-.account_form_element .input {
+.large_form_element .input {
 	width: 320px;
 	display: inline-block;
 	margin-left: 30px
 }
 
-.account_form_element .information {
+.large_form_element .information {
 	width: 320px;
 	display: inline-block;
 	margin-left: 30px;
 	padding-top: 6px;
 }
-
 
 div.form_element_errors {
 	width: 95%;
@@ -395,14 +414,13 @@ div.form_element_errors {
 	color: #D8000C;
 	background-color: #FED1D1;
 	border: 1px solid #E3A198;
-	/* padding: 3px; */
 	border-radius: 0px 0px 3px 3px;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 	margin-left: 5px;
 	z-index: 0;
 }
 
-.account_form_element div.form_element_errors {
+.large_form_element div.form_element_errors {
 	margin-left: 8px;
 }
 
@@ -414,7 +432,6 @@ div.form_element_errors ul {
 div.form_element_errors li {
 	padding: 2px;
 	text-shadow: none;
-	
 }
 
 input[type=text],input[type=password] {
@@ -612,7 +629,7 @@ div.success {
 	color: #4F8A10;
 	background-color: #DFF2BF;
 	border-color: #8FCA50;
-	display:none
+	display: none
 }
 
 div.warning {

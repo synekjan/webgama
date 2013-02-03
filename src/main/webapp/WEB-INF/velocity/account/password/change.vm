@@ -31,7 +31,7 @@
 						<div class="form">
 							<fieldset>
 								<legend>Current Password</legend>
-								<div class="account_form_element">
+								<div class="large_form_element">
 									<label for="oldPassword" class="required">#springMessage("user.current.password"):</label>
 									<div class="input">
 										#springFormPasswordInput("user.oldPassword",'autocomplete="off"')
@@ -40,13 +40,13 @@
 							</fieldset>
 							<fieldset>
 								<legend>New Password</legend>
-								<div class="account_form_element">
+								<div class="large_form_element">
 									<label for="newPassword" class="required">#springMessage("user.new.password"):</label>
 									<div class="input">
 										#springFormPasswordInput("user.newPassword", "")
 										#showElementErrors()</div>
 								</div>
-								<div class="account_form_element">
+								<div class="large_form_element">
 									<label for="confirmNewPassword" class="required">#springMessage("user.confirm.new.password"):</label>
 									<div class="input">
 										#springFormPasswordInput("user.confirmNewPassword", "")
