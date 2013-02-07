@@ -3,15 +3,19 @@ package cz.cvut.fsv.webgama.form;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.validator.constraints.Length;
+import javax.validation.Valid;
 
-import cz.cvut.fsv.webgama.domain.Point;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
+import cz.cvut.fsv.webgama.domain.Input;
 
 public class AdjustmentPageForm {
 	
 	private String axesXY;
 	
 	@Length(max = 5)
+	@NotBlank
 	private String angles;
 
 	private Double epoch;
@@ -36,7 +40,20 @@ public class AdjustmentPageForm {
 
 	private String distanceStdev;
 
-	private List<Point> points = new ArrayList<Point>();
+	@Valid
+	private List<PointForm> points = new ArrayList<>();
+	
+	@Valid
+	private List<ObservationForm> observations = new ArrayList<>();
+
+	public AdjustmentPageForm() {
+		
+	}
+	//TODO
+	public AdjustmentPageForm(Input input) {
+		axesXY = input.getNetwork().getAxesXY();
+	}
+	
 
 	public String getAxesXY() {
 		return axesXY;
@@ -142,12 +159,20 @@ public class AdjustmentPageForm {
 		this.distanceStdev = distanceStdev;
 	}
 
-	public List<Point> getPoints() {
+	public List<PointForm> getPoints() {
 		return points;
 	}
 
-	public void setPoints(List<Point> points) {
+	public void setPoints(List<PointForm> points) {
 		this.points = points;
+	}
+
+	public List<ObservationForm> getObservations() {
+		return observations;
+	}
+
+	public void setObservations(List<ObservationForm> observations) {
+		this.observations = observations;
 	}
 
 }

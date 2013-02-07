@@ -15,15 +15,15 @@ public class Observation {
 
 	private CovMat covMat;
 
-	private List<Direction> directions = new ArrayList<Direction>();
+	private List<Direction> directions = new ArrayList<>();
 
-	private List<Distance> distances = new ArrayList<Distance>();
+	private List<Distance> distances = new ArrayList<>();
 
-	private List<Angle> angles = new ArrayList<Angle>();
+	private List<Angle> angles = new ArrayList<>();
 
-	private List<SlopeDistance> slopeDistances = new ArrayList<SlopeDistance>();
+	private List<SlopeDistance> slopeDistances = new ArrayList<>();
 
-	private List<ZenithAngle> zenithAngles = new ArrayList<ZenithAngle>();
+	private List<ZenithAngle> zenithAngles = new ArrayList<>();
 
 	public Integer getId() {
 		return id;

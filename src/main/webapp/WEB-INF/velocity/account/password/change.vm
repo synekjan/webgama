@@ -27,6 +27,9 @@
 					#springBind("user.*")#if(${status.error})
 					<div class="error">Form has errors</div>
 					#end
+					<div class="form_hints">
+						<b>Bold</b> indicates required field
+					</div>
 					<form action="" method="post">
 						<div class="form">
 							<fieldset>

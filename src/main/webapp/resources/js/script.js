@@ -37,7 +37,14 @@ $(document).ready(function() {
 		$('#ajax_result').html("");
 		return false;
 	});
-	$('.success, .error').delay(5000).hide(1000);
+	$('.success, .error').delay(8000).hide(1000);
+	
+	//TODO
+	/*$('input.submit_btn').click(function() {
+		var url = window.location.pathname;
+		url = url.slice( 0, url.indexOf('?') );
+	});*/
+	
 });
 
 function wizardAjaxPostNext(stepUrl) {

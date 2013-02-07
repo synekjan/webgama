@@ -2,7 +2,7 @@
 	<h3>Toolbar</h3>
 </div>
 <script>
-$(document).ready(function() {
+#[[$(document).ready(function() {
     
     $('h3').click(function() {
         var fileIndex = $('#fileTable tr').children().length - 1;
@@ -14,6 +14,5 @@ $(document).ready(function() {
      
 });
 
-$(".draggable").draggable();
-
+$(".draggable").draggable();]]#
 </script>

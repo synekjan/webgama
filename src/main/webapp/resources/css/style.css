@@ -310,7 +310,7 @@ div#account_container div#delete {
 .panel_header {
 	border-bottom: 1px solid #DDDDDD;
 	padding-bottom: 10px;
-	margin-bottom: 15px;
+	margin-bottom: 5px;
 }
 
 .panel_header h2 {
@@ -324,6 +324,10 @@ div#account_container div#delete {
 
 .form_hints p {
 	padding: 5px;
+}
+
+.text_inputs {
+	margin-top: 10px;
 }
 
 /* ------------------ FORMS ------------------ */
@@ -340,13 +344,13 @@ legend {
 }
 
 .small_form_element,.medium_form_element,.large_form_element {
-	margin: 10px 0px 10px 0px;
-	display: inline-block;
+	margin: 5px 0px; display : inline-block;
 	vertical-align: top;
+	display: inline-block;
 }
 
 .small_form_element {
-	width: 280px;
+	width: 200px;
 }
 
 .medium_form_element {
@@ -355,7 +359,6 @@ legend {
 
 .large_form_element {
 	width: 520px;
-	margin: 10px 0px 10px 0px;
 }
 
 .small_form_element label,.medium_form_element label,.large_form_element label {
@@ -367,7 +370,7 @@ legend {
 }
 
 .small_form_element label {
-	width: 120px;
+	width: 80px;
 }
 
 .medium_form_element label {
@@ -383,7 +386,7 @@ label.required {
 }
 
 .small_form_element .input {
-	width: 120px;
+	width: 100px;
 	display: inline-block;
 	margin-left: 10px
 }
@@ -410,7 +413,7 @@ label.required {
 div.form_element_errors {
 	width: 95%;
 	display: inline-block;
-	font-size: 0.85em;
+	font-size: 0.80em;
 	color: #D8000C;
 	background-color: #FED1D1;
 	border: 1px solid #E3A198;
@@ -424,9 +427,13 @@ div.form_element_errors {
 	margin-left: 8px;
 }
 
+.small_form_element div.form_element_errors {
+	margin-left: 3px;
+}
+
 div.form_element_errors ul {
 	list-style-type: disc;
-	padding: 4px 8px 4px 20px;
+	padding: 2px 6px 2px 18px;
 }
 
 div.form_element_errors li {
@@ -448,11 +455,21 @@ input[type=text],input[type=password] {
 	z-index: 5;
 }
 
+select {
+	height: 28px;
+	vertical-align: center;
+}
+
+.adjustment_form input[type=text], .adjustment_form input[type=password] {
+	height: 20px;
+}
+
 textarea {
 	border: 1px solid #BBBBBB;
 	border-radius: 1px 1px 1px 1px;
 	display: inline-block;
 	color: #555555;
+	width: 100%;
 }
 
 input[type=text]:focus,input[type=password]:focus,textarea:focus {
@@ -525,13 +542,6 @@ input.submit_btn:ACTIVE {
 	margin: 0 auto;
 }
 
-.form_errors {
-	color: red;
-	font-style: italic;
-	font-size: 0.85em;
-	font-style: italic;
-}
-
 .register_container {
 	margin-top: 20px;
 	padding: 30px 0px;
@@ -599,7 +609,7 @@ input.submit_btn:ACTIVE {
 	border-radius: 4px 4px 4px 4px;
 }
 
-#signup_container {
+#signup_container,#onepage {
 	margin: 20px auto;
 	padding: 20px;
 	border: 1px solid #DDDDDD;
