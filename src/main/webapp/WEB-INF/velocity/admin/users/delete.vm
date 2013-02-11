@@ -9,7 +9,7 @@
 	<div id="wrapper">
 		#parse("header.vm")
 		<div id="container">
-			<div id="account_container">
+			<div id="admin_container">
 				<div class="left_menu">
 					<ul>
 						<li><a href="#springUrl("/admin/users")">#springMessage("admin.section.users")</a></li>

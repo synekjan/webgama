@@ -9,23 +9,26 @@
 		#parse("header.vm")
 
 		<div id="container">
-			<div class="left_menu">
-				<ul>
-					<li><a href="#springUrl("/about/project")">#springMessage("about.project")</a></li>
-					<li><a href="#springUrl("/about/cvut")">#springMessage("about.organization")</a></li>
-					<span class="active_menu"><li><a href="#springUrl("/about/author")">#springMessage("about.author")</a></li></span>
-				</ul>
+			<div id="about_container">
+				<div class="right_menu">
+					<div class="menu_header">
+						<h2>ABOUT</h2>
+					</div>
+					<ul>
+						<li><a href="#springUrl("/about/project")">#springMessage("about.project")</a></li>
+						<li><a href="#springUrl("/about/cvut")">#springMessage("about.organization")</a></li>
+						<span class="active_menu"><li><a href="#springUrl("/about/author")">#springMessage("about.author")</a></li></span>
+					</ul>
+				</div>
+				<div id="about_content">
+					<div class="panel_header">
+						<h2>#springMessage("about.author")</h2>
+					</div>
+
+					<p>Jendik Synků</p>
+
+				</div>
 			</div>
-
-			<h3>#springMessage("about.author")</h3>
-
-			<p>Jendik Synků</p>
-
-			<p>Příšerně žluťoučký kůň úpěl ďábelské ódy. Hleď, toť přízračný
-				kůň v mátožné póze šíleně úpí. Zvlášť zákeřný učeň s ďolíčky běží
-				podél zóny úlů. Loď čeří kýlem tůň obzvlášť v Grónské úžině. Ó,
-				náhlý déšť již zvířil prach a čilá laň teď běží s houfcem gazel k
-				úkrytům.</p>
 		</div>
 	</div>
 	#parse("footer.vm")

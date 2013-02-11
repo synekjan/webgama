@@ -234,13 +234,13 @@ div#content {
 }
 
 /* ----------------------------------   ACCOUNT MANAGEMENT   -------------------------------------*/
-div#account_container {
+div#account_container,div#admin_container {
 	padding: 10px;
 	margin: 0px auto;
 	margin-top: 20px;
 }
 
-div#account_container .left_menu {
+.left_menu {
 	margin: 40px -3px 0 0;
 	width: 160px;
 	display: inline-block;
@@ -249,11 +249,11 @@ div#account_container .left_menu {
 	vertical-align: top;
 }
 
-div#account_container .left_menu li {
+.left_menu li {
 	border-radius: 3px 3px 3px 3px;
 }
 
-div#account_container .left_menu li a {
+.left_menu li a {
 	margin-right: -1px;
 	display: block;
 	color: #333333;
@@ -262,28 +262,30 @@ div#account_container .left_menu li a {
 	text-decoration: none;
 }
 
-div#account_container .left_menu li a:HOVER {
+.left_menu li a:HOVER {
 	background-color: #F1F1F1;
 }
 
-div#account_container .left_menu li a:ACTIVE {
+.left_menu li a:ACTIVE {
 	color: #FFFFFF;
 	background-color: #2B6DAE;
+	text-shadow: none;
 }
 
-div#account_container .left_menu span.active_menu li a {
+.left_menu span.active_menu li a {
 	color: #FFFFFF;
 	background-color: #2B6DAE;
+	text-shadow: none;
 }
 
-div#account_container .panel {
+div#account_container .panel,div#admin_container .panel {
 	display: inline-block;
 	padding: 20px;
 	border: 1px solid #DDDDDD;
 	background: #F1F1F1;
 	min-height: 200px;
 	width: 720px;
-	border-radius: 4px 4px 4px 4px;
+	border-radius: 4px;
 	line-height: 1.4;
 }
 
@@ -330,6 +332,45 @@ div#account_container div#delete {
 	margin-top: 10px;
 }
 
+/* ------------------ ABOUT ------------------ */
+div#about_container {
+	margin: 40px 10px 20px 10px;
+	text-shadow: 0 1px 0 #FFFFFF;
+}
+
+div#about_container .right_menu {
+	border: 1px solid #DDD;
+	background-color: #F1F1F1;
+	float: right;
+	margin-top: 10px;
+	padding: 10px;
+	border-radius: 3px;
+	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.05);
+	min-width: 170px;
+}
+
+div#about_container .right_menu ul {
+	padding: 10px 10px 10px 5px;
+}
+
+div#about_container .right_menu li {
+	
+}
+
+.right_menu span.active_menu li a {
+	font-weight: bold;
+}
+
+div#about_container .right_menu .menu_header {
+	font-size: 15px;
+	border-bottom: 1px solid #DDD;
+	padding: 5px;
+}
+
+#about_content {
+	width: 700px;
+}
+
 /* ------------------ FORMS ------------------ */
 fieldset {
 	border-top: 1px solid #DDDDDD;
@@ -344,7 +385,8 @@ legend {
 }
 
 .small_form_element,.medium_form_element,.large_form_element {
-	margin: 5px 0px; display : inline-block;
+	margin: 5px 0px;
+	display: inline-block;
 	vertical-align: top;
 	display: inline-block;
 }
@@ -460,7 +502,7 @@ select {
 	vertical-align: center;
 }
 
-.adjustment_form input[type=text], .adjustment_form input[type=password] {
+.adjustment_form input[type=text],.adjustment_form input[type=password] {
 	height: 20px;
 }
 

@@ -8,17 +8,42 @@
 	<div id="wrapper">
 		#parse("header.vm")
 		<div id="container">
-			<div class="left_menu">
-				<ul>
-					<li><a href="#springUrl("/about/project")">#springMessage("about.project")</a></li>
-					<span class="active_menu"><li><a href="#springUrl("/about/cvut")">#springMessage("about.organization")</a></li></span>
-					<li><a href="#springUrl("/about/author")">#springMessage("about.author")</a></li>
-				</ul>
-			</div>
+			<div id="about_container">
+				<div class="right_menu">
+					<div class="menu_header">
+						<h2>ABOUT</h2>
+					</div>
+					<ul>
+						<li><a href="#springUrl("/about/project")">#springMessage("about.project")</a></li>
+						<span class="active_menu"><li><a href="#springUrl("/about/cvut")">#springMessage("about.organization")</a></li></span>
+						<li><a href="#springUrl("/about/author")">#springMessage("about.author")</a></li>
+					</ul>
+				</div>
+				<div id="about_content">
+					<div class="panel_header">
+						<h2>#springMessage("about.organization")</h2>
+					</div>
+					<p>The Faculty of Civil Engineering, at present one of the
+						eight colleges of the Czech Technical University in Prague, was
+						established, on January 18, 1707 at the initiative of Josef
+						Christian Willenberg. On the basis of the foundation Charter,
+						issued by Emperor Joseph I and written in Czech, the institution,
+						under the name of the Estates School of Engineering in Prague, was
+						proclaimed as the first public engineering school in Central
+						Europe. Nonetheless, the history of Czech technical education goes
+						back further than this date. It was preceded by the Prague Public
+						Engineering and Metallurgical School, in actual fact the first
+						civil engineering school in the Czech Lands. Founded in 1344, four
+						years before Charles University of Prague was established, the
+						school's founder was Master Matthias of Arras, brought from France
+						by the Czech prince Vaclav (Wenceslas), later famous as the King
+						of Bohemia and Germany and the Holy Roman Emperor Charles IV. The
+						school was founded so that Matthias might ensure necessary
+						qualifications for his collaborators. <a href="http://www.fsv.cvut.cz">Meet us on Faculty of Civil Engineering</a> </p>
 
-			<h3>#springMessage("about.organization")</h3>
-			<br> <a href="http://www.cvut.cz">CTU Prague</a> <br> <br>
-			<a href="http://www.fsv.cvut.cz">Faculty of Civil Engineering</a>
+					<a href="http://www.cvut.cz">CTU Prague</a>
+				</div>
+			</div>
 		</div>
 	</div>
 	#parse("footer.vm")
