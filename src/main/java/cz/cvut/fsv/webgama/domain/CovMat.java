@@ -8,7 +8,7 @@ public class CovMat {
 	
 	private Integer band;
 	
-	//private Double[][] val;
+	//private Double[] val;
 
 	public Integer getId() {
 		return id;

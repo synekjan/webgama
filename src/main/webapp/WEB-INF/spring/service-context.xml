@@ -22,7 +22,7 @@
 	</bean>
 
 	<bean id="mailManager" class="cz.cvut.fsv.webgama.service.impl.MailManagerImpl">
-		<property name="addressFrom" value="noreply@fsv.cvut.cz" />
+		<property name="addressFrom" value="${mail.address.from}" />
 		<property name="mailSender" ref="mailSender" />
 		<property name="userDao" ref="userDao" />
 	</bean>
@@ -91,7 +91,7 @@
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- one of the properties available; the maximum file size in bytes -->
-		<!-- <property name="maxUploadSize" value="10000" /> -->
+		<property name="maxUploadSize" value="${import.maximum.file.size}" />
 	</bean>
 
 </beans>

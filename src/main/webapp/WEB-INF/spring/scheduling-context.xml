@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
 	<!-- Scheduled methods  -->
-	<bean id="userJobDetail"
+	<bean id="clearConfirmationsJobDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="userDao" />
 		<property name="targetMethod" value="clearConfirmations" />
@@ -17,23 +17,23 @@
 	</bean>
 	
 	<!-- Triggers  -->
-	<bean id="userJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="jobDetail" ref="userJobDetail" />
-		<property name="startDelay" value="20000" />
-		<property name="cronExpression" value="0 1 0 1/1 * ? *" />
+	<bean id="clearConfirmationsJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="clearConfirmationsJobDetail" />
+		<property name="startDelay" value="${quartz.clearConfirmations.startDelay}" />
+		<property name="cronExpression" value="${quartz.clearConfirmations.cron}" />
 	</bean>
 	
 	<bean id="eraseTmpTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="eraseTmpJobDetail" />
-		<property name="startDelay" value="21000" />
-		<property name="cronExpression" value="0 21 0/3 1/1 * ? *" />
+		<property name="startDelay" value="${quartz.eraseTmp.startDelay}" />
+		<property name="cronExpression" value="${quartz.eraseTmp.cron}" />
 	</bean>
 	
 	<!-- Register trigger -->
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<ref bean="userJobTrigger" />
+				<ref bean="clearConfirmationsJobTrigger" />
 				<ref bean="eraseTmpTrigger" />
 			</list>
 		</property>
