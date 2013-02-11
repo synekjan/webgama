@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+#parse("include.vm")
+<title>Webgama| Users</title>
+</head>
+<body>
+	<div id="wrapper">
+		#parse("header.vm")
+		<div id="container">
+			<div id="account_container">
+				<div class="left_menu">
+					<ul>
+						<li><a href="#springUrl("/admin/users")">#springMessage("admin.section.users")</a></li>
+						<span class="active_menu"><li><a href="#springUrl("/admin/users/delete")">#springMessage("admin.section.users.delete")</a></li></span>
+					</ul>
+				</div>
+				<div id="info" class="panel">
+					<div class="panel_header">
+						<h2>#springMessage("admin.section.users.delete")</h2>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	#parse("footer.vm")
+</body>
+</html>
