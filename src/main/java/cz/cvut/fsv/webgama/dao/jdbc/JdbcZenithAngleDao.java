@@ -67,7 +67,7 @@ public class JdbcZenithAngleDao extends JdbcDaoSupport implements
 
 			ZenithAngle zenithAngle = new ZenithAngle();
 
-			zenithAngle.setId(rs.getInt("zenith_angle_id"));
+			zenithAngle.setId(rs.getLong("zenith_angle_id"));
 			zenithAngle.setFrom(rs.getString("from_id"));
 			zenithAngle.setTo(rs.getString("to_id"));
 			zenithAngle.setVal(rs.getDouble("val"));

@@ -65,7 +65,7 @@ public class JdbcDistanceDao extends JdbcDaoSupport implements DistanceDao {
 
 			Distance distance = new Distance();
 
-			distance.setId(rs.getInt("distance_id"));
+			distance.setId(rs.getLong("distance_id"));
 			distance.setFrom(rs.getString("from_id"));
 			distance.setTo(rs.getString("to_id"));
 			distance.setVal(rs.getDouble("val"));

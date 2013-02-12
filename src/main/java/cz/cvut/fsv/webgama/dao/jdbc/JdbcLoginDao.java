@@ -61,7 +61,7 @@ public class JdbcLoginDao extends JdbcDaoSupport implements LoginDao {
 		public Login mapRow(ResultSet rs, int rowNum) throws SQLException {
 
 			Login login = new Login();
-			login.setId((Integer) rs.getObject("login_id"));
+			login.setId(rs.getLong("login_id"));
 			login.setIp(rs.getString("ip_address"));
 			login.setTime(new DateTime(rs.getTimestamp("time").getTime()));
 			login.setSuccess(rs.getBoolean("success"));

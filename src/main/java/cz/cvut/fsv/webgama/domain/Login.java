@@ -4,7 +4,7 @@ import org.joda.time.DateTime;
 
 public class Login {
 
-	private Integer id;
+	private Long id;
 
 	private User user;
 
@@ -14,11 +14,11 @@ public class Login {
 
 	private Boolean success;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

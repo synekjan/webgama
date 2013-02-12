@@ -8,7 +8,7 @@ public class Input implements Serializable {
 
 	private static final long serialVersionUID = -5648997304219980815L;
 
-	private Integer id;
+	private Long id;
 
 	private User user;
 
@@ -32,11 +32,11 @@ public class Input implements Serializable {
 
 	private Network network;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

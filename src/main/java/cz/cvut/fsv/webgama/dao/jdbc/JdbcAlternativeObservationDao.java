@@ -118,7 +118,7 @@ public class JdbcAlternativeObservationDao extends JdbcDaoSupport implements
 			AlternativeObservation alternativeObservation = new AlternativeObservation();
 
 			alternativeObservation.setId(rs
-					.getInt("alternative_observation_id"));
+					.getLong("alternative_observation_id"));
 			alternativeObservation.setTagname(rs.getString("tagname"));
 			alternativeObservation
 					.setCoordinates(coordinateDao

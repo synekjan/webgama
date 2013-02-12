@@ -104,7 +104,7 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 
 			Input input = new Input();
 
-			input.setId(rs.getInt("input_id"));
+			input.setId(rs.getLong("input_id"));
 			input.setUser(userDao.findUserById(rs.getInt("user_id")));
 			input.setName(rs.getString("name"));
 			input.setFilename(rs.getString("filename"));

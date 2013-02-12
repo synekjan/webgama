@@ -29,7 +29,7 @@ public class JdbcRoleDao extends JdbcDaoSupport implements RoleDao {
 
 			Role role = new Role();
 
-			role.setId(rs.getInt("role_id"));
+			role.setId(rs.getLong("role_id"));
 			role.setName(rs.getString("role"));
 
 			return role;
