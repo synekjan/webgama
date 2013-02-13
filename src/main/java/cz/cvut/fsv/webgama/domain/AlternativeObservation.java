@@ -5,10 +5,10 @@ import java.util.List;
 
 public class AlternativeObservation {
 
-	private Integer id;
-	
+	private Long id;
+
 	private String tagname;
-	
+
 	private CovMat covMat;
 
 	private List<HeightDifference> heightDifferences = new ArrayList<HeightDifference>();
@@ -17,11 +17,11 @@ public class AlternativeObservation {
 
 	private List<Coordinate> coordinates = new ArrayList<Coordinate>();
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

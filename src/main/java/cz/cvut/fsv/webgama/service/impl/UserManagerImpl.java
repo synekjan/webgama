@@ -125,7 +125,7 @@ public class UserManagerImpl implements UserManager {
 		String URL = request.getRequestURL().toString()
 				.replace("/register", "");
 
-		Integer user_id = userDao.findUserByUsername(userForm.getUsername())
+		Long user_id = userDao.findUserByUsername(userForm.getUsername())
 				.getId();
 		userDao.insertConfirmationID(uuid, user_id);
 

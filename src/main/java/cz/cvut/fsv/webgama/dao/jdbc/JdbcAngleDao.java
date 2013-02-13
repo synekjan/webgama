@@ -64,7 +64,7 @@ public class JdbcAngleDao extends JdbcDaoSupport implements AngleDao {
 
 			Angle angle = new Angle();
 
-			angle.setId(rs.getInt("angle_id"));
+			angle.setId(rs.getLong("angle_id"));
 			angle.setFrom(rs.getString("from_id"));
 			angle.setBs(rs.getString("bs"));
 			angle.setFs(rs.getString("fs"));

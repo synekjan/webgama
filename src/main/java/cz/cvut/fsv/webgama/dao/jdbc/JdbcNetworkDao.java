@@ -109,7 +109,7 @@ public class JdbcNetworkDao extends JdbcDaoSupport implements NetworkDao {
 
 			Network network = new Network();
 
-			network.setId(rs.getInt("network_id"));
+			network.setId(rs.getLong("network_id"));
 			network.setAxesXY(rs.getString("axes_xy"));
 			network.setAngles(rs.getString("angles"));
 			network.setEpoch(rs.getDouble("epoch"));

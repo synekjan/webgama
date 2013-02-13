@@ -121,7 +121,7 @@ public class JdbcObservationDao extends JdbcDaoSupport implements
 
 			Observation observation = new Observation();
 
-			observation.setId(rs.getInt("observation_id"));
+			observation.setId(rs.getLong("observation_id"));
 			observation.setFrom(rs.getString("from_id"));
 			observation.setOrientation(rs.getString("orientation"));
 			observation.setFromDh(rs.getDouble("from_dh"));

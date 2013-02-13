@@ -68,7 +68,7 @@ public class JdbcSlopeDistanceDao extends JdbcDaoSupport implements
 
 			SlopeDistance slopeDistance = new SlopeDistance();
 
-			slopeDistance.setId(rs.getInt("slope_distance_id"));
+			slopeDistance.setId(rs.getLong("slope_distance_id"));
 			slopeDistance.setFrom(rs.getString("from_id"));
 			slopeDistance.setTo(rs.getString("to_id"));
 			slopeDistance.setVal(rs.getDouble("val"));

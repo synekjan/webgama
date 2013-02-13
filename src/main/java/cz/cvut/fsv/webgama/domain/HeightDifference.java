@@ -2,23 +2,23 @@ package cz.cvut.fsv.webgama.domain;
 
 public class HeightDifference {
 
-	private Integer id;
-	
+	private Long id;
+
 	private String from;
-	
+
 	private String to;
-	
+
 	private Double val;
-	
+
 	private Double stdev;
-	
+
 	private Double dist;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

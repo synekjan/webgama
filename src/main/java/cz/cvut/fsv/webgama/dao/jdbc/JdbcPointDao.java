@@ -64,7 +64,7 @@ public class JdbcPointDao extends JdbcDaoSupport implements PointDao {
 
 			Point point = new Point();
 
-			point.setId(rs.getInt("point_id"));
+			point.setId(rs.getLong("point_id"));
 			point.setName(rs.getString("id"));
 			point.setX(rs.getDouble("x"));
 			point.setY(rs.getDouble("y"));

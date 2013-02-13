@@ -51,7 +51,8 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 				new Object[] { user.getFirstName(), user.getLastName(),
 						user.getEmail(), user.getTelephone(), user.getStreet(),
 						user.getNumber(), user.getCity(), user.getZipCode(),
-						user.getState(), user.getModified().toDate(), user.getId() });
+						user.getState(), user.getModified().toDate(),
+						user.getId() });
 	}
 
 	@Override
@@ -59,7 +60,8 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 		String sql = "UPDATE users SET password=?, date_modified=? WHERE user_id=?";
 
-		getJdbcTemplate().update(sql, user.getPassword(), user.getModified().toDate(), user.getId());
+		getJdbcTemplate().update(sql, user.getPassword(),
+				user.getModified().toDate(), user.getId());
 	}
 
 	public void updateEnabled(User user) {
@@ -76,12 +78,12 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 		return users;
 	}
-	
+
 	@Override
 	public int getUserCount() {
-		
+
 		String sql = "SELECT COUNT(user_id) FROM users";
-		
+
 		return getJdbcTemplate().queryForInt(sql);
 	}
 
@@ -108,7 +110,7 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 	}
 
 	@Override
-	public User findUserById(int id) {
+	public User findUserById(long id) {
 
 		String sql = "SELECT * FROM users WHERE user_id = ?";
 
@@ -130,7 +132,7 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 	}
 
 	@Override
-	public void insertConfirmationID(String uuid, Integer user_id) {
+	public void insertConfirmationID(String uuid, Long user_id) {
 
 		String sql = "INSERT INTO confirmations (user_id, uuid) VALUES (?,?)";
 
@@ -175,7 +177,7 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 
 			User user = new User();
-			user.setId(rs.getInt("user_id"));
+			user.setId(rs.getLong("user_id"));
 			user.setUsername(rs.getString("username"));
 			user.setPassword(rs.getString("password"));
 			user.setEnabled(rs.getBoolean("enabled"));
@@ -205,7 +207,7 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 			Confirmation conf = new Confirmation();
 
-			conf.setId(rs.getInt("confirmation_id"));
+			conf.setId(rs.getLong("confirmation_id"));
 			conf.setUser(findUserById(rs.getInt("user_id")));
 			conf.setUuid(rs.getString("uuid"));
 			conf.setTime(new DateTime(rs.getTimestamp("time").getTime()));
@@ -213,4 +215,5 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 			return conf;
 		}
 	}
+
 }

@@ -39,7 +39,7 @@ DROP FUNCTION user_authority_function() CASCADE;
 -------------------------- USERS table ----------------------------------
 
 CREATE TABLE users (
-user_id SERIAL PRIMARY KEY,
+user_id BIGSERIAL PRIMARY KEY,
 username VARCHAR(30) NOT NULL UNIQUE,
 password VARCHAR(80) NOT NULL,
 enabled BOOLEAN DEFAULT FALSE,
@@ -68,9 +68,9 @@ INSERT INTO roles VALUES (3,'ROLE_USER');
 
 
 CREATE TABLE authorities (
-authority_id SERIAL PRIMARY KEY,
+authority_id BIGSERIAL PRIMARY KEY,
 role_id INTEGER NOT NULL REFERENCES roles(role_id),
-user_id INTEGER NOT NULL REFERENCES users(user_id)
+user_id BIGINT NOT NULL REFERENCES users(user_id)
 );
 
 --trigger function for automatic insert default user permissions
@@ -104,8 +104,8 @@ EXECUTE PROCEDURE user_authority_function();
 --------------- LOGINS table -------------------
 
 CREATE TABLE logins (
-login_id SERIAL PRIMARY KEY,
-user_id INTEGER NOT NULL REFERENCES users(user_id),
+login_id BIGSERIAL PRIMARY KEY,
+user_id BIGINT NOT NULL REFERENCES users(user_id),
 ip_address VARCHAR(15) NOT NULL,
 time TIMESTAMP NOT NULL DEFAULT now(),
 success BOOLEAN NOT NULL);
@@ -114,8 +114,8 @@ success BOOLEAN NOT NULL);
 --------------- CONFIRMATIONS table ------------------
 
 CREATE TABLE confirmations (
-confirmation_id SERIAL PRIMARY KEY,
-user_id INTEGER NOT NULL REFERENCES users(user_id),
+confirmation_id BIGSERIAL PRIMARY KEY,
+user_id BIGINT NOT NULL REFERENCES users(user_id),
 uuid VARCHAR(36) NOT NULL UNIQUE,
 time TIMESTAMP DEFAULT now()
 );
@@ -147,8 +147,8 @@ GRANT ALL ON confirmations_confirmation_id_seq TO synekjan;
 
 
 CREATE TABLE inputs (
-input_id 		SERIAL PRIMARY KEY,
-user_id 		INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+input_id 		BIGSERIAL PRIMARY KEY,
+user_id 		BIGINT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
 name			VARCHAR(80) NOT NULL,
 filename 		VARCHAR(255) NOT NULL,
 file_content 	TEXT,
@@ -163,8 +163,8 @@ time 			TIMESTAMP DEFAULT now()
 
 
 CREATE TABLE networks (
-network_id		SERIAL PRIMARY KEY,
-input_id		INTEGER NOT NULL REFERENCES inputs(input_id) ON DELETE CASCADE,
+network_id		BIGSERIAL PRIMARY KEY,
+input_id		BIGINT NOT NULL REFERENCES inputs(input_id) ON DELETE CASCADE,
 axes_xy			VARCHAR(2),
 angles			VARCHAR(12),
 epoch			DOUBLE PRECISION,
@@ -181,8 +181,8 @@ distance_stdev	VARCHAR(80)
 );
 
 CREATE TABLE points (
-point_id		SERIAL PRIMARY KEY,
-network_id		INTEGER NOT NULL REFERENCES networks(network_id) ON DELETE CASCADE,
+point_id		BIGSERIAL PRIMARY KEY,
+network_id		BIGINT NOT NULL REFERENCES networks(network_id) ON DELETE CASCADE,
 id				VARCHAR(80) NOT NULL,
 x				DOUBLE PRECISION,
 y				DOUBLE PRECISION,
@@ -192,29 +192,29 @@ adj				VARCHAR(3)
 );
 
 CREATE TABLE covmats (
-covmat_id 		SERIAL PRIMARY KEY,
+covmat_id 		BIGSERIAL PRIMARY KEY,
 dim 			INTEGER NOT NULL,
 band 			INTEGER NOT NULL
 );
 
 CREATE TABLE covmat_values (
-covmat_value_id SERIAL PRIMARY KEY,
-covmat_id 		INTEGER NOT NULL REFERENCES covmats(covmat_id) ON DELETE CASCADE,
+covmat_value_id BIGSERIAL PRIMARY KEY,
+covmat_id 		BIGINT NOT NULL REFERENCES covmats(covmat_id) ON DELETE CASCADE,
 rind 			INTEGER NOT NULL,
 cind 			INTEGER NOT NULL,
 val 			DOUBLE PRECISION
 );
 
 CREATE TABLE alternative_observations (
-alternative_observation_id SERIAL PRIMARY KEY,
-network_id		INTEGER NOT NULL REFERENCES networks(network_id) ON DELETE CASCADE,
+alternative_observation_id BIGSERIAL PRIMARY KEY,
+network_id		BIGINT NOT NULL REFERENCES networks(network_id) ON DELETE CASCADE,
 tagname			VARCHAR(20) NOT NULL check (tagname in ('coordinates', 'vectors', 'height-differences')),
-covmat_id		INTEGER REFERENCES covmats(covmat_id)
+covmat_id		BIGINT REFERENCES covmats(covmat_id)
 );
 
 CREATE TABLE height_differences (
-height_difference_id SERIAL PRIMARY KEY,
-alternative_observation_id INTEGER NOT NULL REFERENCES alternative_observations(alternative_observation_id) ON DELETE CASCADE,
+height_difference_id BIGSERIAL PRIMARY KEY,
+alternative_observation_id BIGINT NOT NULL REFERENCES alternative_observations(alternative_observation_id) ON DELETE CASCADE,
 from_id			VARCHAR(80) NOT NULL,
 to_id			VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,
@@ -223,8 +223,8 @@ dist			DOUBLE PRECISION
 );
 
 CREATE TABLE vectors (
-vector_id 		SERIAL PRIMARY KEY,
-alternative_observation_id INTEGER NOT NULL REFERENCES alternative_observations(alternative_observation_id) ON DELETE CASCADE,
+vector_id 		BIGSERIAL PRIMARY KEY,
+alternative_observation_id BIGINT NOT NULL REFERENCES alternative_observations(alternative_observation_id) ON DELETE CASCADE,
 from_id			VARCHAR(80) NOT NULL,
 to_id			VARCHAR(80) NOT NULL,
 dx				DOUBLE PRECISION NOT NULL,
@@ -235,8 +235,8 @@ to_dh			DOUBLE PRECISION
 );
 
 CREATE TABLE coordinates (
-coordinate_id	SERIAL PRIMARY KEY,
-alternative_observation_id INTEGER NOT NULL REFERENCES alternative_observations(alternative_observation_id) ON DELETE CASCADE,
+coordinate_id	BIGSERIAL PRIMARY KEY,
+alternative_observation_id BIGINT NOT NULL REFERENCES alternative_observations(alternative_observation_id) ON DELETE CASCADE,
 id				VARCHAR(80) NOT NULL,
 x				DOUBLE PRECISION,
 y				DOUBLE PRECISION,
@@ -246,18 +246,18 @@ z				DOUBLE PRECISION
 
 
 CREATE TABLE observations (
-observation_id 	SERIAL PRIMARY KEY,
-network_id		INTEGER NOT NULL REFERENCES networks(network_id) ON DELETE CASCADE,
+observation_id 	BIGSERIAL PRIMARY KEY,
+network_id		BIGINT NOT NULL REFERENCES networks(network_id) ON DELETE CASCADE,
 from_id			VARCHAR(80),
 orientation		VARCHAR(20),
 from_dh			DOUBLE PRECISION,
-covmat_id		INTEGER REFERENCES covmats(covmat_id)
+covmat_id		BIGINT REFERENCES covmats(covmat_id)
 );
 
 
 CREATE TABLE directions (
-direction_id	SERIAL PRIMARY KEY,
-observation_id	INTEGER NOT NULL REFERENCES observations(observation_id) ON DELETE CASCADE,
+direction_id	BIGSERIAL PRIMARY KEY,
+observation_id	BIGINT NOT NULL REFERENCES observations(observation_id) ON DELETE CASCADE,
 to_id			VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,
 stdev			DOUBLE PRECISION,
@@ -266,8 +266,8 @@ to_dh			DOUBLE PRECISION
 );
 
 CREATE TABLE distances (
-distance_id		SERIAL PRIMARY KEY,
-observation_id	INTEGER NOT NULL REFERENCES observations(observation_id) ON DELETE CASCADE,
+distance_id		BIGSERIAL PRIMARY KEY,
+observation_id	BIGINT NOT NULL REFERENCES observations(observation_id) ON DELETE CASCADE,
 from_id			VARCHAR(80),
 to_id			VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,
@@ -278,8 +278,8 @@ to_dh			DOUBLE PRECISION
 
 
 CREATE TABLE angles (
-angle_id		SERIAL PRIMARY KEY,
-observation_id	INTEGER NOT NULL REFERENCES observations(observation_id) ON DELETE CASCADE,
+angle_id		BIGSERIAL PRIMARY KEY,
+observation_id	BIGINT NOT NULL REFERENCES observations(observation_id) ON DELETE CASCADE,
 from_id			VARCHAR(80),
 bs				VARCHAR(80) NOT NULL,
 fs				VARCHAR(80) NOT NULL,
@@ -292,8 +292,8 @@ fs_dh			DOUBLE PRECISION
 
 
 CREATE TABLE slope_distances (
-slope_distance_id	SERIAL PRIMARY KEY,
-observation_id	INTEGER NOT NULL REFERENCES observations(observation_id) ON DELETE CASCADE,
+slope_distance_id	BIGSERIAL PRIMARY KEY,
+observation_id	BIGINT NOT NULL REFERENCES observations(observation_id) ON DELETE CASCADE,
 from_id			VARCHAR(80),
 to_id			VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,
@@ -303,8 +303,8 @@ to_dh			DOUBLE PRECISION
 );
 
 CREATE TABLE zenith_angles (
-zenith_angle_id	SERIAL PRIMARY KEY,
-observation_id	INTEGER NOT NULL REFERENCES observations(observation_id) ON DELETE CASCADE,
+zenith_angle_id	BIGSERIAL PRIMARY KEY,
+observation_id	BIGINT NOT NULL REFERENCES observations(observation_id) ON DELETE CASCADE,
 from_id			VARCHAR(80),
 to_id			VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,
@@ -358,8 +358,8 @@ GRANT ALL ON alternative_observations_alternative_observation_id_seq TO synekjan
 
 
 CREATE TABLE outputs (
-output_id 		SERIAL PRIMARY KEY,
-input_id 		INTEGER NOT NULL REFERENCES inputs(input_id)
+output_id 		BIGSERIAL PRIMARY KEY,
+input_id 		BIGINT NOT NULL REFERENCES inputs(input_id)
 
 );
 

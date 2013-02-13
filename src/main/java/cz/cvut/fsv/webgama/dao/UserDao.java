@@ -25,11 +25,11 @@ public interface UserDao {
 
 	public List<User> findUsersByEmail(String email);
 
-	public User findUserById(int id);
+	public User findUserById(long id);
 
 	public User findUserByUsername(String username);
 
-	public void insertConfirmationID(String uuid, Integer user_id);
+	public void insertConfirmationID(String uuid, Long user_id);
 
 	public void deleteConfirmationID(String uuid);
 

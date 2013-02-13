@@ -4,16 +4,19 @@ import org.joda.time.DateTime;
 
 public class Confirmation {
 
-	private Integer id;
+	private Long id;
+
 	private User user;
+
 	private String uuid;
+
 	private DateTime time;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

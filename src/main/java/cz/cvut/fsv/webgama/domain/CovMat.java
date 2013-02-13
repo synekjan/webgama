@@ -1,25 +1,25 @@
 package cz.cvut.fsv.webgama.domain;
 
 public class CovMat {
-	
-	private Integer id;
-	
+
+	private Long id;
+
 	private Integer dim;
-	
+
 	private Integer band;
-	
-	//private Double[] val;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	// private Double[] val;
 
 	public Integer getDim() {
 		return dim;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setDim(Integer dim) {
@@ -34,12 +34,10 @@ public class CovMat {
 		this.band = band;
 	}
 
-	/*public Double[][] getVal() {
-		return val;
-	}
-
-	public void setVal(Double[][] val) {
-		this.val = val;
-	}*/
+	/*
+	 * public Double[][] getVal() { return val; }
+	 * 
+	 * public void setVal(Double[][] val) { this.val = val; }
+	 */
 
 }

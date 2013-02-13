@@ -62,7 +62,7 @@ public class JdbcVectorDao extends JdbcDaoSupport implements VectorDao {
 
 			Vector vector = new Vector();
 
-			vector.setId(rs.getInt("vector_id"));
+			vector.setId(rs.getLong("vector_id"));
 			vector.setFrom(rs.getString("from_id"));
 			vector.setTo(rs.getString("to_id"));
 			vector.setDx(rs.getDouble("dx"));
