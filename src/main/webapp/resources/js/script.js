@@ -39,6 +39,12 @@ $(document).ready(function() {
 	});
 	$('.success, .error').delay(8000).hide(1000);
 	
+	$(function() {
+		$(".accordion").accordion({
+			heightStyle: "content"
+		});
+	});
+	
 	//TODO
 	/*$('input.submit_btn').click(function() {
 		var url = window.location.pathname;

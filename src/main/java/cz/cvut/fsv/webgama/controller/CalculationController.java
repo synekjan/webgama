@@ -12,18 +12,20 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
 
 @Controller
-@RequestMapping(value = "/calculation")
 public class CalculationController extends MultiActionController {
 
 	@Inject
 	private AdjustmentManager adjustmentManager;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@RequestMapping(value = "/calculations", method = RequestMethod.GET)
 	protected ModelAndView calculationList(HttpServletRequest request) {
 
 		ModelAndView mav = new ModelAndView("/calculation/calculation");
 
-		mav.addObject("inputList", adjustmentManager.getInputsbyUsername(request
+		mav.addObject("myCalculations", adjustmentManager.getInputsbyUsername(request
+				.getUserPrincipal().getName()));
+		
+		mav.addObject("sharedCalculations", adjustmentManager.getInputsbyUsername(request
 				.getUserPrincipal().getName()));
 
 		return mav;

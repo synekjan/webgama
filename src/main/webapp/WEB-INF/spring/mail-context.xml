@@ -6,13 +6,13 @@
 	<!-- ============================= Mail Configuration ============================= -->
 
 	<!-- Faculty SMTP Server -->
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<!-- <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${production.mail.host}" />
 		<property name="port" value="${production.mail.port}" />
-	</bean>
+	</bean> -->
 
 	<!-- Google SMTP Server for testing purposes  -->
-	<!-- <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${google.mail.host}" />
 		<property name="port" value="${google.mail.port}" />
 		<property name="username" value="${google.mail.username}" />
@@ -23,6 +23,6 @@
 				<prop key="mail.smtp.starttls.enable">true</prop>
 			</props>
 		</property>
-	</bean> -->
+	</bean>
 
 </beans>

@@ -479,7 +479,7 @@ div.form_element_errors ul {
 }
 
 div.form_element_errors li {
-	padding: 2px;
+	padding: 2px 0px;
 	text-shadow: none;
 }
 
@@ -933,12 +933,28 @@ div#welcome_container {
 	padding: 40px 0 141px 0;
 }
 
+/* -------------- CALCULATIONS ----------------------- */
+#calculations {
+	display: inline-block;
+	width: 660px;
+}
+
+#quick_links {
+	display: inline-block;
+	width: 200px;
+	border: 1px solid #DDD;
+	border-radius: 4px;
+	vertical-align: top;
+	margin: 30px 20px;
+	padding: 10px;
+}
+
 /* ACCORDION  */
-#accordion {
+.accordion {
 	
 }
 
-#accordion .ui-accordion-content {
+.accordion .ui-accordion-content {
 	background-color: #f5f5f5;
 	color: #777;
 	padding: 10px;
@@ -946,7 +962,7 @@ div#welcome_container {
 	border-top: 0;
 }
 
-#accordion .ui-accordion-header {
+.accordion .ui-accordion-header {
 	background-color: #ccc;
 	margin-top: 2px;
 	padding: 10px;
@@ -955,7 +971,7 @@ div#welcome_container {
 	border-radius: 4px 4px 0px 0px;
 }
 
-#accordion span.time {
+.accordion span.time {
 	float: right;
 }
 
