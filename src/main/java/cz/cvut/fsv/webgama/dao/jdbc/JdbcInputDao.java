@@ -87,6 +87,17 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 
 		return inputs;
 	}
+	
+	@Override
+	public Input findInputById(Long id) {
+		
+		String sql = "SELECT * FROM inputs WHERE input_id = ?";
+
+		Input input = getJdbcTemplate().queryForObject(sql, new Object[] { id },
+				new InputMapper());
+
+		return input;
+	}
 
 	@Override
 	public int getInputCountByUser(User user) {
@@ -111,7 +122,7 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 			input.setFileContent(rs.getString("file_content"));
 			input.setAlgorithm(rs.getString("algorithm"));
 			input.setAngUnits(rs.getInt("ang_units"));
-			input.setLatitude(rs.getDouble("latitude"));
+			input.setLatitude(rs.getObject("latitude") != null ? rs.getDouble("latitude") : null);
 			input.setEllipsoid(rs.getString("ellipsoid"));
 			input.setVersion(rs.getString("version"));
 			input.setNetwork(networkDao.findNetworkByInput(input));
@@ -121,5 +132,7 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 		}
 
 	}
+
+
 
 }

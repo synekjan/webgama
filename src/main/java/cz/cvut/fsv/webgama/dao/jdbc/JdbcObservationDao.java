@@ -124,7 +124,7 @@ public class JdbcObservationDao extends JdbcDaoSupport implements
 			observation.setId(rs.getLong("observation_id"));
 			observation.setFrom(rs.getString("from_id"));
 			observation.setOrientation(rs.getString("orientation"));
-			observation.setFromDh(rs.getDouble("from_dh"));
+			observation.setFromDh(rs.getObject("from_dh") != null ? rs.getDouble("from_dh") : null);
 			observation.setDirections(directionDao
 					.findDirectionsInObservation(observation));
 			observation.setDistances(distanceDao

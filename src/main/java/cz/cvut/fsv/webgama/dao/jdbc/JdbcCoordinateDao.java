@@ -64,9 +64,9 @@ public class JdbcCoordinateDao extends JdbcDaoSupport implements CoordinateDao {
 
 			coordinate.setId(rs.getLong("coordinate_id"));
 			coordinate.setName(rs.getString("id"));
-			coordinate.setX(rs.getDouble("x"));
-			coordinate.setY(rs.getDouble("y"));
-			coordinate.setZ(rs.getDouble("z"));
+			coordinate.setX(rs.getObject("x") != null ? rs.getDouble("x") : null);
+			coordinate.setY(rs.getObject("y") != null ? rs.getDouble("y") : null);
+			coordinate.setZ(rs.getObject("z") != null ? rs.getDouble("z") : null);
 
 			return coordinate;
 		}

@@ -65,10 +65,10 @@ public class JdbcDirectionDao extends JdbcDaoSupport implements DirectionDao {
 
 			direction.setId(rs.getLong("direction_id"));
 			direction.setTo(rs.getString("to_id"));
-			direction.setVal(rs.getDouble("val"));
-			direction.setStdev(rs.getDouble("stdev"));
-			direction.setFromDh(rs.getDouble("from_dh"));
-			direction.setToDh(rs.getDouble("to_dh"));
+			direction.setVal(rs.getObject("val") != null ? rs.getDouble("val") : null);
+			direction.setStdev(rs.getObject("stdev") != null ? rs.getDouble("stdev") : null);
+			direction.setFromDh(rs.getObject("from_dh") != null ? rs.getDouble("from_dh") : null);
+			direction.setToDh(rs.getObject("to_dh") != null ? rs.getDouble("to_dh") : null);
 
 			return direction;
 		}

@@ -74,9 +74,9 @@ public class JdbcHeightDifferenceDao extends JdbcDaoSupport implements
 			heightDifference.setId(rs.getLong("height_difference_id"));
 			heightDifference.setFrom(rs.getString("from_id"));
 			heightDifference.setTo(rs.getString("to_id"));
-			heightDifference.setVal(rs.getDouble("val"));
-			heightDifference.setStdev(rs.getDouble("stdev"));
-			heightDifference.setDist(rs.getDouble("dist"));
+			heightDifference.setVal(rs.getObject("val") != null ? rs.getDouble("val") : null);
+			heightDifference.setStdev(rs.getObject("stdev") != null ? rs.getDouble("stdev") : null);
+			heightDifference.setDist(rs.getObject("dist") != null ? rs.getDouble("dist") : null);
 
 			return heightDifference;
 		}

@@ -112,11 +112,11 @@ public class JdbcNetworkDao extends JdbcDaoSupport implements NetworkDao {
 			network.setId(rs.getLong("network_id"));
 			network.setAxesXY(rs.getString("axes_xy"));
 			network.setAngles(rs.getString("angles"));
-			network.setEpoch(rs.getDouble("epoch"));
+			network.setEpoch(rs.getObject("epoch") != null ? rs.getDouble("epoch") : null);
 			network.setDescription(rs.getString("description"));
-			network.setSigmaApr(rs.getDouble("sigma_apr"));
-			network.setConfPr(rs.getDouble("conf_pr"));
-			network.setTolAbs(rs.getDouble("tol_abs"));
+			network.setSigmaApr(rs.getObject("sigma_apr") != null ? rs.getDouble("sigma_apr") : null);
+			network.setConfPr(rs.getObject("conf_pr") != null ? rs.getDouble("conf_pr") : null);
+			network.setTolAbs(rs.getObject("tol_abs") != null ? rs.getDouble("tol_abs") : null);
 			network.setSigmaAct(rs.getString("sigma_act"));
 			network.setUpdateCC(rs.getString("update_cc"));
 			network.setDirectionStdev(rs.getString("direction_stdev"));
