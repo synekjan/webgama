@@ -41,7 +41,7 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
-	public User getUser(int id) {
+	public User getUser(long id) {
 
 		User user = userDao.findUserById(id);
 

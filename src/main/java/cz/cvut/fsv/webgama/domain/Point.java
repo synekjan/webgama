@@ -1,9 +1,12 @@
 package cz.cvut.fsv.webgama.domain;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Point {
 
 	private Long id;
 
+	@NotBlank
 	private String name;
 
 	private Double x;
@@ -70,6 +73,12 @@ public class Point {
 
 	public void setAdj(String adj) {
 		this.adj = adj;
+	}
+
+	@Override
+	public String toString() {
+		return "Point [id=" + id + ", name=" + name + ", x=" + x + ", y=" + y
+				+ ", z=" + z + ", fix=" + fix + ", adj=" + adj + "]";
 	}
 
 }

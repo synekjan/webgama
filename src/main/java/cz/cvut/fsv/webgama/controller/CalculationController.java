@@ -25,8 +25,7 @@ public class CalculationController extends MultiActionController {
 		mav.addObject("myCalculations", adjustmentManager.getInputsbyUsername(request
 				.getUserPrincipal().getName()));
 		
-		mav.addObject("sharedCalculations", adjustmentManager.getInputsbyUsername(request
-				.getUserPrincipal().getName()));
+		mav.addObject("sharedCalculations", adjustmentManager.getInputsbyUsername("gita"));
 
 		return mav;
 	}

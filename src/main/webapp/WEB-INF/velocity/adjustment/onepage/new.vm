@@ -139,17 +139,17 @@
 										</div>
 									</div>
 									<div class="small_form_element">
-										<label class="required" for="z">Z:</label>
+										<label class="required" for="points[$i].z">Z:</label>
 										<div class="input">
-											#springBind("input.points[$i].z") <input id="z" type="text"
-												name="points[$i].z" value="$!point.z" />
-											#showElementErrors()
-										</div>
+											#springFormInput("input.points[$i].z",
+											"")#showElementErrors()</div>
 									</div>
 									<div class="small_form_element">
 										<label for="fix">Fix:</label>
 										<div class="input">
-											<select id="fix" name="points[${foreach.index}].fix">
+											#springBind("input.points[$i].fix")<select
+												id="fix" name="points[$i].fix">
+												<option value=""></option>
 												<option value="xy">xy</option>
 												<option value="XY">XY</option>
 												<option value="z">z</option>
@@ -159,12 +159,15 @@
 												<option value="xyZ">xyZ</option>
 												<option value="XYz">XYz</option>
 											</select>
+											#showElementErrors()
 										</div>
 									</div>
 									<div class="small_form_element">
-										<label for="adj">Adj:</label>
+										<label for="input.points[$i].adj">Adj:</label>
 										<div class="input">
-											<select id="adj" name="points[${foreach.index}].adj">
+											#springBind("input.points[$i].adj")<select
+												id="input.points[$i].adj" name="input.points[$i].adj">
+												<option value=""></option>
 												<option value="xy">xy</option>
 												<option value="XY">XY</option>
 												<option value="z">z</option>
@@ -174,6 +177,7 @@
 												<option value="xyZ">xyZ</option>
 												<option value="XYz">XYz</option>
 											</select>
+											#showElementErrors()
 										</div>
 									</div>
 								</fieldset>
@@ -255,8 +259,7 @@
 										#set( $j = "${foreach.index}" )
 										<legend>Distance</legend>
 										<div class="small_form_element">
-											<label class="required"
-												for="observations[$i].distances[$j].from">From:</label>
+											<label for="observations[$i].distances[$j].from">From:</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].distances[$j].from",
 												"")#showElementErrors()</div>

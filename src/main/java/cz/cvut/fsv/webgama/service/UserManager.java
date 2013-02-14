@@ -15,7 +15,7 @@ public interface UserManager {
 
 	public void deleteUser(User user);
 
-	public User getUser(int id);
+	public User getUser(long id);
 
 	public User getUser(String username);
 

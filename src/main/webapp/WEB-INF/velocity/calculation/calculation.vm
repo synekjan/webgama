@@ -35,10 +35,7 @@
 									HH:mm:ss",$input.time.toDate())</span>
 							</h3>
 							<div class="accor_content">
-								<p>Cras dictum. Pellentesque habitant morbi tristique
-									senectus et netus et malesuada fames ac turpis egestas.
-									Vestibulum ante ipsum primis in faucibus orci luctus et
-									ultrices posuere cubilia Curae; Aenean lacinia mauris vel est.</p>
+								<a href="#springUrl("/adjustment/onepage/${input.id}")">Edit in One page</a>
 							</div>
 							#end
 						</div>
@@ -70,7 +67,7 @@
 				<div id="quick_links">
 				<ul>
 				<li><a href="#springUrl("/overview")">Index</a></li>
-				<li><a href="#springUrl("/import")">Import</a></li>
+				<li><a href="#springUrl("/import/xml")">Import</a></li>
 				</ul>
 				</div>
 			</div>

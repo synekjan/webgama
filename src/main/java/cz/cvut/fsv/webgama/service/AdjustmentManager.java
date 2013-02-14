@@ -12,6 +12,8 @@ public interface AdjustmentManager {
 	
 	public List<Input> getInputsbyUsername(String username);
 	
+	public Input getInputById(long id);
+	
 	public int getInputCountbyUsername(String username);
 
 }

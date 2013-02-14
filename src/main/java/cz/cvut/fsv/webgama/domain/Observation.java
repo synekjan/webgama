@@ -3,10 +3,15 @@ package cz.cvut.fsv.webgama.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Observation {
 
 	private Long id;
 
+	@NotBlank
 	private String from;
 
 	private String orientation;
@@ -15,14 +20,19 @@ public class Observation {
 
 	private CovMat covMat;
 
+	@Valid
 	private List<Direction> directions = new ArrayList<>();
 
+	@Valid
 	private List<Distance> distances = new ArrayList<>();
 
+	@Valid
 	private List<Angle> angles = new ArrayList<>();
 
+	@Valid
 	private List<SlopeDistance> slopeDistances = new ArrayList<>();
 
+	@Valid
 	private List<ZenithAngle> zenithAngles = new ArrayList<>();
 
 	public Long getId() {

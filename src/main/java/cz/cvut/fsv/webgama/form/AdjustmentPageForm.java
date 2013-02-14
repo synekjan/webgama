@@ -5,17 +5,14 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-
 import cz.cvut.fsv.webgama.domain.Input;
+import cz.cvut.fsv.webgama.domain.Observation;
+import cz.cvut.fsv.webgama.domain.Point;
 
 public class AdjustmentPageForm {
-	
+
 	private String axesXY;
-	
-	@Length(max = 5)
-	@NotBlank
+
 	private String angles;
 
 	private Double epoch;
@@ -41,19 +38,34 @@ public class AdjustmentPageForm {
 	private String distanceStdev;
 
 	@Valid
-	private List<PointForm> points = new ArrayList<>();
-	
+	private List<Point> points = new ArrayList<>();
+
 	@Valid
-	private List<ObservationForm> observations = new ArrayList<>();
+	private List<Observation> observations = new ArrayList<>();
 
 	public AdjustmentPageForm() {
-		
+
 	}
-	//TODO
+
+	// TODO
 	public AdjustmentPageForm(Input input) {
 		axesXY = input.getNetwork().getAxesXY();
+		angles = input.getNetwork().getAngles();
+		epoch = input.getNetwork().getEpoch();
+		description = input.getNetwork().getDescription();
+		sigmaApr = input.getNetwork().getSigmaApr();
+		confPr = input.getNetwork().getConfPr();
+		tolAbs = input.getNetwork().getTolAbs();
+		sigmaAct = input.getNetwork().getSigmaAct();
+		updateCC = input.getNetwork().getUpdateCC();
+		directionStdev = input.getNetwork().getDirectionStdev();
+		angleStdev = input.getNetwork().getAngleStdev();
+		zenithAngleStdev = input.getNetwork().getZenithAngleStdev();
+		distanceStdev = input.getNetwork().getDistanceStdev();
+
+		points = input.getNetwork().getPoints();
+		observations = input.getNetwork().getObservations();
 	}
-	
 
 	public String getAxesXY() {
 		return axesXY;
@@ -159,19 +171,19 @@ public class AdjustmentPageForm {
 		this.distanceStdev = distanceStdev;
 	}
 
-	public List<PointForm> getPoints() {
+	public List<Point> getPoints() {
 		return points;
 	}
 
-	public void setPoints(List<PointForm> points) {
+	public void setPoints(List<Point> points) {
 		this.points = points;
 	}
 
-	public List<ObservationForm> getObservations() {
+	public List<Observation> getObservations() {
 		return observations;
 	}
 
-	public void setObservations(List<ObservationForm> observations) {
+	public void setObservations(List<Observation> observations) {
 		this.observations = observations;
 	}
 

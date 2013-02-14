@@ -24,8 +24,11 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 			.getLogger(AdjustmentManagerImpl.class);
 
 	private InputDao inputDao;
+	
 	private InputParser inputParser;
+	
 	private UserDao userDao;
+	
 	private ProcessManager processManager;
 
 	@Override
@@ -84,6 +87,12 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 
 		return inputDao.getInputCountByUser(userDao
 				.findUserByUsername(username));
+	}
+
+	@Override
+	public Input getInputById(long id) {
+		
+		return inputDao.findInputById(id);
 	}
 
 }

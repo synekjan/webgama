@@ -1,13 +1,19 @@
 package cz.cvut.fsv.webgama.domain;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 public class SlopeDistance {
 
 	private Long id;
 
 	private String from;
 
+	@NotBlank
 	private String to;
 
+	@NotNull
 	private Double val;
 
 	private Double stdev;
