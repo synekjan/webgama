@@ -662,6 +662,12 @@ input.submit_btn:ACTIVE {
 	border-radius: 4px 4px 4px 4px;
 }
 
+#onepage { 
+	background: url("../img/onepage.png") no-repeat scroll 95% 100% #F1F1F1;
+}
+
+
+
 div.info,div.success,div.warning,div.error {
 	font-size: 0.85em;
 	border: 1px solid;
@@ -748,21 +754,7 @@ ul.adjustment_choose a.import {
 	background: url("../img/import.png") no-repeat scroll 97% 100% #F5F5F5;
 }
 
-div#side_toolbar {
-	position: fixed;
-	width: 150px;
-	height: 350px;
-	top: 200px;
-	left: 0;
-	border: 1px solid #BBBBBB;
-	background-color: #FFFFFF;
-	z-index: 50;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-	/* transition: all 1s;
-	-moz-transition: all 1s; Firefox 4
-	-webkit-transition: all 1s; Safari and Chrome
-	-o-transition: all 1s; Opera */
-}
+
 
 div#wizard_panel {
 	width: 860px;
@@ -835,6 +827,7 @@ div#slides {
 	margin: 0px auto;
 	width: 940px;
 	position: relative;
+	display: none;
 }
 
 .slides_container {
@@ -974,6 +967,42 @@ div#welcome_container {
 .accordion span.time {
 	float: right;
 }
+
+
+/* ADJUSTMENT TOOLBAR  */
+div#side_toolbar {
+	position: fixed;
+	width: 250px;
+	height: 350px;
+	top: 200px;
+	left: 0;
+	background-color: #FFFFFF;
+	z-index: 50;
+	
+	/* transition: all 1s;
+	-moz-transition: all 1s; Firefox 4
+	-webkit-transition: all 1s; Safari and Chrome
+	-o-transition: all 1s; Opera */
+}
+
+div#toolbar_content {
+	width:235px;
+	display: inline-block;
+	border: 1px solid #BBBBBB;
+	/* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+	height:100%;
+}
+
+div#collapse_link {
+	width:10px;
+	background-color:silver;
+	height: 100%;
+	display: inline-block;
+}
+
+
+
+
 
 @font-face {
 	font-family: 'Open Sans';

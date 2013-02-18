@@ -1,5 +1,8 @@
 <div id="side_toolbar" class="resizable draggable">
-	<h3>Toolbar</h3>
+<div id="toolbar_content">
+Test
+</div>	
+<div id="collapse_link"><i class="caret"></i></div>
 </div>
 <script>
 #[[$(document).ready(function() {
@@ -12,6 +15,12 @@
                 '</td></tr>');
     });
      
+});
+
+
+
+$("#collapse_link").click(function () {
+	$("#toolbar_content").toggle("slow");
 });
 
 $(".draggable").draggable();]]#

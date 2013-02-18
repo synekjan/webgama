@@ -6,6 +6,7 @@
 <script src="#springUrl("/resources/js/lib/slides.min.jquery.js")"></script>
 <script>
 	jQuery(function() {
+		jQuery("#slides").css("display", "block");
 		jQuery("#slides").slides({
 			preload : true,
 			preloadImage : '#springUrl("/resources/img/loading.gif")',
@@ -18,9 +19,17 @@
 <title>Welcome to WebGama</title>
 </head>
 <body>
+	<noscript>
+		<div
+			style="position: fixed; top: 20px; left: 50%; margin-left: -320px; z-index: 3000;">
+			<div class="error">
+				<b>JavaScript</b> is required for some functionalities of this site.
+				Please enable the use of <b>JavaScript</b> in your browser.
+			</div>
+		</div>
+	</noscript>
 	<div id="wrapper">
 		#parse("header.vm")
-
 		<div id="heading">
 			<h1>Adjust your local networks and join $!userCount colleagues
 				across the World</h1>
