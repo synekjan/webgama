@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 #parse("include.vm")
-<title>Registration</title>
+<title>#springMessage("confirm.email.success.header")</title>
 </head>
 <body>
 	<div id="wrapper">
@@ -11,11 +11,11 @@
 		<div id="container">
 			<div id="signup_container">
 				<div class="panel_header">
-					<h2>Email Confirmation</h2>
+					<h2>#springMessage("confirm.email.success.header")</h2>
 				</div>
 				<div id="dialog_container">
-					<p>Your email address was successfully confirmed</p>
-					<p>Now you can log in at <a href="#springUrl("/signin")">login page</a></p>
+					<p>#springMessage("confirm.email.success.message1")</p>
+					<p>#springMessage("confirm.email.success.message2") <a href="#springUrl('/signin')">#springMessage("confirm.email.success.message2.link")</a></p>
 				</div>
 			</div>
 		</div>

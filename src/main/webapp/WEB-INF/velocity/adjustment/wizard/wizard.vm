@@ -2,7 +2,7 @@
 <html>
 <head>
 #parse("include.vm")
-<title>#springMessage("adjustment.navbar")</title>
+<title>#springMessage("application.name")</title>
 </head>
 <body>
 	<div id="wrapper">
@@ -10,16 +10,16 @@
 		<div id="container">
 			<div class="nav_menu">
 				<ul>
-					<li><a href="#springUrl("/overview")">Overview</a></li>
-					<li><a class="active" href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a></li>
-					<li><a href="#springUrl("/calculations")">Calculations</a></li>
-					<li><a href="#springUrl("/import/xml")">Import</a></li>
-					<li><a href="#springUrl("/export")">Export</a></li>
+					<li><a href="#springUrl("/overview")">#springMessage("navbar.overview")</a></li>
+					<li><a class="active" href="#springUrl("/adjustment")">#springMessage("navbar.adjustment")</a></li>
+					<li><a href="#springUrl("/calculations")">#springMessage("navbar.calculations")</a></li>
+					<li><a href="#springUrl("/import/xml")">#springMessage("navbar.import")</a></li>
+					<li><a href="#springUrl("/export")">#springMessage("navbar.export")</a></li>
 				</ul>
 			</div>
 			<div id="content">
 				<div class="panel_header">
-					<h2>#springMessage("adjustment.navbar")</h2>
+					<h2>#springMessage("navbar.adjustment")</h2>
 				</div>
 				<div id="wizard">
 					<div id="wizard_panel">

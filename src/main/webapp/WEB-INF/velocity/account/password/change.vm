@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 #parse("include.vm")
-<title>#springMessage("change.password")</title>
+<title>#springMessage("account.password.change") - #springMessage("application.name")</title>
 </head>
 <body>
 	<div id="wrapper">
@@ -13,44 +13,44 @@
 				<div class="left_menu">
 					<ul>
 						<li><a href="#springUrl("/account/info")">#springMessage("account.overview")</a></li>
-						<li><a href="#springUrl("/account/personal")">#springMessage("user.personal.settings")</a></li>
-						<span class="active_menu"><li><a href="#springUrl("/account/password/change")">#springMessage("change.password")</a></li></span>
-						<li><a href="#springUrl("/account/logins/show")">#springMessage("logins.list")</a></li>
-						<li><a href="#springUrl("/account/delete")">#springMessage("delete.account")</a></li>
+						<li><a href="#springUrl("/account/personal")">#springMessage("account.personal")</a></li>
+						<span class="active_menu"><li><a href="#springUrl("/account/password/change")">#springMessage("account.password.change")</a></li></span>
+						<li><a href="#springUrl("/account/logins/show")">#springMessage("account.logins.list")</a></li>
+						<li><a href="#springUrl("/account/delete")">#springMessage("account.delete")</a></li>
 					</ul>
 				</div>
 				<div id="changepass" class="panel">
 					<div class="panel_header">
-						<h2>#springMessage("change.password")</h2>
+						<h2>#springMessage("account.password.change")</h2>
 					</div>
-					<div class="success">Password was successfully changed</div>
+					<div class="success">#springMessage("account.password.change.success")</div>
 					#springBind("user.*")#if(${status.error})
-					<div class="error">Form has errors</div>
+					<div class="error">#springMessage("form.has.errors")</div>
 					#end
 					<div class="form_hints">
-						<b>Bold</b> indicates required field
+						#springMessage("bold.is.required")
 					</div>
 					<form action="" method="post">
 						<div class="form">
 							<fieldset>
-								<legend>Current Password</legend>
+								<legend>#springMessage("account.password.change.current.password")</legend>
 								<div class="large_form_element">
-									<label for="oldPassword" class="required">#springMessage("user.current.password"):</label>
+									<label for="oldPassword" class="required">#springMessage("account.password.change.current.password"):</label>
 									<div class="input">
 										#springFormPasswordInput("user.oldPassword",'autocomplete="off"')
 										#showElementErrors()</div>
 								</div>
 							</fieldset>
 							<fieldset>
-								<legend>New Password</legend>
+								<legend>#springMessage("account.password.change.new.password")</legend>
 								<div class="large_form_element">
-									<label for="newPassword" class="required">#springMessage("user.new.password"):</label>
+									<label for="newPassword" class="required">#springMessage("account.password.change.new.password"):</label>
 									<div class="input">
 										#springFormPasswordInput("user.newPassword", "")
 										#showElementErrors()</div>
 								</div>
 								<div class="large_form_element">
-									<label for="confirmNewPassword" class="required">#springMessage("user.confirm.new.password"):</label>
+									<label for="confirmNewPassword" class="required">#springMessage("account.password.change.confirm.new.password"):</label>
 									<div class="input">
 										#springFormPasswordInput("user.confirmNewPassword", "")
 										#showElementErrors()</div>
@@ -59,7 +59,7 @@
 						</div>
 						<div class="form_buttons">
 							<div>
-								<input class="submit_btn" type="submit" value="#springMessage("change.password.button")">
+								<input class="submit_btn" type="submit" value="#springMessage("account.password.change.submit")">
 								<input type="reset" value="Reset">
 							</div>
 						</div>

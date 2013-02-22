@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 #parse("include.vm")
-<title>Registration</title>
+<title>#springMessage("registration")</title>
 </head>
 <body>
 	<div id="wrapper">
@@ -11,18 +11,18 @@
 		<div id="container">
 			<div id="signup_container">
 				<div class="panel_header">
-					<h2>Registration</h2>
+					<h2>#springMessage("registration")</h2>
 				</div>
 				#springBind("user.*")#if(${status.error})
-				<div class="error">Form has erros</div>
+				<div class="error">#springMessage("form.has.errors")</div>
 				#end
 				<div class="form_hints">
-					<b>Bold</b> indicates required field
+					#springMessage("bold.is.required")
 				</div>
 				<form action="" method="post" autocomplete="off">
 					<div class="form">
 						<fieldset>
-							<legend>User Information</legend>
+							<legend>#springMessage("registration.user.information")</legend>
 
 							<div class="medium_form_element">
 								<label for="username" class="required">#springMessage("user.username"):</label>
@@ -47,7 +47,7 @@
 							</div>
 						</fieldset>
 						<fieldset>
-							<legend>Personal Information</legend>
+							<legend>#springMessage("registration.personal.information")</legend>
 							<div class="medium_form_element">
 								<label for="firstName">#springMessage("user.firstname"):</label>
 								<div class="input">#springFormInput("user.firstName", "")
@@ -65,7 +65,7 @@
 							</div>
 						</fieldset>
 						<fieldset>
-							<legend>Address</legend>
+							<legend>#springMessage("registration.address")</legend>
 							<div class="medium_form_element">
 								<label for="street">#springMessage("user.street"):</label>
 								<div class="input">#springFormInput("user.street", "")
@@ -94,7 +94,7 @@
 						</fieldset>
 					</div>
 					<div class="form_buttons">
-						<input class="submit_btn" type="submit" value="#springMessage('submit')" >
+						<input class="submit_btn" type="submit" value="#springMessage("registration.submit")" >
 						<input type="reset" value="Reset">
 					</div>
 				</form>

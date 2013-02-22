@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 #parse("include.vm")
-<title>#springMessage("delete.account")</title>
+<title>#springMessage("account.delete") -
+	#springMessage("application.name")</title>
 </head>
 <body>
 	<div id="wrapper">
@@ -13,25 +14,26 @@
 				<div class="left_menu">
 					<ul>
 						<li><a href="#springUrl("/account/info")">#springMessage("account.overview")</a></li>
-						<li><a href="#springUrl("/account/personal")">#springMessage("user.personal.settings")</a></li>
-						<li><a href="#springUrl("/account/password/change")">#springMessage("change.password")</a></li>
-						<li><a href="#springUrl("/account/logins/show")">#springMessage("logins.list")</a></li>
-						<span class="active_menu"><li><a href="#springUrl("/account/delete")">#springMessage("delete.account")</a></li></span>
+						<li><a href="#springUrl("/account/personal")">#springMessage("account.personal")</a></li>
+						<li><a href="#springUrl("/account/password/change")">#springMessage("account.password.change")</a></li>
+						<li><a href="#springUrl("/account/logins/show")">#springMessage("account.logins.list")</a></li>
+						<span class="active_menu"><li><a href="#springUrl("/account/delete")">#springMessage("account.delete")</a></li></span>
 					</ul>
 				</div>
 				<div id="delete" class="panel">
 					<div class="panel_header">
-						<h2>#springMessage("delete.account")</h2>
+						<h2>#springMessage("account.delete")</h2>
 					</div>
-					<p>Are you really sure to deactive your account and all your
-						calculations?</p>
-					<br>
-					<p>Your account will be kept for 14 days and then will be
-						completely deleted. You can always reactive your account during
-						this period.</p>
-					<br>
+					<p>#springMessage("account.delete.message")</p>
+					#if ($userInputCount != 0)
+					<div class="warning">
+						#springMessage("account.delete.warning.message") <a
+							href="#springUrl('/calculations')">$userInputCount</a>
+						#springMessage("calculations").
+					</div>
+					#end
 					<form action="" method="post">
-						<input class="submit_btn" type="submit" value="#springMessage("delete.account.button")">
+						<input class="submit_btn" type="submit" value="#springMessage("account.delete.submit")">
 					</form>
 				</div>
 			</div>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 #parse("include.vm")
-<title>Log in - WebGama</title>
+<title>#springMessage("sign.in.header") - #springMessage("application.name")</title>
 <script>
 #[[	$(document).ready(function() {
 		$("#username").focus();
@@ -16,7 +16,7 @@
 		<div id="container">
 			<div id="login_container">
 				<div class="panel_header">
-					<h2>Log In</h2>
+					<h2>#springMessage("sign.in.header")</h2>
 				</div>
 				#if ($error)
 				<div class="error">$SPRING_SECURITY_LAST_EXCEPTION.message</div>
@@ -24,21 +24,19 @@
 				<form action="j_spring_security_check" method="post">
 					<div class="text_inputs">
 						<label for="username"><b>#springMessage("user.username")</b>
-							(<a href="#springUrl("/recover/username")" tabindex="-1">forgot
-								username</a>) </label> <input title="Please enter a Username" id="username"
-							type="text" name="j_username"> <br> <br> <label
-							for="password"><b>#springMessage("user.password")</b> (<a
-							href="#springUrl("/recover/password")" tabindex="-1">forgot
-								password</a>) </label> <input title="Please enter your password"
+							(<a href="#springUrl('/recover/username')" tabindex="-1">#springMessage("sign.in.forgot.username")</a>) </label> <input title="#springMessage("sign.in.username.tooltip")"
+							id="username" type="text" name="j_username"> <br> <br>
+						<label for="password"><b>#springMessage("user.password")</b>
+							(<a href="#springUrl('/recover/password')" tabindex="-1">#springMessage("sign.in.forgot.password")</a>) </label> <input title="#springMessage("sign.in.password.tooltip")"
 							id="password" type="password" name="j_password"> <br>
 						<br>
 					</div>
 					<input type='checkbox' name='_spring_security_remember_me'
 						id="_spring_security_remember_me"> <label
-						class="checkbox_label" for="_spring_security_remember_me">#springMessage("keep.me.logged.in")
+						class="checkbox_label" for="_spring_security_remember_me">#springMessage("sign.in.keep.me.logged.in")
 					</label> <br> <br> <input class="submit_btn"
-						title="Please click here to sign" type="submit"
-						value="#springMessage("login.sign.in")">
+						title="#springMessage("sign.in.submit.tooltip")" type="submit"
+						value="#springMessage("sign.in")">
 				</form>
 			</div>
 		</div>

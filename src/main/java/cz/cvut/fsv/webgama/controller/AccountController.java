@@ -175,7 +175,8 @@ public class AccountController extends MultiActionController {
 
 		ModelAndView mav = new ModelAndView("/account/delete/delete");
 		String username = request.getUserPrincipal().getName();
-
+		
+		mav.addObject("userInputCount", adjustmentManager.getInputCountbyUsername(username));
 		logger.info("User[" + username + "] thought about deleting account");
 		return mav;
 	}

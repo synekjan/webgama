@@ -309,9 +309,15 @@ div#account_container div#delete {
 	background: url("../img/bin_symbol.png") no-repeat scroll 95% 100% #F1F1F1;
 }
 
+#delete .warning {
+	width: 500px;
+	font-size: 13px;
+	margin: 15px 0 10px 5px;
+}
+
 .panel_header {
 	border-bottom: 1px solid #DDDDDD;
-	padding-bottom: 10px;
+	padding-bottom: 8px;
 	margin-bottom: 5px;
 }
 
@@ -561,6 +567,7 @@ input.submit_btn {
 	font-weight: bold;
 	padding: 4px 10px;
 	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.25);
+	margin-top: 10px;
 }
 
 input.submit_btn:HOVER {
@@ -576,7 +583,7 @@ input.submit_btn:ACTIVE {
 
 .form_buttons {
 	border-top: 1px solid #DDDDDD;
-	padding: 20px 0 0 30px;
+	padding: 10px 0 0 30px;
 	margin-top: 30px;
 }
 
@@ -662,11 +669,9 @@ input.submit_btn:ACTIVE {
 	border-radius: 4px 4px 4px 4px;
 }
 
-#onepage { 
+#onepage {
 	background: url("../img/onepage.png") no-repeat scroll 95% 100% #F1F1F1;
 }
-
-
 
 div.info,div.success,div.warning,div.error {
 	font-size: 0.85em;
@@ -753,8 +758,6 @@ ul.adjustment_choose a.onepage {
 ul.adjustment_choose a.import {
 	background: url("../img/import.png") no-repeat scroll 97% 100% #F5F5F5;
 }
-
-
 
 div#wizard_panel {
 	width: 860px;
@@ -858,6 +861,26 @@ div#slides {
 	font-weight: bold;
 	font-size: 20px;
 	padding: 10px 0;
+}
+
+.slide .text p {
+	margin-bottom: 10px;
+}
+
+.slide .text .more {
+	margin-top: 25px;
+}
+
+.slide .text .more a {
+	color: #FFF;
+	background-color: #328FC9;
+	padding: 8px 15px;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.slide .text .more a:HOVER {
+	background-color: #429FD9;
 }
 
 #slides div.prev {
@@ -968,7 +991,6 @@ div#welcome_container {
 	float: right;
 }
 
-
 /* ADJUSTMENT TOOLBAR  */
 div#side_toolbar {
 	position: fixed;
@@ -978,7 +1000,7 @@ div#side_toolbar {
 	left: 0;
 	background-color: #FFFFFF;
 	z-index: 50;
-	
+
 	/* transition: all 1s;
 	-moz-transition: all 1s; Firefox 4
 	-webkit-transition: all 1s; Safari and Chrome
@@ -986,23 +1008,19 @@ div#side_toolbar {
 }
 
 div#toolbar_content {
-	width:235px;
+	width: 235px;
 	display: inline-block;
 	border: 1px solid #BBBBBB;
-	/* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
-	height:100%;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	height: 100%;
 }
 
 div#collapse_link {
-	width:10px;
-	background-color:silver;
+	width: 10px;
+	background-color: silver;
 	height: 100%;
 	display: inline-block;
 }
-
-
-
-
 
 @font-face {
 	font-family: 'Open Sans';

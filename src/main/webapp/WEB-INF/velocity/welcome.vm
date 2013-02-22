@@ -16,24 +16,21 @@
 		});
 	});
 </script>
-<title>Welcome to WebGama</title>
+<title>#springMessage("welcome.title")</title>
 </head>
 <body>
 	<noscript>
 		<div
 			style="position: fixed; top: 20px; left: 50%; margin-left: -320px; z-index: 3000;">
 			<div class="error">
-				<b>JavaScript</b> is required for some functionalities of this site.
-				Please enable the use of <b>JavaScript</b> in your browser.
-			</div>
+				#springMessage("welcome.javascript.notenabled")</div>
 		</div>
 	</noscript>
 	<div id="wrapper">
 		#parse("header.vm")
 		<div id="heading">
-			<h1>Adjust your local networks and join $!userCount colleagues
-				across the World</h1>
-
+			#set($cislo = 15)
+			<h1>#springArgMessage("welcome.heading.message", [$userCount, $cislo])</h1>
 		</div>
 		<div id="slides">
 			<div class="slides_container">
@@ -46,8 +43,12 @@
 						<h1>Version 0.1 is out!</h1>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
 							sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							aliqua. Ut enim ad minim veniam</p>
+						<p>quis nostrud exercitation ullamco laboris nisi ut aliquip
+							ex ea commodo consequat.</p>
+						<div class="more">
+							<a href="#">#springMessage("welcome.slideshow.show.more")</a>
+						</div>
 					</div>
 				</div>
 				<div class="slide">
@@ -61,6 +62,9 @@
 							voluptatem accusantium doloremque laudantium, totam rem aperiam,
 							eaque ipsa quae ab illo inventore veritatis et quasi architecto
 							beatae vitae dicta sunt explicabo.</p>
+						<div class="more">
+							<a href="#">#springMessage("welcome.slideshow.learn.more")</a>
+						</div>
 					</div>
 				</div>
 				<div class="slide">
@@ -73,16 +77,18 @@
 							qui blanditiis praesentium voluptatum deleniti atque corrupti
 							quos dolores et quas molestias excepturi sint occaecati
 							cupiditate non provident.</p>
+						<div class="more">
+							<a href="#">#springMessage("welcome.slideshow.learn.more")</a>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="prev"></div>
-			<div class="next">Next</div>
+			<div class="next"></div>
 		</div>
 
 		<div class="register_container">
-			<a id="signup_btn" href="#springUrl("/register")">Sign Up for
-				Free</a>
+			<a id="signup_btn" href="#springUrl("/register")">#springMessage("welcome.signup.big.button")</a>
 		</div>
 
 		<div id="welcome_container">

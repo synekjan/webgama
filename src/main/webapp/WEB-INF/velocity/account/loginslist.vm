@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 #parse("include.vm")
-<title>#springMessage("logins.list")</title>
+<title>#springMessage("account.logins.list") - #springMessage("application.name")</title>
 </head>
 <body>
 	<div id="wrapper">
@@ -13,15 +13,15 @@
 				<div class="left_menu">
 					<ul>
 						<li><a href="#springUrl("/account/info")">#springMessage("account.overview")</a></li>
-						<li><a href="#springUrl("/account/personal")">#springMessage("user.personal.settings")</a></li>
-						<li><a href="#springUrl("/account/password/change")">#springMessage("change.password")</a></li>
-						<span class="active_menu"><li><a href="#springUrl("/account/logins/show")">#springMessage("logins.list")</a></li></span>
-						<li><a href="#springUrl("/account/delete")">#springMessage("delete.account")</a></li>
+						<li><a href="#springUrl("/account/personal")">#springMessage("account.personal")</a></li>
+						<li><a href="#springUrl("/account/password/change")">#springMessage("account.password.change")</a></li>
+						<span class="active_menu"><li><a href="#springUrl("/account/logins/show")">#springMessage("account.logins.list")</a></li></span>
+						<li><a href="#springUrl("/account/delete")">#springMessage("account.delete")</a></li>
 					</ul>
 				</div>
 				<div id="loginslist" class="panel">
 					<div class="panel_header">
-						<h2>#springMessage("logins.list")</h2>
+						<h2>#springMessage("account.logins.list")</h2>
 					</div>
 					<table class="table">
 						<thead>

@@ -2,7 +2,8 @@
 <html>
 <head>
 #parse("include.vm")
-<title>#springMessage("adjustment.navbar")</title>
+<title>#springMessage("navbar.adjustment") -
+	#springMessage("application.name")</title>
 </head>
 <body>
 	<div id="wrapper">
@@ -10,30 +11,28 @@
 		<div id="container">
 			<div class="nav_menu">
 				<ul>
-					<li><a href="#springUrl("/overview")">Overview</a></li>
-					<li><a class="active" href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a></li>
-					<li><a href="#springUrl("/calculations")">Calculations</a></li>
-					<li><a href="#springUrl("/import/xml")">Import</a></li>
-					<li><a href="#springUrl("/export")">Export</a></li>
+					<li><a href="#springUrl("/overview")">#springMessage("navbar.overview")</a></li>
+					<li><a class="active" href="#springUrl("/adjustment")">#springMessage("navbar.adjustment")</a></li>
+					<li><a href="#springUrl("/calculations")">#springMessage("navbar.calculations")</a></li>
+					<li><a href="#springUrl("/import/xml")">#springMessage("navbar.import")</a></li>
+					<li><a href="#springUrl("/export")">#springMessage("navbar.export")</a></li>
 				</ul>
 			</div>
 			<div id="content">
 				<div class="panel_header">
-					<h2>#springMessage("adjustment.navbar")</h2>
+					<h2>#springMessage("navbar.adjustment")</h2>
 				</div>
-				<p>Choose one of the following options and start NEW adjustment:</p>
+				<p>#springMessage("adjustment.choose.message"):</p>
 				<div id="options">
 					<ul class="adjustment_choose">
-						<li><a class="wizard" href="#springUrl("/adjustment/wizard/new")">Wizard
-								<div>Interactive guide through whole adjustment process</div>
+						<li><a class="wizard" href="#springUrl("/adjustment/wizard/new")">#springMessage("adjustment.wizard")
+								<div>#springMessage("adjustment.wizard.hint")</div>
 						</a></li>
-						<li><a class="onepage" href="#springUrl("/adjustment/onepage/new")">One
-								Page
-								<div>One page form for quick completion</div>
+						<li><a class="onepage" href="#springUrl("/adjustment/onepage/new")">#springMessage("adjustment.onepage")
+								<div>#springMessage("adjustment.onepage.hint")</div>
 						</a></li>
-						<li><a class="import" href="#springUrl("/import/xml")">Import
-								XML
-								<div>Upload completed GNU Gama XML feed</div>
+						<li><a class="import" href="#springUrl("/import/xml")">#springMessage("adjustment.from.xml")
+								<div>#springMessage("adjustment.from.xml.hint")</div>
 						</a></li>
 					</ul>
 					<div style="clear: both;"></div>

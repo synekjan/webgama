@@ -2,7 +2,7 @@
 <html>
 <head>
 #parse("include.vm")
-<title>#springMessage("adjustment.navbar")</title>
+<title>#springMessage("application.name")</title>
 </head>
 <body>
 	<div id="wrapper">
@@ -10,72 +10,71 @@
 		<div id="container">
 			<div class="nav_menu">
 				<ul>
-					<li><a href="#springUrl("/overview")">Overview</a></li>
-					<li><a class="active" href="#springUrl("/adjustment")">#springMessage("adjustment.navbar")</a></li>
-					<li><a href="#springUrl("/calculations")">Calculations</a></li>
-					<li><a href="#springUrl("/import/xml")">Import</a></li>
-					<li><a href="#springUrl("/export")">Export</a></li>
+					<li><a href="#springUrl("/overview")">#springMessage("navbar.overview")</a></li>
+					<li><a class="active" href="#springUrl("/adjustment")">#springMessage("navbar.adjustment")</a></li>
+					<li><a href="#springUrl("/calculations")">#springMessage("navbar.calculations")</a></li>
+					<li><a  href="#springUrl("/import/xml")">#springMessage("navbar.import")</a></li>
+					<li><a href="#springUrl("/export")">#springMessage("navbar.export")</a></li>
 				</ul>
 			</div>
 			<div id="content">
-
 				<div id="onepage">
 					<div class="panel_header">
-						<h2>Adjustment Form</h2>
+						<h2>#springMessage("adjustment.onepage.form.name")</h2>
 					</div>
 					#springBind("input.*")#if(${status.error})
-					<div class="error">Form has errors</div>
+					<div class="error">#springMessage("form.has.errors")</div>
 					#end
 					<div class="form_hints">
-						<b>Bold</b> indicates required field
+						#springMessage("bold.is.required")
 					</div>
 					<form action="" method="post">
 						<div class="adjustment_form">
 							<fieldset>
-								<legend>Network Definition</legend>
+								<legend>#springMessage("adjustment.onepage.network.definition")</legend>
 								<div class="medium_form_element">
-									<label for="axesXY">axes XY:</label>
+									<label for="axesXY">#springMessage("input.axesXY"):</label>
 									<div class="input">#springFormInput("input.axesXY","")
 										#showElementErrors()</div>
 								</div>
 								<div class="medium_form_element">
-									<label for="angles">Angles:</label>
+									<label for="angles">#springMessage("input.angles"):</label>
 									<div class="input">#springFormInput("input.angles","")
 										#showElementErrors()</div>
 								</div>
 								<div class="medium_form_element">
-									<label for="epoch">Epoch:</label>
+									<label for="epoch">#springMessage("input.epoch"):</label>
 									<div class="input">#springFormInput("input.epoch", "")
 										#showElementErrors()</div>
 								</div>
 							</fieldset>
 							<fieldset>
-								<legend>Network Description</legend>
+								<legend>#springMessage("adjustment.onepage.network.description")</legend>
 								<div class="medium_form_element">
-									<label for="description">Description:</label>
+									<label for="description">#springMessage("input.description"):</label>
 									<div class="input">#springFormTextarea("input.description",
 										"") #showElementErrors()</div>
 								</div>
 							</fieldset>
 							<fieldset>
-								<legend>Network Parameters</legend>
+								<legend>#springMessage("adjustment.onepage.network.parameters")</legend>
 								<div class="medium_form_element">
-									<label for="sigmaApr">Sigma Apriori:</label>
+									<label for="sigmaApr">#springMessage("input.sigmaApr"):</label>
 									<div class="input">#springFormInput("input.sigmaApr", "")
 										#showElementErrors()</div>
 								</div>
 								<div class="medium_form_element">
-									<label for="confPr">Confidence Probability:</label>
+									<label for="confPr">#springMessage("input.confPr"):</label>
 									<div class="input">#springFormInput("input.confPr", "")
 										#showElementErrors()</div>
 								</div>
 								<div class="medium_form_element">
-									<label for="tolAbs">Tolerance:</label>
+									<label for="tolAbs">#springMessage("input.tolAbs"):</label>
 									<div class="input">#springFormInput("input.tolAbs", "")
 										#showElementErrors()</div>
 								</div>
 								<div class="medium_form_element">
-									<label for="sigma-act">SigmaAct:</label>
+									<label for="sigma-act">#springMessage("input.sigmaAct"):</label>
 									<div class="input">
 										<select id="sigma-act" name="sigmaAct">
 											<option value="aposteriori">Aposteriori</option>
@@ -84,36 +83,36 @@
 									</div>
 								</div>
 								<div class="medium_form_element">
-									<label for="updateCC">UpdateCC:</label>
+									<label for="updateCC">#springMessage("input.updateCC"):</label>
 									<div class="input">#springFormInput("input.updateCC", "")
 										#showElementErrors()</div>
 								</div>
 							</fieldset>
 							<fieldset>
-								<legend>Optional Attributes</legend>
+								<legend>#springMessage("adjustment.onepage.optional.parameters")</legend>
 								<div class="medium_form_element">
-									<label for="directionStdev">Direction Stdev:</label>
+									<label for="directionStdev">#springMessage("input.directionStdev"):</label>
 									<div class="input">#springFormInput("input.directionStdev",
 										"") #showElementErrors()</div>
 								</div>
 								<div class="medium_form_element">
-									<label for="angleStdev">Angle Stdev:</label>
+									<label for="angleStdev">#springMessage("input.angleStdev"):</label>
 									<div class="input">#springFormInput("input.angleStdev",
 										"") #showElementErrors()</div>
 								</div>
 								<div class="medium_form_element">
-									<label for="zenithAngleStdev">Zenith Angle Stdev:</label>
+									<label for="zenithAngleStdev">#springMessage("input.zenithAngleStdev"):</label>
 									<div class="input">#springFormInput("input.zenithAngleStdev",
 										"") #showElementErrors()</div>
 								</div>
 								<div class="medium_form_element">
-									<label for="distanceStdev">Distance Stdev:</label>
+									<label for="distanceStdev">#springMessage("input.distanceStdev"):</label>
 									<div class="input">#springFormInput("input.distanceStdev",
 										"") #showElementErrors()</div>
 								</div>
 							</fieldset>
 							<fieldset>
-								<legend>Points</legend>
+								<legend>#springMessage("adjustment.onepage.points")</legend>
 								#foreach ($point in $input.points)
 								<fieldset>
 									<legend>
@@ -184,13 +183,13 @@
 								#end
 							</fieldset>
 							<fieldset>
-								<legend>Observations</legend>
+								<legend>#springMessage("adjustment.onepage.observations")</legend>
 								#foreach ($observation in $input.observations)
 								<fieldset>
 									#set( $i = "${foreach.index}" )
-									<legend>Observation $i</legend>
+									<legend>#springMessage("adjustment.onepage.observation") $i</legend>
 									<div class="small_form_element">
-										<label class="required" for="from">From:</label>
+										<label class="required" for="from">#springMessage("observation.from"):</label>
 										<div class="input">
 											#springBind("input.observations[$i].from") <input id="from"
 												type="text" name="observations[$i].from"
@@ -198,7 +197,7 @@
 										</div>
 									</div>
 									<div class="small_form_element">
-										<label for="orientation">Orientation:</label>
+										<label for="orientation">#springMessage("observation.orientation"):</label>
 										<div class="input">
 											#springBind("input.observations[$i].orientation") <input
 												id="orientation" type="text"
@@ -207,7 +206,7 @@
 										</div>
 									</div>
 									<div class="small_form_element">
-										<label for="fromDh">FromDh:</label>
+										<label for="fromDh">#springMessage("observation.fromDh"):</label>
 										<div class="input">
 											#springBind("input.observations[$i].fromDh") <input
 												id="fromDh" type="text" name="observations[$i].fromDh"
@@ -218,35 +217,35 @@
 									#foreach ($direction in $observation.directions)
 									<fieldset>
 										#set( $j = "${foreach.index}" )
-										<legend>Direction</legend>
+										<legend>#springMessage("adjustment.onepage.direction")</legend>
 										<div class="small_form_element">
 											<label class="required"
-												for="observations[$i].directions[$j].to">To:</label>
+												for="observations[$i].directions[$j].to">#springMessage("direction.to"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].directions[$j].to",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
 											<label class="required"
-												for="observations[$i].directions[$j].val">Value:</label>
+												for="observations[$i].directions[$j].val">#springMessage("direction.val"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].directions[$j].val",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].directions[$j].stdev">Stdev:</label>
+											<label for="observations[$i].directions[$j].stdev">#springMessage("direction.stdev"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].directions[$j].stdev",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].directions[$j].fromDh">FromDh:</label>
+											<label for="observations[$i].directions[$j].fromDh">#springMessage("direction.fromDh"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].directions[$j].fromDh",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].directions[$j].toDh">ToDh:</label>
+											<label for="observations[$i].directions[$j].toDh">#springMessage("direction.toDh"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].directions[$j].toDh",
 												"")#showElementErrors()</div>
@@ -257,41 +256,41 @@
 									#foreach ($distance in $observation.distances)
 									<fieldset>
 										#set( $j = "${foreach.index}" )
-										<legend>Distance</legend>
+										<legend>#springMessage("adjustment.onepage.distance")</legend>
 										<div class="small_form_element">
-											<label for="observations[$i].distances[$j].from">From:</label>
+											<label for="observations[$i].distances[$j].from">#springMessage("distance.from"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].distances[$j].from",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
 											<label class="required"
-												for="observations[$i].distances[$j].to">To:</label>
+												for="observations[$i].distances[$j].to">#springMessage("distance.to"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].distances[$j].to",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
 											<label class="required"
-												for="observations[$i].distances[$j].val">Value:</label>
+												for="observations[$i].distances[$j].val">#springMessage("distance.val"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].distances[$j].val",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].distances[$j].stdev">Stdev:</label>
+											<label for="observations[$i].distances[$j].stdev">#springMessage("distance.stdev"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].distances[$j].stdev",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].distances[$j].fromDh">FromDh:</label>
+											<label for="observations[$i].distances[$j].fromDh">#springMessage("distance.fromDh"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].distances[$j].fromDh",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].distances[$j].toDh">ToDh:</label>
+											<label for="observations[$i].distances[$j].toDh">#springMessage("distance.toDh"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].distances[$j].toDh",
 												"")#showElementErrors()</div>
@@ -302,51 +301,51 @@
 									#foreach ($angle in $observation.angles)
 									<fieldset>
 										#set( $j = "${foreach.index}" )
-										<legend>Angle</legend>
+										<legend>#springMessage("adjustment.onepage.angle")</legend>
 										<div class="small_form_element">
-											<label for="observations[$i].angles[$j].from">From:</label>
+											<label for="observations[$i].angles[$j].from">#springMessage("angle.from"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].angles[$j].from",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label class="required" for="observations[$i].angles[$j].bs">Backsight:</label>
+											<label class="required" for="observations[$i].angles[$j].bs">#springMessage("angle.bs"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].angles[$j].bs",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label class="required" for="observations[$i].angles[$j].fs">Foresight:</label>
+											<label class="required" for="observations[$i].angles[$j].fs">#springMessage("angle.fs"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].angles[$j].fs",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label class="required" for="observations[$i].angles[$j].val">Value:</label>
+											<label class="required" for="observations[$i].angles[$j].val">#springMessage("angle.val"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].angles[$j].val",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].angles[$j].stdev">Stdev:</label>
+											<label for="observations[$i].angles[$j].stdev">#springMessage("angle.stdev"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].angles[$j].stdev",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].angles[$j].fromDh">FromDh:</label>
+											<label for="observations[$i].angles[$j].fromDh">#springMessage("angle.fromDh"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].angles[$j].fromDh",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].angles[$j].bsDh">BsDh:</label>
+											<label for="observations[$i].angles[$j].bsDh">#springMessage("angle.bsDh"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].angles[$j].bsDh",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].angles[$j].fsDh">FsDh:</label>
+											<label for="observations[$i].angles[$j].fsDh">#springMessage("angle.fsDh"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].angles[$j].fsDh",
 												"")#showElementErrors()</div>
@@ -357,41 +356,41 @@
 									#foreach ($distance in $observation.slopeDistances)
 									<fieldset>
 										#set( $j = "${foreach.index}" )
-										<legend>Slope Distance</legend>
+										<legend>#springMessage("adjustment.onepage.slopeDistance")</legend>
 										<div class="small_form_element">
-											<label for="observations[$i].slopeDistances[$j].from">From:</label>
+											<label for="observations[$i].slopeDistances[$j].from">#springMessage("slopeDistance.from"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].slopeDistances[$j].from",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
 											<label class="required"
-												for="observations[$i].slopeDistances[$j].to">To:</label>
+												for="observations[$i].slopeDistances[$j].to">#springMessage("slopeDistance.to"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].slopeDistances[$j].to",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
 											<label class="required"
-												for="observations[$i].slopeDistances[$j].val">Value:</label>
+												for="observations[$i].slopeDistances[$j].val">#springMessage("slopeDistance.val"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].slopeDistances[$j].val",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].slopeDistances[$j].stdev">Stdev:</label>
+											<label for="observations[$i].slopeDistances[$j].stdev">#springMessage("slopeDistance.stdev"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].slopeDistances[$j].stdev",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].slopeDistances[$j].fromDh">FromDh:</label>
+											<label for="observations[$i].slopeDistances[$j].fromDh">#springMessage("slopeDistance.fromDh"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].slopeDistances[$j].fromDh",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].slopeDistances[$j].toDh">ToDh:</label>
+											<label for="observations[$i].slopeDistances[$j].toDh">#springMessage("slopeDistance.toDh"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].slopeDistances[$j].toDh",
 												"")#showElementErrors()</div>
@@ -402,41 +401,41 @@
 									#foreach ($distance in $observation.zenithAngles)
 									<fieldset>
 										#set( $j = "${foreach.index}" )
-										<legend>Zenith Angle</legend>
+										<legend>#springMessage("adjustment.onepage.zenithAngle")</legend>
 										<div class="small_form_element">
-											<label for="observations[$i].zenithAngles[$j].from">From:</label>
+											<label for="observations[$i].zenithAngles[$j].from">#springMessage("zenithAngle.from"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].zenithAngles[$j].from",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
 											<label class="required"
-												for="observations[$i].zenithAngles[$j].to">To:</label>
+												for="observations[$i].zenithAngles[$j].to">#springMessage("zenithAngle.to"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].zenithAngles[$j].to",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
 											<label class="required"
-												for="observations[$i].zenithAngles[$j].val">Value:</label>
+												for="observations[$i].zenithAngles[$j].val">#springMessage("zenithAngle.val"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].zenithAngles[$j].val",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].zenithAngles[$j].stdev">Stdev:</label>
+											<label for="observations[$i].zenithAngles[$j].stdev">#springMessage("zenithAngle.stdev"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].zenithAngles[$j].stdev",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].zenithAngles[$j].fromDh">FromDh:</label>
+											<label for="observations[$i].zenithAngles[$j].fromDh">#springMessage("zenithAngle.fromDh"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].zenithAngles[$j].fromDh",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label for="observations[$i].zenithAngles[$j].toDh">ToDh:</label>
+											<label for="observations[$i].zenithAngles[$j].toDh">#springMessage("zenithAngle.toDh"):</label>
 											<div class="input">
 												#springFormInput("input.observations[$i].zenithAngles[$j].toDh",
 												"")#showElementErrors()</div>
@@ -448,7 +447,7 @@
 							</fieldset>
 						</div>
 						<div class="form_buttons">
-							<input class="submit_btn" type="submit" value="#springMessage("submit")">
+							<input class="submit_btn" type="submit" value="#springMessage("adjusgment.onepage.submit")">
 							<input type="reset" value="Reset">
 						</div>
 					</form>

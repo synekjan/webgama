@@ -3,35 +3,34 @@
 <head>
 <meta charset="UTF-8">
 #parse("include.vm")
-<title>#springMessage("user.personal.settings")</title>
+<title>#springMessage("account.personal") - #springMessage("application.name")</title>
 </head>
 <body>
 	<div id="wrapper">
 		#parse("header.vm")
-
 		<div id="container">
 			<div id="account_container">
 				<div class="left_menu">
 					<ul>
 						<li><a href="#springUrl("/account/info")">#springMessage("account.overview")</a></li>
-						<span class="active_menu"><li><a href="#springUrl("/account/personal")">#springMessage("user.personal.settings")</a></li></span>
-						<li><a href="#springUrl("/account/password/change")">#springMessage("change.password")</a></li>
-						<li><a href="#springUrl("/account/logins/show")">#springMessage("logins.list")</a></li>
-						<li><a href="#springUrl("/account/delete")">#springMessage("delete.account")</a></li>
+						<span class="active_menu"><li><a href="#springUrl("/account/personal")">#springMessage("account.personal")</a></li></span>
+						<li><a href="#springUrl("/account/password/change")">#springMessage("account.password.change")</a></li>
+						<li><a href="#springUrl("/account/logins/show")">#springMessage("account.logins.list")</a></li>
+						<li><a href="#springUrl("/account/delete")">#springMessage("account.delete")</a></li>
 					</ul>
 				</div>
 				<div id="user" class="panel">
 					<div class="panel_header">
-						<h2>#springMessage("user.personal.settings")</h2>
+						<h2>#springMessage("account.personal")</h2>
 					</div>
-					<div class="success">User was successfully modified</div>
+					<div class="success">#springMessage("account.personal.success")</div>
 					#springBind("user.*")#if(${status.error})
-					<div class="error">Form has errors</div>
+					<div class="error">#springMessage("form.has.errors")</div>
 					#end
 					<form action="" method="post">
 						<div class="form">
 							<fieldset>
-								<legend>#springMessage("user.personal.settings")</legend>
+								<legend>#springMessage("account.personal")</legend>
 								<div class="large_form_element">
 									<label for="firstName">#springMessage("user.firstname"):</label>
 									<div class="input">#springFormInput("user.firstName", "")
@@ -78,7 +77,7 @@
 							</fieldset>
 						</div>
 						<div class="form_buttons">
-							<input class="submit_btn" type="submit" value="#springMessage("submit")">
+							<input class="submit_btn" type="submit" value="#springMessage("account.personal.submit")">
 							<input type="reset" value="Reset">
 						</div>
 					</form>

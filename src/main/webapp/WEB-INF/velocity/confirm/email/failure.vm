@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 #parse("include.vm")
-<title>Registration</title>
+<title>#springMessage("confirm.email.failure.header")</title>
 </head>
 <body>
 	<div id="wrapper">
@@ -11,11 +11,10 @@
 		<div id="container">
 			<div id="signup_container">
 				<div class="panel_header">
-					<h2>Email Confirmation</h2>
+					<h2>#springMessage("confirm.email.failure.header")</h2>
 				</div>
 				<div id="dialog_container">
-					<p>Your email address was not confirmed. Probably time is
-						expired.</p>
+					<p>#springMessage("confirm.email.failure.message")</p>
 				</div>
 			</div>
 		</div>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 #parse("include.vm")
-<title>Registration</title>
+<title>#springMessage("registration")</title>
 </head>
 <body>
 	<div id="wrapper">
@@ -11,14 +11,11 @@
 		<div id="container">
 			<div id="signup_container">
 				<div class="panel_header">
-					<h2>Registration</h2>
+					<h2>#springMessage("registration")</h2>
 				</div>
 				<div id="dialog_container">
-					<p>Registration was successful but your account is not enabled
-						so far.</p>
-					<p>Please confirm your email address by clicking on link we
-						sent to you to enable your account</p>
-					<a href="#springUrl("/")">[back to index]</a>
+					<p>#springMessage("registration.success.message1")</p>
+					<p>#springMessage("registration.success.message2")</p>
 				</div>
 				
 			</div>

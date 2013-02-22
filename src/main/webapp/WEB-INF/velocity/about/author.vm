@@ -12,7 +12,7 @@
 			<div id="about_container">
 				<div class="right_menu">
 					<div class="menu_header">
-						<h2>ABOUT</h2>
+						<h2>#springMessage("about")</h2>
 					</div>
 					<ul>
 						<li><a href="#springUrl("/about/project")">#springMessage("about.project")</a></li>
