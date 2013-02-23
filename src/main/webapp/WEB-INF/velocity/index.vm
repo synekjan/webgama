@@ -23,6 +23,12 @@
 				<p>#springMessage("today.is") $date</p>
 
 				<p>#springMessage("controller") $time ms</p>
+				
+				<br>
+				
+				#foreach ($activity in $activities)
+				<p>${foreach.index}. --- $dateTool.format("yyyy-MM-dd HH:mm:ss",$activity.time.toDate())  --- $activity.message --- $activity.type</p>				
+				#end
 
 			</div>
 		</div>

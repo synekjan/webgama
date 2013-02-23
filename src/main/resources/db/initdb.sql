@@ -25,6 +25,7 @@ DROP TABLE authorities CASCADE;
 DROP TABLE roles CASCADE;
 DROP TABLE logins CASCADE;
 DROP TABLE confirmations CASCADE;
+DROP TABLE activities CASCADE;
 DROP TABLE users CASCADE;
 DROP TABLE privileges CASCADE;
 DROP FUNCTION user_authority_function() CASCADE;
@@ -331,6 +332,24 @@ input_id		BIGINT NOT NULL REFERENCES inputs(input_id) ON DELETE CASCADE,
 privilege_id	INTEGER NOT NULL REFERENCES privileges(privilege_id)
 );
 
+-----  OUTPUT PART  -----
+CREATE TABLE outputs (
+output_id 		BIGSERIAL PRIMARY KEY,
+input_id 		BIGINT NOT NULL REFERENCES inputs(input_id),
+xml_content		TEXT,
+text_content	TEXT
+);
+
+
+----- ACTIVITIES SUPPORT -----
+CREATE TABLE activities (
+activity_id		BIGSERIAL PRIMARY KEY,
+user_id			BIGINT NOT NULL REFERENCES users(user_id),
+type			VARCHAR(30) NOT NULL,
+message			VARCHAR(255) NOT NULL,
+time			TIMESTAMP NOT NULL DEFAULT now()
+);
+
 
 /****************
  *    RIGHTS    *
@@ -368,27 +387,12 @@ GRANT ALL ON alternative_observations_alternative_observation_id_seq TO synekjan
 GRANT ALL ON input_privileges TO synekjan;
 GRANT ALL ON input_privileges_input_privilege_id_seq TO synekjan;
 GRANT ALL ON privileges TO synekjan;
-
-
-
-
------  OUTPUT PART  -----
-
-
-CREATE TABLE outputs (
-output_id 		BIGSERIAL PRIMARY KEY,
-input_id 		BIGINT NOT NULL REFERENCES inputs(input_id),
-xml_content		TEXT,
-text_content	TEXT
-);
-
-
-
-/****************
- *    RIGHTS    *
- ****************/
 GRANT ALL ON outputs TO synekjan;
 GRANT ALL ON outputs_output_id_seq TO synekjan;
+GRANT ALL ON activities TO synekjan;
+GRANT ALL ON activities_activity_id_seq TO synekjan;
+
+
 
 
 

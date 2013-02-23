@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import cz.cvut.fsv.webgama.service.ActivityManager;
 import cz.cvut.fsv.webgama.service.UserManager;
 
 @Controller
@@ -20,6 +21,9 @@ public class IndexController {
 	
 	@Inject
 	private UserManager userManager;
+	
+	@Inject
+	private ActivityManager activityManager;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(IndexController.class);
@@ -31,6 +35,7 @@ public class IndexController {
 				&& request.isUserInRole("ROLE_USER")) {
 			long startTime = System.nanoTime();
 
+			String username = request.getUserPrincipal().getName();
 			Date date = new Date();
 			DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, locale);
 			String dateTime = df.format(date);
@@ -39,6 +44,8 @@ public class IndexController {
 			mav.addObject("date", dateTime);
 			double time = (double) (System.nanoTime() - startTime) / 1000000;
 			mav.addObject("time", time);
+			
+			mav.addObject("activities", activityManager.getRecentActivitiesByUsername(username));
 			return mav;
 
 		} else {
@@ -56,6 +63,7 @@ public class IndexController {
 
 		long startTime = System.nanoTime();
 
+		String username = request.getUserPrincipal().getName();
 		Date date = new Date();
 		DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, locale);
 		String dateTime = df.format(date);
@@ -64,6 +72,9 @@ public class IndexController {
 		mav.addObject("date", dateTime);
 		double time = (double) (System.nanoTime() - startTime) / 1000000;
 		mav.addObject("time", time);
+		
+		mav.addObject("activities", activityManager.getRecentActivitiesByUsername(username));
+		
 		return mav;
 	}
 

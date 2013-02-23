@@ -208,7 +208,7 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 			Confirmation conf = new Confirmation();
 
 			conf.setId(rs.getLong("confirmation_id"));
-			conf.setUser(findUserById(rs.getInt("user_id")));
+			conf.setUser(findUserById(rs.getLong("user_id")));
 			conf.setUuid(rs.getString("uuid"));
 			conf.setTime(new DateTime(rs.getTimestamp("time").getTime()));
 

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import cz.cvut.fsv.webgama.domain.User;
 import cz.cvut.fsv.webgama.form.UserForm;
 import cz.cvut.fsv.webgama.form.UserPasswordChangeForm;
+import cz.cvut.fsv.webgama.service.ActivityManager;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
 import cz.cvut.fsv.webgama.service.LoginManager;
 import cz.cvut.fsv.webgama.service.UserManager;
@@ -35,7 +36,10 @@ public class AccountController extends MultiActionController {
 
 	@Inject
 	private LoginManager loginManager;
-	
+
+	@Inject
+	private ActivityManager activityManager;
+
 	@Inject
 	private AdjustmentManager adjustmentManager;
 
@@ -55,7 +59,8 @@ public class AccountController extends MultiActionController {
 		String username = request.getUserPrincipal().getName();
 		User user = userManager.getUser(username);
 		mav.addObject("user", user);
-		mav.addObject("userInputCount", adjustmentManager.getInputCountbyUsername(username));
+		mav.addObject("userInputCount",
+				adjustmentManager.getInputCountbyUsername(username));
 
 		logger.info("User[" + username + "] checked own account information");
 		return mav;
@@ -94,6 +99,7 @@ public class AccountController extends MultiActionController {
 
 		logger.info("User[" + username
 				+ "] successfully updated personal information");
+		activityManager.recordActivity(username, "user", "User was successfully updated");
 		return new ModelAndView("/account/personal/personal", "success", true);
 	}
 
@@ -132,17 +138,19 @@ public class AccountController extends MultiActionController {
 		return new ModelAndView("/account/password/change", "success", true);
 	}
 
-/*	@RequestMapping(value = "/password/change/success", method = RequestMethod.GET)
-	public ModelAndView successPasswordChange(HttpServletRequest request,
-			Model model, Locale locale) {
-
-		ModelAndView mav = new ModelAndView("/account/password/success");
-		String username = request.getUserPrincipal().getName();
-		mav.addObject("user", new UserPasswordChangeForm());
-
-		logger.info("User[" + username + "] thought about changing password");
-		return mav;
-	}*/
+	/*
+	 * @RequestMapping(value = "/password/change/success", method =
+	 * RequestMethod.GET) public ModelAndView
+	 * successPasswordChange(HttpServletRequest request, Model model, Locale
+	 * locale) {
+	 * 
+	 * ModelAndView mav = new ModelAndView("/account/password/success"); String
+	 * username = request.getUserPrincipal().getName(); mav.addObject("user",
+	 * new UserPasswordChangeForm());
+	 * 
+	 * logger.info("User[" + username + "] thought about changing password");
+	 * return mav; }
+	 */
 
 	@RequestMapping(value = { "/logins", "/logins/show" }, method = RequestMethod.GET)
 	public ModelAndView showLogins(HttpServletRequest request,
@@ -163,8 +171,9 @@ public class AccountController extends MultiActionController {
 
 		ModelAndView mav = new ModelAndView("/account/delete/delete");
 		String username = request.getUserPrincipal().getName();
-		
-		mav.addObject("userInputCount", adjustmentManager.getInputCountbyUsername(username));
+
+		mav.addObject("userInputCount",
+				adjustmentManager.getInputCountbyUsername(username));
 		logger.info("User[" + username + "] thought about deleting account");
 		return mav;
 	}

@@ -42,6 +42,11 @@
 
 	</bean>
 
+	<bean id="activityManager" class="cz.cvut.fsv.webgama.service.impl.ActivityManagerImpl">
+		<property name="activityDao" ref="activityDao" />
+		<property name="userDao" ref="userDao" />
+	</bean>
+
 
 
 	<!-- ============================= Parsers ============================== -->
