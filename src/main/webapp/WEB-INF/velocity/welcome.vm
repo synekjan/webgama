@@ -4,18 +4,6 @@
 <meta charset="UTF-8">
 #parse("include.vm")
 <script src="#springUrl("/resources/js/lib/slides.min.jquery.js")"></script>
-<script>
-	jQuery(function() {
-		jQuery("#slides").css("display", "block");
-		jQuery("#slides").slides({
-			preload : true,
-			preloadImage : '#springUrl("/resources/img/loading.gif")',
-			play : 5000,
-			pause : 2500,
-			hoverPause : true
-		});
-	});
-</script>
 <title>#springMessage("welcome.title")</title>
 </head>
 <body>
@@ -30,7 +18,8 @@
 		#parse("header.vm")
 		<div id="heading">
 			#set($cislo = 15)
-			<h1>#springArgMessage("welcome.heading.message", [$userCount, $cislo])</h1>
+			<h1>#springArgMessage("welcome.heading.message", [$userCount,
+				$cislo])</h1>
 		</div>
 		<div id="slides">
 			<div class="slides_container">
@@ -141,5 +130,17 @@
 		</div>
 	</div>
 	#parse("footer.vm")
+	<script>
+		jQuery(function() {
+			jQuery("#slides").css("display", "block");
+			jQuery("#slides").slides({
+				preload : true,
+				preloadImage : '#springUrl("/resources/img/loading.gif")',
+				play : 5000,
+				pause : 2500,
+				hoverPause : true
+			});
+		});
+	</script>
 </body>
 </html>

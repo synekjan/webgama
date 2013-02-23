@@ -14,7 +14,7 @@
 					<h2>#springMessage("registration")</h2>
 				</div>
 				#springBind("user.*")#if(${status.error})
-				<div class="error">#springMessage("form.has.errors")</div>
+				<div class="error">#springMessage("form.has.errors") <span class="icon-close" role="button"></span></div>
 				#end
 				<div class="form_hints">
 					#springMessage("bold.is.required")

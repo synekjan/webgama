@@ -23,7 +23,7 @@
 						<h2>#springMessage("adjustment.onepage.form.name")</h2>
 					</div>
 					#springBind("input.*")#if(${status.error})
-					<div class="error">#springMessage("form.has.errors")</div>
+					<div class="error">#springMessage("form.has.errors") <span class="icon-close" role="button"></span></div>
 					#end
 					<div class="form_hints">
 						#springMessage("bold.is.required")

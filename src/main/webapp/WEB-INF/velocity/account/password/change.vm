@@ -23,9 +23,11 @@
 					<div class="panel_header">
 						<h2>#springMessage("account.password.change")</h2>
 					</div>
-					<div class="success">#springMessage("account.password.change.success")</div>
+					#if($success)
+					<div class="success">#springMessage("account.password.change.success") <span class="icon-close" role="button"></span></div>
+					#end
 					#springBind("user.*")#if(${status.error})
-					<div class="error">#springMessage("form.has.errors")</div>
+					<div class="error">#springMessage("form.has.errors") <span class="icon-close" role="button"></span></div>
 					#end
 					<div class="form_hints">
 						#springMessage("bold.is.required")

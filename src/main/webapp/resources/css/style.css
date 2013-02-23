@@ -677,7 +677,7 @@ div.info,div.success,div.warning,div.error {
 	font-size: 0.85em;
 	border: 1px solid;
 	margin: 10px 0px;
-	padding: 10px 20px;
+	padding: 10px 10px 10px 20px;
 	border-radius: 3px 3px 3px 3px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -692,7 +692,6 @@ div.success {
 	color: #4F8A10;
 	background-color: #DFF2BF;
 	border-color: #8FCA50;
-	display: none
 }
 
 div.warning {
@@ -705,6 +704,14 @@ div.error {
 	color: #D8000C;
 	background-color: #FED1D1;
 	border-color: #E3A198;
+}
+
+.icon-close {
+	float: right;
+	background: url("../img/cross.png") no-repeat left top;
+	width: 12px;
+	height: 12px;
+	margin-top: 1px;
 }
 
 div#options {

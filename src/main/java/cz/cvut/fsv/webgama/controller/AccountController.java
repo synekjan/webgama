@@ -94,20 +94,8 @@ public class AccountController extends MultiActionController {
 
 		logger.info("User[" + username
 				+ "] successfully updated personal information");
-		return new ModelAndView("redirect:/account/personal?success=true");
+		return new ModelAndView("/account/personal/personal", "success", true);
 	}
-
-/*	@RequestMapping(value = "/personal/success", method = RequestMethod.GET)
-	public ModelAndView successUserChange(HttpServletRequest request,
-			Locale locale) {
-
-		ModelAndView mav = new ModelAndView("/account/personal/success");
-		String username = request.getUserPrincipal().getName();
-		UserForm userForm = new UserForm(userManager.getUser(username));
-		mav.addObject("user", userForm);
-
-		return mav;
-	}*/
 
 	// CHANGING PASSWORD
 	@RequestMapping(value = "/password/change", method = RequestMethod.GET)
@@ -141,7 +129,7 @@ public class AccountController extends MultiActionController {
 
 		logger.info("User[" + username
 				+ "] successfully changed account password");
-		return new ModelAndView("redirect:/account/password/change?success=true");
+		return new ModelAndView("/account/password/change", "success", true);
 	}
 
 /*	@RequestMapping(value = "/password/change/success", method = RequestMethod.GET)

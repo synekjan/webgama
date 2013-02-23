@@ -1,10 +1,4 @@
 $(document).ready(function() {
-	
-	// show success box when form is successfully updated
-	if(location.search == "?success=true"){
-		  $('div.success').show();
-		}
-
 	// DROPDOWN MENU behaviour
 	$('a#account').click(function() {
 		$('#locale_dropdown').slideUp(200);
@@ -38,19 +32,15 @@ $(document).ready(function() {
 		return false;
 	});
 	$('.success, .error').delay(8000).hide(1000);
-	
+	$('.icon-close').click(function() {
+		$('.success, .error').hide();
+	});
+
 	$(function() {
 		$(".accordion").accordion({
-			heightStyle: "content"
+			heightStyle : "content"
 		});
 	});
-	
-	//TODO
-	/*$('input.submit_btn').click(function() {
-		var url = window.location.pathname;
-		url = url.slice( 0, url.indexOf('?') );
-	});*/
-	
 });
 
 function wizardAjaxPostNext(stepUrl) {
@@ -92,6 +82,3 @@ function wizardAjaxPostPrevious(stepUrl) {
 		}
 	});
 }
-
-
-

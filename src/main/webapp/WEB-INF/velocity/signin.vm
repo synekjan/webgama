@@ -19,7 +19,7 @@
 					<h2>#springMessage("sign.in.header")</h2>
 				</div>
 				#if ($error)
-				<div class="error">$SPRING_SECURITY_LAST_EXCEPTION.message</div>
+				<div class="error">$SPRING_SECURITY_LAST_EXCEPTION.message <span class="icon-close" role="button"></span></div>
 				#end
 				<form action="j_spring_security_check" method="post">
 					<div class="text_inputs">
