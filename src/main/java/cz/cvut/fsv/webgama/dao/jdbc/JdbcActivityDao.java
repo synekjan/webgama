@@ -24,11 +24,11 @@ public class JdbcActivityDao extends JdbcDaoSupport implements ActivityDao {
 	@Override
 	public void insert(Activity activity) {
 
-		String sql = "INSERT INTO activities (user_id, type, message) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO activities (user_id, message) VALUES (?, ?)";
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { activity.getUser().getId(), activity.getType(),
+				new Object[] { activity.getUser().getId(),
 						activity.getMessage() });
 	}
 
@@ -41,29 +41,31 @@ public class JdbcActivityDao extends JdbcDaoSupport implements ActivityDao {
 
 	@Override
 	public void update(Activity activity) {
-		String sql = "UPDATE activities SET user_id=?, type=?, message=? WHERE activity_id = ?";
+		String sql = "UPDATE activities SET user_id=?, message=? WHERE activity_id = ?";
 
 		getJdbcTemplate().update(sql, activity.getUser().getId(),
-				activity.getType(), activity.getMessage());
+				activity.getMessage());
 	}
 
 	@Override
 	public List<Activity> findAllActivitiesByUser(User user) {
-		
+
 		String sql = "SELECT * FROM activities WHERE user_id = ? ORDER BY time DESC";
-		
-		List<Activity> activities = getJdbcTemplate().query(sql, new Object[] {user.getId()} , new ActivityMapper());
-		
+
+		List<Activity> activities = getJdbcTemplate().query(sql,
+				new Object[] { user.getId() }, new ActivityMapper());
+
 		return activities;
 	}
 
 	@Override
 	public List<Activity> findRecentActivitiesByUser(User user) {
-		
+
 		String sql = "SELECT * FROM activities WHERE user_id = ? ORDER BY time DESC LIMIT 15";
-		
-		List<Activity> activities = getJdbcTemplate().query(sql, new Object[] {user.getId()} , new ActivityMapper());
-		
+
+		List<Activity> activities = getJdbcTemplate().query(sql,
+				new Object[] { user.getId() }, new ActivityMapper());
+
 		return activities;
 	}
 
@@ -75,7 +77,6 @@ public class JdbcActivityDao extends JdbcDaoSupport implements ActivityDao {
 			Activity activity = new Activity();
 			activity.setId(rs.getLong("activity_id"));
 			activity.setUser(userDao.findUserById(rs.getLong("user_id")));
-			activity.setType(rs.getString("type"));
 			activity.setMessage(rs.getString("message"));
 			activity.setTime(new DateTime(rs.getTimestamp("time").getTime()));
 

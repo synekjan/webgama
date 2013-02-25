@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +25,9 @@ public class IndexController {
 	
 	@Inject
 	private ActivityManager activityManager;
+	
+	@Inject
+	private MessageSource messageSource;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(IndexController.class);
@@ -44,6 +48,8 @@ public class IndexController {
 			mav.addObject("date", dateTime);
 			double time = (double) (System.nanoTime() - startTime) / 1000000;
 			mav.addObject("time", time);
+			
+			mav.addObject("test", messageSource.getMessage("bold.is.required", null, locale));
 			
 			mav.addObject("activities", activityManager.getRecentActivitiesByUsername(username));
 			return mav;

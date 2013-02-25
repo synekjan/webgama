@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
+import cz.cvut.fsv.webgama.service.ActivityManager;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
 
 @Controller
@@ -18,6 +19,9 @@ public class ImportController extends MultiActionController {
 
 	@Inject
 	private AdjustmentManager adjustmentManager;
+	
+	@Inject 
+	private ActivityManager activityManager;
 
 	@RequestMapping(value = "/import/xml", method = RequestMethod.GET)
 	protected ModelAndView showUploadForm() {
@@ -36,7 +40,7 @@ public class ImportController extends MultiActionController {
 			String result = adjustmentManager.adjustFromFile(file, username);
 			ModelAndView mav = new ModelAndView("/import/result");
 			mav.addObject("result", result);
-			
+			activityManager.recordActivity(username, "activity.xml.feed.imported");
 			return mav;
 		} else {
 			return new ModelAndView("/import/xml");

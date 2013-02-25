@@ -99,7 +99,7 @@ public class AccountController extends MultiActionController {
 
 		logger.info("User[" + username
 				+ "] successfully updated personal information");
-		activityManager.recordActivity(username, "user", "User was successfully updated");
+		activityManager.recordActivity(username, "activity.user.changed");
 		return new ModelAndView("/account/personal/personal", "success", true);
 	}
 
@@ -135,6 +135,7 @@ public class AccountController extends MultiActionController {
 
 		logger.info("User[" + username
 				+ "] successfully changed account password");
+		activityManager.recordActivity(username, "activity.password.changed");
 		return new ModelAndView("/account/password/change", "success", true);
 	}
 

@@ -17,19 +17,39 @@
 					<li><a href="#springUrl("/export")">#springMessage("navbar.export")</a></li>
 				</ul>
 			</div>
-			<div id="content">
-				<h2>#springMessage("header")</h2>
-
-				<p>#springMessage("today.is") $date</p>
-
-				<p>#springMessage("controller") $time ms</p>
-				
-				<br>
-				
-				#foreach ($activity in $activities)
-				<p>${foreach.index}. --- $dateTool.format("yyyy-MM-dd HH:mm:ss",$activity.time.toDate())  --- $activity.message --- $activity.type</p>				
-				#end
-
+			<div id="content" class="index_page">
+				<div id="primary">
+					<div id="welcome">
+						<div class="title">#springMessage("index.welcome.title")</div>
+						<div class="today">#springMessage("index.welcome.today.is")
+							$date</div>
+						<div class="whatsnext">
+							<h1>#springMessage("index.welcome.whatsnext")</h1>
+							<ul>
+								<li><a href="#springUrl("/adjustment")">#springMessage("index.welcome.whatsnext.start.adjustment")</a></li>
+								<li><a href="#springUrl("/account/personal")">#springMessage("index.welcome.whatsnext.tell.us")</a></li>
+							</ul>
+						</div>
+					</div>
+					<div id="activities">
+						<h1>#springMessage("index.activity.header")</h1>
+						<div class="activity_list">
+							#foreach ($activity in $activities)
+							<div class="activity">
+								${foreach.index}. #springMessage($activity.message) <span
+									class="time">$dateTool.format("yyyy-MM-dd
+									HH:mm:ss",$activity.time.toDate())</span>
+							</div>
+							#end
+						</div>
+					</div>
+				</div>
+				<div id="secondary">
+					<div id="controls">
+						<div class="small_panel_header">#springMessage("navbar.calculations")</div>
+						
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -22,7 +22,7 @@
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Mapping for simpler styling error pages -->
-	<mvc:resources mapping="/css/**" location="/resources/css/" />
+<!-- 	<mvc:resources mapping="/css/**" location="/resources/css/" /> -->
 
 	<!-- Adds favicon.ico to webappRoot -->
 	<mvc:resources mapping="/favicon.ico" location="/resources/img/favicon.ico" />

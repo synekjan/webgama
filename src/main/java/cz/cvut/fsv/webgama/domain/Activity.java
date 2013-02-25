@@ -8,8 +8,6 @@ public class Activity {
 
 	private User user;
 
-	private String type;
-
 	private String message;
 
 	private DateTime time;
@@ -28,14 +26,6 @@ public class Activity {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getMessage() {

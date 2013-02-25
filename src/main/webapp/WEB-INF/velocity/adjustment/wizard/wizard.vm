@@ -34,8 +34,8 @@
 									type="text" />
 
 								<div id="wizard_buttons">
-									<div id="previous" class="previous_btn step1">Previous</div>
-									<div id="next" class="next_btn step1">Next</div>
+									<input id="previous" class="previous_btn step1" type="submit" value="Previous">
+									<input id="next" class="next_btn step1" type="submit" value="Next">
 								</div>
 							</form>
 						</div>

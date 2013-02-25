@@ -6,7 +6,7 @@ import cz.cvut.fsv.webgama.domain.Activity;
 
 public interface ActivityManager {
 	
-	public void recordActivity(String username, String type, String message);
+	public void recordActivity(String username, String message);
 	
 	public List<Activity> getRecentActivitiesByUsername(String username);
 	

@@ -22,11 +22,10 @@ public class ActivityManagerImpl implements ActivityManager {
 	}
 
 	@Override
-	public void recordActivity(String username, String type, String message) {
+	public void recordActivity(String username, String message) {
 
 		Activity activity = new Activity();
 		activity.setUser(userDao.findUserByUsername(username));
-		activity.setType(type);
 		activity.setMessage(message);
 
 		activityDao.insert(activity);
