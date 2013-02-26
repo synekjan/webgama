@@ -33,6 +33,7 @@ public class CalculationsController extends MultiActionController {
 		
 		mav.addObject("sharedCalculations", adjustmentManager.getInputsbyUsername("gita"));
 
+		mav.addObject("locale", locale);
 		mav.addObject("timeFormatter", timeFormatter);
 		return mav;
 	}

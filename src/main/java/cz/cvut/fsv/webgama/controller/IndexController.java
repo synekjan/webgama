@@ -37,7 +37,6 @@ public class IndexController {
 
 		if (request.getUserPrincipal() != null
 				&& request.isUserInRole("ROLE_USER")) {
-			long startTime = System.nanoTime();
 
 			String username = request.getUserPrincipal().getName();
 			Date date = new Date();
@@ -46,9 +45,8 @@ public class IndexController {
 
 			ModelAndView mav = new ModelAndView("index");
 			mav.addObject("date", dateTime);
-			double time = (double) (System.nanoTime() - startTime) / 1000000;
-			mav.addObject("time", time);
 			
+			mav.addObject("locale", locale);
 			mav.addObject("timeFormatter", timeFormatter);
 			mav.addObject("activities", activityManager.getRecentActivitiesByUsername(username));
 			return mav;
@@ -66,8 +64,6 @@ public class IndexController {
 	@RequestMapping("/overview")
 	public ModelAndView overview(HttpServletRequest request, Locale locale) {
 
-		long startTime = System.nanoTime();
-
 		String username = request.getUserPrincipal().getName();
 		Date date = new Date();
 		DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, locale);
@@ -75,9 +71,8 @@ public class IndexController {
 
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("date", dateTime);
-		double time = (double) (System.nanoTime() - startTime) / 1000000;
-		mav.addObject("time", time);
 		
+		mav.addObject("locale", locale);
 		mav.addObject("timeFormatter", timeFormatter);
 		mav.addObject("activities", activityManager.getRecentActivitiesByUsername(username));
 		

@@ -94,6 +94,7 @@
 	</bean>
 	
 	<bean id="timeFormatter" class="cz.cvut.fsv.webgama.util.TimeFormatter">
+		<property name="messageSource" ref="messageSource" />
 	</bean>
 
 	<bean id="multipartResolver"
