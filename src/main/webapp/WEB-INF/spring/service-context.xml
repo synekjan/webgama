@@ -92,6 +92,9 @@
 
 	<bean id="fileEraser" class="cz.cvut.fsv.webgama.util.FileEraser">
 	</bean>
+	
+	<bean id="timeFormatter" class="cz.cvut.fsv.webgama.util.TimeFormatter">
+	</bean>
 
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

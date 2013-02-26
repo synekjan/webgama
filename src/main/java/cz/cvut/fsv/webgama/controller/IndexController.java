@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import cz.cvut.fsv.webgama.service.ActivityManager;
 import cz.cvut.fsv.webgama.service.UserManager;
+import cz.cvut.fsv.webgama.util.TimeFormatter;
 
 @Controller
 public class IndexController {
@@ -27,7 +27,7 @@ public class IndexController {
 	private ActivityManager activityManager;
 	
 	@Inject
-	private MessageSource messageSource;
+	private TimeFormatter timeFormatter;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(IndexController.class);
@@ -49,8 +49,7 @@ public class IndexController {
 			double time = (double) (System.nanoTime() - startTime) / 1000000;
 			mav.addObject("time", time);
 			
-			mav.addObject("test", messageSource.getMessage("bold.is.required", null, locale));
-			
+			mav.addObject("timeFormatter", timeFormatter);
 			mav.addObject("activities", activityManager.getRecentActivitiesByUsername(username));
 			return mav;
 
@@ -79,6 +78,7 @@ public class IndexController {
 		double time = (double) (System.nanoTime() - startTime) / 1000000;
 		mav.addObject("time", time);
 		
+		mav.addObject("timeFormatter", timeFormatter);
 		mav.addObject("activities", activityManager.getRecentActivitiesByUsername(username));
 		
 		return mav;
