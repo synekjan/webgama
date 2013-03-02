@@ -23,6 +23,7 @@ import cz.cvut.fsv.webgama.domain.Observation;
 import cz.cvut.fsv.webgama.domain.Point;
 import cz.cvut.fsv.webgama.domain.SlopeDistance;
 import cz.cvut.fsv.webgama.domain.ZenithAngle;
+import cz.cvut.fsv.webgama.exception.ResourceNotFoundException;
 import cz.cvut.fsv.webgama.form.AdjustmentPageForm;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
 
@@ -95,9 +96,19 @@ public class AdjustmentPageController extends MultiActionController {
 		return new ModelAndView("redirect:/calculations");
 	}
 
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	protected ModelAndView editInput(@PathVariable long id,
+	protected ModelAndView editInput(@PathVariable Long id,
 			HttpServletRequest request) {
+		
+		boolean b = adjustmentManager.isInputIdInDB(id);
+		
+		System.out.println(b);
+		
+		//Check if path variable is in database otherwise throw 404 HTTP Status code
+		if (id <= 0 || !b)  {
+			throw new ResourceNotFoundException();
+		}
 
 		ModelAndView mav = new ModelAndView("/adjustment/onepage/new");
 

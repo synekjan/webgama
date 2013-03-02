@@ -87,14 +87,14 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 
 		return inputs;
 	}
-	
+
 	@Override
 	public Input findInputById(Long id) {
-		
+
 		String sql = "SELECT * FROM inputs WHERE input_id = ?";
 
-		Input input = getJdbcTemplate().queryForObject(sql, new Object[] { id },
-				new InputMapper());
+		Input input = getJdbcTemplate().queryForObject(sql,
+				new Object[] { id }, new InputMapper());
 
 		return input;
 	}
@@ -106,6 +106,19 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 
 		return getJdbcTemplate()
 				.queryForInt(sql, new Object[] { user.getId() });
+	}
+
+	@Override
+	public boolean isInputIdInDB(Long id) {
+
+		String sql = "SELECT * FROM inputs WHERE input_id = ?";
+		List<Input> ids = getJdbcTemplate().query(sql, new Object[] {id}, new InputMapper());
+
+		if (ids.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	private class InputMapper implements RowMapper<Input> {
@@ -122,7 +135,8 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 			input.setFileContent(rs.getString("file_content"));
 			input.setAlgorithm(rs.getString("algorithm"));
 			input.setAngUnits(rs.getInt("ang_units"));
-			input.setLatitude(rs.getObject("latitude") != null ? rs.getDouble("latitude") : null);
+			input.setLatitude(rs.getObject("latitude") != null ? rs
+					.getDouble("latitude") : null);
 			input.setEllipsoid(rs.getString("ellipsoid"));
 			input.setVersion(rs.getString("version"));
 			input.setNetwork(networkDao.findNetworkByInput(input));
@@ -132,7 +146,5 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 		}
 
 	}
-
-
 
 }

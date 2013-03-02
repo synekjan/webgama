@@ -15,5 +15,7 @@ public interface AdjustmentManager {
 	public Input getInputById(long id);
 	
 	public int getInputCountbyUsername(String username);
+	
+	public boolean isInputIdInDB(Long id);
 
 }

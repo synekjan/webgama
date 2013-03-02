@@ -20,5 +20,7 @@ public interface InputDao {
 	public Input findInputById(Long id);
 	
 	public int getInputCountByUser(User user);
+	
+	public boolean isInputIdInDB(Long id);
 
 }

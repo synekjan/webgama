@@ -95,4 +95,10 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		return inputDao.findInputById(id);
 	}
 
+	@Override
+	public boolean isInputIdInDB(Long id) {
+	
+		return inputDao.isInputIdInDB(id);
+	}
+
 }
