@@ -23,7 +23,6 @@ public class JdbcPointDao extends JdbcDaoSupport implements PointDao {
 				new Object[] { networkId, point.getName(), point.getX(),
 						point.getY(), point.getZ(), point.getFix(),
 						point.getAdj() });
-
 	}
 
 	@Override
@@ -74,7 +73,5 @@ public class JdbcPointDao extends JdbcDaoSupport implements PointDao {
 
 			return point;
 		}
-
 	}
-
 }

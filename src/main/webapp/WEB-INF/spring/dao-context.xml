@@ -22,7 +22,6 @@
 	</bean>
 
 
-
 	<!-- DATA ACCESS OBJECTS -->
 
 	<!-- User management -->
@@ -60,8 +59,31 @@
 	<bean id="networkDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcNetworkDao">
 		<property name="dataSource" ref="dataSource" />
 		<property name="pointDao" ref="pointDao" />
-		<property name="observationDao" ref="observationDao" />
-		<property name="alternativeObservationDao" ref="alternativeObservationDao" />
+		<property name="clusterDao" ref="clusterDao" />
+	</bean>
+
+	<bean id="pointDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcPointDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="clusterDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcClusterDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="coordinateDao" ref="coordinateDao" />
+		<property name="heightDifferenceDao" ref="heightDifferenceDao" />
+		<property name="vectorDao" ref="vectorDao" />
+		<property name="observationDao" ref="observationDao"></property>
+	</bean>
+
+	<bean id="coordinateDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcCoordinateDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="heightDifferenceDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcHeightDifferenceDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="vectorDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcVectorDao">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 	<bean id="observationDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcObservationDao">
@@ -71,10 +93,6 @@
 		<property name="angleDao" ref="angleDao" />
 		<property name="slopeDistanceDao" ref="slopeDistanceDao" />
 		<property name="zenithAngleDao" ref="zenithAngleDao" />
-	</bean>
-
-	<bean id="pointDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcPointDao">
-		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 	<bean id="directionDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcDirectionDao">
@@ -94,26 +112,6 @@
 	</bean>
 
 	<bean id="zenithAngleDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcZenithAngleDao">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-
-	<bean id="alternativeObservationDao"
-		class="cz.cvut.fsv.webgama.dao.jdbc.JdbcAlternativeObservationDao">
-		<property name="dataSource" ref="dataSource" />
-		<property name="coordinateDao" ref="coordinateDao" />
-		<property name="heightDifferenceDao" ref="heightDifferenceDao" />
-		<property name="vectorDao" ref="vectorDao" />
-	</bean>
-
-	<bean id="coordinateDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcCoordinateDao">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-
-	<bean id="heightDifferenceDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcHeightDifferenceDao">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-
-	<bean id="vectorDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcVectorDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 

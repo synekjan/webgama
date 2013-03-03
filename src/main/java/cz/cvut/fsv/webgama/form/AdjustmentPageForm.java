@@ -63,8 +63,9 @@ public class AdjustmentPageForm {
 		zenithAngleStdev = input.getNetwork().getZenithAngleStdev();
 		distanceStdev = input.getNetwork().getDistanceStdev();
 
+		//TODO
 		points = input.getNetwork().getPoints();
-		observations = input.getNetwork().getObservations();
+		/*observations = input.getNetwork().getClusters().getObservations();*/
 	}
 
 	public String getAxesXY() {

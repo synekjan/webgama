@@ -9,25 +9,23 @@ DROP TABLE zenith_angles CASCADE;
 DROP TABLE height_differences CASCADE;
 DROP TABLE vectors CASCADE;
 DROP TABLE coordinates CASCADE;
-DROP TABLE alternative_observations CASCADE;
 DROP TABLE observations CASCADE;
+DROP TABLE clusters CASCADE;
 DROP TABLE points CASCADE;
 DROP TABLE covmat_values CASCADE;
 DROP TABLE covmats CASCADE;
 DROP TABLE networks CASCADE;
 DROP TABLE input_privileges CASCADE;
-DROP TABLE inputs CASCADE;
-
 DROP TABLE outputs CASCADE;
-
+DROP TABLE inputs CASCADE;
 
 DROP TABLE authorities CASCADE;
 DROP TABLE roles CASCADE;
 DROP TABLE logins CASCADE;
 DROP TABLE confirmations CASCADE;
+DROP TABLE activities CASCADE;
 DROP TABLE users CASCADE;
 DROP TABLE privileges CASCADE;
-DROP TABLE activities CASCADE;
 DROP FUNCTION user_authority_function() CASCADE;
 
 
@@ -207,16 +205,16 @@ cind 			INTEGER NOT NULL,
 val 			DOUBLE PRECISION
 );
 
-CREATE TABLE alternative_observations (
-alternative_observation_id BIGSERIAL PRIMARY KEY,
+CREATE TABLE clusters (
+cluster_id 		BIGSERIAL PRIMARY KEY,
 network_id		BIGINT NOT NULL REFERENCES networks(network_id) ON DELETE CASCADE,
-tagname			VARCHAR(20) NOT NULL check (tagname in ('coordinates', 'vectors', 'height-differences')),
+tagname			VARCHAR(20) NOT NULL check (tagname in ('obs', 'coordinates', 'vectors', 'height-differences')),
 covmat_id		BIGINT REFERENCES covmats(covmat_id)
 );
 
 CREATE TABLE height_differences (
 height_difference_id BIGSERIAL PRIMARY KEY,
-alternative_observation_id BIGINT NOT NULL REFERENCES alternative_observations(alternative_observation_id) ON DELETE CASCADE,
+cluster_id 		BIGINT NOT NULL REFERENCES clusters(cluster_id) ON DELETE CASCADE,
 from_id			VARCHAR(80) NOT NULL,
 to_id			VARCHAR(80) NOT NULL,
 val				DOUBLE PRECISION NOT NULL,
@@ -226,7 +224,7 @@ dist			DOUBLE PRECISION
 
 CREATE TABLE vectors (
 vector_id 		BIGSERIAL PRIMARY KEY,
-alternative_observation_id BIGINT NOT NULL REFERENCES alternative_observations(alternative_observation_id) ON DELETE CASCADE,
+cluster_id 		BIGINT NOT NULL REFERENCES clusters(cluster_id) ON DELETE CASCADE,
 from_id			VARCHAR(80) NOT NULL,
 to_id			VARCHAR(80) NOT NULL,
 dx				DOUBLE PRECISION NOT NULL,
@@ -238,18 +236,16 @@ to_dh			DOUBLE PRECISION
 
 CREATE TABLE coordinates (
 coordinate_id	BIGSERIAL PRIMARY KEY,
-alternative_observation_id BIGINT NOT NULL REFERENCES alternative_observations(alternative_observation_id) ON DELETE CASCADE,
+cluster_id 		BIGINT NOT NULL REFERENCES clusters(cluster_id) ON DELETE CASCADE,
 id				VARCHAR(80) NOT NULL,
 x				DOUBLE PRECISION,
 y				DOUBLE PRECISION,
 z				DOUBLE PRECISION
 );
 
-
-
 CREATE TABLE observations (
 observation_id 	BIGSERIAL PRIMARY KEY,
-network_id		BIGINT NOT NULL REFERENCES networks(network_id) ON DELETE CASCADE,
+cluster_id 		BIGINT NOT NULL REFERENCES clusters(cluster_id) ON DELETE CASCADE,
 from_id			VARCHAR(80),
 orientation		VARCHAR(20),
 from_dh			DOUBLE PRECISION,
@@ -381,8 +377,8 @@ GRANT ALL ON covmats TO synekjan;
 GRANT ALL ON covmats_covmat_id_seq TO synekjan;
 GRANT ALL ON covmat_values TO synekjan;
 GRANT ALL ON covmat_values_covmat_value_id_seq TO synekjan;
-GRANT ALL ON alternative_observations TO synekjan;
-GRANT ALL ON alternative_observations_alternative_observation_id_seq TO synekjan;
+GRANT ALL ON clusters TO synekjan;
+GRANT ALL ON clusters_cluster_id_seq TO synekjan;
 GRANT ALL ON input_privileges TO synekjan;
 GRANT ALL ON input_privileges_input_privilege_id_seq TO synekjan;
 GRANT ALL ON privileges TO synekjan;

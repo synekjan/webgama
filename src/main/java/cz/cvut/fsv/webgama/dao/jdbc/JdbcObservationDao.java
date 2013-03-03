@@ -14,9 +14,9 @@ import cz.cvut.fsv.webgama.dao.ObservationDao;
 import cz.cvut.fsv.webgama.dao.SlopeDistanceDao;
 import cz.cvut.fsv.webgama.dao.ZenithAngleDao;
 import cz.cvut.fsv.webgama.domain.Angle;
+import cz.cvut.fsv.webgama.domain.Cluster;
 import cz.cvut.fsv.webgama.domain.Direction;
 import cz.cvut.fsv.webgama.domain.Distance;
-import cz.cvut.fsv.webgama.domain.Network;
 import cz.cvut.fsv.webgama.domain.Observation;
 import cz.cvut.fsv.webgama.domain.SlopeDistance;
 import cz.cvut.fsv.webgama.domain.ZenithAngle;
@@ -51,14 +51,14 @@ public class JdbcObservationDao extends JdbcDaoSupport implements
 	}
 
 	@Override
-	public void insert(Observation observation, Integer networkId) {
+	public void insert(Observation observation, Integer clusterId) {
 
-		String sql = "INSERT INTO observations (network_id, from_id, orientation, from_dh) VALUES (?, ?, ?, ?) RETURNING observation_id";
+		String sql = "INSERT INTO observations (cluster_id, from_id, orientation, from_dh) VALUES (?, ?, ?, ?) RETURNING observation_id";
 
 		int observationId = getJdbcTemplate()
 				.queryForInt(
 						sql,
-						new Object[] { networkId, observation.getFrom(),
+						new Object[] { clusterId, observation.getFrom(),
 								observation.getOrientation(),
 								observation.getFromDh() });
 
@@ -104,12 +104,12 @@ public class JdbcObservationDao extends JdbcDaoSupport implements
 	}
 
 	@Override
-	public List<Observation> findObservationsInNetwork(Network network) {
+	public List<Observation> findObservationsInCluster(Cluster cluster) {
 
-		String sql = "SELECT * FROM observations WHERE network_id = ?";
+		String sql = "SELECT * FROM observations WHERE cluster_id = ?";
 
 		List<Observation> observations = getJdbcTemplate().query(sql,
-				new Object[] { network.getId() }, new ObservationMapper());
+				new Object[] { cluster.getId() }, new ObservationMapper());
 
 		return observations;
 	}
@@ -124,7 +124,8 @@ public class JdbcObservationDao extends JdbcDaoSupport implements
 			observation.setId(rs.getLong("observation_id"));
 			observation.setFrom(rs.getString("from_id"));
 			observation.setOrientation(rs.getString("orientation"));
-			observation.setFromDh(rs.getObject("from_dh") != null ? rs.getDouble("from_dh") : null);
+			observation.setFromDh(rs.getObject("from_dh") != null ? rs
+					.getDouble("from_dh") : null);
 			observation.setDirections(directionDao
 					.findDirectionsInObservation(observation));
 			observation.setDistances(distanceDao

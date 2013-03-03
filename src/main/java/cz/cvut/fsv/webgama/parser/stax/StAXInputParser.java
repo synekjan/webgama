@@ -24,8 +24,8 @@ import javax.xml.stream.events.XMLEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cz.cvut.fsv.webgama.domain.AlternativeObservation;
 import cz.cvut.fsv.webgama.domain.Angle;
+import cz.cvut.fsv.webgama.domain.Cluster;
 import cz.cvut.fsv.webgama.domain.Coordinate;
 import cz.cvut.fsv.webgama.domain.CovMat;
 import cz.cvut.fsv.webgama.domain.Direction;
@@ -63,8 +63,8 @@ public class StAXInputParser implements InputParser {
 
 			Network network = null;
 			Point point = null;
+			Cluster cluster = null;
 			Observation observation = null;
-			AlternativeObservation alternativeObservation = null;
 			Direction direction = null;
 			Distance distance = null;
 			Angle angle = null;
@@ -333,8 +333,10 @@ public class StAXInputParser implements InputParser {
 					}
 
 					if ("obs".equals(startElement.getName().getLocalPart())) {
-						observation = new Observation();
+						cluster = new Cluster();
+						cluster.setTagname("obs");
 						currentTagName = "obs";
+						observation = new Observation();
 
 						@SuppressWarnings("unchecked")
 						Iterator<Attribute> attributes = startElement
@@ -367,7 +369,6 @@ public class StAXInputParser implements InputParser {
 					if ("point".equals(startElement.getName().getLocalPart())) {
 
 						if (!("coordinates".equals(currentTagName))) {
-
 							point = new Point();
 
 							@SuppressWarnings("unchecked")
@@ -444,7 +445,6 @@ public class StAXInputParser implements InputParser {
 								}
 							}
 						}
-
 						continue;
 					}
 
@@ -600,8 +600,8 @@ public class StAXInputParser implements InputParser {
 
 					if ("height-differences".equals(startElement.getName()
 							.getLocalPart())) {
-						alternativeObservation = new AlternativeObservation();
-						alternativeObservation.setTagname("height-differences");
+						cluster = new Cluster();
+						cluster.setTagname("height-differences");
 						currentTagName = "height-differences";
 
 						continue;
@@ -650,16 +650,16 @@ public class StAXInputParser implements InputParser {
 
 					if ("coordinates".equals(startElement.getName()
 							.getLocalPart())) {
-						alternativeObservation = new AlternativeObservation();
-						alternativeObservation.setTagname("coordinates");
+						cluster = new Cluster();
+						cluster.setTagname("coordinates");
 						currentTagName = "coordinates";
 
 						continue;
 					}
 
 					if ("vectors".equals(startElement.getName().getLocalPart())) {
-						alternativeObservation = new AlternativeObservation();
-						alternativeObservation.setTagname("vectors");
+						cluster = new Cluster();
+						cluster.setTagname("vectors");
 						currentTagName = "vectors";
 
 						continue;
@@ -754,15 +754,16 @@ public class StAXInputParser implements InputParser {
 						if (!("coordinates".equals(currentTagName))) {
 							network.getPoints().add(point);
 						} else {
-							alternativeObservation.getCoordinates().add(
-									coordinate);
+							cluster.getCoordinates().add(coordinate);
 						}
 
 						continue;
 					}
 
 					if ("obs".equals(endElement.getName().getLocalPart())) {
-						network.getObservations().add(observation);
+						cluster.getObservations().add(observation);
+						network.getClusters().add(cluster);
+						currentTagName = null;
 						continue;
 					}
 
@@ -802,13 +803,13 @@ public class StAXInputParser implements InputParser {
 					if ("cov-mat".equals(endElement.getName().getLocalPart())) {
 
 						if (currentTagName.equals("obs")) {
-							observation.setCovMat(covMat);
+							cluster.setCovMat(covMat);
 						} else if (currentTagName.equals("height-differences")) {
-							alternativeObservation.setCovMat(covMat);
+							cluster.setCovMat(covMat);
 						} else if (currentTagName.equals("coordinates")) {
-							alternativeObservation.setCovMat(covMat);
+							cluster.setCovMat(covMat);
 						} else if (currentTagName.equals("vectors")) {
-							alternativeObservation.setCovMat(covMat);
+							cluster.setCovMat(covMat);
 						} else {
 							logger.debug("Unrecognized CovMat parent node");
 						}
@@ -817,36 +818,31 @@ public class StAXInputParser implements InputParser {
 
 					if ("height-differences".equals(endElement.getName()
 							.getLocalPart())) {
-						network.getAlternativeObservations().add(
-								alternativeObservation);
+						network.getClusters().add(cluster);
 						currentTagName = null;
 						continue;
 					}
 
 					if ("dh".equals(endElement.getName().getLocalPart())) {
-						alternativeObservation.getHeightDifferences().add(
-								heightDifference);
+						cluster.getHeightDifferences().add(heightDifference);
 						continue;
 					}
 
 					if ("coordinates".equals(endElement.getName()
 							.getLocalPart())) {
-						network.getAlternativeObservations().add(
-								alternativeObservation);
+						network.getClusters().add(cluster);
 						currentTagName = null;
-
 						continue;
 					}
 
 					if ("vectors".equals(endElement.getName().getLocalPart())) {
-						network.getAlternativeObservations().add(
-								alternativeObservation);
+						network.getClusters().add(cluster);
 						currentTagName = null;
 						continue;
 					}
 
 					if ("vec".equals(endElement.getName().getLocalPart())) {
-						alternativeObservation.getVectors().add(vector);
+						cluster.getVectors().add(vector);
 						continue;
 					}
 
@@ -1056,191 +1052,207 @@ public class StAXInputParser implements InputParser {
 			}
 			eventWriter.add(endLine);
 
-			// OBSERVATIONS
-			for (Observation obs : input.getNetwork().getObservations()) {
-				// <obs>
-				eventWriter.add(eventFactory.createStartElement("", "", "obs"));
-				if (obs.getFrom() != null) {
-					eventWriter.add(eventFactory.createAttribute("from",
-							obs.getFrom()));
-				}
-				if (obs.getOrientation() != null) {
-					eventWriter.add(eventFactory.createAttribute("orientation",
-							obs.getOrientation()));
-				}
-				if (obs.getFromDh() != null) {
-					eventWriter.add(eventFactory.createAttribute("from_dh", obs
-							.getFromDh().toString()));
-				}
-				eventWriter.add(endLine);
+			// CLUSTERS
+			for (Cluster cluster : input.getNetwork().getClusters()) {
 
-				// DIRECTIONS
-				for (Direction direction : obs.getDirections()) {
-					// <direction>
-					eventWriter.add(eventFactory.createStartElement("", "",
-							"direction"));
-					eventWriter.add(eventFactory.createAttribute("to",
-							direction.getTo()));
-					eventWriter.add(eventFactory.createAttribute("val",
-							direction.getVal().toString()));
-					if (direction.getStdev() != null) {
-						eventWriter.add(eventFactory.createAttribute("stdev",
-								direction.getStdev().toString()));
-					}
-					if (direction.getFromDh() != null) {
-						eventWriter.add(eventFactory.createAttribute("from_dh",
-								direction.getFromDh().toString()));
-					}
-					if (direction.getToDh() != null) {
-						eventWriter.add(eventFactory.createAttribute("to_dh",
-								direction.getToDh().toString()));
-					}
-					// </direction>
-					eventWriter.add(eventFactory.createEndElement("", "",
-							"direction"));
-					eventWriter.add(endLine);
-				}
+				switch (cluster.getTagname()) {
+				case "obs":
+					for (Observation obs : cluster.getObservations()) {
+						// <obs>
+						eventWriter.add(eventFactory.createStartElement("", "",
+								"obs"));
+						if (obs.getFrom() != null) {
+							eventWriter.add(eventFactory.createAttribute(
+									"from", obs.getFrom()));
+						}
+						if (obs.getOrientation() != null) {
+							eventWriter.add(eventFactory.createAttribute(
+									"orientation", obs.getOrientation()));
+						}
+						if (obs.getFromDh() != null) {
+							eventWriter.add(eventFactory.createAttribute(
+									"from_dh", obs.getFromDh().toString()));
+						}
+						eventWriter.add(endLine);
 
-				// DISTANCES
-				for (Distance distance : obs.getDistances()) {
-					// <distance>
-					eventWriter.add(eventFactory.createStartElement("", "",
-							"distance"));
-					if (distance.getFrom() != null) {
-						eventWriter.add(eventFactory.createAttribute("from",
-								distance.getFrom()));
-					}
-					eventWriter.add(eventFactory.createAttribute("to",
-							distance.getTo()));
-					eventWriter.add(eventFactory.createAttribute("val",
-							distance.getVal().toString()));
-					if (distance.getStdev() != null) {
-						eventWriter.add(eventFactory.createAttribute("stdev",
-								distance.getStdev().toString()));
-					}
-					if (distance.getFromDh() != null) {
-						eventWriter.add(eventFactory.createAttribute("from_dh",
-								distance.getFromDh().toString()));
-					}
-					if (distance.getToDh() != null) {
-						eventWriter.add(eventFactory.createAttribute("to_dh",
-								distance.getToDh().toString()));
-					}
-					// </distance>
-					eventWriter.add(eventFactory.createEndElement("", "",
-							"distance"));
-					eventWriter.add(endLine);
-				}
+						// DIRECTIONS
+						for (Direction direction : obs.getDirections()) {
+							// <direction>
+							eventWriter.add(eventFactory.createStartElement("",
+									"", "direction"));
+							eventWriter.add(eventFactory.createAttribute("to",
+									direction.getTo()));
+							eventWriter.add(eventFactory.createAttribute("val",
+									direction.getVal().toString()));
+							if (direction.getStdev() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"stdev", direction.getStdev()
+												.toString()));
+							}
+							if (direction.getFromDh() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"from_dh", direction.getFromDh()
+												.toString()));
+							}
+							if (direction.getToDh() != null) {
+								eventWriter.add(eventFactory
+										.createAttribute("to_dh", direction
+												.getToDh().toString()));
+							}
+							// </direction>
+							eventWriter.add(eventFactory.createEndElement("",
+									"", "direction"));
+							eventWriter.add(endLine);
+						}
 
-				// ANGLES
-				for (Angle angle : obs.getAngles()) {
-					// <angle>
-					eventWriter.add(eventFactory.createStartElement("", "",
-							"angle"));
-					if (angle.getFrom() != null) {
-						eventWriter.add(eventFactory.createAttribute("from",
-								angle.getFrom()));
-					}
-					eventWriter.add(eventFactory.createAttribute("bs",
-							angle.getBs()));
-					eventWriter.add(eventFactory.createAttribute("fs",
-							angle.getFs()));
-					eventWriter.add(eventFactory.createAttribute("val", angle
-							.getVal().toString()));
-					if (angle.getStdev() != null) {
-						eventWriter.add(eventFactory.createAttribute("stdev",
-								angle.getStdev().toString()));
-					}
-					if (angle.getFromDh() != null) {
-						eventWriter.add(eventFactory.createAttribute("from_dh",
-								angle.getFromDh().toString()));
-					}
-					if (angle.getBsDh() != null) {
-						eventWriter.add(eventFactory.createAttribute("bs_dh",
-								angle.getBsDh().toString()));
-					}
-					if (angle.getFsDh() != null) {
-						eventWriter.add(eventFactory.createAttribute("fs_dh",
-								angle.getFsDh().toString()));
-					}
-					// </angle>
-					eventWriter.add(eventFactory.createEndElement("", "",
-							"angle"));
-					eventWriter.add(endLine);
-				}
+						// DISTANCES
+						for (Distance distance : obs.getDistances()) {
+							// <distance>
+							eventWriter.add(eventFactory.createStartElement("",
+									"", "distance"));
+							if (distance.getFrom() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"from", distance.getFrom()));
+							}
+							eventWriter.add(eventFactory.createAttribute("to",
+									distance.getTo()));
+							eventWriter.add(eventFactory.createAttribute("val",
+									distance.getVal().toString()));
+							if (distance.getStdev() != null) {
+								eventWriter.add(eventFactory
+										.createAttribute("stdev", distance
+												.getStdev().toString()));
+							}
+							if (distance.getFromDh() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"from_dh", distance.getFromDh()
+												.toString()));
+							}
+							if (distance.getToDh() != null) {
+								eventWriter
+										.add(eventFactory.createAttribute(
+												"to_dh", distance.getToDh()
+														.toString()));
+							}
+							// </distance>
+							eventWriter.add(eventFactory.createEndElement("",
+									"", "distance"));
+							eventWriter.add(endLine);
+						}
 
-				// SLOPE DISTANCES
-				for (SlopeDistance slopeDistance : obs.getSlopeDistances()) {
-					// <s-distance>
-					eventWriter.add(eventFactory.createStartElement("", "",
-							"s-distance"));
-					if (slopeDistance.getFrom() != null) {
-						eventWriter.add(eventFactory.createAttribute("from",
-								slopeDistance.getFrom()));
-					}
-					eventWriter.add(eventFactory.createAttribute("to",
-							slopeDistance.getTo()));
-					eventWriter.add(eventFactory.createAttribute("val",
-							slopeDistance.getVal().toString()));
-					if (slopeDistance.getStdev() != null) {
-						eventWriter.add(eventFactory.createAttribute("stdev",
-								slopeDistance.getStdev().toString()));
-					}
-					if (slopeDistance.getFromDh() != null) {
-						eventWriter.add(eventFactory.createAttribute("from_dh",
-								slopeDistance.getFromDh().toString()));
-					}
-					if (slopeDistance.getToDh() != null) {
-						eventWriter.add(eventFactory.createAttribute("to_dh",
-								slopeDistance.getToDh().toString()));
-					}
-					// </s-distance>
-					eventWriter.add(eventFactory.createEndElement("", "",
-							"s-distance"));
-					eventWriter.add(endLine);
-				}
+						// ANGLES
+						for (Angle angle : obs.getAngles()) {
+							// <angle>
+							eventWriter.add(eventFactory.createStartElement("",
+									"", "angle"));
+							if (angle.getFrom() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"from", angle.getFrom()));
+							}
+							eventWriter.add(eventFactory.createAttribute("bs",
+									angle.getBs()));
+							eventWriter.add(eventFactory.createAttribute("fs",
+									angle.getFs()));
+							eventWriter.add(eventFactory.createAttribute("val",
+									angle.getVal().toString()));
+							if (angle.getStdev() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"stdev", angle.getStdev().toString()));
+							}
+							if (angle.getFromDh() != null) {
+								eventWriter.add(eventFactory
+										.createAttribute("from_dh", angle
+												.getFromDh().toString()));
+							}
+							if (angle.getBsDh() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"bs_dh", angle.getBsDh().toString()));
+							}
+							if (angle.getFsDh() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"fs_dh", angle.getFsDh().toString()));
+							}
+							// </angle>
+							eventWriter.add(eventFactory.createEndElement("",
+									"", "angle"));
+							eventWriter.add(endLine);
+						}
 
-				// ZENITH ANGLES
-				for (ZenithAngle zenithAngle : obs.getZenithAngles()) {
-					// <z-angle>
-					eventWriter.add(eventFactory.createStartElement("", "",
-							"z-angle"));
-					if (zenithAngle.getFrom() != null) {
-						eventWriter.add(eventFactory.createAttribute("from",
-								zenithAngle.getFrom()));
-					}
-					eventWriter.add(eventFactory.createAttribute("to",
-							zenithAngle.getTo()));
-					eventWriter.add(eventFactory.createAttribute("val",
-							zenithAngle.getVal().toString()));
-					if (zenithAngle.getStdev() != null) {
-						eventWriter.add(eventFactory.createAttribute("stdev",
-								zenithAngle.getStdev().toString()));
-					}
-					if (zenithAngle.getFromDh() != null) {
-						eventWriter.add(eventFactory.createAttribute("from_dh",
-								zenithAngle.getFromDh().toString()));
-					}
-					if (zenithAngle.getToDh() != null) {
-						eventWriter.add(eventFactory.createAttribute("to_dh",
-								zenithAngle.getToDh().toString()));
-					}
-					// </z-angle>
-					eventWriter.add(eventFactory.createEndElement("", "",
-							"z-angle"));
-					eventWriter.add(endLine);
-				}
+						// SLOPE DISTANCES
+						for (SlopeDistance slopeDistance : obs
+								.getSlopeDistances()) {
+							// <s-distance>
+							eventWriter.add(eventFactory.createStartElement("",
+									"", "s-distance"));
+							if (slopeDistance.getFrom() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"from", slopeDistance.getFrom()));
+							}
+							eventWriter.add(eventFactory.createAttribute("to",
+									slopeDistance.getTo()));
+							eventWriter.add(eventFactory.createAttribute("val",
+									slopeDistance.getVal().toString()));
+							if (slopeDistance.getStdev() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"stdev", slopeDistance.getStdev()
+												.toString()));
+							}
+							if (slopeDistance.getFromDh() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"from_dh", slopeDistance.getFromDh()
+												.toString()));
+							}
+							if (slopeDistance.getToDh() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"to_dh", slopeDistance.getToDh()
+												.toString()));
+							}
+							// </s-distance>
+							eventWriter.add(eventFactory.createEndElement("",
+									"", "s-distance"));
+							eventWriter.add(endLine);
+						}
 
-				// </obs>
-				eventWriter.add(eventFactory.createEndElement("", "", "obs"));
-				eventWriter.add(endLine);
-			}
+						// ZENITH ANGLES
+						for (ZenithAngle zenithAngle : obs.getZenithAngles()) {
+							// <z-angle>
+							eventWriter.add(eventFactory.createStartElement("",
+									"", "z-angle"));
+							if (zenithAngle.getFrom() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"from", zenithAngle.getFrom()));
+							}
+							eventWriter.add(eventFactory.createAttribute("to",
+									zenithAngle.getTo()));
+							eventWriter.add(eventFactory.createAttribute("val",
+									zenithAngle.getVal().toString()));
+							if (zenithAngle.getStdev() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"stdev", zenithAngle.getStdev()
+												.toString()));
+							}
+							if (zenithAngle.getFromDh() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"from_dh", zenithAngle.getFromDh()
+												.toString()));
+							}
+							if (zenithAngle.getToDh() != null) {
+								eventWriter.add(eventFactory.createAttribute(
+										"to_dh", zenithAngle.getToDh()
+												.toString()));
+							}
+							// </z-angle>
+							eventWriter.add(eventFactory.createEndElement("",
+									"", "z-angle"));
+							eventWriter.add(endLine);
+						}
 
-			// ALTERNATIVE OBSERVATION
-			for (AlternativeObservation alternativeObservation : input
-					.getNetwork().getAlternativeObservations()) {
-
-				switch (alternativeObservation.getTagname()) {
+						// </obs>
+						eventWriter.add(eventFactory.createEndElement("", "",
+								"obs"));
+						eventWriter.add(endLine);
+					}
+					break;
 
 				// COORDINATES
 				case "coordinates":
@@ -1250,8 +1262,7 @@ public class StAXInputParser implements InputParser {
 					eventWriter.add(eventFactory.createStartElement("", "",
 							"coordinates"));
 					eventWriter.add(endLine);
-					for (Coordinate coordinate : alternativeObservation
-							.getCoordinates()) {
+					for (Coordinate coordinate : cluster.getCoordinates()) {
 
 						// <point>
 						eventWriter.add(eventFactory.createStartElement("", "",
@@ -1293,7 +1304,7 @@ public class StAXInputParser implements InputParser {
 							"height-differences"));
 					eventWriter.add(endLine);
 
-					for (HeightDifference heightDifference : alternativeObservation
+					for (HeightDifference heightDifference : cluster
 							.getHeightDifferences()) {
 
 						// <dh>
@@ -1341,7 +1352,7 @@ public class StAXInputParser implements InputParser {
 							"vectors"));
 					eventWriter.add(endLine);
 
-					for (Vector vector : alternativeObservation.getVectors()) {
+					for (Vector vector : cluster.getVectors()) {
 
 						// <vec>
 						eventWriter.add(eventFactory.createStartElement("", "",

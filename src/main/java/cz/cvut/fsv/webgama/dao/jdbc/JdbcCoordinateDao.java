@@ -8,20 +8,20 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import cz.cvut.fsv.webgama.dao.CoordinateDao;
-import cz.cvut.fsv.webgama.domain.AlternativeObservation;
+import cz.cvut.fsv.webgama.domain.Cluster;
 import cz.cvut.fsv.webgama.domain.Coordinate;
 
 public class JdbcCoordinateDao extends JdbcDaoSupport implements CoordinateDao {
 
 	@Override
-	public void insert(Coordinate coordinate, Integer alternativeObservationId) {
-		String sql = "INSERT INTO coordinates (alternative_observation_id, id, x, y, z) VALUES (?, ?, ?, ?, ?)";
+	public void insert(Coordinate coordinate, Integer clusterId) {
+		String sql = "INSERT INTO coordinates (cluster_id, id, x, y, z) VALUES (?, ?, ?, ?, ?)";
 
 		getJdbcTemplate()
 				.update(sql,
-						new Object[] { alternativeObservationId,
-								coordinate.getName(), coordinate.getX(),
-								coordinate.getY(), coordinate.getZ() });
+						new Object[] { clusterId, coordinate.getName(),
+								coordinate.getX(), coordinate.getY(),
+								coordinate.getZ() });
 	}
 
 	@Override
@@ -45,13 +45,11 @@ public class JdbcCoordinateDao extends JdbcDaoSupport implements CoordinateDao {
 	}
 
 	@Override
-	public List<Coordinate> findCoordinatesInAlternativeObservation(
-			AlternativeObservation alternativeObservation) {
-		String sql = "SELECT * FROM coordinates WHERE alternative_observation_id = ?";
+	public List<Coordinate> findCoordinatesInCluster(Cluster cluster) {
+		String sql = "SELECT * FROM coordinates WHERE cluster_id = ?";
 
 		List<Coordinate> coordinates = getJdbcTemplate().query(sql,
-				new Object[] { alternativeObservation.getId() },
-				new CoordinateMapper());
+				new Object[] { cluster.getId() }, new CoordinateMapper());
 
 		return coordinates;
 	}
@@ -64,9 +62,12 @@ public class JdbcCoordinateDao extends JdbcDaoSupport implements CoordinateDao {
 
 			coordinate.setId(rs.getLong("coordinate_id"));
 			coordinate.setName(rs.getString("id"));
-			coordinate.setX(rs.getObject("x") != null ? rs.getDouble("x") : null);
-			coordinate.setY(rs.getObject("y") != null ? rs.getDouble("y") : null);
-			coordinate.setZ(rs.getObject("z") != null ? rs.getDouble("z") : null);
+			coordinate.setX(rs.getObject("x") != null ? rs.getDouble("x")
+					: null);
+			coordinate.setY(rs.getObject("y") != null ? rs.getDouble("y")
+					: null);
+			coordinate.setZ(rs.getObject("z") != null ? rs.getDouble("z")
+					: null);
 
 			return coordinate;
 		}

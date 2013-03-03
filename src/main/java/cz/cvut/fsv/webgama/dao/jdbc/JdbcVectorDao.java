@@ -8,20 +8,20 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import cz.cvut.fsv.webgama.dao.VectorDao;
-import cz.cvut.fsv.webgama.domain.AlternativeObservation;
+import cz.cvut.fsv.webgama.domain.Cluster;
 import cz.cvut.fsv.webgama.domain.Vector;
 
 public class JdbcVectorDao extends JdbcDaoSupport implements VectorDao {
 
 	@Override
-	public void insert(Vector vector, Integer alternativeObservationId) {
-		String sql = "INSERT INTO vectors (alternative_observation_id, from_id, to_id, dx, dy, dz, from_dh, to_dh) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	public void insert(Vector vector, Integer clusterId) {
+		String sql = "INSERT INTO vectors (cluster_id, from_id, to_id, dx, dy, dz, from_dh, to_dh) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { alternativeObservationId, vector.getFrom(),
-						vector.getTo(), vector.getDx(), vector.getDy(),
-						vector.getDz(), vector.getFromDh(), vector.getToDh() });
+				new Object[] { clusterId, vector.getFrom(), vector.getTo(),
+						vector.getDx(), vector.getDy(), vector.getDz(),
+						vector.getFromDh(), vector.getToDh() });
 	}
 
 	@Override
@@ -45,13 +45,11 @@ public class JdbcVectorDao extends JdbcDaoSupport implements VectorDao {
 	}
 
 	@Override
-	public List<Vector> findVectorsInAlternativeObservation(
-			AlternativeObservation alternativeObservation) {
-		String sql = "SELECT * FROM vectors WHERE alternative_observation_id = ?";
+	public List<Vector> findVectorsInCluster(Cluster cluster) {
+		String sql = "SELECT * FROM vectors WHERE cluster_id = ?";
 
 		List<Vector> vectors = getJdbcTemplate().query(sql,
-				new Object[] { alternativeObservation.getId() },
-				new VectorMapper());
+				new Object[] { cluster.getId() }, new VectorMapper());
 
 		return vectors;
 	}
@@ -68,8 +66,10 @@ public class JdbcVectorDao extends JdbcDaoSupport implements VectorDao {
 			vector.setDx(rs.getObject("dx") != null ? rs.getDouble("dx") : null);
 			vector.setDy(rs.getObject("dy") != null ? rs.getDouble("dy") : null);
 			vector.setDz(rs.getObject("dz") != null ? rs.getDouble("dz") : null);
-			vector.setFromDh(rs.getObject("from_dh") != null ? rs.getDouble("from_dh") : null);
-			vector.setToDh(rs.getObject("to_dh") != null ? rs.getDouble("to_dh") : null);
+			vector.setFromDh(rs.getObject("from_dh") != null ? rs
+					.getDouble("from_dh") : null);
+			vector.setToDh(rs.getObject("to_dh") != null ? rs
+					.getDouble("to_dh") : null);
 
 			return vector;
 		}

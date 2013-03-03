@@ -33,11 +33,9 @@ public class Network {
 
 	private String distanceStdev;
 
-	private List<Point> points = new ArrayList<Point>();
+	private List<Point> points = new ArrayList<>();
 
-	private List<Observation> observations = new ArrayList<Observation>();
-
-	private List<AlternativeObservation> alternativeObservations = new ArrayList<AlternativeObservation>();
+	private List<Cluster> clusters = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -159,21 +157,11 @@ public class Network {
 		this.points = points;
 	}
 
-	public List<Observation> getObservations() {
-		return observations;
+	public List<Cluster> getClusters() {
+		return clusters;
 	}
 
-	public void setObservations(List<Observation> observations) {
-		this.observations = observations;
+	public void setClusters(List<Cluster> clusters) {
+		this.clusters = clusters;
 	}
-
-	public List<AlternativeObservation> getAlternativeObservations() {
-		return alternativeObservations;
-	}
-
-	public void setAlternativeObservations(
-			List<AlternativeObservation> alternativeObservations) {
-		this.alternativeObservations = alternativeObservations;
-	}
-
 }
