@@ -3,6 +3,8 @@ package cz.cvut.fsv.webgama.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 public class Cluster {
 
 	private Long id;
@@ -10,13 +12,17 @@ public class Cluster {
 	private String tagname;
 
 	private CovMat covMat;
-
+	
+	@Valid
 	private List<Observation> observations = new ArrayList<>();
 
+	@Valid
 	private List<Coordinate> coordinates = new ArrayList<>();
 
+	@Valid
 	private List<HeightDifference> heightDifferences = new ArrayList<>();
 
+	@Valid
 	private List<Vector> vectors = new ArrayList<>();
 
 	public Long getId() {
@@ -74,4 +80,5 @@ public class Cluster {
 	public void setVectors(List<Vector> vectors) {
 		this.vectors = vectors;
 	}
+
 }

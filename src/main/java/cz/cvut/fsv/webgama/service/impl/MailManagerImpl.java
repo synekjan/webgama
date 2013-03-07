@@ -30,7 +30,7 @@ public class MailManagerImpl implements MailManager {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setFrom(addressFrom);
 		message.setTo(userForm.getEmail());
-		message.setSubject("Confirm your email address");
+		message.setSubject("[WebGama] Confirm your email address");
 
 		message.setText("Hello "
 				+ userForm.getUsername()
@@ -54,7 +54,7 @@ public class MailManagerImpl implements MailManager {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setFrom(addressFrom);
 		message.setTo(user.getEmail());
-		message.setSubject("WebGama: Password Reset");
+		message.setSubject("[WebGama] Password Reset");
 
 		message.setText("Hello,\n\nyou recently requested for the password reset.\n\nThe username for your account is: "
 				+ user.getUsername()
@@ -80,7 +80,7 @@ public class MailManagerImpl implements MailManager {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setFrom(addressFrom);
 		message.setTo(userForm.getEmail());
-		message.setSubject("WebGama: Username Reminder");
+		message.setSubject("[WebGama] Username Reminder");
 
 		message.setText("Hello,\n\nyou recently requested for the username you registered with your account.\n\nThe username for your account is: "
 				+ user.getUsername() + "\n\nBest regards,\nWebGama Team");

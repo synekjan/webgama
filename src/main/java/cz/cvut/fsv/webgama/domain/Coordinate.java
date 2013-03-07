@@ -1,9 +1,12 @@
 package cz.cvut.fsv.webgama.domain;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Coordinate {
 
 	private Long id;
 
+	@NotBlank
 	private String name;
 
 	private Double x;

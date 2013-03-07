@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import cz.cvut.fsv.webgama.domain.Cluster;
 import cz.cvut.fsv.webgama.domain.Input;
-import cz.cvut.fsv.webgama.domain.Observation;
 import cz.cvut.fsv.webgama.domain.Point;
 
 public class AdjustmentPageForm {
@@ -41,13 +41,12 @@ public class AdjustmentPageForm {
 	private List<Point> points = new ArrayList<>();
 
 	@Valid
-	private List<Observation> observations = new ArrayList<>();
+	private List<Cluster> clusters = new ArrayList<>();
 
 	public AdjustmentPageForm() {
 
 	}
 
-	// TODO
 	public AdjustmentPageForm(Input input) {
 		axesXY = input.getNetwork().getAxesXY();
 		angles = input.getNetwork().getAngles();
@@ -62,10 +61,8 @@ public class AdjustmentPageForm {
 		angleStdev = input.getNetwork().getAngleStdev();
 		zenithAngleStdev = input.getNetwork().getZenithAngleStdev();
 		distanceStdev = input.getNetwork().getDistanceStdev();
-
-		//TODO
 		points = input.getNetwork().getPoints();
-		/*observations = input.getNetwork().getClusters().getObservations();*/
+		clusters = input.getNetwork().getClusters();
 	}
 
 	public String getAxesXY() {
@@ -180,12 +177,12 @@ public class AdjustmentPageForm {
 		this.points = points;
 	}
 
-	public List<Observation> getObservations() {
-		return observations;
+	public List<Cluster> getClusters() {
+		return clusters;
 	}
 
-	public void setObservations(List<Observation> observations) {
-		this.observations = observations;
+	public void setClusters(List<Cluster> clusters) {
+		this.clusters = clusters;
 	}
 
 }

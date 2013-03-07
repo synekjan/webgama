@@ -15,14 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-import cz.cvut.fsv.webgama.domain.Angle;
-import cz.cvut.fsv.webgama.domain.Direction;
-import cz.cvut.fsv.webgama.domain.Distance;
 import cz.cvut.fsv.webgama.domain.Input;
-import cz.cvut.fsv.webgama.domain.Observation;
 import cz.cvut.fsv.webgama.domain.Point;
-import cz.cvut.fsv.webgama.domain.SlopeDistance;
-import cz.cvut.fsv.webgama.domain.ZenithAngle;
 import cz.cvut.fsv.webgama.exception.ResourceNotFoundException;
 import cz.cvut.fsv.webgama.form.AdjustmentPageForm;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
@@ -61,37 +55,11 @@ public class AdjustmentPageController extends MultiActionController {
 			String username = request.getUserPrincipal().getName();
 			logger.info("User[" + username + "] had errors["
 					+ result.getErrorCount() + "] in adjustment one page form!");
-			return new ModelAndView("/adjustment/onepage/new");
+			return new ModelAndView("/adjustment/onepage/new", "errorCount", result.getErrorCount());
 		}
 
 		System.out.println(adjustmentForm.getSigmaAct());
 		System.out.println(adjustmentForm.getDescription());
-		int i = 0;
-		for (Observation form : adjustmentForm.getObservations()) {
-			i++;
-			System.out.println(i);
-
-			for (Direction direction : form.getDirections()) {
-				System.out.println(direction.getTo());
-
-			}
-			for (Distance direction : form.getDistances()) {
-				System.out.println(direction.getTo());
-
-			}
-			for (Angle direction : form.getAngles()) {
-				System.out.println(direction.getBs());
-
-			}
-			for (SlopeDistance direction : form.getSlopeDistances()) {
-				System.out.println(direction.getTo());
-
-			}
-			for (ZenithAngle direction : form.getZenithAngles()) {
-				System.out.println(direction.getTo());
-
-			}
-		}
 
 		return new ModelAndView("redirect:/calculations");
 	}
@@ -100,13 +68,9 @@ public class AdjustmentPageController extends MultiActionController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	protected ModelAndView editInput(@PathVariable Long id,
 			HttpServletRequest request) {
-		
-		boolean b = adjustmentManager.isInputIdInDB(id);
-		
-		System.out.println(b);
-		
+
 		//Check if path variable is in database otherwise throw 404 HTTP Status code
-		if (id <= 0 || !b)  {
+		if (id <= 0 || !adjustmentManager.isInputIdInDB(id))  {
 			throw new ResourceNotFoundException();
 		}
 
@@ -128,9 +92,10 @@ public class AdjustmentPageController extends MultiActionController {
 
 		if (result.hasErrors()) {
 			String username = request.getUserPrincipal().getName();
+			
 			logger.info("User[" + username + "] had errors["
 					+ result.getErrorCount() + "] in adjustment one page form!");
-			return new ModelAndView("/adjustment/onepage/new");
+			return new ModelAndView("/adjustment/onepage/new", "errorCount", result.getErrorCount());
 		}
 
 		return new ModelAndView("redirect:/calculations");

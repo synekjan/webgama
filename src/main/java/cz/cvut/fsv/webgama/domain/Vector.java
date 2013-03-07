@@ -1,17 +1,26 @@
 package cz.cvut.fsv.webgama.domain;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Vector {
 
 	private Long id;
 
+	@NotBlank
 	private String from;
 
+	@NotBlank
 	private String to;
 
+	@NotNull
 	private Double dx;
 
+	@NotNull
 	private Double dy;
 
+	@NotNull
 	private Double dz;
 
 	private Double fromDh;
