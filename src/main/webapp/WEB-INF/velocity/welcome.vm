@@ -26,7 +26,7 @@
 				<div class="slide">
 					<div class="image">
 						<img alt="Test picture" width="600" height="400"
-							title="Tooltip picture" src="#springUrl("/resources/img/test.jpg")">
+							title="#springMessage("application.name")" src="#springUrl("/resources/img/webgama-slide.png")">
 					</div>
 					<div class="text">
 						<h1>Version 0.1 is out!</h1>
@@ -43,7 +43,7 @@
 				<div class="slide">
 					<div class="image">
 						<img alt="Test picture" width="600" height="400"
-							title="Tooltip picture" src="#springUrl("/resources/img/test.jpg")">
+							title="#springMessage("application.name")" src="#springUrl("/resources/img/webgama-slide.png")">
 					</div>
 					<div class="text">
 						<h1>Amazing feature</h1>
@@ -58,7 +58,7 @@
 				</div>
 				<div class="slide">
 					<div class="image">
-						<img alt="Test picture" title="Tooltip picture" src="#springUrl("/resources/img/test.jpg")">
+						<img alt="Test picture" title="#springMessage("application.name")" src="#springUrl("/resources/img/webgama-slide.png")">
 					</div>
 					<div class="text">
 						<h1>Less Amazing feature</h1>

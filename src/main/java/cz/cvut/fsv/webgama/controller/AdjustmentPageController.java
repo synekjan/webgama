@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import cz.cvut.fsv.webgama.domain.Input;
 import cz.cvut.fsv.webgama.domain.Point;
+import cz.cvut.fsv.webgama.exception.PermissionDeniedException;
 import cz.cvut.fsv.webgama.exception.ResourceNotFoundException;
 import cz.cvut.fsv.webgama.form.AdjustmentPageForm;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
@@ -73,10 +74,14 @@ public class AdjustmentPageController extends MultiActionController {
 		if (id <= 0 || !adjustmentManager.isInputIdInDB(id))  {
 			throw new ResourceNotFoundException();
 		}
+		
+		Input input = adjustmentManager.getInputById(id);
+		//Check if user has permission to edit
+		if (!request.getUserPrincipal().getName().equals(input.getUser().getUsername())) {
+			throw new PermissionDeniedException();
+		}
 
 		ModelAndView mav = new ModelAndView("/adjustment/onepage/new");
-
-		Input input = adjustmentManager.getInputById(id);
 
 		AdjustmentPageForm adjustmentForm = new AdjustmentPageForm(input);
 
