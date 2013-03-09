@@ -11,6 +11,8 @@ import cz.cvut.fsv.webgama.domain.Point;
 
 public class AdjustmentPageForm {
 
+	private String name;
+	
 	private String axesXY;
 
 	private String angles;
@@ -48,6 +50,7 @@ public class AdjustmentPageForm {
 	}
 
 	public AdjustmentPageForm(Input input) {
+		name = input.getName();
 		axesXY = input.getNetwork().getAxesXY();
 		angles = input.getNetwork().getAngles();
 		epoch = input.getNetwork().getEpoch();
@@ -63,6 +66,14 @@ public class AdjustmentPageForm {
 		distanceStdev = input.getNetwork().getDistanceStdev();
 		points = input.getNetwork().getPoints();
 		clusters = input.getNetwork().getClusters();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getAxesXY() {

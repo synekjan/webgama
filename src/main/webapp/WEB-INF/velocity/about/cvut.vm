@@ -10,9 +10,6 @@
 		<div id="container">
 			<div id="about_container">
 				<div class="right_menu">
-					<div class="menu_header">
-						<h2>#springMessage("about")</h2>
-					</div>
 					<ul>
 						<li><a href="#springUrl("/about/project")">#springMessage("about.project")</a></li>
 						<span class="active_menu"><li><a href="#springUrl("/about/cvut")">#springMessage("about.organization")</a></li></span>

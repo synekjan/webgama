@@ -22,8 +22,10 @@
 					<div class="panel_header">
 						<h2>#springMessage("import.xml")</h2>
 					</div>
+					<p>#springMessage("import.xml.message") </p><br>
 					<form method="post" action="" enctype="multipart/form-data">
-						<input type="file" name="file" /> <br> <br> <input class="submit_btn" type="submit" />
+						<input type="file" name="file" /> <br> <br>
+						<input class="submit_btn" type="submit" value="#springMessage("import.xml.submit")" />
 					</form>
 				</div>
 			</div>

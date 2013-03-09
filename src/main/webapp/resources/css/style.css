@@ -148,7 +148,7 @@ div#account_dropdown a,div#locale_dropdown a {
 
 div#account_dropdown a:HOVER,div#locale_dropdown a:HOVER {
 	color: #FFFFFF;
-	background-color: #2B6DAE;
+	background-color: #3375B6;
 }
 
 /* ------------------------------------   FOOTER   ------------------------------------- */
@@ -272,13 +272,13 @@ div#account_container,div#admin_container {
 
 .left_menu li a:ACTIVE {
 	color: #FFFFFF;
-	background-color: #2B6DAE;
+	background-color: #3375B6;
 	text-shadow: none;
 }
 
 .left_menu span.active_menu li a {
 	color: #FFFFFF;
-	background-color: #2B6DAE;
+	background-color: #3375B6;
 	text-shadow: none;
 }
 
@@ -322,7 +322,7 @@ div#account_container div#delete {
 .panel_header {
 	border-bottom: 1px solid #DDDDDD;
 	padding-bottom: 8px;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 }
 
 .panel_header h2 {
@@ -352,21 +352,27 @@ div#about_container .right_menu {
 	border: 1px solid #DDD;
 	float: right;
 	margin-top: 10px;
-	border-radius: 3px;
+	/* border-radius: 5px; */
 	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.05);
-	min-width: 170px;
+	min-width: 200px;
 }
 
-div#about_container .right_menu ul {
-	padding: 10px;
+.right_menu li a {
+	display: block;
+	padding: 7px 5px 7px 15px;
+	border-top: 1px solid #EEEEEE;
 }
 
-div#about_container .right_menu li {
-	
+.right_menu li a:HOVER { 
+	text-decoration: none;
+	background-color: #F1F1F1;
 }
 
 .right_menu span.active_menu li a {
-	font-weight: bold;
+	text-decoration: none;
+	background-color: #0088CC;
+	color: #FFFFFF;
+	text-shadow: 0 -1px 1px #555555;
 }
 
 div#about_container .right_menu .menu_header {
@@ -506,7 +512,7 @@ input[type=text],input[type=password] {
 	border-radius: 3px 3px 3px 3px;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 	z-index: 5;
-/* 	transition: border 0.5s linear 0s, box-shadow 0.2s linear 0s;
+	/* 	transition: border 0.5s linear 0s, box-shadow 0.2s linear 0s;
 	-moz-transition: border 0.5s linear 0s, box-shadow 0.2s linear 0s;
 	-webkit-transition: border 0.5s linear 0s, box-shadow 0.2s linear 0s;
 	-o-transition: border 0.5s linear 0s, box-shadow 0.2s linear 0s; */
@@ -537,14 +543,14 @@ input[type=text]:focus,input[type=password]:focus,textarea:focus {
 
 input[type=submit],input[type=reset] {
 	background-color: #FAFAFA;
-	background-image: linear-gradient(to bottom, #FCFCFC, #D5D5D5);
+	background-image: linear-gradient(to bottom, #FFFFFF, #E6E6E6);
 	background-repeat: repeat-x;
 	border: 1px solid #CCCCCC;
 	border-radius: 4px 4px 4px 4px;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
-	font-size: 13px;
+	font-size: 14px;
 	color: #444444;
-	padding: 4px 10px;
+	padding: 5px 15px;
 	text-shadow: 1px 1px 0 #FFFFFF;
 }
 
@@ -558,6 +564,7 @@ label.checkbox_label {
 
 input[type=submit]:HOVER,input[type=reset]:HOVER {
 	border: 1px solid #AAAAAA;
+	background-color: #E6E6E6
 }
 
 input[type=submit]:ACTIVE,input[type=reset]:ACTIVE {
@@ -566,22 +573,22 @@ input[type=submit]:ACTIVE,input[type=reset]:ACTIVE {
 
 input.submit_btn {
 	background-color: #2B6DAE;
-	background-image: linear-gradient(#5A9CDD, #2062A3);
+	background-image: linear-gradient(#5A9CDD, #3072B3);
 	background-repeat: repeat-x;
 	border: 1px solid #51A0B3;
 	border-radius: 4px 4px 4px 4px;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
 	color: #FFFFFF;
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: bold;
-	padding: 4px 10px;
+	padding: 5px 15px;
 	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.25);
 	margin-top: 10px;
 }
 
 input.submit_btn:HOVER {
 	background-color: #328FC9;
-	background-image: linear-gradient(#66C7E5, #328FC9);
+	background-image: linear-gradient(#37A3EB, #1171BF);
 	background-repeat: repeat-x;
 }
 
@@ -835,12 +842,12 @@ div#wizard_buttons {
 /* ----------------- INDEX ----------------------  */
 .index_page #primary {
 	display: inline-block;
-	width: 660px;
+	width: 680px;
 }
 
 .index_page #secondary {
 	display: inline-block;
-	width: 240px;
+	width: 220px;
 	margin-left: 30px;
 	vertical-align: top;
 }
@@ -888,14 +895,12 @@ div#wizard_buttons {
 }
 
 .index_page #secondary #controls {
-	margin-top: 30px;
-	width: 220px;
+	margin: 20px auto 0 auto;
+	width: 200px;
 	border: 1px solid #DDD;
 	border-radius: 5px;
-	min-height: 140px;
+	min-height: 100px;
 }
-
-
 
 /* ---------------------- WELCOME PAGE HEADING -------------------*/
 #heading {
@@ -1053,7 +1058,7 @@ div#welcome_container {
 .small_panel_header {
 	background-color: #F1F1F1;
 	text-align: center;
-	padding:5px;
+	padding: 5px;
 	border-bottom: 1px solid #DDD;
 }
 
