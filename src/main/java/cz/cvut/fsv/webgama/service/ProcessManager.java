@@ -1,9 +1,9 @@
 package cz.cvut.fsv.webgama.service;
 
-import cz.cvut.fsv.webgama.domain.Input;
+import cz.cvut.fsv.webgama.domain.ProcessOutput;
 
 public interface ProcessManager {
-	
-	public String runExternalGama(Input input, String username);
+
+	public ProcessOutput runExternalGama(String feed, String username);
 
 }

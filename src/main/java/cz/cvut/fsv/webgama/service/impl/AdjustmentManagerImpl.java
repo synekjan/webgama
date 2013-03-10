@@ -14,6 +14,7 @@ import com.google.common.io.CharStreams;
 import cz.cvut.fsv.webgama.dao.InputDao;
 import cz.cvut.fsv.webgama.dao.UserDao;
 import cz.cvut.fsv.webgama.domain.Input;
+import cz.cvut.fsv.webgama.domain.ProcessOutput;
 import cz.cvut.fsv.webgama.parser.InputParser;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
 import cz.cvut.fsv.webgama.service.ProcessManager;
@@ -24,24 +25,30 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 			.getLogger(AdjustmentManagerImpl.class);
 
 	private InputDao inputDao;
-	
+
 	private InputParser inputParser;
-	
+
 	private UserDao userDao;
-	
+
 	private ProcessManager processManager;
 
 	@Override
 	@Transactional
 	public String adjustFromFile(MultipartFile file, String username) {
 		Input input = null;
+		ProcessOutput processOutput = null;
 		try {
-			input = inputParser.parseInput(file.getInputStream());
-			input.setUser(userDao.findUserByUsername(username));
 			// Google Guava InputStream to String
 			String stringFromStream = CharStreams
 					.toString(new InputStreamReader(file.getInputStream(),
 							"UTF-8"));
+			processOutput = processManager.runExternalGama(stringFromStream, username);
+			
+			if (processOutput.getExitValue() != 0)
+				return processOutput.getErrorMessage();
+
+			input = inputParser.parseInput(file.getInputStream());
+			input.setUser(userDao.findUserByUsername(username));
 			input.setName("Import-" + file.getOriginalFilename());
 			input.setFileContent(stringFromStream);
 			input.setFilename(file.getOriginalFilename());
@@ -55,7 +62,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 			logger.error("Error during converting MultipartFile to InputStream");
 		}
 
-		return processManager.runExternalGama(input, username);
+		return processOutput.getResult();
 	}
 
 	@Transactional
@@ -91,13 +98,13 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 
 	@Override
 	public Input getInputById(long id) {
-		
+
 		return inputDao.findInputById(id);
 	}
 
 	@Override
 	public boolean isInputIdInDB(Long id) {
-	
+
 		return inputDao.isInputIdInDB(id);
 	}
 
