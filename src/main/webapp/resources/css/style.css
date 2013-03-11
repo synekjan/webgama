@@ -4,7 +4,7 @@ html,body {
 	height: 100%;
 }
 
-body { /* background-color: #FCFCFC; */
+body {
 	background-color: #FFF;
 	color: #333333;
 	font-family: "Open Sans", Helvetica, Arial, sans-serif;
@@ -51,24 +51,14 @@ div#header a {
 
 div#logo {
 	float: left;
-	margin: 6px 0 0 0;
-	font-weight: bold;
-	text-decoration: none;
 }
 
-div#logo a {
-	font-size: 20px;
-	text-shadow: 0 -1px 1px #333333;
-	font-weight: bold;
-	text-decoration: none;
-	transition: text-shadow 0.5s;
-	-moz-transition: text-shadow 0.5s; /* Firefox 4 */
-	-webkit-transition: text-shadow 0.5s; /* Safari and Chrome */
-	-o-transition: text-shadow 0.5s; /* Opera */
+div#logo a img{
+	padding: 7px 3px 3px 3px;
 }
 
-div#logo a:HOVER {
-	text-shadow: 0 -1px 1px #AAAAAA, 0 0 20px #FFFFFF;
+div#logo:HOVER {
+	background-color: #2B6DAE;
 }
 
 div#header_menu {
@@ -346,12 +336,13 @@ div#account_container div#delete {
 div#about_container {
 	margin: 40px 10px 20px 10px;
 	text-shadow: 0 1px 0 #FFFFFF;
+	overflow: auto;
 }
 
 div#about_container .right_menu {
 	border: 1px solid #DDD;
-	float: right;
-	margin-top: 10px;
+	float: left;
+	margin: 10px 20px 10px 0px;
 	/* border-radius: 5px; */
 	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.05);
 	min-width: 200px;
@@ -363,7 +354,7 @@ div#about_container .right_menu {
 	border-top: 1px solid #EEEEEE;
 }
 
-.right_menu li a:HOVER { 
+.right_menu li a:HOVER {
 	text-decoration: none;
 	background-color: #F1F1F1;
 }
@@ -386,7 +377,12 @@ div#about_container .right_menu .menu_header {
 
 #about_content {
 	width: 700px;
+	float: left;
 }
+
+/* #about_content:AFTER {
+	clear: both;
+} */
 
 /* ------------------ FORMS ------------------ */
 fieldset {
@@ -1060,6 +1056,29 @@ div#welcome_container {
 	text-align: center;
 	padding: 5px;
 	border-bottom: 1px solid #DDD;
+}
+
+#calculations {
+	padding: 5px;
+}
+
+#my_calculations,#shared_calculations {
+	padding: 20px 15px 10px 15px;
+	margin-top: 28px;
+	background: -moz-linear-gradient(top, #FFFFFF, #F5F5F5) repeat scroll 0 0 #F5F5F5;
+	min-height: 100px;
+	border: 1px solid #DDDDDD;
+	border-radius: 4px;
+}
+
+#calculations h4 {
+	font-size: 18px;
+	font-family: "Jura", Arial, sans-serif;
+	margin-top: -40px;
+	background-color: #F5F5F5;
+	border: 1px solid #DDDDDD;
+	padding: 3px 5px;
+	width: 260px;
 }
 
 /* ACCORDION  */

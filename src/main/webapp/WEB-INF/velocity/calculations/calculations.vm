@@ -24,7 +24,7 @@
 				</div>
 				<div id="calculations">
 					<div id="my_calculations">
-						#springMessage("calculations.my.calculations") #if
+						<h4>#springMessage("calculations.my.calculations")</h4> #if
 						($myCalculations.isEmpty())
 						<p>
 							<i>#springMessage("calculations.my.calculations.notadded")</i>
@@ -46,7 +46,7 @@
 						#end
 					</div>
 					<div id="shared_calculations">
-						#springMessage("calculations.shared.calculations") #if
+						<h4>#springMessage("calculations.shared.calculations")</h4> #if
 						($sharedCalculations.isEmpty())
 						<p>
 							<i>#springMessage("calculations.my.calculations.notadded")</i>
