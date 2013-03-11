@@ -24,8 +24,8 @@
 				</div>
 				<div id="calculations">
 					<div id="my_calculations">
-						<h4>#springMessage("calculations.my.calculations")</h4> #if
-						($myCalculations.isEmpty())
+						<h4>#springMessage("calculations.my.calculations")</h4>
+						#if ($myCalculations.isEmpty())
 						<p>
 							<i>#springMessage("calculations.my.calculations.notadded")</i>
 						</p>
@@ -33,12 +33,16 @@
 						<div class="accordion">
 							#foreach ($input in $myCalculations)
 							<h3>
-								$input.name <span class="time" title="$dateTool.format("yyyy-MM-dd HH:mm:ss",$input.time.toDate())">$timeFormatter.periodFromNow($input.time, $locale)</span>
+								$input.name <span class="time" title="$dateTool.format("
+									yyyy-MM-ddHH:mm:ss",$input.time.toDate())">$timeFormatter.periodFromNow($input.time,
+									$locale)</span>
 							</h3>
 							<div class="accor_content">
 								<div style="min-height: 100px;">
-									<a href="#springUrl("/adjustment/onepage/${input.id}")">Edit
-										in One page</a>
+									<a class="button" href="#springUrl("/adjustment/onepage/${input.id}")">Edit</a>
+									<a class="button" href="#">Delete</a>
+									<a class="button" href="#">Export</a>
+
 								</div>
 							</div>
 							#end
@@ -46,8 +50,8 @@
 						#end
 					</div>
 					<div id="shared_calculations">
-						<h4>#springMessage("calculations.shared.calculations")</h4> #if
-						($sharedCalculations.isEmpty())
+						<h4>#springMessage("calculations.shared.calculations")</h4>
+						#if ($sharedCalculations.isEmpty())
 						<p>
 							<i>#springMessage("calculations.my.calculations.notadded")</i>
 						</p>
@@ -55,7 +59,9 @@
 						<div class="accordion">
 							#foreach ($input in $sharedCalculations)
 							<h3>
-								$input.name <span class="time" title="$dateTool.format("yyyy-MM-dd HH:mm:ss",$input.time.toDate())">$timeFormatter.periodFromNow($input.time, $locale)</span>
+								$input.name <span class="time" title="$dateTool.format("
+									yyyy-MM-ddHH:mm:ss",$input.time.toDate())">$timeFormatter.periodFromNow($input.time,
+									$locale)</span>
 							</h3>
 							<div class="accor_content">
 								<p>Cras dictum. Pellentesque habitant morbi tristique
@@ -67,14 +73,15 @@
 					</div>
 				</div>
 				<div id="quick_links">
-					<div class="small_panel_header">Quick Links</div>
-					<ul>
-						<li><a href="#springUrl("/overview")">#springMessage("navbar.overview")</a></li>
-						<li><a href="#springUrl("/import/xml")">#springMessage("navbar.import")</a></li>
-					</ul>
+					<div class="small_panel_header">#springMessage("navbar.adjustment")</div>
+					<div class="content">
+						<a class="new_button" href="#springUrl("/adjustment")">#springMessage("calculations.adjustment.new")</a>
+					</div>
 				</div>
+
 			</div>
 		</div>
+	</div>
 	</div>
 	#parse("footer.vm")
 </body>

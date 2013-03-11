@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import cz.cvut.fsv.webgama.service.ActivityManager;
+import cz.cvut.fsv.webgama.service.AdjustmentManager;
 import cz.cvut.fsv.webgama.service.UserManager;
 import cz.cvut.fsv.webgama.util.TimeFormatter;
 
@@ -25,6 +26,9 @@ public class IndexController {
 	
 	@Inject
 	private ActivityManager activityManager;
+	
+	@Inject
+	private AdjustmentManager adjustmentManager;
 	
 	@Inject
 	private TimeFormatter timeFormatter;
@@ -45,6 +49,8 @@ public class IndexController {
 
 			ModelAndView mav = new ModelAndView("index");
 			mav.addObject("date", dateTime);
+			
+			mav.addObject("ownCalculationCount", adjustmentManager.getInputCountbyUsername(username));
 			
 			mav.addObject("locale", locale);
 			mav.addObject("timeFormatter", timeFormatter);
@@ -71,6 +77,8 @@ public class IndexController {
 
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("date", dateTime);
+		
+		mav.addObject("ownCalculationCount", adjustmentManager.getInputCountbyUsername(username));
 		
 		mav.addObject("locale", locale);
 		mav.addObject("timeFormatter", timeFormatter);

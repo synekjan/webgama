@@ -36,7 +36,10 @@
 						<div class="activity_list">
 							#foreach ($activity in $activities)
 							<div class="activity">
-								${foreach.index}. #springMessage($activity.message) <span title="$dateTool.format("yyyy-MM-dd HH:mm:ss",$activity.time.toDate())" class="time">$timeFormatter.periodFromNow($activity.time, $locale)</span>
+								${foreach.index}. #springMessage($activity.message) <span
+									title="$dateTool.format(" yyyy-MM-dd
+									HH:mm:ss",$activity.time.toDate())" class="time">$timeFormatter.periodFromNow($activity.time,
+									$locale)</span>
 							</div>
 							#end
 						</div>
@@ -45,7 +48,17 @@
 				<div id="secondary">
 					<div id="controls">
 						<div class="small_panel_header">#springMessage("navbar.calculations")</div>
-						
+						<div class="controls_content">
+							<div class="own_calculations">
+								<a href="#springUrl("/calculations#my_calculations")">#springMessage("index.calculations.own")<span
+									class="big_number">$ownCalculationCount</span></a>
+							</div>
+							<div class="shared_calculations">
+								<a href="#springUrl("/calculations#shared_calculations")">#springMessage("index.calculations.shared")<span class="big_number">0</span>
+								</a>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>
