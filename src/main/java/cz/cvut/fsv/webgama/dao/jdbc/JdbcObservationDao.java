@@ -21,8 +21,7 @@ import cz.cvut.fsv.webgama.domain.Observation;
 import cz.cvut.fsv.webgama.domain.SlopeDistance;
 import cz.cvut.fsv.webgama.domain.ZenithAngle;
 
-public class JdbcObservationDao extends JdbcDaoSupport implements
-		ObservationDao {
+public class JdbcObservationDao extends JdbcDaoSupport implements ObservationDao {
 
 	private DirectionDao directionDao;
 	private DistanceDao distanceDao;
@@ -51,15 +50,14 @@ public class JdbcObservationDao extends JdbcDaoSupport implements
 	}
 
 	@Override
-	public void insert(Observation observation, Integer clusterId) {
+	public void insert(Observation observation, Long clusterId) {
 
 		String sql = "INSERT INTO observations (cluster_id, from_id, orientation, from_dh) VALUES (?, ?, ?, ?) RETURNING observation_id";
 
-		int observationId = getJdbcTemplate()
-				.queryForInt(
+		long observationId = getJdbcTemplate()
+				.queryForLong(
 						sql,
-						new Object[] { clusterId, observation.getFrom(),
-								observation.getOrientation(),
+						new Object[] { clusterId, observation.getFrom(), observation.getOrientation(),
 								observation.getFromDh() });
 
 		for (Direction direction : observation.getDirections()) {
@@ -98,8 +96,7 @@ public class JdbcObservationDao extends JdbcDaoSupport implements
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { observation.getFrom(),
-						observation.getOrientation(), observation.getFromDh(),
+				new Object[] { observation.getFrom(), observation.getOrientation(), observation.getFromDh(),
 						observation.getId() });
 	}
 
@@ -108,8 +105,8 @@ public class JdbcObservationDao extends JdbcDaoSupport implements
 
 		String sql = "SELECT * FROM observations WHERE cluster_id = ?";
 
-		List<Observation> observations = getJdbcTemplate().query(sql,
-				new Object[] { cluster.getId() }, new ObservationMapper());
+		List<Observation> observations = getJdbcTemplate().query(sql, new Object[] { cluster.getId() },
+				new ObservationMapper());
 
 		return observations;
 	}
@@ -124,18 +121,12 @@ public class JdbcObservationDao extends JdbcDaoSupport implements
 			observation.setId(rs.getLong("observation_id"));
 			observation.setFrom(rs.getString("from_id"));
 			observation.setOrientation(rs.getString("orientation"));
-			observation.setFromDh(rs.getObject("from_dh") != null ? rs
-					.getDouble("from_dh") : null);
-			observation.setDirections(directionDao
-					.findDirectionsInObservation(observation));
-			observation.setDistances(distanceDao
-					.findDistancesInObservation(observation));
-			observation
-					.setAngles(angleDao.findAnglesInObservation(observation));
-			observation.setSlopeDistances(slopeDistanceDao
-					.findSlopeDistancesInObservation(observation));
-			observation.setZenithAngles(zenithAngleDao
-					.findZenithAnglesInObservation(observation));
+			observation.setFromDh(rs.getObject("from_dh") != null ? rs.getDouble("from_dh") : null);
+			observation.setDirections(directionDao.findDirectionsInObservation(observation));
+			observation.setDistances(distanceDao.findDistancesInObservation(observation));
+			observation.setAngles(angleDao.findAnglesInObservation(observation));
+			observation.setSlopeDistances(slopeDistanceDao.findSlopeDistancesInObservation(observation));
+			observation.setZenithAngles(zenithAngleDao.findZenithAnglesInObservation(observation));
 
 			return observation;
 		}

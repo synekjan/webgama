@@ -4,18 +4,18 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import cz.cvut.fsv.webgama.domain.Input;
+import cz.cvut.fsv.webgama.domain.Calculation;
 
 public interface AdjustmentManager {
-	
+
 	public String adjustFromFile(MultipartFile file, String username);
-	
-	public List<Input> getInputsbyUsername(String username);
-	
-	public Input getInputById(long id);
-	
-	public int getInputCountbyUsername(String username);
-	
-	public boolean isInputIdInDB(Long id);
+
+	public List<Calculation> getCalculationsbyUsername(String username);
+
+	public Calculation getCalculationById(long id);
+
+	public long getCalculationCountbyUsername(String username);
+
+	public boolean isCalculationIdInDB(Long id);
 
 }

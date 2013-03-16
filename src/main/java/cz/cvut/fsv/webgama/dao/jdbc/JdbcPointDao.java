@@ -14,14 +14,13 @@ import cz.cvut.fsv.webgama.domain.Point;
 public class JdbcPointDao extends JdbcDaoSupport implements PointDao {
 
 	@Override
-	public void insert(Point point, Integer networkId) {
+	public void insert(Point point, Long networkId) {
 
 		String sql = "INSERT INTO points (network_id, id, x, y, z, fix, adj) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { networkId, point.getName(), point.getX(),
-						point.getY(), point.getZ(), point.getFix(),
+				new Object[] { networkId, point.getName(), point.getX(), point.getY(), point.getZ(), point.getFix(),
 						point.getAdj() });
 	}
 
@@ -40,9 +39,8 @@ public class JdbcPointDao extends JdbcDaoSupport implements PointDao {
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { point.getName(), point.getX(), point.getY(),
-						point.getZ(), point.getFix(), point.getAdj(),
-						point.getId() });
+				new Object[] { point.getName(), point.getX(), point.getY(), point.getZ(), point.getFix(),
+						point.getAdj(), point.getId() });
 	}
 
 	@Override
@@ -50,8 +48,7 @@ public class JdbcPointDao extends JdbcDaoSupport implements PointDao {
 
 		String sql = "SELECT * FROM points WHERE network_id = ?";
 
-		List<Point> points = getJdbcTemplate().query(sql,
-				new Object[] { network.getId() }, new PointMapper());
+		List<Point> points = getJdbcTemplate().query(sql, new Object[] { network.getId() }, new PointMapper());
 
 		return points;
 	}

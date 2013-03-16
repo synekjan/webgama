@@ -25,10 +25,10 @@
 						<h2>#springMessage("account.delete")</h2>
 					</div>
 					<p>#springMessage("account.delete.message")</p>
-					#if ($userInputCount != 0)
+					#if ($userCalculationCount != 0)
 					<div class="warning">
 						#springMessage("account.delete.warning.message") <a
-							href="#springUrl('/calculations')">$userInputCount</a>
+							href="#springUrl('/calculations')">$userCalculationCount</a>
 						#springMessage("calculations").
 					</div>
 					#end

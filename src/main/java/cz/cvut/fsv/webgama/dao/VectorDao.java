@@ -7,7 +7,7 @@ import cz.cvut.fsv.webgama.domain.Vector;
 
 public interface VectorDao {
 
-	public void insert(Vector vector, Integer clusterId);
+	public void insert(Vector vector, Long clusterId);
 
 	public void delete(Vector vector);
 

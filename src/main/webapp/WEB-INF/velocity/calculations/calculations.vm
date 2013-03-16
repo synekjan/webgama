@@ -33,8 +33,7 @@
 						<div class="accordion">
 							#foreach ($input in $myCalculations)
 							<h3>
-								$input.name <span class="time" title="$dateTool.format("
-									yyyy-MM-ddHH:mm:ss",$input.time.toDate())">$timeFormatter.periodFromNow($input.time,
+								$input.name <span class="time" title="$dateTool.format("yyyy-MM-dd HH:mm:ss",$input.time.toDate())">$timeFormatter.periodFromNow($input.time,
 									$locale)</span>
 							</h3>
 							<div class="accor_content">

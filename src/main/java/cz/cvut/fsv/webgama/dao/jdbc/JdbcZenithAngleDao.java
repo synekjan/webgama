@@ -11,20 +11,17 @@ import cz.cvut.fsv.webgama.dao.ZenithAngleDao;
 import cz.cvut.fsv.webgama.domain.Observation;
 import cz.cvut.fsv.webgama.domain.ZenithAngle;
 
-public class JdbcZenithAngleDao extends JdbcDaoSupport implements
-		ZenithAngleDao {
+public class JdbcZenithAngleDao extends JdbcDaoSupport implements ZenithAngleDao {
 
 	@Override
-	public void insert(ZenithAngle zenithAngle, Integer observationId) {
+	public void insert(ZenithAngle zenithAngle, Long observationId) {
 
 		String sql = "INSERT INTO zenith_angles (observation_id, from_id, to_id, val, stdev, from_dh, to_dh) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { observationId, zenithAngle.getFrom(),
-						zenithAngle.getTo(), zenithAngle.getVal(),
-						zenithAngle.getStdev(), zenithAngle.getFromDh(),
-						zenithAngle.getToDh() });
+				new Object[] { observationId, zenithAngle.getFrom(), zenithAngle.getTo(), zenithAngle.getVal(),
+						zenithAngle.getStdev(), zenithAngle.getFromDh(), zenithAngle.getToDh() });
 	}
 
 	@Override
@@ -42,20 +39,17 @@ public class JdbcZenithAngleDao extends JdbcDaoSupport implements
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { zenithAngle.getFrom(), zenithAngle.getTo(),
-						zenithAngle.getVal(), zenithAngle.getStdev(),
-						zenithAngle.getFromDh(), zenithAngle.getToDh(),
-						zenithAngle.getId() });
+				new Object[] { zenithAngle.getFrom(), zenithAngle.getTo(), zenithAngle.getVal(),
+						zenithAngle.getStdev(), zenithAngle.getFromDh(), zenithAngle.getToDh(), zenithAngle.getId() });
 	}
 
 	@Override
-	public List<ZenithAngle> findZenithAnglesInObservation(
-			Observation observation) {
+	public List<ZenithAngle> findZenithAnglesInObservation(Observation observation) {
 
 		String sql = "SELECT * FROM zenith_angles WHERE observation_id = ?";
 
-		List<ZenithAngle> zenithAngles = getJdbcTemplate().query(sql,
-				new Object[] { observation.getId() }, new ZenithAngleMapper());
+		List<ZenithAngle> zenithAngles = getJdbcTemplate().query(sql, new Object[] { observation.getId() },
+				new ZenithAngleMapper());
 
 		return zenithAngles;
 	}

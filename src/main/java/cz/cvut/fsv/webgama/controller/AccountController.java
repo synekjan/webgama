@@ -49,8 +49,7 @@ public class AccountController extends MultiActionController {
 	// @Inject
 	// private UserValidator userValidator;
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(AccountController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
 	@RequestMapping(value = { "", "/info" }, method = RequestMethod.GET)
 	public ModelAndView accountInfo(HttpServletRequest request) {
@@ -59,8 +58,7 @@ public class AccountController extends MultiActionController {
 		String username = request.getUserPrincipal().getName();
 		User user = userManager.getUser(username);
 		mav.addObject("user", user);
-		mav.addObject("userInputCount",
-				adjustmentManager.getInputCountbyUsername(username));
+		mav.addObject("userCalculationCount", adjustmentManager.getCalculationCountbyUsername(username));
 
 		logger.info("User[" + username + "] checked own account information");
 		return mav;
@@ -79,9 +77,8 @@ public class AccountController extends MultiActionController {
 	}
 
 	@RequestMapping(value = { "/personal" }, method = RequestMethod.POST)
-	public ModelAndView modifyUser(
-			@Valid @ModelAttribute("user") UserForm userForm,
-			BindingResult result, HttpServletRequest request) {
+	public ModelAndView modifyUser(@Valid @ModelAttribute("user") UserForm userForm, BindingResult result,
+			HttpServletRequest request) {
 
 		// userValidator.validate(userForm, result);
 
@@ -90,23 +87,20 @@ public class AccountController extends MultiActionController {
 
 		if (result.hasErrors()) {
 
-			logger.info("User[" + username
-					+ "] was unsuccessful in editing personal informations");
+			logger.info("User[" + username + "] was unsuccessful in editing personal informations");
 			return new ModelAndView("/account/personal/personal");
 		}
 
 		userManager.updateUser(userForm);
 
-		logger.info("User[" + username
-				+ "] successfully updated personal information");
+		logger.info("User[" + username + "] successfully updated personal information");
 		activityManager.recordActivity(username, "activity.user.changed");
 		return new ModelAndView("/account/personal/personal", "success", true);
 	}
 
 	// CHANGING PASSWORD
 	@RequestMapping(value = "/password/change", method = RequestMethod.GET)
-	public ModelAndView changePasswordForm(HttpServletRequest request,
-			Model model, Locale locale) {
+	public ModelAndView changePasswordForm(HttpServletRequest request, Model model, Locale locale) {
 
 		ModelAndView mav = new ModelAndView("/account/password/change");
 		String username = request.getUserPrincipal().getName();
@@ -117,8 +111,7 @@ public class AccountController extends MultiActionController {
 	}
 
 	@RequestMapping(value = { "/password/change" }, method = RequestMethod.POST)
-	public ModelAndView changePassword(
-			@Valid @ModelAttribute("user") UserPasswordChangeForm userForm,
+	public ModelAndView changePassword(@Valid @ModelAttribute("user") UserPasswordChangeForm userForm,
 			BindingResult result, HttpServletRequest request) {
 
 		String username = request.getUserPrincipal().getName();
@@ -126,15 +119,13 @@ public class AccountController extends MultiActionController {
 		passwordValidator.validate(userForm, result);
 
 		if (result.hasErrors()) {
-			logger.info("User[" + username
-					+ "] was unsuccessful in changing his/her password");
+			logger.info("User[" + username + "] was unsuccessful in changing his/her password");
 			return new ModelAndView("/account/password/change");
 		}
 
 		userManager.changeUserPassword(userForm);
 
-		logger.info("User[" + username
-				+ "] successfully changed account password");
+		logger.info("User[" + username + "] successfully changed account password");
 		activityManager.recordActivity(username, "activity.password.changed");
 		return new ModelAndView("/account/password/change", "success", true);
 	}
@@ -154,14 +145,12 @@ public class AccountController extends MultiActionController {
 	 */
 
 	@RequestMapping(value = { "/logins", "/logins/show" }, method = RequestMethod.GET)
-	public ModelAndView showLogins(HttpServletRequest request,
-			Principal principal) {
+	public ModelAndView showLogins(HttpServletRequest request, Principal principal) {
 
 		ModelAndView mav = new ModelAndView("/account/loginslist");
 		String username = request.getUserPrincipal().getName();
 
-		mav.addObject("loginList",
-				loginManager.getLoginList(principal.getName()));
+		mav.addObject("loginList", loginManager.getLoginList(principal.getName()));
 
 		logger.info("User[" + username + "] checks own loging status");
 		return mav;
@@ -173,8 +162,7 @@ public class AccountController extends MultiActionController {
 		ModelAndView mav = new ModelAndView("/account/delete/delete");
 		String username = request.getUserPrincipal().getName();
 
-		mav.addObject("userInputCount",
-				adjustmentManager.getInputCountbyUsername(username));
+		mav.addObject("userCalculationCount", adjustmentManager.getCalculationCountbyUsername(username));
 		logger.info("User[" + username + "] thought about deleting account");
 		return mav;
 	}

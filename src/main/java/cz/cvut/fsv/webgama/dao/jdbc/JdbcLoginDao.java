@@ -19,17 +19,12 @@ public class JdbcLoginDao extends JdbcDaoSupport implements LoginDao {
 
 		String sql = "INSERT INTO logins (user_id,ip_address,success) VALUES (?, ?, ?)";
 
-		getJdbcTemplate().update(
-				sql,
-				new Object[] { login.getUser().getId(), login.getIp(),
-						login.getSuccess() });
+		getJdbcTemplate().update(sql, new Object[] { login.getUser().getId(), login.getIp(), login.getSuccess() });
 
 		if (login.getSuccess()) {
-			logger.info("User [" + login.getUser().getUsername()
-					+ "] successfully logged from " + login.getIp());
+			logger.info("User [" + login.getUser().getUsername() + "] successfully logged from " + login.getIp());
 		} else {
-			logger.info("User [" + login.getUser().getUsername()
-					+ "] unsuccessfully logged from " + login.getIp());
+			logger.info("User [" + login.getUser().getUsername() + "] unsuccessfully logged from " + login.getIp());
 		}
 
 	}
@@ -39,8 +34,7 @@ public class JdbcLoginDao extends JdbcDaoSupport implements LoginDao {
 
 		String sql = "SELECT login_id,ip_address,time,success FROM logins WHERE user_id = ? ORDER BY time DESC";
 
-		List<Login> logins = getJdbcTemplate().query(sql,
-				new Object[] { user.getId() }, new LoginMapper());
+		List<Login> logins = getJdbcTemplate().query(sql, new Object[] { user.getId() }, new LoginMapper());
 
 		return logins;
 	}
@@ -50,8 +44,7 @@ public class JdbcLoginDao extends JdbcDaoSupport implements LoginDao {
 
 		String sql = "SELECT login_id,ip_address,time,success FROM logins WHERE time = (SELECT MAX(time) FROM logins WHERE user_id = ? )";
 
-		return getJdbcTemplate().queryForObject(sql,
-				new Object[] { user.getId() }, new LoginMapper());
+		return getJdbcTemplate().queryForObject(sql, new Object[] { user.getId() }, new LoginMapper());
 
 	}
 

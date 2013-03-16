@@ -5,7 +5,7 @@ import cz.cvut.fsv.webgama.domain.Network;
 
 public interface NetworkDao {
 
-	public void insert(Network network, Integer inputId);
+	public void insert(Network network, Long inputId);
 
 	public void delete(Network network);
 

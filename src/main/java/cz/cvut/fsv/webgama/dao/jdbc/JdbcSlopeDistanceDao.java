@@ -11,20 +11,17 @@ import cz.cvut.fsv.webgama.dao.SlopeDistanceDao;
 import cz.cvut.fsv.webgama.domain.Observation;
 import cz.cvut.fsv.webgama.domain.SlopeDistance;
 
-public class JdbcSlopeDistanceDao extends JdbcDaoSupport implements
-		SlopeDistanceDao {
+public class JdbcSlopeDistanceDao extends JdbcDaoSupport implements SlopeDistanceDao {
 
 	@Override
-	public void insert(SlopeDistance slopeDistance, Integer observationId) {
+	public void insert(SlopeDistance slopeDistance, Long observationId) {
 
 		String sql = "INSERT INTO slope_distances (observation_id, from_id, to_id, val, stdev, from_dh, to_dh) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { observationId, slopeDistance.getFrom(),
-						slopeDistance.getTo(), slopeDistance.getVal(),
-						slopeDistance.getStdev(), slopeDistance.getFromDh(),
-						slopeDistance.getToDh() });
+				new Object[] { observationId, slopeDistance.getFrom(), slopeDistance.getTo(), slopeDistance.getVal(),
+						slopeDistance.getStdev(), slopeDistance.getFromDh(), slopeDistance.getToDh() });
 	}
 
 	@Override
@@ -42,20 +39,18 @@ public class JdbcSlopeDistanceDao extends JdbcDaoSupport implements
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { slopeDistance.getFrom(), slopeDistance.getTo(),
-						slopeDistance.getVal(), slopeDistance.getStdev(),
-						slopeDistance.getFromDh(), slopeDistance.getToDh(),
+				new Object[] { slopeDistance.getFrom(), slopeDistance.getTo(), slopeDistance.getVal(),
+						slopeDistance.getStdev(), slopeDistance.getFromDh(), slopeDistance.getToDh(),
 						slopeDistance.getId() });
 	}
 
 	@Override
-	public List<SlopeDistance> findSlopeDistancesInObservation(
-			Observation observation) {
+	public List<SlopeDistance> findSlopeDistancesInObservation(Observation observation) {
 
 		String sql = "SELECT * FROM slope_distances WHERE observation_id = ?";
 
-		List<SlopeDistance> slopeDistances = getJdbcTemplate().query(sql,
-				new Object[] { observation.getId() }, new DistanceMapper());
+		List<SlopeDistance> slopeDistances = getJdbcTemplate().query(sql, new Object[] { observation.getId() },
+				new DistanceMapper());
 
 		return slopeDistances;
 	}
@@ -63,8 +58,7 @@ public class JdbcSlopeDistanceDao extends JdbcDaoSupport implements
 	private static class DistanceMapper implements RowMapper<SlopeDistance> {
 
 		@Override
-		public SlopeDistance mapRow(ResultSet rs, int rowNum)
-				throws SQLException {
+		public SlopeDistance mapRow(ResultSet rs, int rowNum) throws SQLException {
 
 			SlopeDistance slopeDistance = new SlopeDistance();
 

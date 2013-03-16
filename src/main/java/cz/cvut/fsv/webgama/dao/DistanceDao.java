@@ -7,7 +7,7 @@ import cz.cvut.fsv.webgama.domain.Observation;
 
 public interface DistanceDao {
 
-	public void insert(Distance distance, Integer observationId);
+	public void insert(Distance distance, Long observationId);
 
 	public void delete(Distance distance);
 

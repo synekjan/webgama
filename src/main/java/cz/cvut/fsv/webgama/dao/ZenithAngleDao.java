@@ -7,7 +7,7 @@ import cz.cvut.fsv.webgama.domain.ZenithAngle;
 
 public interface ZenithAngleDao {
 
-	public void insert(ZenithAngle zenithAngle, Integer observationId);
+	public void insert(ZenithAngle zenithAngle, Long observationId);
 
 	public void delete(ZenithAngle zenithAngle);
 

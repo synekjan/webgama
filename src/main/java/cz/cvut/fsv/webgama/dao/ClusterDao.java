@@ -7,7 +7,7 @@ import cz.cvut.fsv.webgama.domain.Network;
 
 public interface ClusterDao {
 
-	public void insert(Cluster cluster, Integer networkId);
+	public void insert(Cluster cluster, Long networkId);
 
 	public void delete(Cluster cluster);
 

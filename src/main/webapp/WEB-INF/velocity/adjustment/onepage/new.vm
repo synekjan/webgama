@@ -24,8 +24,8 @@
 					</div>
 					#springBind("input.*")#if(${status.error})
 					<div class="error">
-						#springArgMessage("form.has.arg.errors", $errorCount) <span class="icon-close"
-							role="button"></span>
+						#springArgMessage("form.has.arg.errors", $errorCount) <span
+							class="icon-close" role="button"></span>
 					</div>
 					#end
 					<div class="form_hints">#springMessage("bold.is.required")</div>
@@ -40,8 +40,14 @@
 								</div>
 								<div class="medium_form_element">
 									<label for="angles">#springMessage("input.angles"):</label>
-									<div class="input">#springFormInput("input.angles","")
-										#showElementErrors()</div>
+									<div class="input">
+										<select id="sigma-act" name="angles">
+											<option value="left-handed" #if ($input.angles==
+												"left-handed") selected #end>Left-Handed</option>
+											<option value="right-handed" #if ($input.angles==
+												"right-handed") selected #end>Right-Handed</option>
+										</select> #showElementErrors()
+									</div>
 								</div>
 								<div class="medium_form_element">
 									<label for="epoch">#springMessage("input.epoch"):</label>
@@ -78,8 +84,10 @@
 									<label for="sigma-act">#springMessage("input.sigmaAct"):</label>
 									<div class="input">
 										<select id="sigma-act" name="sigmaAct">
-											<option value="aposteriori">Aposteriori</option>
-											<option selected="selected" value="apriori">Apriori</option>
+											<option value="apriori" #if ($input.sigmaAct==
+												"apriori") selected #end>Apriori</option>
+											<option value="aposteriori" #if ($input.sigmaAct==
+												"aposteriori") selected #end>Aposteriori</option>
 										</select>
 									</div>
 								</div>
@@ -112,75 +120,80 @@
 										"") #showElementErrors()</div>
 								</div>
 							</fieldset>
-							<fieldset>
-								<legend>#springMessage("adjustment.onepage.points")</legend>
-								#foreach ($point in $input.points)
+
+							<div id="points">
 								<fieldset>
-									<legend>
-										#set( $i = "${foreach.index}" )
-										#springBind("input.points[$i].name") <input type="text"
-											name="points[$i].name" value="$!point.name" />
-										#showElementErrors()
-									</legend>
-									<div class="small_form_element">
-										<label class="required" for="points[$i].x">X:</label>
-										<div class="input">
-											#springBind("input.points[$i].x") <input id="points[$i].x"
-												type="text" name="points[$i].x" value="$!point.x" />
-											#showElementErrors()
-										</div>
+									<legend>#springMessage("adjustment.onepage.points")</legend>
+									#foreach ($point in $input.points) #set( $i =
+									"${foreach.index}" )
+									<div id="point_$i">
+										<fieldset>
+											<legend>
+												#springBind("input.points[$i].name") <input type="text"
+													name="points[$i].name" value="$!point.name" />
+												#showElementErrors()
+											</legend>
+											<div class="small_form_element">
+												<label class="required" for="points[$i].x">X:</label>
+												<div class="input">
+													#springBind("input.points[$i].x") <input id="points[$i].x"
+														type="text" name="points[$i].x" value="$!point.x" />
+													#showElementErrors()
+												</div>
+											</div>
+											<div class="small_form_element">
+												<label class="required" for="points[$i].y">Y:</label>
+												<div class="input">
+													#springBind("input.points[$i].y") <input id="points[$i].y"
+														type="text" name="points[$i].y" value="$!point.y" />
+													#showElementErrors()
+												</div>
+											</div>
+											<div class="small_form_element">
+												<label class="required" for="points[$i].z">Z:</label>
+												<div class="input">
+													#springFormInput("input.points[$i].z",
+													"")#showElementErrors()</div>
+											</div>
+											<div class="small_form_element">
+												<label for="points[$i].fix">Fix:</label>
+												<div class="input">
+													#springBind("input.points[$i].fix")<select
+														id="points[$i].fix" name="points[$i].fix">
+														<option value=""></option>
+														<option value="xy" #if ($point.fix== "xy") selected #end>xy</option>
+														<option value="XY" #if ($point.fix== "XY") selected #end>XY</option>
+														<option value="z" #if ($point.fix== "z") selected #end>z</option>
+														<option value="Z" #if ($point.fix== "Z") selected #end>Z</option>
+														<option value="xyz" #if ($point.fix== "xyz") selected #end>xyz</option>
+														<option value="XYZ" #if ($point.fix== "XYZ") selected #end>XYZ</option>
+														<option value="xyZ" #if ($point.fix== "xyZ") selected #end>xyZ</option>
+														<option value="XYz" #if ($point.fix== "XYz") selected #end>XYz</option>
+													</select> #showElementErrors()
+												</div>
+											</div>
+											<div class="small_form_element">
+												<label for="points[$i].adj">Adj:</label>
+												<div class="input">
+													#springBind("input.points[$i].adj")<select
+														id="points[$i].adj" name="points[$i].adj">
+														<option value=""></option>
+														<option value="xy" #if ($point.adj== "xy") selected #end>xy</option>
+														<option value="XY" #if ($point.adj== "XY") selected #end>XY</option>
+														<option value="z" #if ($point.adj== "z") selected #end>z</option>
+														<option value="Z" #if ($point.adj== "Z") selected #end>Z</option>
+														<option value="xyz" #if ($point.adj== "xyz") selected #end>xyz</option>
+														<option value="XYZ" #if ($point.adj== "XYZ") selected #end>XYZ</option>
+														<option value="xyZ" #if ($point.adj== "xyZ") selected #end>xyZ</option>
+														<option value="XYz" #if ($point.adj== "XYz") selected #end>XYz</option>
+													</select> #showElementErrors()
+												</div>
+											</div>
+										</fieldset>
 									</div>
-									<div class="small_form_element">
-										<label class="required" for="points[$i].y">Y:</label>
-										<div class="input">
-											#springBind("input.points[$i].y") <input id="points[$i].y"
-												type="text" name="points[$i].y" value="$!point.y" />
-											#showElementErrors()
-										</div>
-									</div>
-									<div class="small_form_element">
-										<label class="required" for="points[$i].z">Z:</label>
-										<div class="input">
-											#springFormInput("input.points[$i].z",
-											"")#showElementErrors()</div>
-									</div>
-									<div class="small_form_element">
-										<label for="fix">Fix:</label>
-										<div class="input">
-											#springBind("input.points[$i].fix")<select id="fix"
-												name="points[$i].fix">
-												<option value=""></option>
-												<option value="xy">xy</option>
-												<option value="XY">XY</option>
-												<option value="z">z</option>
-												<option value="Z">Z</option>
-												<option value="xyz">xyz</option>
-												<option value="XYZ">XYZ</option>
-												<option value="xyZ">xyZ</option>
-												<option value="XYz">XYz</option>
-											</select> #showElementErrors()
-										</div>
-									</div>
-									<div class="small_form_element">
-										<label for="input.points[$i].adj">Adj:</label>
-										<div class="input">
-											#springBind("input.points[$i].adj")<select
-												id="input.points[$i].adj" name="input.points[$i].adj">
-												<option value=""></option>
-												<option value="xy">xy</option>
-												<option value="XY">XY</option>
-												<option value="z">z</option>
-												<option value="Z">Z</option>
-												<option value="xyz">xyz</option>
-												<option value="XYZ">XYZ</option>
-												<option value="xyZ">xyZ</option>
-												<option value="XYz">XYz</option>
-											</select> #showElementErrors()
-										</div>
-									</div>
+									#end
 								</fieldset>
-								#end
-							</fieldset>
+							</div>
 
 							<fieldset>
 								<legend>#springMessage("adjustment.onepage.clusters")</legend>
@@ -555,36 +568,31 @@
 										#set( $i = "${foreach.index}" )
 										<legend>#springMessage("adjustment.onepage.vector")</legend>
 										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].vectors[$i].from">#springMessage("vector.from"):</label>
+											<label class="required" for="clusters[$h].vectors[$i].from">#springMessage("vector.from"):</label>
 											<div class="input">
 												#springFormInput("input.clusters[$h].vectors[$i].from",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].vectors[$i].to">#springMessage("vector.to"):</label>
+											<label class="required" for="clusters[$h].vectors[$i].to">#springMessage("vector.to"):</label>
 											<div class="input">
 												#springFormInput("input.clusters[$h].vectors[$i].to",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].vectors[$i].dx">#springMessage("vector.dx"):</label>
+											<label class="required" for="clusters[$h].vectors[$i].dx">#springMessage("vector.dx"):</label>
 											<div class="input">
 												#springFormInput("input.clusters[$h].vectors[$i].dx",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].vectors[$i].dy">#springMessage("vector.dy"):</label>
+											<label class="required" for="clusters[$h].vectors[$i].dy">#springMessage("vector.dy"):</label>
 											<div class="input">
 												#springFormInput("input.clusters[$h].vectors[$i].dy",
 												"")#showElementErrors()</div>
 										</div>
 										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].vectors[$i].dz">#springMessage("vector.dz"):</label>
+											<label class="required" for="clusters[$h].vectors[$i].dz">#springMessage("vector.dz"):</label>
 											<div class="input">
 												#springFormInput("input.clusters[$h].vectors[$i].dz",
 												"")#showElementErrors()</div>

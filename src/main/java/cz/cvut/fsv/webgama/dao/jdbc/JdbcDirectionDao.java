@@ -14,14 +14,13 @@ import cz.cvut.fsv.webgama.domain.Observation;
 public class JdbcDirectionDao extends JdbcDaoSupport implements DirectionDao {
 
 	@Override
-	public void insert(Direction direction, Integer observationId) {
+	public void insert(Direction direction, Long observationId) {
 
 		String sql = "INSERT INTO directions (observation_id, to_id, val, stdev, from_dh, to_dh) VALUES (?, ?, ?, ?, ?, ?)";
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { observationId, direction.getTo(),
-						direction.getVal(), direction.getStdev(),
+				new Object[] { observationId, direction.getTo(), direction.getVal(), direction.getStdev(),
 						direction.getFromDh(), direction.getToDh() });
 	}
 
@@ -40,8 +39,7 @@ public class JdbcDirectionDao extends JdbcDaoSupport implements DirectionDao {
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { direction.getTo(), direction.getVal(),
-						direction.getStdev(), direction.getFromDh(),
+				new Object[] { direction.getTo(), direction.getVal(), direction.getStdev(), direction.getFromDh(),
 						direction.getToDh(), direction.getId() });
 	}
 
@@ -50,8 +48,8 @@ public class JdbcDirectionDao extends JdbcDaoSupport implements DirectionDao {
 
 		String sql = "SELECT * FROM directions WHERE observation_id = ?";
 
-		List<Direction> directions = getJdbcTemplate().query(sql,
-				new Object[] { observation.getId() }, new DirectionMapper());
+		List<Direction> directions = getJdbcTemplate().query(sql, new Object[] { observation.getId() },
+				new DirectionMapper());
 
 		return directions;
 	}

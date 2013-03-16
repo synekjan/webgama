@@ -14,15 +14,14 @@ import cz.cvut.fsv.webgama.domain.Observation;
 public class JdbcAngleDao extends JdbcDaoSupport implements AngleDao {
 
 	@Override
-	public void insert(Angle angle, Integer observationId) {
+	public void insert(Angle angle, Long observationId) {
 
 		String sql = "INSERT INTO angles (observation_id, from_id, bs, fs, val, stdev, from_dh, bs_dh, fs_dh) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { observationId, angle.getFrom(), angle.getBs(),
-						angle.getFs(), angle.getVal(), angle.getStdev(),
-						angle.getFromDh(), angle.getBsDh(), angle.getFsDh() });
+				new Object[] { observationId, angle.getFrom(), angle.getBs(), angle.getFs(), angle.getVal(),
+						angle.getStdev(), angle.getFromDh(), angle.getBsDh(), angle.getFsDh() });
 
 	}
 
@@ -41,9 +40,8 @@ public class JdbcAngleDao extends JdbcDaoSupport implements AngleDao {
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { angle.getFrom(), angle.getBs(), angle.getFs(),
-						angle.getVal(), angle.getStdev(), angle.getFromDh(),
-						angle.getBsDh(), angle.getFsDh(), angle.getId() });
+				new Object[] { angle.getFrom(), angle.getBs(), angle.getFs(), angle.getVal(), angle.getStdev(),
+						angle.getFromDh(), angle.getBsDh(), angle.getFsDh(), angle.getId() });
 	}
 
 	@Override
@@ -51,8 +49,7 @@ public class JdbcAngleDao extends JdbcDaoSupport implements AngleDao {
 
 		String sql = "SELECT * FROM angles WHERE observation_id = ?";
 
-		List<Angle> angles = getJdbcTemplate().query(sql,
-				new Object[] { observation.getId() }, new AngleMapper());
+		List<Angle> angles = getJdbcTemplate().query(sql, new Object[] { observation.getId() }, new AngleMapper());
 
 		return angles;
 	}

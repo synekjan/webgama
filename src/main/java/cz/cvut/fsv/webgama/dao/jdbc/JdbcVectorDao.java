@@ -14,14 +14,13 @@ import cz.cvut.fsv.webgama.domain.Vector;
 public class JdbcVectorDao extends JdbcDaoSupport implements VectorDao {
 
 	@Override
-	public void insert(Vector vector, Integer clusterId) {
+	public void insert(Vector vector, Long clusterId) {
 		String sql = "INSERT INTO vectors (cluster_id, from_id, to_id, dx, dy, dz, from_dh, to_dh) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { clusterId, vector.getFrom(), vector.getTo(),
-						vector.getDx(), vector.getDy(), vector.getDz(),
-						vector.getFromDh(), vector.getToDh() });
+				new Object[] { clusterId, vector.getFrom(), vector.getTo(), vector.getDx(), vector.getDy(),
+						vector.getDz(), vector.getFromDh(), vector.getToDh() });
 	}
 
 	@Override
@@ -38,8 +37,7 @@ public class JdbcVectorDao extends JdbcDaoSupport implements VectorDao {
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { vector.getFrom(), vector.getTo(),
-						vector.getDx(), vector.getDy(), vector.getDz(),
+				new Object[] { vector.getFrom(), vector.getTo(), vector.getDx(), vector.getDy(), vector.getDz(),
 						vector.getFromDh(), vector.getToDh(), vector.getId() });
 
 	}
@@ -48,8 +46,7 @@ public class JdbcVectorDao extends JdbcDaoSupport implements VectorDao {
 	public List<Vector> findVectorsInCluster(Cluster cluster) {
 		String sql = "SELECT * FROM vectors WHERE cluster_id = ?";
 
-		List<Vector> vectors = getJdbcTemplate().query(sql,
-				new Object[] { cluster.getId() }, new VectorMapper());
+		List<Vector> vectors = getJdbcTemplate().query(sql, new Object[] { cluster.getId() }, new VectorMapper());
 
 		return vectors;
 	}
@@ -66,10 +63,8 @@ public class JdbcVectorDao extends JdbcDaoSupport implements VectorDao {
 			vector.setDx(rs.getObject("dx") != null ? rs.getDouble("dx") : null);
 			vector.setDy(rs.getObject("dy") != null ? rs.getDouble("dy") : null);
 			vector.setDz(rs.getObject("dz") != null ? rs.getDouble("dz") : null);
-			vector.setFromDh(rs.getObject("from_dh") != null ? rs
-					.getDouble("from_dh") : null);
-			vector.setToDh(rs.getObject("to_dh") != null ? rs
-					.getDouble("to_dh") : null);
+			vector.setFromDh(rs.getObject("from_dh") != null ? rs.getDouble("from_dh") : null);
+			vector.setToDh(rs.getObject("to_dh") != null ? rs.getDouble("to_dh") : null);
 
 			return vector;
 		}

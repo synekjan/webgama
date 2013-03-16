@@ -7,7 +7,7 @@ import cz.cvut.fsv.webgama.domain.Observation;
 
 public interface DirectionDao {
 
-	public void insert(Direction direction, Integer observationId);
+	public void insert(Direction direction, Long observationId);
 
 	public void delete(Direction direction);
 

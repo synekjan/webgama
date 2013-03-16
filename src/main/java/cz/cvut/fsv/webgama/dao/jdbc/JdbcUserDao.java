@@ -16,8 +16,7 @@ import cz.cvut.fsv.webgama.domain.User;
 
 public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(JdbcUserDao.class);
+	private static final Logger logger = LoggerFactory.getLogger(JdbcUserDao.class);
 
 	@Override
 	public void insert(User user) {
@@ -26,11 +25,9 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { user.getUsername(), user.getPassword(),
-						user.getFirstName(), user.getLastName(),
-						user.getEmail(), user.getTelephone(), user.getStreet(),
-						user.getNumber(), user.getCity(), user.getZipCode(),
-						user.getState() });
+				new Object[] { user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
+						user.getEmail(), user.getTelephone(), user.getStreet(), user.getNumber(), user.getCity(),
+						user.getZipCode(), user.getState() });
 	}
 
 	@Override
@@ -48,11 +45,9 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { user.getFirstName(), user.getLastName(),
-						user.getEmail(), user.getTelephone(), user.getStreet(),
-						user.getNumber(), user.getCity(), user.getZipCode(),
-						user.getState(), user.getModified().toDate(),
-						user.getId() });
+				new Object[] { user.getFirstName(), user.getLastName(), user.getEmail(), user.getTelephone(),
+						user.getStreet(), user.getNumber(), user.getCity(), user.getZipCode(), user.getState(),
+						user.getModified().toDate(), user.getId() });
 	}
 
 	@Override
@@ -60,8 +55,7 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 		String sql = "UPDATE users SET password=?, date_modified=? WHERE user_id=?";
 
-		getJdbcTemplate().update(sql, user.getPassword(),
-				user.getModified().toDate(), user.getId());
+		getJdbcTemplate().update(sql, user.getPassword(), user.getModified().toDate(), user.getId());
 	}
 
 	public void updateEnabled(User user) {
@@ -73,8 +67,7 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 	@Override
 	public List<User> getUserList() {
 
-		List<User> users = getJdbcTemplate().query("SELECT * FROM users;",
-				new UserMapper());
+		List<User> users = getJdbcTemplate().query("SELECT * FROM users", new UserMapper());
 
 		return users;
 	}
@@ -92,8 +85,7 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 		String sql = "SELECT * FROM users WHERE username = ?";
 
-		List<User> users = getJdbcTemplate().query(sql,
-				new Object[] { username }, new UserMapper());
+		List<User> users = getJdbcTemplate().query(sql, new Object[] { username }, new UserMapper());
 
 		return users;
 	}
@@ -103,8 +95,7 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 		String sql = "SELECT * FROM users WHERE email = ?";
 
-		List<User> users = getJdbcTemplate().query(sql, new Object[] { email },
-				new UserMapper());
+		List<User> users = getJdbcTemplate().query(sql, new Object[] { email }, new UserMapper());
 
 		return users;
 	}
@@ -114,8 +105,7 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 		String sql = "SELECT * FROM users WHERE user_id = ?";
 
-		User user = getJdbcTemplate().queryForObject(sql, new Object[] { id },
-				new UserMapper());
+		User user = getJdbcTemplate().queryForObject(sql, new Object[] { id }, new UserMapper());
 
 		return user;
 	}
@@ -125,8 +115,7 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 		String sql = "SELECT * FROM users WHERE username = ?";
 
-		User user = getJdbcTemplate().queryForObject(sql,
-				new Object[] { username }, new UserMapper());
+		User user = getJdbcTemplate().queryForObject(sql, new Object[] { username }, new UserMapper());
 
 		return user;
 	}
@@ -154,8 +143,8 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 
 		String sql = "SELECT * FROM confirmations WHERE uuid = ?";
 
-		List<Confirmation> confirmations = getJdbcTemplate().query(sql,
-				new Object[] { uuid }, new ConfirmationMapper());
+		List<Confirmation> confirmations = getJdbcTemplate()
+				.query(sql, new Object[] { uuid }, new ConfirmationMapper());
 
 		return confirmations;
 	}
@@ -190,10 +179,8 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 			user.setCity(rs.getString("city"));
 			user.setZipCode(rs.getString("zipcode"));
 			user.setState(rs.getString("state"));
-			user.setCreated(new DateTime(rs.getTimestamp("date_created")
-					.getTime()));
-			user.setModified(new DateTime(rs.getTimestamp("date_modified")
-					.getTime()));
+			user.setCreated(new DateTime(rs.getTimestamp("date_created").getTime()));
+			user.setModified(new DateTime(rs.getTimestamp("date_modified").getTime()));
 
 			return user;
 		}
@@ -202,8 +189,7 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 	private class ConfirmationMapper implements RowMapper<Confirmation> {
 
 		@Override
-		public Confirmation mapRow(ResultSet rs, int rowNum)
-				throws SQLException {
+		public Confirmation mapRow(ResultSet rs, int rowNum) throws SQLException {
 
 			Confirmation conf = new Confirmation();
 

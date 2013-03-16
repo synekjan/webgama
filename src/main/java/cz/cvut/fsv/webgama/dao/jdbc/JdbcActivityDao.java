@@ -26,10 +26,7 @@ public class JdbcActivityDao extends JdbcDaoSupport implements ActivityDao {
 
 		String sql = "INSERT INTO activities (user_id, message) VALUES (?, ?)";
 
-		getJdbcTemplate().update(
-				sql,
-				new Object[] { activity.getUser().getId(),
-						activity.getMessage() });
+		getJdbcTemplate().update(sql, new Object[] { activity.getUser().getId(), activity.getMessage() });
 	}
 
 	@Override
@@ -43,8 +40,7 @@ public class JdbcActivityDao extends JdbcDaoSupport implements ActivityDao {
 	public void update(Activity activity) {
 		String sql = "UPDATE activities SET user_id=?, message=? WHERE activity_id = ?";
 
-		getJdbcTemplate().update(sql, activity.getUser().getId(),
-				activity.getMessage());
+		getJdbcTemplate().update(sql, activity.getUser().getId(), activity.getMessage());
 	}
 
 	@Override
@@ -52,8 +48,7 @@ public class JdbcActivityDao extends JdbcDaoSupport implements ActivityDao {
 
 		String sql = "SELECT * FROM activities WHERE user_id = ? ORDER BY time DESC";
 
-		List<Activity> activities = getJdbcTemplate().query(sql,
-				new Object[] { user.getId() }, new ActivityMapper());
+		List<Activity> activities = getJdbcTemplate().query(sql, new Object[] { user.getId() }, new ActivityMapper());
 
 		return activities;
 	}
@@ -63,8 +58,7 @@ public class JdbcActivityDao extends JdbcDaoSupport implements ActivityDao {
 
 		String sql = "SELECT * FROM activities WHERE user_id = ? ORDER BY time DESC LIMIT 15";
 
-		List<Activity> activities = getJdbcTemplate().query(sql,
-				new Object[] { user.getId() }, new ActivityMapper());
+		List<Activity> activities = getJdbcTemplate().query(sql, new Object[] { user.getId() }, new ActivityMapper());
 
 		return activities;
 	}

@@ -32,7 +32,7 @@
 					<div class="large_form_element">
 						<label>#springMessage("navbar.calculations"):</label>
 						<div class="information">
-							<a href="#springUrl("/calculations")">$userInputCount #springMessage("calculations")</a> 
+							<a href="#springUrl("/calculations")">$userCalculationCount #springMessage("calculations")</a> 
 						</div>
 					</div>
 					<div class="large_form_element">

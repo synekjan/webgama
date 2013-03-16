@@ -30,8 +30,7 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 		this.coordinateDao = coordinateDao;
 	}
 
-	public void setHeightDifferenceDao(
-			JdbcHeightDifferenceDao heightDifferenceDao) {
+	public void setHeightDifferenceDao(JdbcHeightDifferenceDao heightDifferenceDao) {
 		this.heightDifferenceDao = heightDifferenceDao;
 	}
 
@@ -44,12 +43,11 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 	}
 
 	@Override
-	public void insert(Cluster cluster, Integer networkId) {
+	public void insert(Cluster cluster, Long networkId) {
 
 		String sql = "INSERT INTO clusters (network_id, tagname) VALUES (?, ?) RETURNING cluster_id";
 
-		int clusterId = getJdbcTemplate().queryForInt(sql,
-				new Object[] { networkId, cluster.getTagname() });
+		long clusterId = getJdbcTemplate().queryForLong(sql, new Object[] { networkId, cluster.getTagname() });
 
 		switch (cluster.getTagname()) {
 		case "obs":
@@ -63,8 +61,7 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 			}
 			break;
 		case "height-differences":
-			for (HeightDifference heightDifference : cluster
-					.getHeightDifferences()) {
+			for (HeightDifference heightDifference : cluster.getHeightDifferences()) {
 				heightDifferenceDao.insert(heightDifference, clusterId);
 			}
 			break;
@@ -74,8 +71,7 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 			}
 			break;
 		default:
-			logger.error("Unrecognized cluster during inserting - "
-					+ cluster.getTagname());
+			logger.error("Unrecognized cluster during inserting - " + cluster.getTagname());
 			break;
 		}
 	}
@@ -92,8 +88,7 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 	public void update(Cluster cluster) {
 		String sql = "UPDATE clusters SET tagname=? WHERE cluster_id=?";
 
-		getJdbcTemplate().update(sql,
-				new Object[] { cluster.getTagname(), cluster.getId() });
+		getJdbcTemplate().update(sql, new Object[] { cluster.getTagname(), cluster.getId() });
 
 	}
 
@@ -102,8 +97,7 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 
 		String sql = "SELECT * FROM clusters WHERE network_id = ?";
 
-		List<Cluster> clusters = getJdbcTemplate().query(sql,
-				new Object[] { network.getId() }, new ClusterMapper());
+		List<Cluster> clusters = getJdbcTemplate().query(sql, new Object[] { network.getId() }, new ClusterMapper());
 
 		return clusters;
 	}
@@ -118,13 +112,10 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 			cluster.setId(rs.getLong("cluster_id"));
 			cluster.setTagname(rs.getString("tagname"));
 			/* cluster.setCovmat(rs.getObject("covmat_id")); */
-			cluster.setCoordinates(coordinateDao
-					.findCoordinatesInCluster(cluster));
-			cluster.setHeightDifferences(heightDifferenceDao
-					.findHeightDifferencesInCluster(cluster));
+			cluster.setCoordinates(coordinateDao.findCoordinatesInCluster(cluster));
+			cluster.setHeightDifferences(heightDifferenceDao.findHeightDifferencesInCluster(cluster));
 			cluster.setVectors(vectorDao.findVectorsInCluster(cluster));
-			cluster.setObservations(observationDao
-					.findObservationsInCluster(cluster));
+			cluster.setObservations(observationDao.findObservationsInCluster(cluster));
 
 			return cluster;
 		}

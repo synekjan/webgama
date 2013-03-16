@@ -32,8 +32,7 @@ public class JdbcAuthorityDao extends JdbcDaoSupport implements AuthorityDao {
 
 		String sql = "SELECT * FROM authorities WHERE user_id = ?";
 
-		List<Authority> list = getJdbcTemplate().query(sql,
-				new Object[] { user.getId() }, new AuthorityMapper());
+		List<Authority> list = getJdbcTemplate().query(sql, new Object[] { user.getId() }, new AuthorityMapper());
 
 		return list;
 	}

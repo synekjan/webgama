@@ -50,7 +50,7 @@ public class IndexController {
 			ModelAndView mav = new ModelAndView("index");
 			mav.addObject("date", dateTime);
 			
-			mav.addObject("ownCalculationCount", adjustmentManager.getInputCountbyUsername(username));
+			mav.addObject("ownCalculationCount", adjustmentManager.getCalculationCountbyUsername(username));
 			
 			mav.addObject("locale", locale);
 			mav.addObject("timeFormatter", timeFormatter);
@@ -78,7 +78,7 @@ public class IndexController {
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("date", dateTime);
 		
-		mav.addObject("ownCalculationCount", adjustmentManager.getInputCountbyUsername(username));
+		mav.addObject("ownCalculationCount", adjustmentManager.getCalculationCountbyUsername(username));
 		
 		mav.addObject("locale", locale);
 		mav.addObject("timeFormatter", timeFormatter);

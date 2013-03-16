@@ -49,10 +49,21 @@
 	</bean>
 
 
-	<!-- ******************** **** INPUT part **** ******************** -->
+	<!-- ******************** **** CALCULATIONS part **** ******************** -->
+	<bean id="calculationDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcCalculationDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="inputDao" ref="inputDao" />
+		<property name="outputDao" ref="outputDao" />
+		<property name="userDao" ref="userDao" />
+	</bean>
+
+	<bean id="outputDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcOutputDao">
+		<property name="dataSource" ref="dataSource" />
+
+	</bean>
+
 	<bean id="inputDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcInputDao">
 		<property name="dataSource" ref="dataSource" />
-		<property name="userDao" ref="userDao" />
 		<property name="networkDao" ref="networkDao" />
 	</bean>
 

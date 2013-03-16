@@ -7,7 +7,7 @@ import cz.cvut.fsv.webgama.domain.HeightDifference;
 
 public interface HeightDifferenceDao {
 
-	public void insert(HeightDifference heightDifference, Integer clusterId);
+	public void insert(HeightDifference heightDifference, Long clusterId);
 
 	public void delete(HeightDifference heightDifference);
 

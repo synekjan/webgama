@@ -28,11 +28,11 @@ public class JdbcNetworkDao extends JdbcDaoSupport implements NetworkDao {
 	}
 
 	@Override
-	public void insert(Network network, Integer inputId) {
+	public void insert(Network network, Long inputId) {
 
 		String sql = "INSERT INTO networks (input_id, axes_xy, angles, epoch, description, sigma_apr, conf_pr, tol_abs, sigma_act, update_cc, direction_stdev, angle_stdev, zenith_angle_stdev, distance_stdev) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING network_id";
 
-		int networkId = getJdbcTemplate().queryForInt(
+		long networkId = getJdbcTemplate().queryForLong(
 				sql,
 				new Object[] { inputId, network.getAxesXY(),
 						network.getAngles(), network.getEpoch(),

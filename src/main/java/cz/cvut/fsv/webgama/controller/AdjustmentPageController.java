@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
+import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.domain.Input;
 import cz.cvut.fsv.webgama.domain.Point;
 import cz.cvut.fsv.webgama.exception.PermissionDeniedException;
@@ -29,8 +30,7 @@ public class AdjustmentPageController extends MultiActionController {
 	@Inject
 	private AdjustmentManager adjustmentManager;
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(AdjustmentPageController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdjustmentPageController.class);
 
 	@RequestMapping(value = { "", "new" }, method = RequestMethod.GET)
 	protected ModelAndView newInput(HttpServletRequest request) {
@@ -45,17 +45,13 @@ public class AdjustmentPageController extends MultiActionController {
 	}
 
 	@RequestMapping(value = { "", "new" }, method = RequestMethod.POST)
-	protected ModelAndView postNewInput(
-			@Valid @ModelAttribute("input") AdjustmentPageForm adjustmentForm,
+	protected ModelAndView postNewInput(@Valid @ModelAttribute("input") AdjustmentPageForm adjustmentForm,
 			BindingResult result, HttpServletRequest request) {
-
-		Point point = new Point();
-		point.setName("test");
 
 		if (result.hasErrors()) {
 			String username = request.getUserPrincipal().getName();
-			logger.info("User[" + username + "] had errors["
-					+ result.getErrorCount() + "] in adjustment one page form!");
+			logger.info("User[" + username + "] had errors[" + result.getErrorCount()
+					+ "] in adjustment one page form!");
 			return new ModelAndView("/adjustment/onepage/new", "errorCount", result.getErrorCount());
 		}
 
@@ -65,24 +61,24 @@ public class AdjustmentPageController extends MultiActionController {
 		return new ModelAndView("redirect:/calculations");
 	}
 
-	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	protected ModelAndView editInput(@PathVariable Long id,
-			HttpServletRequest request) {
+	protected ModelAndView editInput(@PathVariable Long id, HttpServletRequest request) {
 
-		//Check if path variable is in database otherwise throw 404 HTTP Status code
-		if (id <= 0 || !adjustmentManager.isInputIdInDB(id))  {
+		// Check if path variable is in database otherwise throw 404 HTTP Status
+		// code
+		if (id <= 0 || !adjustmentManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
-		
-		Input input = adjustmentManager.getInputById(id);
-		//Check if user has permission to edit
-		if (!request.getUserPrincipal().getName().equals(input.getUser().getUsername())) {
+
+		Calculation calculation = adjustmentManager.getCalculationById(id);
+		// Check if user has permission to edit
+		if (!request.getUserPrincipal().getName().equals(calculation.getUser().getUsername())) {
 			throw new PermissionDeniedException();
 		}
 
 		ModelAndView mav = new ModelAndView("/adjustment/onepage/new");
 
+		Input input = calculation.getInput();
 		AdjustmentPageForm adjustmentForm = new AdjustmentPageForm(input);
 
 		mav.addObject("input", adjustmentForm);
@@ -92,15 +88,19 @@ public class AdjustmentPageController extends MultiActionController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
 	protected ModelAndView postEditedInput(@PathVariable Long id,
-			@Valid @ModelAttribute("input") AdjustmentPageForm adjustmentForm,
-			BindingResult result, HttpServletRequest request) {
+			@Valid @ModelAttribute("input") AdjustmentPageForm adjustmentForm, BindingResult result,
+			HttpServletRequest request) {
 
 		if (result.hasErrors()) {
 			String username = request.getUserPrincipal().getName();
-			
-			logger.info("User[" + username + "] had errors["
-					+ result.getErrorCount() + "] in adjustment one page form!");
+
+			logger.info("User[" + username + "] had errors[" + result.getErrorCount()
+					+ "] in adjustment one page form!");
 			return new ModelAndView("/adjustment/onepage/new", "errorCount", result.getErrorCount());
+		}
+
+		for (Point point : adjustmentForm.getPoints()) {
+			System.out.println(point.getAdj());
 		}
 
 		return new ModelAndView("redirect:/calculations");

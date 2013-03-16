@@ -11,20 +11,16 @@ import cz.cvut.fsv.webgama.dao.HeightDifferenceDao;
 import cz.cvut.fsv.webgama.domain.Cluster;
 import cz.cvut.fsv.webgama.domain.HeightDifference;
 
-public class JdbcHeightDifferenceDao extends JdbcDaoSupport implements
-		HeightDifferenceDao {
+public class JdbcHeightDifferenceDao extends JdbcDaoSupport implements HeightDifferenceDao {
 
 	@Override
-	public void insert(HeightDifference heightDifference, Integer clusterId) {
+	public void insert(HeightDifference heightDifference, Long clusterId) {
 		String sql = "INSERT INTO height_differences (cluster_id, from_id, to_id, val, stdev, dist) VALUES (?, ?, ?, ?, ?, ?)";
 
-		getJdbcTemplate()
-				.update(sql,
-						new Object[] { clusterId, heightDifference.getFrom(),
-								heightDifference.getTo(),
-								heightDifference.getVal(),
-								heightDifference.getStdev(),
-								heightDifference.getDist() });
+		getJdbcTemplate().update(
+				sql,
+				new Object[] { clusterId, heightDifference.getFrom(), heightDifference.getTo(),
+						heightDifference.getVal(), heightDifference.getStdev(), heightDifference.getDist() });
 
 	}
 
@@ -32,8 +28,7 @@ public class JdbcHeightDifferenceDao extends JdbcDaoSupport implements
 	public void delete(HeightDifference heightDifference) {
 		String sql = "DELETE FROM height_differences WHERE height_difference_id = ?";
 
-		getJdbcTemplate()
-				.update(sql, new Object[] { heightDifference.getId() });
+		getJdbcTemplate().update(sql, new Object[] { heightDifference.getId() });
 
 	}
 
@@ -43,10 +38,8 @@ public class JdbcHeightDifferenceDao extends JdbcDaoSupport implements
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { heightDifference.getFrom(),
-						heightDifference.getTo(), heightDifference.getVal(),
-						heightDifference.getStdev(),
-						heightDifference.getDist(), heightDifference.getId() });
+				new Object[] { heightDifference.getFrom(), heightDifference.getTo(), heightDifference.getVal(),
+						heightDifference.getStdev(), heightDifference.getDist(), heightDifference.getId() });
 
 	}
 
@@ -54,30 +47,25 @@ public class JdbcHeightDifferenceDao extends JdbcDaoSupport implements
 	public List<HeightDifference> findHeightDifferencesInCluster(Cluster cluster) {
 		String sql = "SELECT * FROM height_differences WHERE cluster_id = ?";
 
-		List<HeightDifference> heightDifferences = getJdbcTemplate().query(sql,
-				new Object[] { cluster.getId() }, new HeightDifferenceMapper());
+		List<HeightDifference> heightDifferences = getJdbcTemplate().query(sql, new Object[] { cluster.getId() },
+				new HeightDifferenceMapper());
 
 		return heightDifferences;
 	}
 
-	private static class HeightDifferenceMapper implements
-			RowMapper<HeightDifference> {
+	private static class HeightDifferenceMapper implements RowMapper<HeightDifference> {
 
 		@Override
-		public HeightDifference mapRow(ResultSet rs, int rowNum)
-				throws SQLException {
+		public HeightDifference mapRow(ResultSet rs, int rowNum) throws SQLException {
 
 			HeightDifference heightDifference = new HeightDifference();
 
 			heightDifference.setId(rs.getLong("height_difference_id"));
 			heightDifference.setFrom(rs.getString("from_id"));
 			heightDifference.setTo(rs.getString("to_id"));
-			heightDifference.setVal(rs.getObject("val") != null ? rs
-					.getDouble("val") : null);
-			heightDifference.setStdev(rs.getObject("stdev") != null ? rs
-					.getDouble("stdev") : null);
-			heightDifference.setDist(rs.getObject("dist") != null ? rs
-					.getDouble("dist") : null);
+			heightDifference.setVal(rs.getObject("val") != null ? rs.getDouble("val") : null);
+			heightDifference.setStdev(rs.getObject("stdev") != null ? rs.getDouble("stdev") : null);
+			heightDifference.setDist(rs.getObject("dist") != null ? rs.getDouble("dist") : null);
 
 			return heightDifference;
 		}

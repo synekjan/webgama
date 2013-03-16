@@ -11,8 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.io.CharStreams;
 
-import cz.cvut.fsv.webgama.dao.InputDao;
+import cz.cvut.fsv.webgama.dao.CalculationDao;
 import cz.cvut.fsv.webgama.dao.UserDao;
+import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.domain.Input;
 import cz.cvut.fsv.webgama.domain.ProcessOutput;
 import cz.cvut.fsv.webgama.parser.InputParser;
@@ -21,10 +22,9 @@ import cz.cvut.fsv.webgama.service.ProcessManager;
 
 public class AdjustmentManagerImpl implements AdjustmentManager {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(AdjustmentManagerImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdjustmentManagerImpl.class);
 
-	private InputDao inputDao;
+	private CalculationDao calculationDao;
 
 	private InputParser inputParser;
 
@@ -32,48 +32,8 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 
 	private ProcessManager processManager;
 
-	@Override
-	@Transactional
-	public String adjustFromFile(MultipartFile file, String username) {
-		Input input = null;
-		ProcessOutput processOutput = null;
-		try {
-			// Google Guava InputStream to String
-			String stringFromStream = CharStreams
-					.toString(new InputStreamReader(file.getInputStream(),
-							"UTF-8"));
-			processOutput = processManager.runExternalGama(stringFromStream, username);
-			
-			if (processOutput.getExitValue() != 0)
-				return processOutput.getErrorMessage();
-
-			input = inputParser.parseInput(file.getInputStream());
-			input.setUser(userDao.findUserByUsername(username));
-			input.setName("Import-" + file.getOriginalFilename());
-			input.setFileContent(stringFromStream);
-			input.setFilename(file.getOriginalFilename());
-			input.setAlgorithm("svd");
-			input.setAngUnits(400);
-			input.setLatitude(0.0);
-
-			inputDao.insert(input);
-
-		} catch (IOException e) {
-			logger.error("Error during converting MultipartFile to InputStream");
-		}
-
-		return processOutput.getResult();
-	}
-
-	@Transactional
-	@Override
-	public List<Input> getInputsbyUsername(String username) {
-
-		return inputDao.findInputsByUser(userDao.findUserByUsername(username));
-	}
-
-	public void setInputDao(InputDao inputDao) {
-		this.inputDao = inputDao;
+	public void setCalculationDao(CalculationDao calculationDao) {
+		this.calculationDao = calculationDao;
 	}
 
 	public void setInputParser(InputParser inputParser) {
@@ -88,24 +48,68 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		this.processManager = processManager;
 	}
 
+	@Override
+	@Transactional
+	public String adjustFromFile(MultipartFile file, String username) {
+		Input input = null;
+		ProcessOutput processOutput = null;
+
+		try (InputStreamReader inputStreamReader = new InputStreamReader(file.getInputStream(), "UTF-8")) {
+
+			// Google Guava InputStream to String
+			String stringFromStream = CharStreams.toString(inputStreamReader);
+
+			processOutput = processManager.runExternalGama(stringFromStream, username);
+
+			if (processOutput.getExitValue() != 0)
+				return processOutput.getErrorMessage();
+
+			input = inputParser.parseInput(file.getInputStream());
+			input.setXmlContent(stringFromStream);
+
+			Calculation calculation = new Calculation();
+			calculation.setUser(userDao.findUserByUsername(username));
+			calculation.setName("Import-" + file.getOriginalFilename());
+			calculation.setProgress("not-calculated");
+			calculation.setLanguage("en");
+			calculation.setAlgorithm("svd");
+			calculation.setAngUnits(400);
+			calculation.setLatitude(0.0);
+			calculation.setInput(input);
+
+			calculationDao.insert(calculation);
+
+		} catch (IOException e) {
+			logger.error("Error during converting MultipartFile to InputStream");
+		}
+
+		return processOutput.getResult();
+	}
+
 	@Transactional
 	@Override
-	public int getInputCountbyUsername(String username) {
+	public List<Calculation> getCalculationsbyUsername(String username) {
 
-		return inputDao.getInputCountByUser(userDao
-				.findUserByUsername(username));
+		return calculationDao.findCalculationsByUser(userDao.findUserByUsername(username));
+	}
+
+	@Transactional
+	@Override
+	public long getCalculationCountbyUsername(String username) {
+
+		return calculationDao.getCalculationCountByUser(userDao.findUserByUsername(username));
 	}
 
 	@Override
-	public Input getInputById(long id) {
+	public Calculation getCalculationById(long id) {
 
-		return inputDao.findInputById(id);
+		return calculationDao.findCalculationById(id);
 	}
 
 	@Override
-	public boolean isInputIdInDB(Long id) {
+	public boolean isCalculationIdInDB(Long id) {
 
-		return inputDao.isInputIdInDB(id);
+		return calculationDao.isCalculationIdInDB(id);
 	}
 
 }

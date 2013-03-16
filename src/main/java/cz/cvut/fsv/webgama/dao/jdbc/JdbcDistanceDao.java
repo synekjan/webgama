@@ -14,16 +14,14 @@ import cz.cvut.fsv.webgama.domain.Observation;
 public class JdbcDistanceDao extends JdbcDaoSupport implements DistanceDao {
 
 	@Override
-	public void insert(Distance distance, Integer observationId) {
+	public void insert(Distance distance, Long observationId) {
 
 		String sql = "INSERT INTO distances (observation_id, from_id, to_id, val, stdev, from_dh, to_dh) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { observationId, distance.getFrom(),
-						distance.getTo(), distance.getVal(),
-						distance.getStdev(), distance.getFromDh(),
-						distance.getToDh() });
+				new Object[] { observationId, distance.getFrom(), distance.getTo(), distance.getVal(),
+						distance.getStdev(), distance.getFromDh(), distance.getToDh() });
 	}
 
 	@Override
@@ -36,15 +34,13 @@ public class JdbcDistanceDao extends JdbcDaoSupport implements DistanceDao {
 
 	@Override
 	public void update(Distance distance) {
-		
+
 		String sql = "UPDATE distances SET from_id=? to_id=?, val=?, stdev=?, from_dh=?, to_dh=? WHERE distance_id=?";
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { distance.getFrom(),
-						distance.getTo(), distance.getVal(),
-						distance.getStdev(), distance.getFromDh(),
-						distance.getToDh(), distance.getId() });
+				new Object[] { distance.getFrom(), distance.getTo(), distance.getVal(), distance.getStdev(),
+						distance.getFromDh(), distance.getToDh(), distance.getId() });
 	}
 
 	@Override
@@ -52,8 +48,8 @@ public class JdbcDistanceDao extends JdbcDaoSupport implements DistanceDao {
 
 		String sql = "SELECT * FROM distances WHERE observation_id = ?";
 
-		List<Distance> distances = getJdbcTemplate().query(sql,
-				new Object[] { observation.getId() }, new DistanceMapper());
+		List<Distance> distances = getJdbcTemplate().query(sql, new Object[] { observation.getId() },
+				new DistanceMapper());
 
 		return distances;
 	}

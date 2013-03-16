@@ -16,8 +16,7 @@ public class JdbcRoleDao extends JdbcDaoSupport implements RoleDao {
 
 		String sql = "SELECT * FROM roles WHERE role_id = ?";
 
-		Role role = getJdbcTemplate().queryForObject(sql, new Object[] { id },
-				new RoleMapper());
+		Role role = getJdbcTemplate().queryForObject(sql, new Object[] { id }, new RoleMapper());
 
 		return role;
 	}

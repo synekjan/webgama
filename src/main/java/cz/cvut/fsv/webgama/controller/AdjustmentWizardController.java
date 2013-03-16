@@ -19,12 +19,12 @@ import cz.cvut.fsv.webgama.domain.Input;
 @Scope("session")
 @RequestMapping("/adjustment/wizard")
 public class AdjustmentWizardController extends MultiActionController implements Serializable {
-	
+
 	private static final long serialVersionUID = 5171649431095330184L;
-	
+
 	private Input input = new Input();
 
-	@RequestMapping(value = {"", "new"}, method = RequestMethod.GET)
+	@RequestMapping(value = { "", "new" }, method = RequestMethod.GET)
 	protected ModelAndView newInput(HttpServletRequest request) {
 
 		long startTime = System.nanoTime();
@@ -32,50 +32,49 @@ public class AdjustmentWizardController extends MultiActionController implements
 
 		double time = (double) (System.nanoTime() - startTime) / 1000000;
 		mav.addObject("time", time);
-		
+
 		input = new Input();
-		input.setAlgorithm(request.getUserPrincipal().getName());
 
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/step1", method = RequestMethod.POST)
 	protected ModelAndView step1(HttpServletRequest request, Locale locale, HttpServletResponse response) {
-		
+
 		ModelAndView mav = new ModelAndView("adjustment/wizard/step1");
-		
+
 		mav.addObject("input", input);
-		
+
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/step2", method = RequestMethod.POST)
 	protected ModelAndView step2(HttpServletRequest request, Locale locale, HttpServletResponse response) {
-		
+
 		ModelAndView mav = new ModelAndView("adjustment/wizard/step2");
-		
+
 		mav.addObject("input", input);
-		
+
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/step3", method = RequestMethod.POST)
 	protected ModelAndView step3(HttpServletRequest request, Locale locale, HttpServletResponse response) {
-		
+
 		ModelAndView mav = new ModelAndView("adjustment/wizard/step3");
-		
+
 		mav.addObject("input", input);
-		
+
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/step4", method = RequestMethod.POST)
 	protected ModelAndView step4(HttpServletRequest request, Locale locale, HttpServletResponse response) {
-		
+
 		ModelAndView mav = new ModelAndView("adjustment/wizard/step4");
-		
+
 		mav.addObject("input", input);
-		
+
 		return mav;
 	}
 

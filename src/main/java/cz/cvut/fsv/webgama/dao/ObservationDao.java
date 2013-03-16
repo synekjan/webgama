@@ -7,7 +7,7 @@ import cz.cvut.fsv.webgama.domain.Observation;
 
 public interface ObservationDao {
 	
-	public void insert(Observation observation, Integer clusterId);
+	public void insert(Observation observation, Long clusterId);
 
 	public void delete(Observation observation);
 

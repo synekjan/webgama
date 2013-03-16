@@ -1,26 +1,18 @@
 package cz.cvut.fsv.webgama.dao;
 
-import java.util.List;
-
+import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.domain.Input;
-import cz.cvut.fsv.webgama.domain.User;
 
 public interface InputDao {
 
-	public void insert(Input input);
+	public void insert(Input input, Long calculationId);
 
 	public void delete(Input input);
 
 	public void update(Input input);
 
-	public List<Input> getInputList();
-	
-	public List<Input> findInputsByUser(User user);
-	
 	public Input findInputById(Long id);
-	
-	public int getInputCountByUser(User user);
-	
-	public boolean isInputIdInDB(Long id);
+
+	public Input findInputInCalculation(Calculation calculation);
 
 }

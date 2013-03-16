@@ -7,7 +7,7 @@ import cz.cvut.fsv.webgama.domain.SlopeDistance;
 
 public interface SlopeDistanceDao {
 
-	public void insert(SlopeDistance slopeDistance, Integer observationId);
+	public void insert(SlopeDistance slopeDistance, Long observationId);
 
 	public void delete(SlopeDistance slopeDistance);
 

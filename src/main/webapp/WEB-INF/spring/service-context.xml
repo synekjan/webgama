@@ -28,7 +28,7 @@
 	</bean>
 
 	<bean id="adjustmentManager" class="cz.cvut.fsv.webgama.service.impl.AdjustmentManagerImpl">
-		<property name="inputDao" ref="inputDao" />
+		<property name="calculationDao" ref="calculationDao" />
 		<property name="inputParser" ref="inputParser" />
 		<property name="userDao" ref="userDao" />
 		<property name="processManager" ref="processManager" />

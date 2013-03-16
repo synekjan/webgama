@@ -14,13 +14,12 @@ import cz.cvut.fsv.webgama.domain.Coordinate;
 public class JdbcCoordinateDao extends JdbcDaoSupport implements CoordinateDao {
 
 	@Override
-	public void insert(Coordinate coordinate, Integer clusterId) {
+	public void insert(Coordinate coordinate, Long clusterId) {
 		String sql = "INSERT INTO coordinates (cluster_id, id, x, y, z) VALUES (?, ?, ?, ?, ?)";
 
 		getJdbcTemplate()
 				.update(sql,
-						new Object[] { clusterId, coordinate.getName(),
-								coordinate.getX(), coordinate.getY(),
+						new Object[] { clusterId, coordinate.getName(), coordinate.getX(), coordinate.getY(),
 								coordinate.getZ() });
 	}
 
@@ -38,8 +37,7 @@ public class JdbcCoordinateDao extends JdbcDaoSupport implements CoordinateDao {
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { coordinate.getName(), coordinate.getX(),
-						coordinate.getY(), coordinate.getZ(),
+				new Object[] { coordinate.getName(), coordinate.getX(), coordinate.getY(), coordinate.getZ(),
 						coordinate.getId() });
 
 	}
@@ -48,8 +46,8 @@ public class JdbcCoordinateDao extends JdbcDaoSupport implements CoordinateDao {
 	public List<Coordinate> findCoordinatesInCluster(Cluster cluster) {
 		String sql = "SELECT * FROM coordinates WHERE cluster_id = ?";
 
-		List<Coordinate> coordinates = getJdbcTemplate().query(sql,
-				new Object[] { cluster.getId() }, new CoordinateMapper());
+		List<Coordinate> coordinates = getJdbcTemplate().query(sql, new Object[] { cluster.getId() },
+				new CoordinateMapper());
 
 		return coordinates;
 	}
@@ -62,12 +60,9 @@ public class JdbcCoordinateDao extends JdbcDaoSupport implements CoordinateDao {
 
 			coordinate.setId(rs.getLong("coordinate_id"));
 			coordinate.setName(rs.getString("id"));
-			coordinate.setX(rs.getObject("x") != null ? rs.getDouble("x")
-					: null);
-			coordinate.setY(rs.getObject("y") != null ? rs.getDouble("y")
-					: null);
-			coordinate.setZ(rs.getObject("z") != null ? rs.getDouble("z")
-					: null);
+			coordinate.setX(rs.getObject("x") != null ? rs.getDouble("x") : null);
+			coordinate.setY(rs.getObject("y") != null ? rs.getDouble("y") : null);
+			coordinate.setZ(rs.getObject("z") != null ? rs.getDouble("z") : null);
 
 			return coordinate;
 		}

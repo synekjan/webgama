@@ -18,6 +18,7 @@ DROP TABLE networks CASCADE;
 DROP TABLE input_privileges CASCADE;
 DROP TABLE outputs CASCADE;
 DROP TABLE inputs CASCADE;
+DROP TABLE calculations CASCADE;
 
 DROP TABLE authorities CASCADE;
 DROP TABLE roles CASCADE;
@@ -145,17 +146,24 @@ GRANT ALL ON confirmations_confirmation_id_seq TO synekjan;
 
 -----  INPUT PART  -----
 
+CREATE TABLE calculations (
+calculation_id	BIGSERIAL PRIMARY KEY,
+user_id 		BIGINT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+name			VARCHAR(80) NOT NULL,
+progress		VARCHAR(20) NOT NULL,
+language		VARCHAR(2) NOT NULL,
+algorithm		VARCHAR(12),
+ang_units		INTEGER,
+latitude		DOUBLE PRECISION,
+ellipsoid		VARCHAR(20),
+time 			TIMESTAMP DEFAULT now()
+);
+
 
 CREATE TABLE inputs (
 input_id 		BIGSERIAL PRIMARY KEY,
-user_id 		BIGINT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
-name			VARCHAR(80) NOT NULL,
-filename 		VARCHAR(255) NOT NULL,
-file_content 	TEXT,
-algorithm		VARCHAR(12) NOT NULL,
-ang_units		INTEGER NOT NULL,
-latitude		DOUBLE PRECISION NOT NULL,
-ellipsoid		VARCHAR(20),
+calculation_id 	BIGINT NOT NULL REFERENCES calculations(calculation_id) ON DELETE CASCADE,
+xml_content 	TEXT,
 version			VARCHAR(10),
 time 			TIMESTAMP DEFAULT now()
 );
@@ -324,16 +332,19 @@ INSERT INTO privileges (privilege_id, privilege) VALUES (3, 'FULL');
 CREATE TABLE input_privileges (
 input_privilege_id BIGSERIAL PRIMARY KEY,
 user_id			BIGINT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE, 
-input_id		BIGINT NOT NULL REFERENCES inputs(input_id) ON DELETE CASCADE,
+calculation_id	BIGINT NOT NULL REFERENCES calculations(calculation_id) ON DELETE CASCADE,
 privilege_id	INTEGER NOT NULL REFERENCES privileges(privilege_id)
 );
 
 -----  OUTPUT PART  -----
 CREATE TABLE outputs (
 output_id 		BIGSERIAL PRIMARY KEY,
-input_id 		BIGINT NOT NULL REFERENCES inputs(input_id) ON DELETE CASCADE,
+calculation_id 	BIGINT NOT NULL REFERENCES calculations(calculation_id) ON DELETE CASCADE,
 xml_content		TEXT,
-text_content	TEXT
+text_content	TEXT,
+html_content	TEXT,
+svg_content		TEXT,
+time			TIMESTAMP DEFAULT now()
 );
 
 
@@ -349,6 +360,8 @@ time			TIMESTAMP NOT NULL DEFAULT now()
 /****************
  *    RIGHTS    *
  ****************/
+GRANT ALL ON calculations TO synekjan;
+GRANT ALL ON calculations_calculation_id_seq TO synekjan;
 GRANT ALL ON inputs TO synekjan;
 GRANT ALL ON inputs_input_id_seq TO synekjan;
 GRANT ALL ON networks TO synekjan;

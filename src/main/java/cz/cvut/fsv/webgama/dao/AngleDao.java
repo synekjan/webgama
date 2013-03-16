@@ -7,7 +7,7 @@ import cz.cvut.fsv.webgama.domain.Observation;
 
 public interface AngleDao {
 
-	public void insert(Angle angle, Integer observationId);
+	public void insert(Angle angle, Long observationId);
 
 	public void delete(Angle angle);
 

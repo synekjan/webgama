@@ -33,8 +33,9 @@ public class ImportController extends MultiActionController {
 	protected ModelAndView uploadXML(@RequestParam("file") MultipartFile file,
 			HttpServletRequest request) {
 
-		if (!file.isEmpty()) {
+		if (!file.isEmpty() || file.getSize() < 1000000) {
 
+			
 			String username = request.getUserPrincipal().getName();
 
 			String result = adjustmentManager.adjustFromFile(file, username);

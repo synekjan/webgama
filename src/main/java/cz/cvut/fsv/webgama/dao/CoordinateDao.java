@@ -7,7 +7,7 @@ import cz.cvut.fsv.webgama.domain.Coordinate;
 
 public interface CoordinateDao {
 
-	public void insert(Coordinate coordinate, Integer clusterId);
+	public void insert(Coordinate coordinate, Long clusterId);
 
 	public void delete(Coordinate coordinate);
 
