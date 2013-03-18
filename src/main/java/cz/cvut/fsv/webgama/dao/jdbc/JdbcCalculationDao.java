@@ -125,7 +125,7 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 			calculation.setEllipsoid(rs.getString("ellipsoid"));
 			calculation.setTime(new DateTime(rs.getTimestamp("time").getTime()));
 			calculation.setInput(inputDao.findInputInCalculation(calculation));
-			calculation.setOutput(outputDao.findOutputInCalculation(calculation));
+			calculation.setOutput("calculated".equals(calculation.getProgress()) ? outputDao.findOutputInCalculation(calculation) : null);
 
 			return calculation;
 		}
