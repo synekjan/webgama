@@ -15,6 +15,7 @@ import cz.cvut.fsv.webgama.dao.CalculationDao;
 import cz.cvut.fsv.webgama.dao.UserDao;
 import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.domain.Input;
+import cz.cvut.fsv.webgama.domain.Output;
 import cz.cvut.fsv.webgama.domain.ProcessOutput;
 import cz.cvut.fsv.webgama.parser.InputParser;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
@@ -59,11 +60,6 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 			// Google Guava InputStream to String
 			String stringFromStream = CharStreams.toString(inputStreamReader);
 
-			processOutput = processManager.runExternalGama(stringFromStream, username);
-
-			if (processOutput.getExitValue() != 0)
-				return processOutput.getErrorMessage();
-
 			input = inputParser.parseInput(file.getInputStream());
 			input.setXmlContent(stringFromStream);
 
@@ -76,6 +72,19 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 			calculation.setAngUnits(400);
 			calculation.setLatitude(0.0);
 			calculation.setInput(input);
+			
+			//run GNU Gama calculation 
+			processOutput = processManager.runExternalGama(calculation, username);
+
+			if (processOutput.getExitValue() != 0)
+				return processOutput.getErrorMessage();
+			
+			Output output = new Output();
+			output.setXmlContent(processOutput.getXmlResult());
+			output.setHtmlContent(processOutput.getHtmlResult());
+			output.setSvgContent(processOutput.getSvgResult());
+			output.setTextContent(processOutput.getTextResult());
+			calculation.setOutput(output);
 
 			calculationDao.insert(calculation);
 
@@ -83,7 +92,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 			logger.error("Error during converting MultipartFile to InputStream");
 		}
 
-		return processOutput.getResult();
+		return processOutput.getXmlResult();
 	}
 
 	@Transactional

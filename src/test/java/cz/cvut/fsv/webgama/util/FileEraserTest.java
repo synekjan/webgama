@@ -19,7 +19,7 @@ public class FileEraserTest {
 		
 		for (int i = 0; i < 10; i++) {
 			
-			File file = new File("/tmp/" + Generator.generateFilename("user"));
+			File file = new File("/tmp/" + Generator.generateInputFilename("user"));
 			file.createNewFile();
 			
 		}

@@ -2,8 +2,6 @@ package cz.cvut.fsv.webgama.domain;
 
 import org.joda.time.DateTime;
 
-//TODO --- implemented
-//FIXME
 public class Output {
 
 	private Long id;
