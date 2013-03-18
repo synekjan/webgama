@@ -59,7 +59,6 @@
 
 	<bean id="outputDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcOutputDao">
 		<property name="dataSource" ref="dataSource" />
-
 	</bean>
 
 	<bean id="inputDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcInputDao">
