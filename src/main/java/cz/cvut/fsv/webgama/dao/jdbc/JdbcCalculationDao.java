@@ -50,14 +50,14 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 	@Override
 	public void update(Calculation calculation) {
 
-		String sql = "UPDATE calculations SET user_id=?, name=? progress=?, language=?, algorithm=?, ang_units=?, latitude=?, ellipsoid=?, time=? WHERE calculation_id = ?";
+		String sql = "UPDATE calculations SET user_id=?, name=?, progress=?, language=?, algorithm=?, ang_units=?, latitude=?, ellipsoid=? WHERE calculation_id = ?";
 
 		getJdbcTemplate().update(
 				sql,
 				new Object[] { calculation.getUser().getId(), calculation.getName(), calculation.getProgress(),
 						calculation.getLanguage(), calculation.getAlgorithm(), calculation.getAngUnits(),
-						calculation.getLatitude(), calculation.getEllipsoid(), calculation.getTime(),
-						calculation.getId() });
+						calculation.getLatitude(), calculation.getEllipsoid(), calculation.getId() });
+		inputDao.update(calculation.getInput());
 	}
 
 	@Override
@@ -92,20 +92,20 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 	public long getCalculationCountByUser(User user) {
 
 		String sql = "SELECT COUNT(calculation_id) FROM calculations WHERE user_id = ?";
-
+		
 		return getJdbcTemplate().queryForLong(sql, new Object[] { user.getId() });
 	}
 
 	@Override
 	public boolean isCalculationIdInDB(Long id) {
-		 String sql = "SELECT * FROM calculations WHERE calculation_id = ?";
-         List<Calculation> ids = getJdbcTemplate().query(sql, new Object[] {id}, new CalculationMapper());
+		String sql = "SELECT * FROM calculations WHERE calculation_id = ?";
+		List<Calculation> ids = getJdbcTemplate().query(sql, new Object[] { id }, new CalculationMapper());
 
-         if (ids.isEmpty()) {
-                 return false;
-         } else {
-                 return true;
-         }
+		if (ids.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	private class CalculationMapper implements RowMapper<Calculation> {
@@ -126,7 +126,8 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 			calculation.setEllipsoid(rs.getString("ellipsoid"));
 			calculation.setTime(new DateTime(rs.getTimestamp("time").getTime()));
 			calculation.setInput(inputDao.findInputInCalculation(calculation));
-			calculation.setOutput("calculated".equals(calculation.getProgress()) ? outputDao.findOutputInCalculation(calculation) : null);
+			calculation.setOutput("calculated".equals(calculation.getProgress()) ? outputDao
+					.findOutputInCalculation(calculation) : null);
 
 			return calculation;
 		}

@@ -127,6 +127,7 @@
 									#foreach ($point in $input.points) #set( $i =
 									"${foreach.index}" )
 									<div id="point_$i">
+									#springFormHiddenInput("input.points[$i].id" "")
 										<fieldset>
 											<legend>
 												#springBind("input.points[$i].name") <input type="text"
@@ -197,11 +198,15 @@
 
 							<fieldset>
 								<legend>#springMessage("adjustment.onepage.clusters")</legend>
-								#foreach($cluster in $input.clusters) #set( $h =
-								"${foreach.index}" ) #if ($cluster.getObservations().size() !=
-								0) #foreach ($observation in $cluster.observations)
+								#foreach($cluster in $input.clusters) 
+								#set( $h = "${foreach.index}" ) 
+								
+								#if ($cluster.getObservations().size() !=0)
+								#springFormHiddenInput("input.clusters[$h].tagname" "") 
+								#foreach ($observation in $cluster.observations)
 								<fieldset>
 									#set( $i = "${foreach.index}" )
+									#springFormHiddenInput("input.clusters[$h].observations[$i].id" "")
 									<legend>#springMessage("adjustment.onepage.observation")</legend>
 									<div class="small_form_element">
 										<label class="required" for="from">#springMessage("observation.from"):</label>
@@ -235,6 +240,7 @@
 									#foreach ($direction in $observation.directions)
 									<fieldset>
 										#set( $j = "${foreach.index}" )
+										#springFormHiddenInput("input.clusters[$h].observations[$i].directions[$j].id" "")
 										<legend>#springMessage("adjustment.onepage.direction")</legend>
 										<div class="small_form_element">
 											<label class="required"
@@ -277,6 +283,7 @@
 									#foreach ($distance in $observation.distances)
 									<fieldset>
 										#set( $j = "${foreach.index}" )
+										#springFormHiddenInput("input.clusters[$h].observations[$i].distances[$j].id" "")
 										<legend>#springMessage("adjustment.onepage.distance")</legend>
 										<div class="small_form_element">
 											<label for="clusters[$h].observations[$i].distances[$j].from">#springMessage("distance.from"):</label>
@@ -324,6 +331,7 @@
 									#foreach ($angle in $observation.angles)
 									<fieldset>
 										#set( $j = "${foreach.index}" )
+										#springFormHiddenInput("input.clusters[$h].observations[$i].angles[$j].id" "")
 										<legend>#springMessage("adjustment.onepage.angle")</legend>
 										<div class="small_form_element">
 											<label for="clusters[$h].observations[$i].angles[$j].from">#springMessage("angle.from"):</label>
@@ -382,6 +390,7 @@
 									#foreach ($distance in $observation.slopeDistances)
 									<fieldset>
 										#set( $j = "${foreach.index}" )
+										#springFormHiddenInput("input.clusters[$h].observations[$i].slopeDistances[$j].id" "")
 										<legend>#springMessage("adjustment.onepage.slopeDistance")</legend>
 										<div class="small_form_element">
 											<label
@@ -431,6 +440,7 @@
 									#foreach ($distance in $observation.zenithAngles)
 									<fieldset>
 										#set( $j = "${foreach.index}" )
+										#springFormHiddenInput("input.clusters[$h].observations[$i].zenithAngles[$j].id" "")
 										<legend>#springMessage("adjustment.onepage.zenithAngle")</legend>
 										<div class="small_form_element">
 											<label
@@ -482,11 +492,13 @@
 								<!-- COORDINATES -->
 								#elseif ($cluster.getCoordinates().size() != 0)
 								<fieldset>
+									#springFormHiddenInput("input.clusters[$h].tagname" "")
 									<legend>#springMessage("adjustment.onepage.coordinates")</legend>
 									#foreach ($coordinate in $cluster.coordinates)
 									<fieldset>
+										#set( $i = "${foreach.index}" )
+										#springFormHiddenInput("input.clusters[$h].coordinates[$i].id" "")
 										<legend>
-											#set( $i = "${foreach.index}" )
 											#springBind("input.clusters[$h].coordinates[$i].name") <input
 												type="text" name="clusters[$h].coordinates[$i].name"
 												value="$!coordinate.name" /> #showElementErrors()
@@ -517,10 +529,12 @@
 								<!-- HEIGHT DIFFERENCE  -->
 								#elseif ($cluster.getHeightDifferences().size() != 0)
 								<fieldset>
+									#springFormHiddenInput("input.clusters[$h].tagname" "")
 									<legend>#springMessage("adjustment.onepage.heightDifferences")</legend>
 									#foreach ($heightDifference in $cluster.heightDifferences)
 									<fieldset>
 										#set( $i = "${foreach.index}" )
+										#springFormHiddenInput("input.clusters[$h].heightDifferences[$i].id" "")
 										<legend>#springMessage("adjustment.onepage.heightDifference")</legend>
 										<div class="small_form_element">
 											<label class="required"
@@ -562,10 +576,12 @@
 								<!-- VECTORS  -->
 								#elseif ($cluster.getVectors().size() != 0)
 								<fieldset>
+									#springFormHiddenInput("input.clusters[$h].tagname" "")
 									<legend>#springMessage("adjustment.onepage.vectors")</legend>
 									#foreach ($vector in $cluster.vectors)
 									<fieldset>
 										#set( $i = "${foreach.index}" )
+										#springFormHiddenInput("input.clusters[$h].vectors[$i].id" "")
 										<legend>#springMessage("adjustment.onepage.vector")</legend>
 										<div class="small_form_element">
 											<label class="required" for="clusters[$h].vectors[$i].from">#springMessage("vector.from"):</label>

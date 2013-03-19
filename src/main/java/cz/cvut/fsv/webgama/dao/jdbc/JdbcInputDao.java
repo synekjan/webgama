@@ -48,7 +48,9 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 		String sql = "UPDATE inputs SET xml_content=?, version=?, time=? WHERE input_id = ?";
 
 		getJdbcTemplate().update(sql,
-				new Object[] { input.getXmlContent(), input.getVersion(), input.getTime(), input.getId() });
+				new Object[] { input.getXmlContent(), input.getVersion(), input.getTime().toDate(), input.getId() });
+
+		networkDao.update(input.getNetwork());
 	}
 
 	@Override

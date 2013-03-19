@@ -46,7 +46,7 @@ public class JdbcDirectionDao extends JdbcDaoSupport implements DirectionDao {
 	@Override
 	public List<Direction> findDirectionsInObservation(Observation observation) {
 
-		String sql = "SELECT * FROM directions WHERE observation_id = ?";
+		String sql = "SELECT * FROM directions WHERE observation_id = ? ORDER BY direction_id";
 
 		List<Direction> directions = getJdbcTemplate().query(sql, new Object[] { observation.getId() },
 				new DirectionMapper());

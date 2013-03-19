@@ -46,7 +46,7 @@ public class JdbcPointDao extends JdbcDaoSupport implements PointDao {
 	@Override
 	public List<Point> findPointsInNetwork(Network network) {
 
-		String sql = "SELECT * FROM points WHERE network_id = ?";
+		String sql = "SELECT * FROM points WHERE network_id = ? ORDER BY point_id";
 
 		List<Point> points = getJdbcTemplate().query(sql, new Object[] { network.getId() }, new PointMapper());
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +16,10 @@ import cz.cvut.fsv.webgama.dao.CalculationDao;
 import cz.cvut.fsv.webgama.dao.UserDao;
 import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.domain.Input;
+import cz.cvut.fsv.webgama.domain.Network;
 import cz.cvut.fsv.webgama.domain.Output;
 import cz.cvut.fsv.webgama.domain.ProcessOutput;
+import cz.cvut.fsv.webgama.form.AdjustmentPageForm;
 import cz.cvut.fsv.webgama.parser.InputParser;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
 import cz.cvut.fsv.webgama.service.ProcessManager;
@@ -109,16 +112,53 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		return calculationDao.getCalculationCountByUser(userDao.findUserByUsername(username));
 	}
 
+	@Transactional
 	@Override
 	public Calculation getCalculationById(long id) {
 
 		return calculationDao.findCalculationById(id);
 	}
 
+	@Transactional
 	@Override
 	public boolean isCalculationIdInDB(Long id) {
 
 		return calculationDao.isCalculationIdInDB(id);
+	}
+
+	@Transactional
+	@Override
+	public void updateInputInCalculation(AdjustmentPageForm adjustmentForm, Calculation calculation) {
+		
+		Input input = calculation.getInput();
+		input.setTime(new DateTime());
+		Network network = input.getNetwork();
+		network.setAxesXY(adjustmentForm.getAxesXY());
+		network.setAngles(adjustmentForm.getAngles());
+		network.setEpoch(adjustmentForm.getEpoch());
+		network.setDescription(adjustmentForm.getDescription());
+		network.setSigmaApr(adjustmentForm.getSigmaApr());
+		network.setConfPr(adjustmentForm.getConfPr());
+		network.setTolAbs(adjustmentForm.getTolAbs());
+		network.setSigmaAct(adjustmentForm.getSigmaAct());
+		network.setUpdateCC(adjustmentForm.getUpdateCC());
+		network.setDirectionStdev(adjustmentForm.getDirectionStdev());
+		network.setDistanceStdev(adjustmentForm.getDistanceStdev());
+		network.setAngleStdev(adjustmentForm.getAngleStdev());
+		network.setZenithAngleStdev(adjustmentForm.getZenithAngleStdev());
+		network.setPoints(adjustmentForm.getPoints());
+		network.setClusters(adjustmentForm.getClusters());
+		input.setNetwork(network);
+		
+		//FIXME
+		/*inputParser.composeInput(stream, input)*/
+		
+		calculation.setInput(input);
+		
+		
+		
+		calculationDao.update(calculation);
+		
 	}
 
 }

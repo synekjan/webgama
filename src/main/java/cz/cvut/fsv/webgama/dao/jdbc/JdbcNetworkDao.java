@@ -34,14 +34,10 @@ public class JdbcNetworkDao extends JdbcDaoSupport implements NetworkDao {
 
 		long networkId = getJdbcTemplate().queryForLong(
 				sql,
-				new Object[] { inputId, network.getAxesXY(),
-						network.getAngles(), network.getEpoch(),
-						network.getDescription(), network.getSigmaApr(),
-						network.getConfPr(), network.getTolAbs(),
-						network.getSigmaAct(), network.getUpdateCC(),
-						network.getDirectionStdev(), network.getAngleStdev(),
-						network.getZenithAngleStdev(),
-						network.getDistanceStdev() });
+				new Object[] { inputId, network.getAxesXY(), network.getAngles(), network.getEpoch(),
+						network.getDescription(), network.getSigmaApr(), network.getConfPr(), network.getTolAbs(),
+						network.getSigmaAct(), network.getUpdateCC(), network.getDirectionStdev(),
+						network.getAngleStdev(), network.getZenithAngleStdev(), network.getDistanceStdev() });
 
 		for (Point point : network.getPoints()) {
 			pointDao.insert(point, networkId);
@@ -69,13 +65,22 @@ public class JdbcNetworkDao extends JdbcDaoSupport implements NetworkDao {
 
 		getJdbcTemplate().update(
 				sql,
-				new Object[] { network.getAxesXY(), network.getAngles(),
-						network.getEpoch(), network.getDescription(),
-						network.getSigmaApr(), network.getConfPr(),
-						network.getTolAbs(), network.getSigmaAct(),
-						network.getUpdateCC(), network.getDirectionStdev(),
-						network.getAngleStdev(), network.getZenithAngleStdev(),
-						network.getDistanceStdev(), network.getId() });
+				new Object[] { network.getAxesXY(), network.getAngles(), network.getEpoch(), network.getDescription(),
+						network.getSigmaApr(), network.getConfPr(), network.getTolAbs(), network.getSigmaAct(),
+						network.getUpdateCC(), network.getDirectionStdev(), network.getAngleStdev(),
+						network.getZenithAngleStdev(), network.getDistanceStdev(), network.getId() });
+
+		for (Point point : network.getPoints()) {
+			if (point.getId() != null) {
+				pointDao.update(point);
+			} else {
+				pointDao.insert(point, network.getId());
+			}
+		}
+
+		for (Cluster cluster : network.getClusters()) {
+			clusterDao.update(cluster);
+		}
 	}
 
 	@Override
@@ -83,8 +88,7 @@ public class JdbcNetworkDao extends JdbcDaoSupport implements NetworkDao {
 
 		String sql = "SELECT * FROM networks WHERE input_id = ?";
 
-		Network network = getJdbcTemplate().queryForObject(sql,
-				new Object[] { input.getId() }, new NetworkMapper());
+		Network network = getJdbcTemplate().queryForObject(sql, new Object[] { input.getId() }, new NetworkMapper());
 
 		return network;
 	}
@@ -99,15 +103,11 @@ public class JdbcNetworkDao extends JdbcDaoSupport implements NetworkDao {
 			network.setId(rs.getLong("network_id"));
 			network.setAxesXY(rs.getString("axes_xy"));
 			network.setAngles(rs.getString("angles"));
-			network.setEpoch(rs.getObject("epoch") != null ? rs
-					.getDouble("epoch") : null);
+			network.setEpoch(rs.getObject("epoch") != null ? rs.getDouble("epoch") : null);
 			network.setDescription(rs.getString("description"));
-			network.setSigmaApr(rs.getObject("sigma_apr") != null ? rs
-					.getDouble("sigma_apr") : null);
-			network.setConfPr(rs.getObject("conf_pr") != null ? rs
-					.getDouble("conf_pr") : null);
-			network.setTolAbs(rs.getObject("tol_abs") != null ? rs
-					.getDouble("tol_abs") : null);
+			network.setSigmaApr(rs.getObject("sigma_apr") != null ? rs.getDouble("sigma_apr") : null);
+			network.setConfPr(rs.getObject("conf_pr") != null ? rs.getDouble("conf_pr") : null);
+			network.setTolAbs(rs.getObject("tol_abs") != null ? rs.getDouble("tol_abs") : null);
 			network.setSigmaAct(rs.getString("sigma_act"));
 			network.setUpdateCC(rs.getString("update_cc"));
 			network.setDirectionStdev(rs.getString("direction_stdev"));

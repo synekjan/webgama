@@ -90,12 +90,54 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 
 		getJdbcTemplate().update(sql, new Object[] { cluster.getTagname(), cluster.getId() });
 
+		switch (cluster.getTagname()) {
+		case "obs":
+			for (Observation observation : cluster.getObservations()) {
+				if (observation.getId() != null) {
+					observationDao.update(observation);
+				} else {
+					observationDao.insert(observation, cluster.getId());
+				}
+			}
+			break;
+		case "coordinates":
+			for (Coordinate coordinate : cluster.getCoordinates()) {
+				if (coordinate.getId() != null) {
+					coordinateDao.update(coordinate);
+				} else {
+					coordinateDao.insert(coordinate, cluster.getId());
+				}
+			}
+			break;
+		case "height-differences":
+			for (HeightDifference heightDifference : cluster.getHeightDifferences()) {
+				if (heightDifference.getId() != null) {
+					heightDifferenceDao.update(heightDifference);
+				} else {
+					heightDifferenceDao.insert(heightDifference, cluster.getId());
+				}
+			}
+			break;
+		case "vectors":
+			for (Vector vector : cluster.getVectors()) {
+				if (vector.getId() != null) {
+					vectorDao.update(vector);
+				} else {
+					vectorDao.insert(vector, cluster.getId());
+				}
+			}
+			break;
+		default:
+			logger.error("Unrecognized cluster during updating - " + cluster.getTagname());
+			break;
+		}
+
 	}
 
 	@Override
 	public List<Cluster> findClustersInNetwork(Network network) {
 
-		String sql = "SELECT * FROM clusters WHERE network_id = ?";
+		String sql = "SELECT * FROM clusters WHERE network_id = ? ORDER BY cluster_id";
 
 		List<Cluster> clusters = getJdbcTemplate().query(sql, new Object[] { network.getId() }, new ClusterMapper());
 

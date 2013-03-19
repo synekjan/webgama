@@ -46,7 +46,7 @@ public class JdbcZenithAngleDao extends JdbcDaoSupport implements ZenithAngleDao
 	@Override
 	public List<ZenithAngle> findZenithAnglesInObservation(Observation observation) {
 
-		String sql = "SELECT * FROM zenith_angles WHERE observation_id = ?";
+		String sql = "SELECT * FROM zenith_angles WHERE observation_id = ? ORDER BY zenith_angle_id";
 
 		List<ZenithAngle> zenithAngles = getJdbcTemplate().query(sql, new Object[] { observation.getId() },
 				new ZenithAngleMapper());

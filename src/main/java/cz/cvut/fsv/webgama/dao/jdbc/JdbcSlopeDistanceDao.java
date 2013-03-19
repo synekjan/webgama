@@ -47,7 +47,7 @@ public class JdbcSlopeDistanceDao extends JdbcDaoSupport implements SlopeDistanc
 	@Override
 	public List<SlopeDistance> findSlopeDistancesInObservation(Observation observation) {
 
-		String sql = "SELECT * FROM slope_distances WHERE observation_id = ?";
+		String sql = "SELECT * FROM slope_distances WHERE observation_id = ? ORDER BY slope_distance_id";
 
 		List<SlopeDistance> slopeDistances = getJdbcTemplate().query(sql, new Object[] { observation.getId() },
 				new DistanceMapper());

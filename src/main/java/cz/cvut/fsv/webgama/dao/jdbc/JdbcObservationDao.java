@@ -92,18 +92,58 @@ public class JdbcObservationDao extends JdbcDaoSupport implements ObservationDao
 	@Override
 	public void update(Observation observation) {
 
-		String sql = "UPDATE observations SET from_id=? orientation=? from_dh=? WHERE observation_id=?";
+		String sql = "UPDATE observations SET from_id=?, orientation=?, from_dh=? WHERE observation_id=?";
 
 		getJdbcTemplate().update(
 				sql,
 				new Object[] { observation.getFrom(), observation.getOrientation(), observation.getFromDh(),
 						observation.getId() });
+		
+		for (Direction direction : observation.getDirections()) {
+			if (direction.getId() != null) {
+				directionDao.update(direction);
+			} else {
+				directionDao.insert(direction, observation.getId());
+			}
+		}
+
+		for (Distance distance : observation.getDistances()) {
+			if (distance.getId() != null) {
+				distanceDao.update(distance);
+			} else {
+				distanceDao.insert(distance, observation.getId());
+			}
+		}
+
+		for (Angle angle : observation.getAngles()) {
+			if (angle.getId() != null) {
+				angleDao.update(angle);
+			} else {
+				angleDao.insert(angle, observation.getId());
+			}
+		}
+
+		for (SlopeDistance slopeDistance : observation.getSlopeDistances()) {
+			if (slopeDistance.getId() != null) {
+				slopeDistanceDao.update(slopeDistance);
+			} else {
+				slopeDistanceDao.insert(slopeDistance, observation.getId());
+			}
+		}
+
+		for (ZenithAngle zenithAngle : observation.getZenithAngles()) {
+			if (zenithAngle.getId() != null) {
+				zenithAngleDao.update(zenithAngle);
+			} else {
+				zenithAngleDao.insert(zenithAngle, observation.getId());
+			}
+		}
 	}
 
 	@Override
 	public List<Observation> findObservationsInCluster(Cluster cluster) {
 
-		String sql = "SELECT * FROM observations WHERE cluster_id = ?";
+		String sql = "SELECT * FROM observations WHERE cluster_id = ? ORDER BY observation_id";
 
 		List<Observation> observations = getJdbcTemplate().query(sql, new Object[] { cluster.getId() },
 				new ObservationMapper());

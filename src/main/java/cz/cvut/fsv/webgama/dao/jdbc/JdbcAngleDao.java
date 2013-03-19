@@ -47,7 +47,7 @@ public class JdbcAngleDao extends JdbcDaoSupport implements AngleDao {
 	@Override
 	public List<Angle> findAnglesInObservation(Observation observation) {
 
-		String sql = "SELECT * FROM angles WHERE observation_id = ?";
+		String sql = "SELECT * FROM angles WHERE observation_id = ? ORDER BY angle_id";
 
 		List<Angle> angles = getJdbcTemplate().query(sql, new Object[] { observation.getId() }, new AngleMapper());
 

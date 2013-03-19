@@ -35,7 +35,7 @@ public class JdbcDistanceDao extends JdbcDaoSupport implements DistanceDao {
 	@Override
 	public void update(Distance distance) {
 
-		String sql = "UPDATE distances SET from_id=? to_id=?, val=?, stdev=?, from_dh=?, to_dh=? WHERE distance_id=?";
+		String sql = "UPDATE distances SET from_id=?, to_id=?, val=?, stdev=?, from_dh=?, to_dh=? WHERE distance_id=?";
 
 		getJdbcTemplate().update(
 				sql,
@@ -46,7 +46,7 @@ public class JdbcDistanceDao extends JdbcDaoSupport implements DistanceDao {
 	@Override
 	public List<Distance> findDistancesInObservation(Observation observation) {
 
-		String sql = "SELECT * FROM distances WHERE observation_id = ?";
+		String sql = "SELECT * FROM distances WHERE observation_id = ? ORDER BY distance_id";
 
 		List<Distance> distances = getJdbcTemplate().query(sql, new Object[] { observation.getId() },
 				new DistanceMapper());
