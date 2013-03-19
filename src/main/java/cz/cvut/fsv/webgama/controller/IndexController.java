@@ -59,7 +59,7 @@ public class IndexController {
 
 		} else {
 			
-			int userCount = userManager.getUserCount();
+			Long userCount = userManager.getUserCount();
 
 			logger.info("Welcome page was requested from IP: "
 					+ request.getRemoteHost());

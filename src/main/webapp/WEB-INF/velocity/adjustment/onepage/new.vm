@@ -645,5 +645,16 @@
 		</div>
 	</div>
 	#parse("footer.vm") #parse("toolbar.vm")
+	<script>
+		jQuery(document).ready(function() {
+
+			$("#points input").focus(function() {
+				 $(this).css('border-color', '#8b66ac');
+
+			  }).blur(function(){
+			       $(this).css('border-color', '#555555');
+			});
+		});
+	</script>
 </body>
 </html>

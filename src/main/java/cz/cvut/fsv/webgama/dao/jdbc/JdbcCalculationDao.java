@@ -28,11 +28,11 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 
 		String sql = "INSERT INTO calculations (user_id, name, progress, language, algorithm, ang_units, latitude, ellipsoid) VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING calculation_id";
 
-		long calculationId = getJdbcTemplate().queryForLong(
+		Long calculationId = getJdbcTemplate().queryForObject(
 				sql,
 				new Object[] { calculation.getUser().getId(), calculation.getName(), calculation.getProgress(),
 						calculation.getLanguage(), calculation.getAlgorithm(), calculation.getAngUnits(),
-						calculation.getLatitude(), calculation.getEllipsoid() });
+						calculation.getLatitude(), calculation.getEllipsoid() }, Long.class);
 
 		inputDao.insert(calculation.getInput(), calculationId);
 		outputDao.insert(calculation.getOutput(), calculationId);
@@ -89,11 +89,11 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 	}
 
 	@Override
-	public long getCalculationCountByUser(User user) {
+	public Long getCalculationCountByUser(User user) {
 
 		String sql = "SELECT COUNT(calculation_id) FROM calculations WHERE user_id = ?";
-		
-		return getJdbcTemplate().queryForLong(sql, new Object[] { user.getId() });
+
+		return getJdbcTemplate().queryForObject(sql, new Object[] { user.getId() }, Long.class);
 	}
 
 	@Override

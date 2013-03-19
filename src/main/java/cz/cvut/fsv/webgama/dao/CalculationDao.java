@@ -19,7 +19,7 @@ public interface CalculationDao {
 	
 	public Calculation findCalculationById(Long id);
 	
-	public long getCalculationCountByUser(User user);
+	public Long getCalculationCountByUser(User user);
 	
 	public boolean isCalculationIdInDB(Long id);
 

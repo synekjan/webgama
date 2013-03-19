@@ -682,7 +682,7 @@ input.submit_btn:ACTIVE {
 }
 
 div.info,div.success,div.warning,div.error {
-	font-size: 0.85em;
+	font-size: 0.9em;
 	border: 1px solid;
 	margin: 10px 0px;
 	padding: 10px 10px 10px 20px;
@@ -716,10 +716,11 @@ div.error {
 
 .icon-close {
 	float: right;
-	background: url("../img/cross.png") no-repeat left top;
-	width: 12px;
-	height: 12px;
-	margin-top: 1px;
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAURJREFUeNpi/P//PwO1AeOoofQxtKKiAkSdAeLZQPmZ7OzsDCD88+dPMGZkZGwAylkAsUdHRweGfhYcloEMNAZiLij7LJKcMxDHA7E8VM4EXTMTDkNnA/FjINYE4rlAbAYVdwPiqUCsAMTXoOqIdulMIL4OMhDofX0gPYOJiek8kLYC8tWB3j8HZGcC8SlsmpnwhPchoAEpbGxsx4Fsw69fvyYBDdMA8ncDxXEaSMhQEDgINOQoiPH9+3eI11hYduAzkKChQJd5//r1CxQxDNzc3GCx379/BwHFHcg11BsUKUBDDYH0UQ4Ojk6gty8ADbUG8qcAsQOphjZAY10e6KpjQDoLaCAo8eYB+ReAtDYQz4GqI9pQUMIWh6bPdCC+BBU/DMTZQHwDmk4tSElSHrAcBcRX0ORALl8Jy1GjpdQQNhQgwABcAn7fEd6v7wAAAABJRU5ErkJggg==");
+	width: 20px;
+	height: 20px;
+	margin-top: -3px;
+	cursor: pointer;
 }
 
 div#options {

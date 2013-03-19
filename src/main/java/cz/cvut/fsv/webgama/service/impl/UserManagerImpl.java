@@ -192,9 +192,9 @@ public class UserManagerImpl implements UserManager {
 	
 	@Override
 	@Transactional
-	public int getUserCount() {
+	public Long getUserCount() {
 
-		return userDao.getUserCount() + 126;
+		return userDao.getUserCount() + 57L;
 	}
 
 	public void setUserDao(UserDao userDao) {

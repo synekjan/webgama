@@ -73,11 +73,11 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 	}
 
 	@Override
-	public int getUserCount() {
+	public Long getUserCount() {
 
 		String sql = "SELECT COUNT(user_id) FROM users";
 
-		return getJdbcTemplate().queryForInt(sql);
+		return getJdbcTemplate().queryForObject(sql, Long.class);
 	}
 
 	@Override

@@ -54,11 +54,11 @@ public class JdbcObservationDao extends JdbcDaoSupport implements ObservationDao
 
 		String sql = "INSERT INTO observations (cluster_id, from_id, orientation, from_dh) VALUES (?, ?, ?, ?) RETURNING observation_id";
 
-		long observationId = getJdbcTemplate()
-				.queryForLong(
+		Long observationId = getJdbcTemplate()
+				.queryForObject(
 						sql,
 						new Object[] { clusterId, observation.getFrom(), observation.getOrientation(),
-								observation.getFromDh() });
+								observation.getFromDh() }, Long.class);
 
 		for (Direction direction : observation.getDirections()) {
 			directionDao.insert(direction, observationId);
@@ -98,7 +98,7 @@ public class JdbcObservationDao extends JdbcDaoSupport implements ObservationDao
 				sql,
 				new Object[] { observation.getFrom(), observation.getOrientation(), observation.getFromDh(),
 						observation.getId() });
-		
+
 		for (Direction direction : observation.getDirections()) {
 			if (direction.getId() != null) {
 				directionDao.update(direction);

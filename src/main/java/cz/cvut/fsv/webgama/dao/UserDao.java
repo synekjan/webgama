@@ -19,7 +19,7 @@ public interface UserDao {
 
 	public List<User> getUserList();
 	
-	public int getUserCount();
+	public Long getUserCount();
 
 	public List<User> findUsersByUsername(String username);
 

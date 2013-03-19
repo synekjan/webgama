@@ -32,12 +32,13 @@ public class JdbcNetworkDao extends JdbcDaoSupport implements NetworkDao {
 
 		String sql = "INSERT INTO networks (input_id, axes_xy, angles, epoch, description, sigma_apr, conf_pr, tol_abs, sigma_act, update_cc, direction_stdev, angle_stdev, zenith_angle_stdev, distance_stdev) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING network_id";
 
-		long networkId = getJdbcTemplate().queryForLong(
+		Long networkId = getJdbcTemplate().queryForObject(
 				sql,
 				new Object[] { inputId, network.getAxesXY(), network.getAngles(), network.getEpoch(),
 						network.getDescription(), network.getSigmaApr(), network.getConfPr(), network.getTolAbs(),
 						network.getSigmaAct(), network.getUpdateCC(), network.getDirectionStdev(),
-						network.getAngleStdev(), network.getZenithAngleStdev(), network.getDistanceStdev() });
+						network.getAngleStdev(), network.getZenithAngleStdev(), network.getDistanceStdev() },
+				Long.class);
 
 		for (Point point : network.getPoints()) {
 			pointDao.insert(point, networkId);

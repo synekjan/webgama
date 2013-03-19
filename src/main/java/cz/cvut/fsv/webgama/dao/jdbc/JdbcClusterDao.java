@@ -47,7 +47,7 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 
 		String sql = "INSERT INTO clusters (network_id, tagname) VALUES (?, ?) RETURNING cluster_id";
 
-		long clusterId = getJdbcTemplate().queryForLong(sql, new Object[] { networkId, cluster.getTagname() });
+		Long clusterId = getJdbcTemplate().queryForObject(sql, new Object[] { networkId, cluster.getTagname() }, Long.class);
 
 		switch (cluster.getTagname()) {
 		case "obs":

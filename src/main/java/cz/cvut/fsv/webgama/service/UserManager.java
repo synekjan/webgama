@@ -38,6 +38,6 @@ public interface UserManager {
 
 	public void confirmEmailAddress(String uuid);
 	
-	public int getUserCount();
+	public Long getUserCount();
 
 }

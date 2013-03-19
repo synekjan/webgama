@@ -29,7 +29,7 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 
 		// Store last generated value from SERIAL PostgreSQL type [RETURNING
 		// syntax]
-		long inputId = getJdbcTemplate().queryForLong(sql, params);
+		Long inputId = getJdbcTemplate().queryForObject(sql, params, Long.class);
 
 		networkDao.insert(input.getNetwork(), inputId);
 	}
