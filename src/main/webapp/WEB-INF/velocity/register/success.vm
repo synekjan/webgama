@@ -15,9 +15,10 @@
 				</div>
 				<div id="dialog_container">
 					<p>#springMessage("registration.success.message1")</p>
+					<br>
 					<p>#springMessage("registration.success.message2")</p>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>

@@ -14,8 +14,9 @@
 					<h2>#springMessage("confirm.email.success.header")</h2>
 				</div>
 				<div id="dialog_container">
-					<p>#springMessage("confirm.email.success.message1")</p>
-					<p>#springMessage("confirm.email.success.message2") <a href="#springUrl('/signin')">#springMessage("confirm.email.success.message2.link")</a></p>
+					<p>#springMessage("confirm.email.success.message1").
+						#springMessage("confirm.email.success.message2"):</p>
+					<br> <a class="button" href="#springUrl('/signin')">#springMessage("confirm.email.success.message2.link")</a>
 				</div>
 			</div>
 		</div>
