@@ -35,7 +35,7 @@
 								<legend>#springMessage("adjustment.onepage.network.definition")</legend>
 								<div class="medium_form_element">
 									<label for="axesXY">#springMessage("input.axesXY"):</label>
-									<div class="input">#springFormInput("input.axesXY","")
+									<div class="input">#springFormInput("input.axesXY",'placeholder="ne"')
 										#showElementErrors()</div>
 								</div>
 								<div class="medium_form_element">
@@ -51,7 +51,7 @@
 								</div>
 								<div class="medium_form_element">
 									<label for="epoch">#springMessage("input.epoch"):</label>
-									<div class="input">#springFormInput("input.epoch", "")
+									<div class="input">#springFormInput("input.epoch", 'placeholder="0"')
 										#showElementErrors()</div>
 								</div>
 							</fieldset>
@@ -67,34 +67,36 @@
 								<legend>#springMessage("adjustment.onepage.network.parameters")</legend>
 								<div class="medium_form_element">
 									<label for="sigmaApr">#springMessage("input.sigmaApr"):</label>
-									<div class="input">#springFormInput("input.sigmaApr", "")
-										#showElementErrors()</div>
+									<div class="input">#springFormInput("input.sigmaApr",
+										'placeholder="10"') #showElementErrors()</div>
 								</div>
 								<div class="medium_form_element">
 									<label for="confPr">#springMessage("input.confPr"):</label>
-									<div class="input">#springFormInput("input.confPr", "")
-										#showElementErrors()</div>
+									<div class="input">#springFormInput("input.confPr",
+										'placeholder="0.95"') #showElementErrors()</div>
 								</div>
 								<div class="medium_form_element">
 									<label for="tolAbs">#springMessage("input.tolAbs"):</label>
-									<div class="input">#springFormInput("input.tolAbs", "")
-										#showElementErrors()</div>
+									<div class="input">#springFormInput("input.tolAbs",
+										'placeholder="1000"') #showElementErrors()</div>
 								</div>
 								<div class="medium_form_element">
 									<label for="sigma-act">#springMessage("input.sigmaAct"):</label>
 									<div class="input">
 										<select id="sigma-act" name="sigmaAct">
-											<option value="apriori" #if ($input.sigmaAct==
-												"apriori") selected #end>Apriori</option>
-											<option value="aposteriori" #if ($input.sigmaAct==
-												"aposteriori") selected #end>Aposteriori</option>
+											<option value="aposteriori" #if ($input.sigmaAct == "aposteriori") selected #end>Aposteriori</option>
+											<option value="apriori" #if ($input.sigmaAct ==	"apriori") selected #end>Apriori</option>
 										</select>
 									</div>
 								</div>
 								<div class="medium_form_element">
 									<label for="updateCC">#springMessage("input.updateCC"):</label>
-									<div class="input">#springFormInput("input.updateCC", "")
-										#showElementErrors()</div>
+									<div class="input">
+										<select id="updateCC" name="updateCC">
+											<option value="no" #if ($input.updateCC== "no") selected #end>#springMessage("no")</option>
+											<option value="yes" #if ($input.updateCC== "yes") selected #end>#springMessage("yes")</option>
+										</select> #showElementErrors()
+									</div>
 								</div>
 							</fieldset>
 							<fieldset>
@@ -126,71 +128,64 @@
 									<legend>#springMessage("adjustment.onepage.points")</legend>
 									#foreach ($point in $input.points) #set( $i =
 									"${foreach.index}" )
-									<div id="point_$i">
-									#springFormHiddenInput("input.points[$i].id" "")
-										<fieldset>
-											<legend>
-												#springBind("input.points[$i].name") <input type="text"
-													name="points[$i].name" value="$!point.name" />
+									<div id="point_$i" class="point">
+									<span class="icon-close" role="button"></span>
+										#springFormHiddenInput("input.points[$i].id" "")
+										<div class="title_bar">
+											<label class="required" for="points[$i].name">#springMessage("adjustment.onepage.point"):</label>
+											#springBind("input.points[$i].name") <input type="text"
+												id="points[$i].name" name="points[$i].name"
+												value="$!point.name" /> #showElementErrors() 
+										</div>
+										<div class="point_content">
+											<div class="point_form_element">
+												<label for="points[$i].x">X:</label>
+												#springBind("input.points[$i].x") <input id="points[$i].x"
+													type="text" name="points[$i].x" value="$!point.x" />
 												#showElementErrors()
-											</legend>
-											<div class="small_form_element">
-												<label class="required" for="points[$i].x">X:</label>
-												<div class="input">
-													#springBind("input.points[$i].x") <input id="points[$i].x"
-														type="text" name="points[$i].x" value="$!point.x" />
-													#showElementErrors()
-												</div>
 											</div>
-											<div class="small_form_element">
-												<label class="required" for="points[$i].y">Y:</label>
-												<div class="input">
-													#springBind("input.points[$i].y") <input id="points[$i].y"
-														type="text" name="points[$i].y" value="$!point.y" />
-													#showElementErrors()
-												</div>
+											<div class="point_form_element">
+												<label for="points[$i].y">Y:</label>
+												#springBind("input.points[$i].y") <input id="points[$i].y"
+													type="text" name="points[$i].y" value="$!point.y" />
+												#showElementErrors()
 											</div>
-											<div class="small_form_element">
-												<label class="required" for="points[$i].z">Z:</label>
-												<div class="input">
-													#springFormInput("input.points[$i].z",
-													"")#showElementErrors()</div>
+											<div class="point_form_element">
+												<label for="points[$i].z">Z:</label>
+												#springFormInput("input.points[$i].z",
+												"")#showElementErrors()
 											</div>
-											<div class="small_form_element">
+											<div class="point_form_element">
 												<label for="points[$i].fix">Fix:</label>
-												<div class="input">
-													#springBind("input.points[$i].fix")<select
-														id="points[$i].fix" name="points[$i].fix">
-														<option value=""></option>
-														<option value="xy" #if ($point.fix== "xy") selected #end>xy</option>
-														<option value="XY" #if ($point.fix== "XY") selected #end>XY</option>
-														<option value="z" #if ($point.fix== "z") selected #end>z</option>
-														<option value="Z" #if ($point.fix== "Z") selected #end>Z</option>
-														<option value="xyz" #if ($point.fix== "xyz") selected #end>xyz</option>
-														<option value="XYZ" #if ($point.fix== "XYZ") selected #end>XYZ</option>
-														<option value="xyZ" #if ($point.fix== "xyZ") selected #end>xyZ</option>
-														<option value="XYz" #if ($point.fix== "XYz") selected #end>XYz</option>
-													</select> #showElementErrors()
-												</div>
+												#springBind("input.points[$i].fix")<select
+													id="points[$i].fix" name="points[$i].fix">
+													<option value=""></option>
+													<option value="xy" #if ($point.fix== "xy") selected #end>xy</option>
+													<option value="XY" #if ($point.fix== "XY") selected #end>XY</option>
+													<option value="z" #if ($point.fix== "z") selected #end>z</option>
+													<option value="Z" #if ($point.fix== "Z") selected #end>Z</option>
+													<option value="xyz" #if ($point.fix== "xyz") selected #end>xyz</option>
+													<option value="XYZ" #if ($point.fix== "XYZ") selected #end>XYZ</option>
+													<option value="xyZ" #if ($point.fix== "xyZ") selected #end>xyZ</option>
+													<option value="XYz" #if ($point.fix== "XYz") selected #end>XYz</option>
+												</select> #showElementErrors()
 											</div>
-											<div class="small_form_element">
+											<div class="point_form_element">
 												<label for="points[$i].adj">Adj:</label>
-												<div class="input">
-													#springBind("input.points[$i].adj")<select
-														id="points[$i].adj" name="points[$i].adj">
-														<option value=""></option>
-														<option value="xy" #if ($point.adj== "xy") selected #end>xy</option>
-														<option value="XY" #if ($point.adj== "XY") selected #end>XY</option>
-														<option value="z" #if ($point.adj== "z") selected #end>z</option>
-														<option value="Z" #if ($point.adj== "Z") selected #end>Z</option>
-														<option value="xyz" #if ($point.adj== "xyz") selected #end>xyz</option>
-														<option value="XYZ" #if ($point.adj== "XYZ") selected #end>XYZ</option>
-														<option value="xyZ" #if ($point.adj== "xyZ") selected #end>xyZ</option>
-														<option value="XYz" #if ($point.adj== "XYz") selected #end>XYz</option>
-													</select> #showElementErrors()
-												</div>
+												#springBind("input.points[$i].adj")<select
+													id="points[$i].adj" name="points[$i].adj">
+													<option value=""></option>
+													<option value="xy" #if ($point.adj== "xy") selected #end>xy</option>
+													<option value="XY" #if ($point.adj== "XY") selected #end>XY</option>
+													<option value="z" #if ($point.adj== "z") selected #end>z</option>
+													<option value="Z" #if ($point.adj== "Z") selected #end>Z</option>
+													<option value="xyz" #if ($point.adj== "xyz") selected #end>xyz</option>
+													<option value="XYZ" #if ($point.adj== "XYZ") selected #end>XYZ</option>
+													<option value="xyZ" #if ($point.adj== "xyZ") selected #end>xyZ</option>
+													<option value="XYz" #if ($point.adj== "XYz") selected #end>XYz</option>
+												</select> #showElementErrors()
 											</div>
-										</fieldset>
+										</div>
 									</div>
 									#end
 								</fieldset>
@@ -648,12 +643,12 @@
 	<script>
 		jQuery(document).ready(function() {
 
-			$("#points input").focus(function() {
-				 $(this).css('border-color', '#8b66ac');
+			/* jQuery("#points input").focus(function() {
+				 jQuery(this).css('border-color', '#8b66ac');
 
 			  }).blur(function(){
-			       $(this).css('border-color', '#555555');
-			});
+			       jQuery(this).css('border-color', '#555555');
+			}); */
 		});
 	</script>
 </body>

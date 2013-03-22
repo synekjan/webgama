@@ -50,13 +50,14 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 	@Override
 	public void update(Calculation calculation) {
 
-		String sql = "UPDATE calculations SET user_id=?, name=?, progress=?, language=?, algorithm=?, ang_units=?, latitude=?, ellipsoid=? WHERE calculation_id = ?";
+		String sql = "UPDATE calculations SET user_id=?, name=?, progress=?, language=?, algorithm=?, ang_units=?, latitude=?, ellipsoid=?, time=? WHERE calculation_id = ?";
 
 		getJdbcTemplate().update(
 				sql,
 				new Object[] { calculation.getUser().getId(), calculation.getName(), calculation.getProgress(),
 						calculation.getLanguage(), calculation.getAlgorithm(), calculation.getAngUnits(),
-						calculation.getLatitude(), calculation.getEllipsoid(), calculation.getId() });
+						calculation.getLatitude(), calculation.getEllipsoid(), calculation.getTime().toDate(),
+						calculation.getId() });
 		inputDao.update(calculation.getInput());
 	}
 

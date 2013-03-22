@@ -7,14 +7,11 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-import cz.cvut.fsv.webgama.domain.User;
 import cz.cvut.fsv.webgama.service.UserManager;
 
 @Controller
@@ -41,12 +38,12 @@ public class AdjustmentController extends MultiActionController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/{name}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/{name}", method = RequestMethod.GET)
 	protected @ResponseBody
 	User getJSON(@PathVariable String name) {
 
 		User user = userManager.getUser(name);
 
 		return user;
-	}
+	}*/
 }

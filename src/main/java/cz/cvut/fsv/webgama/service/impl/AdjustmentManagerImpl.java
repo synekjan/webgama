@@ -126,7 +126,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		return calculationDao.isCalculationIdInDB(id);
 	}
 
-	@Transactional
+	/*@Transactional*/
 	@Override
 	public void updateInputInCalculation(AdjustmentPageForm adjustmentForm, Calculation calculation) {
 		
@@ -154,8 +154,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		/*inputParser.composeInput(stream, input)*/
 		
 		calculation.setInput(input);
-		
-		
+		calculation.setTime(new DateTime());
 		
 		calculationDao.update(calculation);
 		

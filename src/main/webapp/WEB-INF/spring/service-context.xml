@@ -65,10 +65,6 @@
 		<property name="userManager" ref="userManager" />
 	</bean>
 
-	<bean class="cz.cvut.fsv.webgama.validator.UserValidator">
-
-	</bean>
-
 	<bean class="cz.cvut.fsv.webgama.validator.UserPasswordChangeValidator">
 		<property name="userManager" ref="userManager" />
 	</bean>

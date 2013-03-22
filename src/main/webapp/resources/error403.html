@@ -3,26 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-@CHARSET "UTF-8";
+body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	color: #333;
+}
 
 div#error_container {
-	margin: 0 auto;
-	margin-top: 200px;
-	padding-top: 100px;
-	padding-bottom: 100px;
-	width: 700px;
-	border: 1px dashed gray;
-	text-align: center;
-	font-style: italic;
+	width: 400px;
+	height: 300px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -200px;
+	margin-top: -200px;
+}
+
+div#logo {
+	height: 64px;
+	width: 230px;
+	margin-bottom: 30px;
+}
+
+span#error_code {
+	font-size: 16px;
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+.gray {
+	color: #999;
+}
+
+#error_message {
+	margin: 15px 0px;
 }
 </style>
-<title>HTTP Error 403</title>
+<title>403 Forbidden Error</title>
 </head>
 <body>
 	<div id="error_container">
-		<h1>This is error code 403 [Access denied]</h1>
+		<div id="logo">
+			<img alt="Logo"
+				src="http://geo102.fsv.cvut.cz/user/burvamar/error_logo.png">
+		</div>
+		<span id="error_code">403.</span><span class="gray">That's an
+			error.</span>
+		<div id="error_message">You may not have permission to view this page.</div>
+		<span class="gray">That's all we know.</span>
 	</div>
-	
-	<a href=""></a>
 </body>
 </html>

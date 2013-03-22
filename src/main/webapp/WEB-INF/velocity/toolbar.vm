@@ -6,28 +6,42 @@
 		</div>
 		<div id="toolbar_content">
 		
-		<button>Add Point</button></div>
+		<button class="add_point">Add Point</button></div>
 	</div>
 </div>
 
 <script>
-#[[$(document).ready(function() {
-    
-    $('h3').click(function() {
-        var fileIndex = $('#fileTable tr').children().length - 1;
-        $('#fileTable').append(
-                '<tr><td>'+
-                '   <input type="file" name="files['+ fileIndex +']" />'+
-                '</td></tr>');
-    });
-     
+jQuery(document).ready(function() {
+
+jQuery("button.add_point").click(function () {
+	
+	var pointIndex = jQuery("#points > fieldset").children().length -1;
+		
+	jQuery("#points > fieldset").append(renderPoint(pointIndex));
+	
+});
+
+
+jQuery(document).on("click", "span.icon-close", function () {
+	var parent = jQuery(this).parent();
+	parent.fadeOut(500, function() {
+		jQuery(this).remove();
+	});
 });
 
 
 
-$("#collapse_link").click(function () {
-	$("#toolbar_content").toggle("slow");
+jQuery("#collapse_link").click(function () {
+	jQuery("#toolbar_content").toggle("slow");
 });
 
-$(".draggable").draggable();]]#
+});
+
+
+function renderPoint(pointIndex) {
+
+	var html = '<div id="point_' + pointIndex + '" class="point"><span class="icon-close" role="button"></span><div class="title_bar"><label class="required" for="points[' + pointIndex + '].name">#springMessage("adjustment.onepage.point"):</label><input id="points[' + pointIndex + '].name" type="text" value="" name="points[' + pointIndex + '].name"></div><div class="point_content"><div class="point_form_element"><label for="points[' + pointIndex + '].x">X:</label><input id="points[' + pointIndex + '].x" type="text" value="" name="points[' + pointIndex + '].x"></div><div class="point_form_element"><label for="points[' + pointIndex + '].y">Y:</label><input id="points[' + pointIndex + '].y" type="text" value="" name="points[' + pointIndex + '].y"></div><div class="point_form_element"><label for="points[' + pointIndex + '].z">Z:</label><input id="points[' + pointIndex + '].z" type="text" value="" name="points[' + pointIndex + '].z"></div><div class="point_form_element"><label for="points[' + pointIndex + '].fix">Fix:</label><select id="points[' + pointIndex + '].fix" name="points[' + pointIndex + '].fix"><option value=""></option><option value="xy">xy</option><option value="XY">XY</option><option value="z">z</option><option value="Z">Z</option><option value="xyz">xyz</option><option value="XYZ">XYZ</option><option value="xyZ">xyZ</option><option value="XYz">XYz</option></select></div><div class="point_form_element"><label for="points[' + pointIndex + '].adj">Adj:</label><select id="points[' + pointIndex + '].adj" name="points[' + pointIndex + '].adj"><option value=""></option><option value="xy">xy</option><option value="XY">XY</option><option value="z">z</option><option value="Z">Z</option><option value="xyz">xyz</option><option value="XYZ">XYZ</option><option value="xyZ">xyZ</option><option value="XYz">XYz</option></select></div></div></div>';
+
+	return html;
+}
 </script>

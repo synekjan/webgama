@@ -41,6 +41,9 @@ $(document).ready(function() {
 			heightStyle : "content"
 		});
 	});
+	
+	$(".draggable").draggable();
+	
 });
 
 function wizardAjaxPostNext(stepUrl) {

@@ -383,7 +383,7 @@ div#about_container .right_menu .menu_header {
 /* ------------------ FORMS ------------------ */
 fieldset {
 	border-top: 1px solid #DDDDDD;
-	padding-left: 40px;
+	padding: 0px 40px;
 	text-shadow: 1px 1px 0 #FFFFFF;
 }
 
@@ -716,7 +716,8 @@ div.error {
 
 .icon-close {
 	float: right;
-	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAURJREFUeNpi/P//PwO1AeOoofQxtKKiAkSdAeLZQPmZ7OzsDCD88+dPMGZkZGwAylkAsUdHRweGfhYcloEMNAZiLij7LJKcMxDHA7E8VM4EXTMTDkNnA/FjINYE4rlAbAYVdwPiqUCsAMTXoOqIdulMIL4OMhDofX0gPYOJiek8kLYC8tWB3j8HZGcC8SlsmpnwhPchoAEpbGxsx4Fsw69fvyYBDdMA8ncDxXEaSMhQEDgINOQoiPH9+3eI11hYduAzkKChQJd5//r1CxQxDNzc3GCx379/BwHFHcg11BsUKUBDDYH0UQ4Ojk6gty8ADbUG8qcAsQOphjZAY10e6KpjQDoLaCAo8eYB+ReAtDYQz4GqI9pQUMIWh6bPdCC+BBU/DMTZQHwDmk4tSElSHrAcBcRX0ORALl8Jy1GjpdQQNhQgwABcAn7fEd6v7wAAAABJRU5ErkJggg==");
+	background-image:
+		url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAURJREFUeNpi/P//PwO1AeOoofQxtKKiAkSdAeLZQPmZ7OzsDCD88+dPMGZkZGwAylkAsUdHRweGfhYcloEMNAZiLij7LJKcMxDHA7E8VM4EXTMTDkNnA/FjINYE4rlAbAYVdwPiqUCsAMTXoOqIdulMIL4OMhDofX0gPYOJiek8kLYC8tWB3j8HZGcC8SlsmpnwhPchoAEpbGxsx4Fsw69fvyYBDdMA8ncDxXEaSMhQEDgINOQoiPH9+3eI11hYduAzkKChQJd5//r1CxQxDNzc3GCx379/BwHFHcg11BsUKUBDDYH0UQ4Ojk6gty8ADbUG8qcAsQOphjZAY10e6KpjQDoLaCAo8eYB+ReAtDYQz4GqI9pQUMIWh6bPdCC+BBU/DMTZQHwDmk4tSElSHrAcBcRX0ORALl8Jy1GjpdQQNhQgwABcAn7fEd6v7wAAAABJRU5ErkJggg==");
 	width: 20px;
 	height: 20px;
 	margin-top: -3px;
@@ -890,13 +891,12 @@ div#wizard_buttons {
 	border-radius: 5px;
 }
 
-.controls_content .own_calculations, .controls_content .shared_calculations {
+.controls_content .own_calculations,.controls_content .shared_calculations {
 	display: inline-block;
 	font-size: 14px;
 	text-align: center;
 	width: 97px;
 	padding-top: 5px;
-	
 }
 
 .controls_content .own_calculations {
@@ -1151,6 +1151,63 @@ span.time {
 	font-size: 0.9em;
 }
 
+/* ADJUSTMENT FORMS */
+#points {
+	
+}
+
+div.point {
+	border: 1px solid #AAAAAA;
+	border-radius: 3px;
+	margin-bottom: 15px;
+	background-color: #FFFFFF;
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+
+div.title_bar {
+	height: 24px;
+	border-bottom: 1px solid #DDD;
+	padding-left: 10px;
+	background: -moz-linear-gradient(top, #F1F1F1, #d7d7d7) repeat scroll 0 0 #e9e9e9;
+}
+
+.adjustment_form div.title_bar input {
+	height: 18px;
+	width: 160px;
+	box-shadow: none;
+	border-color: #CCC;
+	margin: 1px 10px;
+	padding-left: 5px;
+}
+
+.adjustment_form div.title_bar input:focus {
+	border-color: rgba(82, 168, 236, 0.8);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+#points .point_form_element {
+	width: 150px;
+	display: inline-block;
+}
+
+.point_content {
+	padding: 10px 5px 5px 10px;
+}
+
+#points .point_form_element label {
+	margin-right: 5px;
+}
+
+#points .point_form_element input {
+	width: 120px;
+	height: 18px;
+}
+
+#points .point_form_element select {
+	height: 25px;
+	width: 120px;
+}
+
 /* ADJUSTMENT TOOLBAR  */
 div#side_toolbar {
 	position: fixed;
@@ -1167,8 +1224,6 @@ div#side_toolbar {
 	-o-transition: all 1s; Opera */
 }
 
-
-
 div#toolbar {
 	width: 250px;
 	display: inline-block;
@@ -1179,8 +1234,8 @@ div#toolbar {
 }
 
 div#toolbar_header {
-	font-size: 0.9em; 
-	padding : 3px;
+	font-size: 0.9em;
+	padding: 3px;
 	text-align: center;
 	border-bottom: 1px solid #CCCCCC;
 	background-color: #e9e9e9;
@@ -1218,8 +1273,10 @@ div#collapse_link {
 }
 
 @font-face {
-  font-family: 'Roboto Condensed';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Roboto Condensed Light'), local('RobotoCondensed-Light'), url(http://themes.googleusercontent.com/static/fonts/robotocondensed/v7/b9QBgL0iMZfDSpmcXcE8nCj3Mi2hOMP9GNHlaDA9WRI.woff) format('woff');
+	font-family: 'Roboto Condensed';
+	font-style: normal;
+	font-weight: 300;
+	src: local('Roboto Condensed Light'), local('RobotoCondensed-Light'),
+		url(http://themes.googleusercontent.com/static/fonts/robotocondensed/v7/b9QBgL0iMZfDSpmcXcE8nCj3Mi2hOMP9GNHlaDA9WRI.woff)
+		format('woff');
 }

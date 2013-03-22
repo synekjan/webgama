@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.domain.Input;
+import cz.cvut.fsv.webgama.domain.Point;
 import cz.cvut.fsv.webgama.exception.PermissionDeniedException;
 import cz.cvut.fsv.webgama.exception.ResourceNotFoundException;
 import cz.cvut.fsv.webgama.form.AdjustmentPageForm;
@@ -99,6 +100,15 @@ public class AdjustmentPageController extends MultiActionController {
 		}
 		Calculation calculation = adjustmentManager.getCalculationById(id);
 		adjustmentManager.updateInputInCalculation(adjustmentForm, calculation);
+		
+		for (Point point : adjustmentForm.getPoints()) {
+			/*System.out.print(point.getId() + " ");*/
+			System.out.print(point.getName() + " ");
+			/*System.out.print(point.getX() + " ");
+			System.out.print(point.getY() + " ");
+			System.out.println(point.getZ() + " ");*/
+			System.out.println("--------");
+		}
 
 		return new ModelAndView("redirect:/calculations");
 	}

@@ -33,14 +33,13 @@
 						<div class="accordion">
 							#foreach ($input in $myCalculations)
 							<h3>
-								$input.name <span class="time" title="$dateTool.format("yyyy-MM-dd HH:mm:ss",$input.time.toDate())">$timeFormatter.periodFromNow($input.time,
-									$locale)</span>
+								$input.name <span class="time" title="$dateTool.format("yyyy-MM-dd HH:mm:ss",$input.time.toDate())"> #if ($timeFormatter.periodFromNow($input.time, $locale) == "") #springMessage("now") #else $timeFormatter.periodFromNow($input.time, $locale) #end</span>
 							</h3>
 							<div class="accor_content">
 								<div style="min-height: 100px;">
-									<a class="button" href="#springUrl("/adjustment/onepage/${input.id}")">Edit</a>
-									<a class="button" href="#">Delete</a>
-									<a class="button" href="#">Export</a>
+									<a class="button" href="#springUrl("/adjustment/onepage/${input.id}")">EDIT</a>
+									<a class="button" href="#">DELETE</a>
+									<a class="button" href="#">EXPORT</a>
 
 								</div>
 							</div>

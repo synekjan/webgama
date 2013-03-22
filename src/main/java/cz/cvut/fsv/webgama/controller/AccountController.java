@@ -1,6 +1,5 @@
 package cz.cvut.fsv.webgama.controller;
 
-import java.security.Principal;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -46,9 +45,6 @@ public class AccountController extends MultiActionController {
 	@Inject
 	private UserPasswordChangeValidator passwordValidator;
 
-	// @Inject
-	// private UserValidator userValidator;
-
 	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
 	@RequestMapping(value = { "", "/info" }, method = RequestMethod.GET)
@@ -79,8 +75,6 @@ public class AccountController extends MultiActionController {
 	@RequestMapping(value = { "/personal" }, method = RequestMethod.POST)
 	public ModelAndView modifyUser(@Valid @ModelAttribute("user") UserForm userForm, BindingResult result,
 			HttpServletRequest request) {
-
-		// userValidator.validate(userForm, result);
 
 		String username = request.getUserPrincipal().getName();
 		userForm.setUsername(username);
@@ -128,32 +122,6 @@ public class AccountController extends MultiActionController {
 		logger.info("User[" + username + "] successfully changed account password");
 		activityManager.recordActivity(username, "activity.password.changed");
 		return new ModelAndView("/account/password/change", "success", true);
-	}
-
-	/*
-	 * @RequestMapping(value = "/password/change/success", method =
-	 * RequestMethod.GET) public ModelAndView
-	 * successPasswordChange(HttpServletRequest request, Model model, Locale
-	 * locale) {
-	 * 
-	 * ModelAndView mav = new ModelAndView("/account/password/success"); String
-	 * username = request.getUserPrincipal().getName(); mav.addObject("user",
-	 * new UserPasswordChangeForm());
-	 * 
-	 * logger.info("User[" + username + "] thought about changing password");
-	 * return mav; }
-	 */
-
-	@RequestMapping(value = { "/logins", "/logins/show" }, method = RequestMethod.GET)
-	public ModelAndView showLogins(HttpServletRequest request, Principal principal) {
-
-		ModelAndView mav = new ModelAndView("/account/loginslist");
-		String username = request.getUserPrincipal().getName();
-
-		mav.addObject("loginList", loginManager.getLoginList(principal.getName()));
-
-		logger.info("User[" + username + "] checks own loging status");
-		return mav;
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)

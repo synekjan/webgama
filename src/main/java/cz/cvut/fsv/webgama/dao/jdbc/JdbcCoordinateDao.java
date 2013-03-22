@@ -33,7 +33,7 @@ public class JdbcCoordinateDao extends JdbcDaoSupport implements CoordinateDao {
 
 	@Override
 	public void update(Coordinate coordinate) {
-		String sql = "UPDATE coordinate SET id=?, x=?, y=?, z=? WHERE coordinate_id=?";
+		String sql = "UPDATE coordinates SET id=?, x=?, y=?, z=? WHERE coordinate_id=?";
 
 		getJdbcTemplate().update(
 				sql,

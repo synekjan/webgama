@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import cz.cvut.fsv.webgama.domain.Cluster;
 import cz.cvut.fsv.webgama.domain.Input;
 import cz.cvut.fsv.webgama.domain.Point;
 
 public class AdjustmentPageForm {
-	
+
 	private String axesXY;
 
 	private String angles;
@@ -19,6 +21,8 @@ public class AdjustmentPageForm {
 
 	private String description;
 
+	@Max(100)
+	@Min(0)
 	private Double sigmaApr;
 
 	private Double confPr;

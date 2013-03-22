@@ -3,40 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-@CHARSET "UTF-8";
+body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	color: #333;
+}
+
 div#error_container {
-	width: 700px;
-	height: 400px;
+	width: 400px;
+	height: 300px;
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	margin-left: -350px;
+	margin-left: -200px;
 	margin-top: -200px;
-	border: 1px dashed #CCC;
-	font-family:  Arial, sans-serif;
-	font-size: 16px;
 }
 
 div#logo {
-	height: 120px;
-	width: 300px;
-	border: 1px solid #DDD;
+	height: 64px;
+	width: 230px;
+	margin-bottom: 30px;
 }
 
-span#code {
-	padding: 20px;
-	font-size: 20px;
+span#error_code {
+	font-size: 16px;
+	font-weight: bold;
+	margin-right: 10px;
 }
 
+.gray {
+	color: #999;
+}
+
+#error_message {
+	margin: 15px 0px;
+}
 </style>
-<title>HTTP Error 404</title>
+<title>404 Not Found Error</title>
 </head>
 <body>
 	<div id="error_container">
-	<div id="logo"></div>
-	<div><i>That's an error</i></div>
-		<div id="error_message">404, The requested URL was not found on this server</div>
-
+		<div id="logo">
+			<img alt="Logo"
+				src="http://geo102.fsv.cvut.cz/user/burvamar/error_logo.png">
+		</div>
+		<span id="error_code">404.</span><span class="gray">That's an
+			error.</span>
+		<div id="error_message">The requested URL was not found on this
+			server.</div>
+		<span class="gray">That's all we know.</span>
 	</div>
 </body>
 </html>

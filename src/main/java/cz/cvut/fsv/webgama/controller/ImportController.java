@@ -39,7 +39,7 @@ public class ImportController extends MultiActionController {
 			String username = request.getUserPrincipal().getName();
 
 			String result = adjustmentManager.adjustFromFile(file, username);
-			ModelAndView mav = new ModelAndView("/import/result");
+			ModelAndView mav = new ModelAndView("redirect:/calculations");
 			mav.addObject("result", result);
 			activityManager.recordActivity(username, "activity.xml.feed.imported");
 			return mav;

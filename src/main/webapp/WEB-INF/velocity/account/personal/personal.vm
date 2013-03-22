@@ -15,7 +15,6 @@
 						<li><a href="#springUrl("/account/info")">#springMessage("account.overview")</a></li>
 						<span class="active_menu"><li><a href="#springUrl("/account/personal")">#springMessage("account.personal")</a></li></span>
 						<li><a href="#springUrl("/account/password/change")">#springMessage("account.password.change")</a></li>
-						<li><a href="#springUrl("/account/logins/show")">#springMessage("account.logins.list")</a></li>
 						<li><a href="#springUrl("/account/delete")">#springMessage("account.delete")</a></li>
 					</ul>
 				</div>
