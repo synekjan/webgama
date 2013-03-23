@@ -1,7 +1,9 @@
 package cz.cvut.fsv.webgama.service.impl;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -88,6 +90,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 			output.setSvgContent(processOutput.getSvgResult());
 			output.setTextContent(processOutput.getTextResult());
 			calculation.setOutput(output);
+			calculation.setProgress("calculated");
 
 			calculationDao.insert(calculation);
 
@@ -109,7 +112,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 	@Override
 	public long getCalculationCountbyUsername(String username) {
 
-		return calculationDao.getCalculationCountByUser(userDao.findUserByUsername(username));
+		return calculationDao.countCalculationsByUser(userDao.findUserByUsername(username));
 	}
 
 	@Transactional
@@ -150,12 +153,17 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		network.setClusters(adjustmentForm.getClusters());
 		input.setNetwork(network);
 		
-		//FIXME
-		/*inputParser.composeInput(stream, input)*/
-		
+		//convert OutputStream to String and update xml_content in inputs table
+		OutputStream baos = new ByteArrayOutputStream(10000);
+		inputParser.composeInput(baos, input);
+		input.setXmlContent(baos.toString());
 		calculation.setInput(input);
-		calculation.setTime(new DateTime());
+
+		//delete output -- need to be recalculated again
+		calculation.setOutput(null);
+		calculation.setProgress("not-calculated");
 		
+		calculation.setTime(new DateTime());
 		calculationDao.update(calculation);
 		
 	}

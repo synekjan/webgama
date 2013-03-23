@@ -2,6 +2,7 @@ package cz.cvut.fsv.webgama.dao.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.joda.time.DateTime;
 import org.springframework.jdbc.core.RowMapper;
@@ -49,9 +50,13 @@ public class JdbcOutputDao extends JdbcDaoSupport implements OutputDao {
 
 		String sql = "SELECT * FROM outputs WHERE calculation_id =?";
 
-		Output output = getJdbcTemplate().queryForObject(sql, new Object[] { calculation.getId() }, new OutputMapper());
+		List<Output> outputs = getJdbcTemplate().query(sql, new Object[] { calculation.getId() }, new OutputMapper());
 
-		return output;
+		if (outputs.isEmpty()) {
+			return null;
+		} else {
+			return outputs.get(0);
+		}
 	}
 
 	private class OutputMapper implements RowMapper<Output> {

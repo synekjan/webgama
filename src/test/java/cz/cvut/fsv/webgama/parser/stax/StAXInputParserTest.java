@@ -1,9 +1,10 @@
 package cz.cvut.fsv.webgama.parser.stax;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,7 +53,15 @@ public class StAXInputParserTest {
 		Input input = inputParser.parseInput(inputStream2);
 		Input input3 = inputParser.parseInput(inputStream3);
 		assertNotNull(input);
-		inputParser.composeInput(System.out, input3);
+		
+		OutputStream baos = new ByteArrayOutputStream(10000);
+		
+		inputParser.composeInput(baos, input3);
+		String str = baos.toString();
+		assertTrue(str.contains("<dh from=\"1\" to=\"2\" val=\"0.061\" stdev=\"3.9\""));
+		assertTrue(str.contains("val=\"266.666543\""));
+		assertTrue(str.contains("to=\"3\" val=\"160.814358\""));
+		System.out.println(str);
 	}
 
 }

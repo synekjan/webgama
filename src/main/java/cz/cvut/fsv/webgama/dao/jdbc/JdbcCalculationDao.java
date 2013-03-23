@@ -13,6 +13,7 @@ import cz.cvut.fsv.webgama.dao.InputDao;
 import cz.cvut.fsv.webgama.dao.OutputDao;
 import cz.cvut.fsv.webgama.dao.UserDao;
 import cz.cvut.fsv.webgama.domain.Calculation;
+import cz.cvut.fsv.webgama.domain.Output;
 import cz.cvut.fsv.webgama.domain.User;
 
 public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao {
@@ -59,6 +60,18 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 						calculation.getLatitude(), calculation.getEllipsoid(), calculation.getTime().toDate(),
 						calculation.getId() });
 		inputDao.update(calculation.getInput());
+
+		if (calculation.getOutput() == null) {
+			Output output = outputDao.findOutputInCalculation(calculation);
+			if (output != null) {
+				outputDao.delete(output);
+			}
+		} else {
+			if (outputDao.findOutputInCalculation(calculation) == null) {
+				outputDao.insert(calculation.getOutput(), calculation.getId());
+			}
+			outputDao.update(calculation.getOutput());
+		}
 	}
 
 	@Override
@@ -90,16 +103,16 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 	}
 
 	@Override
-	public Long getCalculationCountByUser(User user) {
+	public Long countCalculationsByUser(User user) {
 
 		String sql = "SELECT COUNT(calculation_id) FROM calculations WHERE user_id = ?";
 
 		return getJdbcTemplate().queryForObject(sql, new Object[] { user.getId() }, Long.class);
 	}
-	
+
 	@Override
 	public void deleteCalculationById(Long id) {
-		
+
 		String sql = "DELETE FROM calculations WHERE calculation_id = ?";
 
 		getJdbcTemplate().update(sql, id);

@@ -19,7 +19,7 @@ public interface CalculationDao {
 	
 	public Calculation findCalculationById(Long id);
 	
-	public Long getCalculationCountByUser(User user);
+	public Long countCalculationsByUser(User user);
 	
 	public void deleteCalculationById(Long id);
 	

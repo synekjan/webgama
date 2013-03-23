@@ -6,8 +6,11 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +34,12 @@ public class AdjustmentPageController extends MultiActionController {
 	private AdjustmentManager adjustmentManager;
 
 	private static final Logger logger = LoggerFactory.getLogger(AdjustmentPageController.class);
+
+	//Convert empty and whitespaces to null
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+	}
 
 	@RequestMapping(value = { "", "new" }, method = RequestMethod.GET)
 	protected ModelAndView newInput(HttpServletRequest request) {
@@ -100,13 +109,15 @@ public class AdjustmentPageController extends MultiActionController {
 		}
 		Calculation calculation = adjustmentManager.getCalculationById(id);
 		adjustmentManager.updateInputInCalculation(adjustmentForm, calculation);
-		
+
 		for (Point point : adjustmentForm.getPoints()) {
-			/*System.out.print(point.getId() + " ");*/
+			/* System.out.print(point.getId() + " "); */
 			System.out.print(point.getName() + " ");
-			/*System.out.print(point.getX() + " ");
-			System.out.print(point.getY() + " ");
-			System.out.println(point.getZ() + " ");*/
+			/*
+			 * System.out.print(point.getX() + " ");
+			 * System.out.print(point.getY() + " ");
+			 * System.out.println(point.getZ() + " ");
+			 */
 			System.out.println("--------");
 		}
 

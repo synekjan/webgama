@@ -43,6 +43,12 @@
 										<!-- <a class="button delete_button" href="#springUrl("/adjustment/delete/${calculation.id}")">DELETE</a> -->
 										<button class="delete_button" data="${calculation.id}">DELETE</button>
 										<a class="button" href="#">EXPORT</a>
+										<p>$calculation.progress</p>
+										#if ($calculation.progress == "not-calculated")
+										<button class="calculate_button" data="${calculation.id}">CALCULATE</button>
+										#else
+										<button class="calculate_button" disabled="disabled" data="${calculation.id}">CALCULATE</button>
+										#end
 
 									</div>
 								</div>
@@ -99,6 +105,19 @@
 						object.fadeOut(500, function() {
 							jQuery(this).remove();
 						});
+					}
+				});
+			});
+			
+			jQuery("button.calculate_button").click(function() {
+				var id = jQuery(this).attr("data");
+				var btn = jQuery(this);
+				jQuery.ajax({
+					type : "POST",
+					data : "id=" + id,
+					url : '#springUrl("/calculation/calculate")',
+					success : function(msg) {
+						btn.attr('disabled', 'disabled');
 					}
 				});
 			});

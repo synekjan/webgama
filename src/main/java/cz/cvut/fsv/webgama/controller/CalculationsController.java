@@ -51,5 +51,16 @@ public class CalculationsController extends MultiActionController {
 			
 		return "OK";
 	}
+	
+	@RequestMapping(value = "/calculation/calculate", method = RequestMethod.POST)
+	protected @ResponseBody String calculateCalculation(@RequestParam Long id, HttpServletRequest request) {
+		
+		System.out.println(id);
+		String username = request.getUserPrincipal().getName();
+		System.out.println(username);
+		calculationManager.calculate(id, username);
+			
+		return "OK";
+	}
 
 }

@@ -937,7 +937,7 @@ public class StAXInputParser implements InputParser {
 			// <network>
 			eventWriter.add(endLine);
 			eventWriter.add(eventFactory.createStartElement("", "", "network"));
-			if (input.getNetwork().getAxesXY() != null) {
+			if (input.getNetwork().getAxesXY() != null ) {
 				eventWriter.add(eventFactory.createAttribute("axes-xy", input
 						.getNetwork().getAxesXY()));
 			}
