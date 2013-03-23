@@ -96,6 +96,14 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 
 		return getJdbcTemplate().queryForObject(sql, new Object[] { user.getId() }, Long.class);
 	}
+	
+	@Override
+	public void deleteCalculationById(Long id) {
+		
+		String sql = "DELETE FROM calculations WHERE calculation_id = ?";
+
+		getJdbcTemplate().update(sql, id);
+	}
 
 	@Override
 	public boolean isCalculationIdInDB(Long id) {
@@ -146,5 +154,4 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-
 }

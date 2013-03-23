@@ -21,6 +21,8 @@ public interface CalculationDao {
 	
 	public Long getCalculationCountByUser(User user);
 	
+	public void deleteCalculationById(Long id);
+	
 	public boolean isCalculationIdInDB(Long id);
 
 }

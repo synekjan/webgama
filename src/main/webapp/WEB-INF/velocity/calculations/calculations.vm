@@ -31,18 +31,22 @@
 						</p>
 						#else
 						<div class="accordion">
-							#foreach ($input in $myCalculations)
-							<h3>
-								$input.name <span class="time" title="$dateTool.format("yyyy-MM-dd HH:mm:ss",$input.time.toDate())"> #if ($timeFormatter.periodFromNow($input.time, $locale) == "") #springMessage("now") #else $timeFormatter.periodFromNow($input.time, $locale) #end</span>
-							</h3>
-							<div class="accor_content">
-								<div style="min-height: 100px;">
-									<a class="button" href="#springUrl("/adjustment/onepage/${input.id}")">EDIT</a>
-									<a class="button" href="#">DELETE</a>
-									<a class="button" href="#">EXPORT</a>
+							#foreach ($calculation in $myCalculations)
+				
+								<h3 class="calculation_${calculation.id}">
+									$calculation.name <span class="time" title="$dateTool.format("yyyy-MM-ddHH:mm:ss",$calculation.time.toDate())"> 
+										#if ($timeFormatter.periodFromNow($calculation.time, $locale) == "") #springMessage("now") #else $timeFormatter.periodFromNow($calculation.time, $locale) #end</span>
+								</h3>
+								<div class="accor_content calculation_${calculation.id}">
+									<div style="min-height: 100px;">
+										<a class="button" href="#springUrl("/adjustment/onepage/${calculation.id}")">EDIT</a>
+										<!-- <a class="button delete_button" href="#springUrl("/adjustment/delete/${calculation.id}")">DELETE</a> -->
+										<button class="delete_button" data="${calculation.id}">DELETE</button>
+										<a class="button" href="#">EXPORT</a>
 
+									</div>
 								</div>
-							</div>
+														
 							#end
 						</div>
 						#end
@@ -55,10 +59,9 @@
 						</p>
 						#else
 						<div class="accordion">
-							#foreach ($input in $sharedCalculations)
+							#foreach ($calculation in $sharedCalculations)
 							<h3>
-								$input.name <span class="time" title="$dateTool.format("
-									yyyy-MM-ddHH:mm:ss",$input.time.toDate())">$timeFormatter.periodFromNow($input.time,
+								$calculation.name <span class="time" title="$dateTool.format("yyyy-MM-ddHH:mm:ss",$calculation.time.toDate())">$timeFormatter.periodFromNow($calculation.time,
 									$locale)</span>
 							</h3>
 							<div class="accor_content">
@@ -82,5 +85,25 @@
 	</div>
 	</div>
 	#parse("footer.vm")
+	<script>
+		jQuery(document).ready(function() {
+
+			jQuery("button.delete_button").click(function() {
+				var id = jQuery(this).attr("data");
+				jQuery.ajax({
+					type : "POST",
+					data : "id=" + id,
+					url : '#springUrl("/calculation/delete")',
+					success : function(msg) {
+						var object = jQuery(".calculation_" + id);
+						object.fadeOut(500, function() {
+							jQuery(this).remove();
+						});
+					}
+				});
+			});
+
+		});
+	</script>
 </body>
 </html>

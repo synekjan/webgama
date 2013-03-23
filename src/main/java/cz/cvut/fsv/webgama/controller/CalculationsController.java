@@ -8,10 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
+import cz.cvut.fsv.webgama.service.CalculationManager;
 import cz.cvut.fsv.webgama.util.TimeFormatter;
 
 @Controller
@@ -22,6 +25,9 @@ public class CalculationsController extends MultiActionController {
 	
 	@Inject
 	private TimeFormatter timeFormatter;
+	
+	@Inject
+	private CalculationManager calculationManager;
 
 	@RequestMapping(value = "/calculations", method = RequestMethod.GET)
 	protected ModelAndView calculationList(HttpServletRequest request, Locale locale) {
@@ -36,6 +42,14 @@ public class CalculationsController extends MultiActionController {
 		mav.addObject("locale", locale);
 		mav.addObject("timeFormatter", timeFormatter);
 		return mav;
+	}
+	
+	@RequestMapping(value = "/calculation/delete", method = RequestMethod.POST)
+	protected @ResponseBody String deleteCalculation(@RequestParam Long id, HttpServletRequest request) {
+		
+		calculationManager.deleteCalculation(id);
+			
+		return "OK";
 	}
 
 }

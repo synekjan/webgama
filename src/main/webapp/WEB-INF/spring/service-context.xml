@@ -39,7 +39,7 @@
 	</bean>
 
 	<bean id="calculationManager" class="cz.cvut.fsv.webgama.service.impl.CalculationManagerImpl">
-
+		<property name="calculationDao" ref="calculationDao" />
 	</bean>
 
 	<bean id="activityManager" class="cz.cvut.fsv.webgama.service.impl.ActivityManagerImpl">
@@ -88,7 +88,7 @@
 
 	<bean id="fileEraser" class="cz.cvut.fsv.webgama.util.FileEraser">
 	</bean>
-	
+
 	<bean id="timeFormatter" class="cz.cvut.fsv.webgama.util.TimeFormatter">
 		<property name="messageSource" ref="messageSource" />
 	</bean>
