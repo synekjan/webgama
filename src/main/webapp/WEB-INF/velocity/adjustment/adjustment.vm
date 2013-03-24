@@ -35,7 +35,6 @@
 								<div>#springMessage("adjustment.from.xml.hint")</div>
 						</a></li>
 					</ul>
-					<div style="clear: both;"></div>
 				</div>
 			</div>
 		</div>

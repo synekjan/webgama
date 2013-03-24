@@ -64,6 +64,11 @@ public class ProcessManagerImpl implements ProcessManager {
 
 
 		// adds optional runtime arguments
+		if (calculation.getLanguage() != null) {
+			commands.add("--language");
+			commands.add(calculation.getLanguage());
+		}
+		
 		if (calculation.getAlgorithm() != null) {
 			commands.add("--algorithm");
 			commands.add(calculation.getAlgorithm());

@@ -22,9 +22,7 @@ public class CalculationManagerImpl implements CalculationManager {
 	}
 
 	@Override
-	public void calculate(Long id, String username) {
-		
-		Calculation calculation = calculationDao.findCalculationById(id);
+	public void calculate(Calculation calculation, String username) {
 		
 		ProcessOutput processOutput = processManager.runExternalGama(calculation, username);
 		

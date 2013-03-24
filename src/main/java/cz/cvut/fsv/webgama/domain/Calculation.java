@@ -2,7 +2,6 @@ package cz.cvut.fsv.webgama.domain;
 
 import org.joda.time.DateTime;
 
-//TODO - implement to DAO etc.
 public class Calculation {
 
 	private Long id;

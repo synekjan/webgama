@@ -728,6 +728,7 @@ div#options {
 	margin: 0 auto;
 	padding-top: 20px;
 	width: 730px;
+	overflow: auto;
 }
 
 ul.adjustment_choose a {
@@ -1115,6 +1116,24 @@ div#welcome_container {
 	width: 260px;
 }
 
+.calculate_wrapper {
+	width: 200px;
+	border: 1px solid #DDD;
+	float: right;
+	min-height: 100px;
+	border-radius: 4px;
+	position: relative;
+	margin-bottom: 30px;
+}
+
+.calculate_wrapper button {
+	position: absolute;
+	top: 90px;
+	right: 55px;
+	z-index: 10;
+	
+}
+
 /* ACCORDION  */
 .accordion {
 	
@@ -1126,6 +1145,7 @@ div#welcome_container {
 	padding: 10px;
 	border: 1px solid #ddd;
 	border-top: 0;
+	overflow: auto;
 }
 
 .accordion .ui-accordion-header {

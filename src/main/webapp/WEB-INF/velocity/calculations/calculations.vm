@@ -32,27 +32,66 @@
 						#else
 						<div class="accordion">
 							#foreach ($calculation in $myCalculations)
-				
-								<h3 class="calculation_${calculation.id}">
-									$calculation.name <span class="time" title="$dateTool.format("yyyy-MM-ddHH:mm:ss",$calculation.time.toDate())"> 
-										#if ($timeFormatter.periodFromNow($calculation.time, $locale) == "") #springMessage("now") #else $timeFormatter.periodFromNow($calculation.time, $locale) #end</span>
-								</h3>
-								<div class="accor_content calculation_${calculation.id}">
-									<div style="min-height: 100px;">
-										<a class="button" href="#springUrl("/adjustment/onepage/${calculation.id}")">EDIT</a>
-										<!-- <a class="button delete_button" href="#springUrl("/adjustment/delete/${calculation.id}")">DELETE</a> -->
-										<button class="delete_button" data="${calculation.id}">DELETE</button>
-										<a class="button" href="#">EXPORT</a>
+
+							<h3 class="calculation_${calculation.id}">
+								$calculation.name <span class="time" title="$dateTool.format("yyyy-MM-ddHH:mm:ss",$calculation.time.toDate())">
+									#if ($timeFormatter.periodFromNow($calculation.time, $locale)
+									== "") #springMessage("now") #else
+									$timeFormatter.periodFromNow($calculation.time, $locale) #end</span>
+							</h3>
+							<div class="accor_content calculation_${calculation.id}">
+								<!-- <div style="min-height: 100px;"> -->
+								<a class="button" href="#springUrl("/adjustment/onepage/${calculation.id}")">EDIT</a>
+								<!-- <a class="button delete_button" href="#springUrl("/adjustment/delete/${calculation.id}")">DELETE</a> -->
+								<button class="delete_button" data="${calculation.id}">DELETE</button>
+								<a class="button" href="#">EXPORT</a>
+								
+
+								<div class="calculate_wrapper">
+									<form id="calculate_form_${calculation.id}">
 										<p>$calculation.progress</p>
+										
+										<select name="language">
+											<option #if ($calculation.language == "en") selected #end value="en">EN</option>
+											<option #if ($calculation.language == "ca") selected #end value="ca">CA</option>
+											<option #if ($calculation.language == "cz") selected #end value="cz">CZ</option>
+											<option #if ($calculation.language == "du") selected #end value="du">DU</option>
+											<option #if ($calculation.language == "es") selected #end value="es">ES</option>
+											<option #if ($calculation.language == "fi") selected #end value="fi">FI</option>
+											<option #if ($calculation.language == "fr") selected #end value="fr">FR</option>
+											<option #if ($calculation.language == "hu") selected #end value="hu">HU</option>
+											<option #if ($calculation.language == "ru") selected #end value="ru">RU</option>
+											<option #if ($calculation.language == "ua") selected #end value="ua">UA</option>
+											<option #if ($calculation.language == "zh") selected #end value="zh">ZH</option>
+										</select>
+										
+										<select name="algorithm">
+											<option #if ($calculation.algorithm == "svd") selected #end value="svd">SVD</option>
+											<option #if ($calculation.algorithm == "gso") selected #end value="gso">GSO</option>
+											<option #if ($calculation.algorithm == "cholesky") selected #end value="cholesky">CHOLESKY</option>
+											<option #if ($calculation.algorithm == "envelope") selected #end value="envelope">ENVELOPE</option>
+										</select> 
+										
+										<select name="angUnits">
+											<option #if ($calculation.algorithm == "400") selected #end value="400">400</option>
+											<option #if ($calculation.algorithm == "360") selected #end value="360">360</option>
+										</select>
+										
+										
+										
+										
 										#if ($calculation.progress == "not-calculated")
 										<button class="calculate_button" data="${calculation.id}">CALCULATE</button>
 										#else
-										<button class="calculate_button" disabled="disabled" data="${calculation.id}">CALCULATE</button>
+										<button class="calculate_button" disabled="disabled"
+											data="${calculation.id}">CALCULATE</button>
 										#end
-
-									</div>
+									</form>
 								</div>
-														
+
+								<!-- </div> -->
+							</div>
+
 							#end
 						</div>
 						#end
@@ -61,7 +100,7 @@
 						<h4>#springMessage("calculations.shared.calculations")</h4>
 						#if ($sharedCalculations.isEmpty())
 						<p>
-							<i>#springMessage("calculations.my.calculations.notadded")</i>
+							<i>#springMessage("calculations.shared.calculations.notshared")</i>
 						</p>
 						#else
 						<div class="accordion">
@@ -108,18 +147,21 @@
 					}
 				});
 			});
-			
-			jQuery("button.calculate_button").click(function() {
+
+			jQuery("button.calculate_button").click(function(e) {
 				var id = jQuery(this).attr("data");
 				var btn = jQuery(this);
+				var fields = btn.parent().serialize();
 				jQuery.ajax({
 					type : "POST",
-					data : "id=" + id,
+					data : fields + "&id=" + id,
 					url : '#springUrl("/calculation/calculate")',
 					success : function(msg) {
 						btn.attr('disabled', 'disabled');
 					}
 				});
+				//stops normal form submit
+				return false;
 			});
 
 		});

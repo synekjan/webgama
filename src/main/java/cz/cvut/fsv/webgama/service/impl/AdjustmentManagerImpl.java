@@ -74,8 +74,8 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 			calculation.setProgress("not-calculated");
 			calculation.setLanguage("en");
 			calculation.setAlgorithm("svd");
-			calculation.setAngUnits(400);
-			calculation.setLatitude(0.0);
+			calculation.setAngUnits(360);
+			calculation.setLatitude(50.0);
 			calculation.setInput(input);
 			
 			//run GNU Gama calculation 
@@ -129,7 +129,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		return calculationDao.isCalculationIdInDB(id);
 	}
 
-	/*@Transactional*/
+	@Transactional
 	@Override
 	public void updateInputInCalculation(AdjustmentPageForm adjustmentForm, Calculation calculation) {
 		
