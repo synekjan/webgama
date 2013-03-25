@@ -21,9 +21,43 @@
 			<div id="content">
 				<div class="panel_header">
 					<h2>#springMessage("navbar.export")</h2>
-					<p style="margin-left: 20px;"></p>
 				</div>
+				<div id="export_wrap">
+					<table id="export">
+						<thead>
+							<tr>
+								<th>#springMessage('export.owner')</th>
+								<th>#springMessage('export.progress')</th>
+								<th>#springMessage('export.name')</th>
+								<th>#springMessage('export.language')</th>
+								<th>#springMessage('export.algorithm')</th>
+								<th>#springMessage('export.time')</th>
+							</tr>
+						</thead>
+						<tbody>
+							#foreach ($calculation in $calculations)
+							<tr>
+								<td><a #if ($calculation.progress == "calculated") href="#springUrl("/export/${calculation.id}")" class="clickable" #end>$calculation.user.username</a></td>
+								<td><a #if ($calculation.progress == "calculated") href="#springUrl("/export/${calculation.id}")" class="clickable" #end>#springMessage("$calculation.progress")</a></td>
+								<td><a #if ($calculation.progress == "calculated") href="#springUrl("/export/${calculation.id}")" class="clickable" #end>$calculation.name</a></td>
+								<td><a #if ($calculation.progress == "calculated") href="#springUrl("/export/${calculation.id}")" class="clickable" #end>#springMessage("$calculation.language")</a></td>
+								<td><a #if ($calculation.progress == "calculated") href="#springUrl("/export/${calculation.id}")" class="clickable" #end>$calculation.algorithm</a></td>
+								<td><a #if ($calculation.progress == "calculated") href="#springUrl("/export/${calculation.id}")" class="clickable" #end>$dateTool.format("yyyy-MM-dd HH:mm:ss",$calculation.time.toDate())</a></td>
+							</tr>
+							#end
+						</tbody>
+					</table>
+					#if ($calculations.isEmpty())
+						<p>
+							<i>#springMessage("calculations.my.calculations.notadded")</i>
+						</p>
+						#end
+					<br>
+					<div style="border: 1px solid #DDD; width: 200px; height: 100px;">
+						<p>#springMessage('export.tip')</p>
+					</div>
 
+				</div>
 			</div>
 		</div>
 	</div>

@@ -23,7 +23,7 @@
 					<h2>#springMessage("navbar.adjustment")</h2>
 				</div>
 				<p>#springMessage("adjustment.choose.message"):</p>
-				<div id="options">
+				<div id="adjustment_options">
 					<ul class="adjustment_choose">
 						<li><a class="wizard" href="#springUrl("/adjustment/wizard/new")">#springMessage("adjustment.wizard")
 								<div>#springMessage("adjustment.wizard.hint")</div>

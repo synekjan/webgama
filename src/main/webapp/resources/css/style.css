@@ -724,7 +724,7 @@ div.error {
 	cursor: pointer;
 }
 
-div#options {
+div#adjustment_options {
 	margin: 0 auto;
 	padding-top: 20px;
 	width: 730px;
@@ -1131,7 +1131,6 @@ div#welcome_container {
 	top: 90px;
 	right: 55px;
 	z-index: 10;
-	
 }
 
 /* ACCORDION  */
@@ -1272,6 +1271,93 @@ div#collapse_link {
 	background-color: silver;
 	height: 100%;
 	display: inline-block;
+}
+
+/*  EXPORT  */
+#export_wrap {
+	padding: 10px;
+}
+
+table#export {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table#export th {
+	font-weight: bold;
+	padding: 7px;
+}
+
+table#export tr {
+	border-bottom: 1px solid #CCC;
+	transition: all 0.5s;
+	-moz-transition: all 0.5s; /* Firefox 4 */
+	-webkit-transition: all 0.5s; /* Safari and Chrome */
+	-o-transition: all 0.5s; /* Opera */
+}
+
+table#export tbody tr:HOVER {
+	background-color: #F5F5F5;
+	cursor: pointer;
+}
+
+table#export tbody tr:HOVER td a {
+	padding: 10px 7px;
+	transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+}
+
+table#export td {
+	padding: 0px;
+	display: table-cell;
+}
+
+table#export td a {
+	text-decoration: none;
+	color: #999;
+	display: block;
+	height: 100%;
+	padding: 7px;
+}
+
+table#export td a.clickable {
+	color: #4183C4;
+}
+
+
+#export_options {
+	width: 900px;
+	margin: 20px auto;
+	overflow: auto;
+}
+
+ul.export_choose a {
+	margin: 10px;
+	width: 180px;
+	padding: 20px 0 0 20px;
+	height: 100px;
+	border: 1px solid #CCCCCC;
+	border-radius: 4px 4px 4px 4px;
+	float: left;
+	text-decoration: none;
+	font-size: 25px;
+	font-family: Roboto Condensed, sans-serif;
+	color: #777777;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+	text-shadow: 0 1px 0 #FFFFFF;
+}
+
+ul.export_choose a:HOVER {
+	border-color: #AAAAAA;
+	color: #111111;
+}
+
+ul.export_choose a:ACTIVE {
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4) inset;
+	padding-top: 22px;
+	height: 98px;
 }
 
 @font-face {

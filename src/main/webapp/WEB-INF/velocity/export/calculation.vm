@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+#parse("include.vm")
+<title>#springMessage("navbar.export") -
+	#springMessage("application.name")</title>
+</head>
+<body>
+	<div id="wrapper">
+		#parse("header.vm")
+		<div id="container">
+			<div class="nav_menu">
+				<ul>
+					<li><a href="#springUrl("/overview")">#springMessage("navbar.overview")</a></li>
+					<li><a href="#springUrl("/adjustment")">#springMessage("navbar.adjustment")</a></li>
+					<li><a href="#springUrl("/calculations")">#springMessage("navbar.calculations")</a></li>
+					<li><a href="#springUrl("/import/xml")">#springMessage("navbar.import")</a></li>
+					<li><a class="active" href="#springUrl("/export")">#springMessage("navbar.export")</a></li>
+				</ul>
+			</div>
+			<div id="content">
+				<div class="panel_header">
+					<h2>#springMessage("navbar.export")</h2>
+				</div>
+				<div id="export_wrap">
+					Calculation name: $calculation.name<br> Used algorithm:
+					$calculation.algorithm<br> Language: $calculation.language<br><br>
+
+
+					<textarea rows="20" readonly="readonly">$calculation.output.textContent</textarea>
+
+					<div id="export_options">
+						Download:
+						<ul class="export_choose">
+							<li><a class="xml" href="#springUrl("/export/${calculation.id}/xml")">XML</a></li>
+							<li><a class="text" href="#springUrl("/export/${calculation.id}/text")">TEXT</a></li>
+							<li><a class="html" href="#springUrl("/export/${calculation.id}/html")">HTML</a></li>
+							<li><a class="svg" href="#springUrl("/export/${calculation.id}/svg")">SVG</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	#parse("footer.vm")
+	<script>
+		jQuery(function() {
+			jQuery("#tabs").tabs();
+		});
+	</script>
+</body>
+</html>

@@ -3,6 +3,8 @@ package cz.cvut.fsv.webgama.controller;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +24,8 @@ public class ImportController extends MultiActionController {
 	
 	@Inject 
 	private ActivityManager activityManager;
+	
+	private static final Logger logger = LoggerFactory.getLogger(ImportController.class);
 
 	@RequestMapping(value = "/import/xml", method = RequestMethod.GET)
 	protected ModelAndView showUploadForm() {
@@ -42,6 +46,7 @@ public class ImportController extends MultiActionController {
 			ModelAndView mav = new ModelAndView("/import/result");
 			mav.addObject("result", result);
 			activityManager.recordActivity(username, "activity.xml.feed.imported");
+			logger.info(username + " uploaded file: " + file.getOriginalFilename());
 			return mav;
 		} else {
 			return new ModelAndView("/import/xml");

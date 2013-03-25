@@ -44,7 +44,7 @@
 								<a class="button" href="#springUrl("/adjustment/onepage/${calculation.id}")">EDIT</a>
 								<!-- <a class="button delete_button" href="#springUrl("/adjustment/delete/${calculation.id}")">DELETE</a> -->
 								<button class="delete_button" data="${calculation.id}">DELETE</button>
-								<a class="button" href="#">EXPORT</a>
+								<a class="button" href="#springUrl("/export/${calculation.id}")">EXPORT</a>
 								
 
 								<div class="calculate_wrapper">
@@ -52,17 +52,17 @@
 										<p>$calculation.progress</p>
 										
 										<select name="language">
-											<option #if ($calculation.language == "en") selected #end value="en" title="#springMessage('english')">English</option>
-											<option #if ($calculation.language == "ca") selected #end value="ca" title="#springMessage('catalan')">català</option>
-											<option #if ($calculation.language == "cz") selected #end value="cz" title="#springMessage('czech')">Česky</option>
-											<option #if ($calculation.language == "du") selected #end value="du" title="#springMessage('dutch')">Nederlands</option>
-											<option #if ($calculation.language == "es") selected #end value="es" title="#springMessage('spanish')">Español</option>
-											<option #if ($calculation.language == "fi") selected #end value="fi" title="#springMessage('finnish')">Suomi</option>
-											<option #if ($calculation.language == "fr") selected #end value="fr" title="#springMessage('french')">Français</option>
-											<option #if ($calculation.language == "hu") selected #end value="hu" title="#springMessage('hugarian')">Magyar</option>
-											<option #if ($calculation.language == "ru") selected #end value="ru" title="#springMessage('russian')">Pусский</option>
-											<option #if ($calculation.language == "ua") selected #end value="ua" title="#springMessage('ukrainian')">Український</option>
-											<option #if ($calculation.language == "zh") selected #end value="zh" title="#springMessage('chinese')">简体中文</option>
+											<option #if ($calculation.language == "en") selected #end value="en" title="#springMessage('en')">English</option>
+											<option #if ($calculation.language == "ca") selected #end value="ca" title="#springMessage('ca')">català</option>
+											<option #if ($calculation.language == "cz") selected #end value="cz" title="#springMessage('cz')">Česky</option>
+											<option #if ($calculation.language == "du") selected #end value="du" title="#springMessage('du')">Nederlands</option>
+											<option #if ($calculation.language == "es") selected #end value="es" title="#springMessage('es')">Español</option>
+											<option #if ($calculation.language == "fi") selected #end value="fi" title="#springMessage('fi')">Suomi</option>
+											<option #if ($calculation.language == "fr") selected #end value="fr" title="#springMessage('fr')">Français</option>
+											<option #if ($calculation.language == "hu") selected #end value="hu" title="#springMessage('hu')">Magyar</option>
+											<option #if ($calculation.language == "ru") selected #end value="ru" title="#springMessage('ru')">Pусский</option>
+											<option #if ($calculation.language == "ua") selected #end value="ua" title="#springMessage('ua')">Український</option>
+											<option #if ($calculation.language == "zh") selected #end value="zh" title="#springMessage('zh')">简体中文</option>
 										</select>
 										
 										<select name="algorithm">
@@ -76,9 +76,6 @@
 											<option #if ($calculation.algorithm == "400") selected #end value="400">400</option>
 											<option #if ($calculation.algorithm == "360") selected #end value="360">360</option>
 										</select>
-										
-										
-										
 										
 										#if ($calculation.progress == "not-calculated")
 										<button class="calculate_button" data="${calculation.id}">CALCULATE</button>
