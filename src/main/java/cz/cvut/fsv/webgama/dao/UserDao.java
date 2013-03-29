@@ -18,7 +18,7 @@ public interface UserDao {
 	public void updateEnabled(User user);
 
 	public List<User> getUserList();
-	
+
 	public Long getUserCount();
 
 	public List<User> findUsersByUsername(String username);

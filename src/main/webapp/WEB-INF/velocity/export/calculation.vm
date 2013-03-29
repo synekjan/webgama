@@ -27,7 +27,7 @@
 					$calculation.algorithm<br> Language: $calculation.language<br><br>
 
 
-					<textarea rows="20" readonly="readonly">$calculation.output.textContent</textarea>
+					<textarea rows="20" readonly="readonly">$!calculation.output.textContent</textarea>
 
 					<div id="export_options">
 						Download:

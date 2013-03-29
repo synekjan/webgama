@@ -492,6 +492,12 @@ div.form_element_errors li {
 	text-shadow: none;
 }
 
+.input textarea {
+	width: 605px;
+	height: 120px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
 input[type=text],input[type=password] {
 	border: 1px solid #BBBBBB;
 	border-radius: 1px 1px 1px 1px;
@@ -650,6 +656,65 @@ input.submit_btn:ACTIVE {
 	border-radius: 4px 4px 4px 4px;
 }
 
+#import_container .form_element_errors {
+	width: 250px;
+}
+
+#import_container #gnu_gama_error {
+	color: #D8000C;
+	background-color: #FED1D1;
+	border: 1px solid #E3A198;
+	padding: 5px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+#overlay {
+	position:fixed;
+	width: 300px;
+	height: 200px;
+	left: 50%;
+	top: 50%;
+	margin-left: -200px;
+	margin-top: -200px;
+	background-color: #FFF;
+	border: 1px solid #AAA;
+	visibility: hidden;
+	opacity: 1;
+	z-index: 9999;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+#overlay #loader_logo {
+	width: 64px;
+	height: 64px;
+	margin: 20px auto;
+}
+
+#overlay #loader_loader {
+	width: 160px;
+	height: 20px;
+	margin: 30px auto;
+	
+}
+
+#overlay #loader_message {
+	text-align: center;
+	font: bold 14px;
+}
+
+.dim {
+	opacity: 0.5;
+	background-color: #000;
+	z-index: 9990;
+  	position: absolute;
+  	top: 0;
+	left: 0;
+  	height: 100%;
+  	width: 100%;
+  	content: "";
+  	visibility: hidden;
+}
+
 #login_container {
 	margin: 60px auto;
 	padding: 20px;
@@ -722,6 +787,10 @@ div.error {
 	height: 20px;
 	margin-top: -3px;
 	cursor: pointer;
+}
+
+.adjustment_form .icon-close {
+	margin: 0;
 }
 
 div#adjustment_options {
@@ -1175,17 +1244,18 @@ span.time {
 	
 }
 
-div.point {
-	border: 1px solid #AAAAAA;
+.window  {
+	border: 1px solid #AAA;
 	border-radius: 3px;
 	margin-bottom: 15px;
-	background-color: #FFFFFF;
+	background-color: #FFF;
 	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+	padding: 0;
 }
 
 div.title_bar {
 	height: 24px;
-	border-bottom: 1px solid #DDD;
+	border-bottom: 1px solid #AAA;
 	padding-left: 10px;
 	background: -moz-linear-gradient(top, #F1F1F1, #d7d7d7) repeat scroll 0 0 #e9e9e9;
 }
@@ -1205,27 +1275,35 @@ div.title_bar {
 }
 
 #points .point_form_element {
-	width: 150px;
+	width: 140px;
 	display: inline-block;
 }
 
-.point_content {
+.window_content {
 	padding: 10px 5px 5px 10px;
 }
+
 
 #points .point_form_element label {
 	margin-right: 5px;
 }
 
 #points .point_form_element input {
-	width: 120px;
+	width: 115px;
 	height: 18px;
 }
 
 #points .point_form_element select {
 	height: 25px;
-	width: 120px;
+	width: 110px;
 }
+
+
+
+
+
+
+
 
 /* ADJUSTMENT TOOLBAR  */
 div#side_toolbar {
@@ -1259,7 +1337,7 @@ div#toolbar_header {
 	border-bottom: 1px solid #CCCCCC;
 	background-color: #e9e9e9;
 	background-image: -moz-linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
-	cursor: pointer;
+	cursor: move;
 }
 
 div#toolbar_content {
@@ -1320,12 +1398,12 @@ table#export td a {
 	display: block;
 	height: 100%;
 	padding: 7px;
+	display: block;
 }
 
 table#export td a.clickable {
 	color: #4183C4;
 }
-
 
 #export_options {
 	width: 900px;

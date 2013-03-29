@@ -141,14 +141,17 @@ public class JdbcObservationDao extends JdbcDaoSupport implements ObservationDao
 	}
 
 	@Override
-	public List<Observation> findObservationsInCluster(Cluster cluster) {
+	public Observation findObservationInCluster(Cluster cluster) {
 
 		String sql = "SELECT * FROM observations WHERE cluster_id = ? ORDER BY observation_id";
 
 		List<Observation> observations = getJdbcTemplate().query(sql, new Object[] { cluster.getId() },
 				new ObservationMapper());
 
-		return observations;
+		if (observations.isEmpty())
+			return null;
+		
+		return observations.get(0);
 	}
 
 	private class ObservationMapper implements RowMapper<Observation> {

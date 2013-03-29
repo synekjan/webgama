@@ -45,7 +45,7 @@ public class ProcessManagerImpl implements ProcessManager {
 		}
 		// adds input xml file path to command sequence
 		commands.add(filePath);
-		
+
 		// send xml output to std::out
 		commands.add("--xml");
 		commands.add("-");
@@ -62,13 +62,12 @@ public class ProcessManagerImpl implements ProcessManager {
 		String svgOutputFilePath = "/tmp/" + Generator.generateSvgOutputFilename(username);
 		commands.add(svgOutputFilePath);
 
-
 		// adds optional runtime arguments
 		if (calculation.getLanguage() != null) {
 			commands.add("--language");
 			commands.add(calculation.getLanguage());
 		}
-		
+
 		if (calculation.getAlgorithm() != null) {
 			commands.add("--algorithm");
 			commands.add(calculation.getAlgorithm());
@@ -110,12 +109,10 @@ public class ProcessManagerImpl implements ProcessManager {
 			processOutput.setExitValue(exitValue);
 			processOutput.setXmlResult(result);
 			processOutput.setErrorMessage(errorString);
-			processOutput.setTextResult(Files.toString(new File(textOutputFilePath), Charsets.UTF_8));
-			processOutput.setHtmlResult(Files.toString(new File(htmlOutputFilePath), Charsets.UTF_8));
-			processOutput.setSvgResult(Files.toString(new File(svgOutputFilePath), Charsets.UTF_8));
 
 		} catch (IOException | InterruptedException e) {
 			logger.error("error during starting process");
+			e.printStackTrace();
 		} finally {
 			if (inputStream != null) {
 				try {
@@ -131,6 +128,18 @@ public class ProcessManagerImpl implements ProcessManager {
 					e.printStackTrace();
 				}
 			}
+		}
+
+		if (processOutput.getExitValue() != 0)
+			return processOutput;
+
+		try {
+			processOutput.setTextResult(Files.toString(new File(textOutputFilePath), Charsets.UTF_8));
+			processOutput.setHtmlResult(Files.toString(new File(htmlOutputFilePath), Charsets.UTF_8));
+			processOutput.setSvgResult(Files.toString(new File(svgOutputFilePath), Charsets.UTF_8));
+		} catch (IOException e) {
+			logger.error("error during reading result files");
+			e.printStackTrace();
 		}
 
 		return processOutput;

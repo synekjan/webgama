@@ -12,9 +12,9 @@ public class Cluster {
 	private String tagname;
 
 	private CovMat covMat;
-	
+
 	@Valid
-	private List<Observation> observations = new ArrayList<>();
+	private Observation observation;
 
 	@Valid
 	private List<Coordinate> coordinates = new ArrayList<>();
@@ -49,12 +49,12 @@ public class Cluster {
 		this.covMat = covMat;
 	}
 
-	public List<Observation> getObservations() {
-		return observations;
+	public Observation getObservation() {
+		return observation;
 	}
 
-	public void setObservations(List<Observation> observations) {
-		this.observations = observations;
+	public void setObservation(Observation observation) {
+		this.observation = observation;
 	}
 
 	public List<Coordinate> getCoordinates() {

@@ -10,6 +10,6 @@ public interface NetworkDao {
 	public void delete(Network network);
 
 	public void update(Network network);
-	
+
 	public Network findNetworkByInput(Input input);
 }

@@ -51,8 +51,8 @@
 								</div>
 								<div class="medium_form_element">
 									<label for="epoch">#springMessage("input.epoch"):</label>
-									<div class="input">#springFormInput("input.epoch", 'placeholder="0"')
-										#showElementErrors()</div>
+									<div class="input">#springFormInput("input.epoch",
+										'placeholder="0"') #showElementErrors()</div>
 								</div>
 							</fieldset>
 							<fieldset>
@@ -67,7 +67,8 @@
 								<legend>#springMessage("adjustment.onepage.network.parameters")</legend>
 								<div class="medium_form_element">
 									<label for="sigmaApr">#springMessage("input.sigmaApr"):</label>
-									<div class="input">#springFormInput("input.sigmaApr",
+
+									<div class="input">#springFormInput("input.sigmaApr"
 										'placeholder="10"') #showElementErrors()</div>
 								</div>
 								<div class="medium_form_element">
@@ -84,8 +85,10 @@
 									<label for="sigma-act">#springMessage("input.sigmaAct"):</label>
 									<div class="input">
 										<select id="sigma-act" name="sigmaAct">
-											<option value="aposteriori" #if ($input.sigmaAct == "aposteriori") selected #end>Aposteriori</option>
-											<option value="apriori" #if ($input.sigmaAct ==	"apriori") selected #end>Apriori</option>
+											<option value="aposteriori" #if ($input.sigmaAct==
+												"aposteriori") selected #end>Aposteriori</option>
+											<option value="apriori" #if ($input.sigmaAct==
+												"apriori") selected #end>Apriori</option>
 										</select>
 									</div>
 								</div>
@@ -94,7 +97,8 @@
 									<div class="input">
 										<select id="updateCC" name="updateCC">
 											<option value="no" #if ($input.updateCC== "no") selected #end>#springMessage("no")</option>
-											<option value="yes" #if ($input.updateCC== "yes") selected #end>#springMessage("yes")</option>
+											<option value="yes" #if ($input.updateCC==
+												"yes") selected #end>#springMessage("yes")</option>
 										</select> #showElementErrors()
 									</div>
 								</div>
@@ -128,16 +132,16 @@
 									<legend>#springMessage("adjustment.onepage.points")</legend>
 									#foreach ($point in $input.points) #set( $i =
 									"${foreach.index}" )
-									<div id="point_$i" class="point">
-									<span class="icon-close" role="button"></span>
+									<div id="point_$i" class="window">
+										<span class="icon-close" role="button"></span>
 										#springFormHiddenInput("input.points[$i].id" "")
 										<div class="title_bar">
 											<label class="required" for="points[$i].name">#springMessage("adjustment.onepage.point"):</label>
 											#springBind("input.points[$i].name") <input type="text"
 												id="points[$i].name" name="points[$i].name"
-												value="$!point.name" /> #showElementErrors() 
+												value="$!point.name" /> #showElementErrors()
 										</div>
-										<div class="point_content">
+										<div class="window_content">
 											<div class="point_form_element">
 												<label for="points[$i].x">X:</label>
 												#springBind("input.points[$i].x") <input id="points[$i].x"
@@ -191,444 +195,510 @@
 								</fieldset>
 							</div>
 
-							<fieldset>
-								<legend>#springMessage("adjustment.onepage.clusters")</legend>
-								#foreach($cluster in $input.clusters) 
-								#set( $h = "${foreach.index}" ) 
-								
-								#if ($cluster.getObservations().size() !=0)
-								#springFormHiddenInput("input.clusters[$h].tagname" "") 
-								#foreach ($observation in $cluster.observations)
+							<div id="clusters">
 								<fieldset>
-									#set( $i = "${foreach.index}" )
-									#springFormHiddenInput("input.clusters[$h].observations[$i].id" "")
-									<legend>#springMessage("adjustment.onepage.observation")</legend>
-									<div class="small_form_element">
-										<label class="required" for="from">#springMessage("observation.from"):</label>
-										<div class="input">
-											#springBind("input.clusters[$h].observations[$i].from") <input
-												id="from" type="text"
-												name="clusters[$h].observations[$i].from"
-												value="$!observation.from" /> #showElementErrors()
+									<legend>#springMessage("adjustment.onepage.clusters")</legend>
+									#foreach($cluster in $input.clusters) #set( $h
+									="${foreach.index}" ) #if ($cluster.getObservation())
+									#set($observation = $cluster.observation )
+									<div id="observation_${h}" class="window">
+										<span class="icon-close" role="button"></span>
+										#springFormHiddenInput("input.clusters[$h].tagname" "")
+										#springFormHiddenInput("input.clusters[$h].observation.id" "")
+										<div class="title_bar">
+											<label class="required">#springMessage("adjustment.onepage.observation")</label>
+										</div>
+										<div class="window_content">
+											<div class="small_form_element">
+												<label class="required" for="from">#springMessage("observation.from"):</label>
+												<div class="input">
+													#springBind("input.clusters[$h].observation.from") <input
+														id="from" type="text" name="clusters[$h].observation.from"
+														value="$!observation.from" /> #showElementErrors()
+												</div>
+											</div>
+											<div class="small_form_element">
+												<label for="orientation">#springMessage("observation.orientation"):</label>
+												<div class="input">
+													#springBind("input.clusters[$h].observation.orientation") <input
+														id="orientation" type="text"
+														name="clusters[$h].observation.orientation"
+														value="$!observation.orientation" /> #showElementErrors()
+												</div>
+											</div>
+											<div class="small_form_element">
+												<label for="fromDh">#springMessage("observation.fromDh"):</label>
+												<div class="input">
+													#springBind("input.clusters[$h].observation.fromDh") <input
+														id="fromDh" type="text"
+														name="clusters[$h].observation.fromDh"
+														value="$!observation.fromDh" /> #showElementErrors()
+												</div>
+											</div>
+
+											<!-- DIRECTIONS  -->
+											#foreach ($direction in $observation.directions) #set( $j =
+											"${foreach.index}" )
+											<div id="direction_${h}_$j" class="window">
+												<span class="icon-close" role="button"></span>
+												#springFormHiddenInput("input.clusters[$h].observation.directions[$j].id"
+												"")
+												<div class="title_bar">
+													<label class="required">#springMessage("adjustment.onepage.direction")</label>
+												</div>
+												<div class="window_content">
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].observation.directions[$j].to">#springMessage("direction.to"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.directions[$j].to",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].observation.directions[$j].val">#springMessage("direction.val"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.directions[$j].val",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label for="clusters[$h].observation.directions[$j].stdev">#springMessage("direction.stdev"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.directions[$j].stdev",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label
+															for="clusters[$h].observation.directions[$j].fromDh">#springMessage("direction.fromDh"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.directions[$j].fromDh",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label for="clusters[$h].observation.directions[$j].toDh">#springMessage("direction.toDh"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.directions[$j].toDh",
+															"")#showElementErrors()</div>
+													</div>
+												</div>
+											</div>
+											#end
+											<!-- DISTANCES  -->
+											#foreach ($distance in $observation.distances) #set( $j =
+											"${foreach.index}" )
+											<div id="distance_${h}_$j" class="window">
+												<span class="icon-close" role="button"></span>
+												#springFormHiddenInput("input.clusters[$h].observation.distances[$j].id"
+												"")
+												<div class="title_bar">
+													<label class="required">#springMessage("adjustment.onepage.distance")</label>
+												</div>
+												<div class="window_content">
+													<div class="small_form_element">
+														<label for="clusters[$h].observation.distances[$j].from">#springMessage("distance.from"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.distances[$j].from",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].observation.distances[$j].to">#springMessage("distance.to"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.distances[$j].to",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].observation.distances[$j].val">#springMessage("distance.val"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.distances[$j].val",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label for="clusters[$h].observation.distances[$j].stdev">#springMessage("distance.stdev"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.distances[$j].stdev",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label for="clusters[$h].observation.distances[$j].fromDh">#springMessage("distance.fromDh"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.distances[$j].fromDh",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label for="clusters[$h].observation.distances[$j].toDh">#springMessage("distance.toDh"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.distances[$j].toDh",
+															"")#showElementErrors()</div>
+													</div>
+												</div>
+											</div>
+											#end
+											<!-- ANGLES  -->
+											#foreach ($angle in $observation.angles) #set( $j =
+											"${foreach.index}" )
+											<div id="angle_${h}_$j" class="window">
+												<span class="icon-close" role="button"></span>
+												#springFormHiddenInput("input.clusters[$h].observation.angles[$j].id"
+												"")
+												<div class="title_bar">
+													<label class="required">#springMessage("adjustment.onepage.angle")</label>
+												</div>
+												<div class="window_content">
+													<div class="small_form_element">
+														<label for="clusters[$h].observation.angles[$j].from">#springMessage("angle.from"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.angles[$j].from",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].observation.angles[$j].bs">#springMessage("angle.bs"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.angles[$j].bs",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].observation.angles[$j].fs">#springMessage("angle.fs"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.angles[$j].fs",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].observation.angles[$j].val">#springMessage("angle.val"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.angles[$j].val",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label for="clusters[$h].observation.angles[$j].stdev">#springMessage("angle.stdev"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.angles[$j].stdev",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label for="clusters[$h].observation.angles[$j].fromDh">#springMessage("angle.fromDh"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.angles[$j].fromDh",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label for="clusters[$h].observation.angles[$j].bsDh">#springMessage("angle.bsDh"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.angles[$j].bsDh",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label for="clusters[$h].observation.angles[$j].fsDh">#springMessage("angle.fsDh"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.angles[$j].fsDh",
+															"")#showElementErrors()</div>
+													</div>
+												</div>
+											</div>
+											#end
+											<!-- SLOPE DISTANCES  -->
+											#foreach ($distance in $observation.slopeDistances) #set( $j
+											= "${foreach.index}" )
+											<div id="slopeDistance_${h}_$j" class="window">
+												<span class="icon-close" role="button"></span>
+												#springFormHiddenInput("input.clusters[$h].observation.slopeDistances[$j].id"
+												"")
+												<div class="title_bar">
+													<label class="required">#springMessage("adjustment.onepage.slopeDistance")</label>
+												</div>
+												<div class="window_content">
+													<div class="small_form_element">
+														<label
+															for="clusters[$h].observation.slopeDistances[$j].from">#springMessage("slopeDistance.from"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.slopeDistances[$j].from",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].observation.slopeDistances[$j].to">#springMessage("slopeDistance.to"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.slopeDistances[$j].to",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].observation.slopeDistances[$j].val">#springMessage("slopeDistance.val"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.slopeDistances[$j].val",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label
+															for="clusters[$h].observation.slopeDistances[$j].stdev">#springMessage("slopeDistance.stdev"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.slopeDistances[$j].stdev",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label
+															for="clusters[$h].observation.slopeDistances[$j].fromDh">#springMessage("slopeDistance.fromDh"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.slopeDistances[$j].fromDh",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label
+															for="clusters[$h].observation.slopeDistances[$j].toDh">#springMessage("slopeDistance.toDh"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.slopeDistances[$j].toDh",
+															"")#showElementErrors()</div>
+													</div>
+												</div>
+											</div>
+											#end
+											<!-- ZENITH ANGLES  -->
+											#foreach ($distance in $observation.zenithAngles) #set( $j =
+											"${foreach.index}" )
+											<div id="zenithAngle_${h}_$j" class="window">
+												<span class="icon-close" role="button"></span>
+												#springFormHiddenInput("input.clusters[$h].observation.zenithAngles[$j].id"
+												"")
+												<div class="title_bar">
+													<label class="required">#springMessage("adjustment.onepage.zenithAngle")</label>
+												</div>
+												<div class="window_content">
+													<div class="small_form_element">
+														<label
+															for="clusters[$h].observation.zenithAngles[$j].from">#springMessage("zenithAngle.from"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.zenithAngles[$j].from",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].observation.zenithAngles[$j].to">#springMessage("zenithAngle.to"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.zenithAngles[$j].to",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].observation.zenithAngles[$j].val">#springMessage("zenithAngle.val"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.zenithAngles[$j].val",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label
+															for="clusters[$h].observation.zenithAngles[$j].stdev">#springMessage("zenithAngle.stdev"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.zenithAngles[$j].stdev",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label
+															for="clusters[$h].observation.zenithAngles[$j].fromDh">#springMessage("zenithAngle.fromDh"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.zenithAngles[$j].fromDh",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label
+															for="clusters[$h].observation.zenithAngles[$j].toDh">#springMessage("zenithAngle.toDh"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].observation.zenithAngles[$j].toDh",
+															"")#showElementErrors()</div>
+													</div>
+												</div>
+											</div>
+											#end
 										</div>
 									</div>
-									<div class="small_form_element">
-										<label for="orientation">#springMessage("observation.orientation"):</label>
-										<div class="input">
-											#springBind("input.clusters[$h].observations[$i].orientation")
-											<input id="orientation" type="text"
-												name="clusters[$h].observations[$i].orientation"
-												value="$!observation.orientation" /> #showElementErrors()
+
+									<!-- COORDINATES -->
+									#elseif ($cluster.getCoordinates().size() != 0)
+									<div id="coordinates_${h}" class="window">
+										<span class="icon-close" role="button"></span>
+										#springFormHiddenInput("input.clusters[$h].tagname" "")
+										<div class="title_bar">
+											<label class="required">#springMessage("adjustment.onepage.coordinates")</label>
+										</div>
+										<div class="window_content">
+											#foreach ($coordinate in $cluster.coordinates) #set( $i =
+											"${foreach.index}" )
+											<div id="coordinate_${h}_$i" class="window">
+												<span class="icon-close" role="button"></span>
+												#springFormHiddenInput("input.clusters[$h].coordinates[$i].id"
+												"")
+												<div class="title_bar">
+													<label for="clusters[$h].coordinates[$i].name"
+														class="required">#springMessage("adjustment.onepage.coordinate"):
+													</label> #springBind("input.clusters[$h].coordinates[$i].name") <input
+														type="text" name="clusters[$h].coordinates[$i].name"
+														id="clusters[$h].coordinates[$i].name"
+														value="$!coordinate.name" /> #showElementErrors()
+												</div>
+												<div class="window_content">
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].coordinates[$i].x">X:</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].coordinates[$i].x",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].coordinates[$i].y">Y:</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].coordinates[$i].y",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].coordinates[$i].z">Z:</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].coordinates[$i].z",
+															"")#showElementErrors()</div>
+													</div>
+												</div>
+											</div>
+											#end
 										</div>
 									</div>
-									<div class="small_form_element">
-										<label for="fromDh">#springMessage("observation.fromDh"):</label>
-										<div class="input">
-											#springBind("input.clusters[$h].observations[$i].fromDh") <input
-												id="fromDh" type="text"
-												name="clusters[$h].observations[$i].fromDh"
-												value="$!observation.fromDh" /> #showElementErrors()
+
+									<!-- HEIGHT DIFFERENCE  -->
+									#elseif ($cluster.getHeightDifferences().size() != 0)
+									<div id="heightDifferences_${h}" class="window">
+										<span class="icon-close" role="button"></span>
+										#springFormHiddenInput("input.clusters[$h].tagname" "")
+										<div class="title_bar">
+											<label class="required">#springMessage("adjustment.onepage.heightDifferences")</label>
+										</div>
+										<div class="window_content">
+											#foreach ($heightDifference in $cluster.heightDifferences)
+											#set( $i = "${foreach.index}" )
+											<div id="heightDifference_${h}_$j" class="window">
+												<span class="icon-close" role="button"></span>
+												#springFormHiddenInput("input.clusters[$h].heightDifferences[$i].id"
+												"")
+												<div class="title_bar">
+													<label class="required">#springMessage("adjustment.onepage.heightDifference")</label>
+												</div>
+												<div class="window_content">
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].heightDifferences[$i].from">#springMessage("heightDifference.from"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].heightDifferences[$i].from",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].heightDifferences[$i].to">#springMessage("heightDifference.to"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].heightDifferences[$i].to",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].heightDifferences[$i].val">#springMessage("heightDifference.val"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].heightDifferences[$i].val",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label for="clusters[$h].heightDifferences[$i].stdev">#springMessage("heightDifference.stdev"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].heightDifferences[$i].stdev",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label for="clusters[$h].heightDifferences[$i].dist">#springMessage("heightDifference.dist"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].heightDifferences[$i].dist",
+															"")#showElementErrors()</div>
+													</div>
+												</div>
+											</div>
+											#end
 										</div>
 									</div>
 
-									<!-- DIRECTIONS  -->
-									#foreach ($direction in $observation.directions)
-									<fieldset>
-										#set( $j = "${foreach.index}" )
-										#springFormHiddenInput("input.clusters[$h].observations[$i].directions[$j].id" "")
-										<legend>#springMessage("adjustment.onepage.direction")</legend>
-										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].observations[$i].directions[$j].to">#springMessage("direction.to"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].directions[$j].to",
-												"")#showElementErrors()</div>
+									<!-- VECTORS  -->
+									#elseif ($cluster.getVectors().size() != 0)
+									<div id="vectors_${h}" class="window">
+										<span class="icon-close" role="button"></span>
+										#springFormHiddenInput("input.clusters[$h].tagname" "")
+										<div class="title_bar">
+											<label class="required">#springMessage("adjustment.onepage.vectors")</label>
 										</div>
-										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].observations[$i].directions[$j].val">#springMessage("direction.val"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].directions[$j].val",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label
-												for="clusters[$h].observations[$i].directions[$j].stdev">#springMessage("direction.stdev"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].directions[$j].stdev",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label
-												for="clusters[$h].observations[$i].directions[$j].fromDh">#springMessage("direction.fromDh"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].directions[$j].fromDh",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label
-												for="clusters[$h].observations[$i].directions[$j].toDh">#springMessage("direction.toDh"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].directions[$j].toDh",
-												"")#showElementErrors()</div>
-										</div>
-									</fieldset>
-									#end
-									<!-- DISTANCES  -->
-									#foreach ($distance in $observation.distances)
-									<fieldset>
-										#set( $j = "${foreach.index}" )
-										#springFormHiddenInput("input.clusters[$h].observations[$i].distances[$j].id" "")
-										<legend>#springMessage("adjustment.onepage.distance")</legend>
-										<div class="small_form_element">
-											<label for="clusters[$h].observations[$i].distances[$j].from">#springMessage("distance.from"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].distances[$j].from",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].observations[$i].distances[$j].to">#springMessage("distance.to"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].distances[$j].to",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].observations[$i].distances[$j].val">#springMessage("distance.val"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].distances[$j].val",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label
-												for="clusters[$h].observations[$i].distances[$j].stdev">#springMessage("distance.stdev"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].distances[$j].stdev",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label
-												for="clusters[$h].observations[$i].distances[$j].fromDh">#springMessage("distance.fromDh"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].distances[$j].fromDh",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label for="clusters[$h].observations[$i].distances[$j].toDh">#springMessage("distance.toDh"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].distances[$j].toDh",
-												"")#showElementErrors()</div>
-										</div>
-									</fieldset>
-									#end
-									<!-- ANGLES  -->
-									#foreach ($angle in $observation.angles)
-									<fieldset>
-										#set( $j = "${foreach.index}" )
-										#springFormHiddenInput("input.clusters[$h].observations[$i].angles[$j].id" "")
-										<legend>#springMessage("adjustment.onepage.angle")</legend>
-										<div class="small_form_element">
-											<label for="clusters[$h].observations[$i].angles[$j].from">#springMessage("angle.from"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].angles[$j].from",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].observations[$i].angles[$j].bs">#springMessage("angle.bs"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].angles[$j].bs",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].observations[$i].angles[$j].fs">#springMessage("angle.fs"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].angles[$j].fs",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].observations[$i].angles[$j].val">#springMessage("angle.val"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].angles[$j].val",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label for="clusters[$h].observations[$i].angles[$j].stdev">#springMessage("angle.stdev"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].angles[$j].stdev",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label for="clusters[$h].observations[$i].angles[$j].fromDh">#springMessage("angle.fromDh"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].angles[$j].fromDh",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label for="clusters[$h].observations[$i].angles[$j].bsDh">#springMessage("angle.bsDh"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].angles[$j].bsDh",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label for="clusters[$h].observations[$i].angles[$j].fsDh">#springMessage("angle.fsDh"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].angles[$j].fsDh",
-												"")#showElementErrors()</div>
-										</div>
-									</fieldset>
-									#end
-									<!-- SLOPE DISTANCES  -->
-									#foreach ($distance in $observation.slopeDistances)
-									<fieldset>
-										#set( $j = "${foreach.index}" )
-										#springFormHiddenInput("input.clusters[$h].observations[$i].slopeDistances[$j].id" "")
-										<legend>#springMessage("adjustment.onepage.slopeDistance")</legend>
-										<div class="small_form_element">
-											<label
-												for="clusters[$h].observations[$i].slopeDistances[$j].from">#springMessage("slopeDistance.from"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].slopeDistances[$j].from",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].observations[$i].slopeDistances[$j].to">#springMessage("slopeDistance.to"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].slopeDistances[$j].to",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].observations[$i].slopeDistances[$j].val">#springMessage("slopeDistance.val"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].slopeDistances[$j].val",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label
-												for="clusters[$h].observations[$i].slopeDistances[$j].stdev">#springMessage("slopeDistance.stdev"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].slopeDistances[$j].stdev",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label
-												for="clusters[$h].observations[$i].slopeDistances[$j].fromDh">#springMessage("slopeDistance.fromDh"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].slopeDistances[$j].fromDh",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label
-												for="clusters[$h].observations[$i].slopeDistances[$j].toDh">#springMessage("slopeDistance.toDh"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].slopeDistances[$j].toDh",
-												"")#showElementErrors()</div>
-										</div>
-									</fieldset>
-									#end
-									<!-- ZENITH ANGLES  -->
-									#foreach ($distance in $observation.zenithAngles)
-									<fieldset>
-										#set( $j = "${foreach.index}" )
-										#springFormHiddenInput("input.clusters[$h].observations[$i].zenithAngles[$j].id" "")
-										<legend>#springMessage("adjustment.onepage.zenithAngle")</legend>
-										<div class="small_form_element">
-											<label
-												for="clusters[$h].observations[$i].zenithAngles[$j].from">#springMessage("zenithAngle.from"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].zenithAngles[$j].from",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].observations[$i].zenithAngles[$j].to">#springMessage("zenithAngle.to"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].zenithAngles[$j].to",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].observations[$i].zenithAngles[$j].val">#springMessage("zenithAngle.val"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].zenithAngles[$j].val",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label
-												for="clusters[$h].observations[$i].zenithAngles[$j].stdev">#springMessage("zenithAngle.stdev"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].zenithAngles[$j].stdev",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label
-												for="clusters[$h].observations[$i].zenithAngles[$j].fromDh">#springMessage("zenithAngle.fromDh"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].zenithAngles[$j].fromDh",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label
-												for="clusters[$h].observations[$i].zenithAngles[$j].toDh">#springMessage("zenithAngle.toDh"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].observations[$i].zenithAngles[$j].toDh",
-												"")#showElementErrors()</div>
-										</div>
-									</fieldset>
-									#end
-								</fieldset>
-								#end
+										<div class="window_content">
+											#foreach ($vector in $cluster.vectors) #set( $i =
+											"${foreach.index}" )
 
-								<!-- COORDINATES -->
-								#elseif ($cluster.getCoordinates().size() != 0)
-								<fieldset>
-									#springFormHiddenInput("input.clusters[$h].tagname" "")
-									<legend>#springMessage("adjustment.onepage.coordinates")</legend>
-									#foreach ($coordinate in $cluster.coordinates)
-									<fieldset>
-										#set( $i = "${foreach.index}" )
-										#springFormHiddenInput("input.clusters[$h].coordinates[$i].id" "")
-										<legend>
-											#springBind("input.clusters[$h].coordinates[$i].name") <input
-												type="text" name="clusters[$h].coordinates[$i].name"
-												value="$!coordinate.name" /> #showElementErrors()
-										</legend>
-										<div class="small_form_element">
-											<label class="required" for="clusters[$h].coordinates[$i].x">X:</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].coordinates[$i].x",
-												"")#showElementErrors()</div>
+											<div id="vector_${h}_$j" class="window">
+												<span class="icon-close" role="button"></span>
+												#springFormHiddenInput("input.clusters[$h].vectors[$i].id"
+												"")
+												<div class="title_bar">
+													<label class="required">#springMessage("adjustment.onepage.vector")</label>
+												</div>
+												<div class="window_content">
+													<div class="small_form_element">
+														<label class="required"
+															for="clusters[$h].vectors[$i].from">#springMessage("vector.from"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].vectors[$i].from",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required" for="clusters[$h].vectors[$i].to">#springMessage("vector.to"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].vectors[$i].to",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required" for="clusters[$h].vectors[$i].dx">#springMessage("vector.dx"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].vectors[$i].dx",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required" for="clusters[$h].vectors[$i].dy">#springMessage("vector.dy"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].vectors[$i].dy",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label class="required" for="clusters[$h].vectors[$i].dz">#springMessage("vector.dz"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].vectors[$i].dz",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label for="clusters[$h].vectors[$i].fromDh">#springMessage("vector.fromDh"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].vectors[$i].fromDh",
+															"")#showElementErrors()</div>
+													</div>
+													<div class="small_form_element">
+														<label for="clusters[$h].vectors[$i].toDh">#springMessage("vector.toDh"):</label>
+														<div class="input">
+															#springFormInput("input.clusters[$h].vectors[$i].toDh",
+															"")#showElementErrors()</div>
+													</div>
+												</div>
+											</div>
+											#end
 										</div>
-										<div class="small_form_element">
-											<label class="required" for="clusters[$h].coordinates[$i].y">Y:</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].coordinates[$i].y",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required" for="clusters[$h].coordinates[$i].z">Z:</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].coordinates[$i].z",
-												"")#showElementErrors()</div>
-										</div>
-									</fieldset>
-
-									#end
+									</div>
+									#{else}
+									<p>
+										<b>HOUSTON, WE HAVE A PROBLEM!</b>
+									</p>
+									#end #end
 								</fieldset>
-
-								<!-- HEIGHT DIFFERENCE  -->
-								#elseif ($cluster.getHeightDifferences().size() != 0)
-								<fieldset>
-									#springFormHiddenInput("input.clusters[$h].tagname" "")
-									<legend>#springMessage("adjustment.onepage.heightDifferences")</legend>
-									#foreach ($heightDifference in $cluster.heightDifferences)
-									<fieldset>
-										#set( $i = "${foreach.index}" )
-										#springFormHiddenInput("input.clusters[$h].heightDifferences[$i].id" "")
-										<legend>#springMessage("adjustment.onepage.heightDifference")</legend>
-										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].heightDifferences[$i].from">#springMessage("heightDifference.from"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].heightDifferences[$i].from",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].heightDifferences[$i].to">#springMessage("heightDifference.to"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].heightDifferences[$i].to",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required"
-												for="clusters[$h].heightDifferences[$i].val">#springMessage("heightDifference.val"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].heightDifferences[$i].val",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label for="clusters[$h].heightDifferences[$i].stdev">#springMessage("heightDifference.stdev"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].heightDifferences[$i].stdev",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label for="clusters[$h].heightDifferences[$i].dist">#springMessage("heightDifference.dist"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].heightDifferences[$i].dist",
-												"")#showElementErrors()</div>
-										</div>
-									</fieldset>
-									#end
-								</fieldset>
-
-								<!-- VECTORS  -->
-								#elseif ($cluster.getVectors().size() != 0)
-								<fieldset>
-									#springFormHiddenInput("input.clusters[$h].tagname" "")
-									<legend>#springMessage("adjustment.onepage.vectors")</legend>
-									#foreach ($vector in $cluster.vectors)
-									<fieldset>
-										#set( $i = "${foreach.index}" )
-										#springFormHiddenInput("input.clusters[$h].vectors[$i].id" "")
-										<legend>#springMessage("adjustment.onepage.vector")</legend>
-										<div class="small_form_element">
-											<label class="required" for="clusters[$h].vectors[$i].from">#springMessage("vector.from"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].vectors[$i].from",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required" for="clusters[$h].vectors[$i].to">#springMessage("vector.to"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].vectors[$i].to",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required" for="clusters[$h].vectors[$i].dx">#springMessage("vector.dx"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].vectors[$i].dx",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required" for="clusters[$h].vectors[$i].dy">#springMessage("vector.dy"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].vectors[$i].dy",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label class="required" for="clusters[$h].vectors[$i].dz">#springMessage("vector.dz"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].vectors[$i].dz",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label for="clusters[$h].vectors[$i].fromDh">#springMessage("vector.fromDh"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].vectors[$i].fromDh",
-												"")#showElementErrors()</div>
-										</div>
-										<div class="small_form_element">
-											<label for="clusters[$h].vectors[$i].toDh">#springMessage("vector.toDh"):</label>
-											<div class="input">
-												#springFormInput("input.clusters[$h].vectors[$i].toDh",
-												"")#showElementErrors()</div>
-										</div>
-									</fieldset>
-									#end
-								</fieldset>
-								#{else}
-								<p>
-									<b>HOUSTON, WE HAVE A PROBLEM!</b>
-								</p>
-								#end #end
-							</fieldset>
+							</div>
 						</div>
 						<div class="form_buttons">
 							<input class="submit_btn" type="submit" value="#springMessage("adjustment.onepage.submit")">

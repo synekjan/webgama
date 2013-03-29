@@ -13,7 +13,6 @@ public interface SlopeDistanceDao {
 
 	public void update(SlopeDistance slopeDistance);
 
-	public List<SlopeDistance> findSlopeDistancesInObservation(
-			Observation observation);
+	public List<SlopeDistance> findSlopeDistancesInObservation(Observation observation);
 
 }

@@ -1,15 +1,17 @@
 package cz.cvut.fsv.webgama.service;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import cz.cvut.fsv.webgama.domain.Calculation;
+import cz.cvut.fsv.webgama.domain.ProcessOutput;
 import cz.cvut.fsv.webgama.form.AdjustmentPageForm;
 
 public interface AdjustmentManager {
 
-	public String adjustFromFile(MultipartFile file, String username);
+	public ProcessOutput adjustFromFile(MultipartFile file, String username, Locale locale);
 
 	public List<Calculation> getCalculationsbyUsername(String username);
 

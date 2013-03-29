@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Locale;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -56,8 +57,8 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 
 	@Override
 	@Transactional
-	public String adjustFromFile(MultipartFile file, String username) {
-		Input input = null;
+	public ProcessOutput adjustFromFile(MultipartFile file, String username, Locale locale) {
+		Input input = new Input();
 		ProcessOutput processOutput = null;
 
 		try (InputStreamReader inputStreamReader = new InputStreamReader(file.getInputStream(), "UTF-8")) {
@@ -65,25 +66,33 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 			// Google Guava InputStream to String
 			String stringFromStream = CharStreams.toString(inputStreamReader);
 
-			input = inputParser.parseInput(file.getInputStream());
-			input.setXmlContent(stringFromStream);
-
 			Calculation calculation = new Calculation();
 			calculation.setUser(userDao.findUserByUsername(username));
 			calculation.setName("Import-" + file.getOriginalFilename());
-			calculation.setProgress("not-calculated");
-			calculation.setLanguage("en");
 			calculation.setAlgorithm("svd");
-			calculation.setAngUnits(360);
+			calculation.setAngUnits(400);
 			calculation.setLatitude(50.0);
+
+			// calculate directly from file content
+			input.setXmlContent(stringFromStream);
 			calculation.setInput(input);
-			
-			//run GNU Gama calculation 
+
+			// choose default language
+			if (locale.getLanguage().equals(new Locale("cs").getLanguage())) {
+				calculation.setLanguage("cz");
+			} else {
+				calculation.setLanguage("en");
+			}
+
+			// run GNU Gama calculation
 			processOutput = processManager.runExternalGama(calculation, username);
 
 			if (processOutput.getExitValue() != 0)
-				return processOutput.getErrorMessage();
-			
+				return processOutput;
+
+			input = inputParser.parseInput(file.getInputStream());
+			calculation.setInput(input);
+
 			Output output = new Output();
 			output.setXmlContent(processOutput.getXmlResult());
 			output.setHtmlContent(processOutput.getHtmlResult());
@@ -98,7 +107,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 			logger.error("Error during converting MultipartFile to InputStream");
 		}
 
-		return processOutput.getXmlResult();
+		return processOutput;
 	}
 
 	@Transactional
@@ -132,7 +141,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 	@Transactional
 	@Override
 	public void updateInputInCalculation(AdjustmentPageForm adjustmentForm, Calculation calculation) {
-		
+
 		Input input = calculation.getInput();
 		input.setTime(new DateTime());
 		Network network = input.getNetwork();
@@ -152,20 +161,20 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		network.setPoints(adjustmentForm.getPoints());
 		network.setClusters(adjustmentForm.getClusters());
 		input.setNetwork(network);
-		
-		//convert OutputStream to String and update xml_content in inputs table
+
+		// convert OutputStream to String and update xml_content in inputs table
 		OutputStream baos = new ByteArrayOutputStream(10000);
 		inputParser.composeInput(baos, input);
 		input.setXmlContent(baos.toString());
 		calculation.setInput(input);
 
-		//delete output -- need to be recalculated again
+		// delete output -- need to be recalculated again
 		calculation.setOutput(null);
 		calculation.setProgress("not-calculated");
-		
+
 		calculation.setTime(new DateTime());
 		calculationDao.update(calculation);
-		
+
 	}
 
 }

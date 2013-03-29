@@ -78,6 +78,9 @@
 		<property name="userManager" ref="userManager" />
 	</bean>
 
+	<bean class="cz.cvut.fsv.webgama.validator.UploadValidator">
+	</bean>
+
 
 
 	<!-- ============================= Utils ============================= -->
@@ -97,7 +100,7 @@
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- one of the properties available; the maximum file size in bytes -->
-		<property name="maxUploadSize" value="${import.maximum.file.size}" />
+		<!-- <property name="maxUploadSize" value="${import.maximum.file.size}" /> -->
 	</bean>
 
 </beans>

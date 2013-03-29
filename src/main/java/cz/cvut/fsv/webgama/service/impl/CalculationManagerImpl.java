@@ -10,21 +10,24 @@ import cz.cvut.fsv.webgama.service.ProcessManager;
 public class CalculationManagerImpl implements CalculationManager {
 
 	private CalculationDao calculationDao;
-	
+
 	private ProcessManager processManager;
 
 	public void setCalculationDao(CalculationDao calculationDao) {
 		this.calculationDao = calculationDao;
 	}
-	
+
 	public void setProcessManager(ProcessManager processManager) {
 		this.processManager = processManager;
 	}
 
 	@Override
-	public void calculate(Calculation calculation, String username) {
-		
+	public ProcessOutput calculate(Calculation calculation, String username) {
+
 		ProcessOutput processOutput = processManager.runExternalGama(calculation, username);
+
+		if (processOutput.getExitValue() != 0)
+			return processOutput;
 		
 		Output output = new Output();
 		output.setXmlContent(processOutput.getXmlResult());
@@ -33,9 +36,10 @@ public class CalculationManagerImpl implements CalculationManager {
 		output.setTextContent(processOutput.getTextResult());
 		calculation.setOutput(output);
 		calculation.setProgress("calculated");
-		
+
 		calculationDao.update(calculation);
 
+		return processOutput;
 	}
 
 	@Override
@@ -43,16 +47,13 @@ public class CalculationManagerImpl implements CalculationManager {
 		calculationDao.deleteCalculationById(id);
 	}
 
-	/*@Async
-	public void exampleAsync() {
-		
-		System.out.println("Start --- " + Thread.currentThread().getName());
-		
-		long i = 0;
-		while (i < 100000000L) {
-			i++;
-		}
-		
-		System.out.println("Konec --- " + Thread.currentThread().getName());
-	}*/
+	/*
+	 * @Async public void exampleAsync() {
+	 * 
+	 * System.out.println("Start --- " + Thread.currentThread().getName());
+	 * 
+	 * long i = 0; while (i < 100000000L) { i++; }
+	 * 
+	 * System.out.println("Konec --- " + Thread.currentThread().getName()); }
+	 */
 }

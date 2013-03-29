@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import cz.cvut.fsv.webgama.domain.Calculation;
+import cz.cvut.fsv.webgama.domain.ProcessOutput;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
 import cz.cvut.fsv.webgama.service.CalculationManager;
+import cz.cvut.fsv.webgama.util.JsonResponse;
 import cz.cvut.fsv.webgama.util.TimeFormatter;
 
 @Controller
@@ -56,8 +59,9 @@ public class CalculationsController extends MultiActionController {
 
 	@RequestMapping(value = "/calculation/calculate", method = RequestMethod.POST)
 	protected @ResponseBody
-	String calculateCalculation(@RequestParam String language, @RequestParam String algorithm,
-			@RequestParam Integer angUnits, @RequestParam Long id, HttpServletRequest request) {
+	JsonResponse calculateCalculation(@RequestParam String language, @RequestParam String algorithm,
+			@RequestParam Integer angUnits, @RequestParam Long id, HttpServletRequest request,
+			HttpServletResponse response) {
 
 		String username = request.getUserPrincipal().getName();
 		Calculation calculation = adjustmentManager.getCalculationById(id);
@@ -65,9 +69,18 @@ public class CalculationsController extends MultiActionController {
 		calculation.setAlgorithm(algorithm);
 		calculation.setAngUnits(angUnits);
 
-		calculationManager.calculate(calculation, username);
+		JsonResponse jsonResponse = new JsonResponse();
 
-		return "OK";
+		ProcessOutput output = calculationManager.calculate(calculation, username);
+
+		if (output.getExitValue() != 0) {
+			jsonResponse.setError(true);
+			jsonResponse.setMessage(output.getErrorMessage());
+			return jsonResponse;
+		}
+
+		jsonResponse.setMessage("OK");
+		return jsonResponse;
 	}
 
 }

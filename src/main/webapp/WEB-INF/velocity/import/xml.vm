@@ -2,7 +2,8 @@
 <html>
 <head>
 #parse("include.vm")
-<title>#springMessage("navbar.import") | #springMessage("application.name")</title>
+<title>#springMessage("navbar.import") |
+	#springMessage("application.name")</title>
 </head>
 <body>
 	<div id="wrapper">
@@ -22,15 +23,40 @@
 					<div class="panel_header">
 						<h2>#springMessage("import.xml")</h2>
 					</div>
-					<p>#springMessage("import.xml.message") </p><br>
+					<p>#springMessage("import.xml.message")</p>
+					<br>
 					<form method="post" action="" enctype="multipart/form-data">
-						<input type="file" name="file" /> <br> <br>
-						<input class="submit_btn" type="submit" value="#springMessage("import.xml.submit")" />
+						#springBind("uploadForm.file") <input type="file" id="file"
+							name="file" /> <br> #showElementErrors() #if ($gamaError)
+						<div id="gnu_gama_error">
+							<p>#springMessage("import.xml.input.not.valid"): <br> <br>$gamaError</p>
+						</div>
+						#end <br> <input class="submit_btn" type="submit"
+							value="#springMessage('import.xml.submit')" />
 					</form>
+
 				</div>
 			</div>
 		</div>
 	</div>
 	#parse("footer.vm")
+	<div id="overlay">
+		<div id="loader_logo">
+			<img alt="logo" src="#springUrl('/resources/img/big_logo.png')">
+		</div>
+		<div id="loader_loader">
+			<img alt="loader" src="#springUrl('/resources/img/loader-big.gif')">
+		</div>
+		<div id="loader_message">#springMessage('import.loader.message')</div>
+	</div>
+	<div class="dim"></div>
+	<script>
+		jQuery(document).ready(function() {
+			jQuery('.submit_btn').click(function() {
+				jQuery("#overlay").css("visibility", "visible");
+				jQuery(".dim").css("visibility", "visible");
+			});
+		});
+	</script>
 </body>
 </html>

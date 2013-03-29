@@ -47,6 +47,13 @@ public class AccountController extends MultiActionController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
+	// Convert empty and whitespaces to null
+	/*
+	 * @InitBinder public void initBinder(WebDataBinder binder) {
+	 * binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+	 * }
+	 */
+
 	@RequestMapping(value = { "", "/info" }, method = RequestMethod.GET)
 	public ModelAndView accountInfo(HttpServletRequest request) {
 

@@ -47,13 +47,12 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 
 		String sql = "INSERT INTO clusters (network_id, tagname) VALUES (?, ?) RETURNING cluster_id";
 
-		Long clusterId = getJdbcTemplate().queryForObject(sql, new Object[] { networkId, cluster.getTagname() }, Long.class);
+		Long clusterId = getJdbcTemplate().queryForObject(sql, new Object[] { networkId, cluster.getTagname() },
+				Long.class);
 
 		switch (cluster.getTagname()) {
 		case "obs":
-			for (Observation observation : cluster.getObservations()) {
-				observationDao.insert(observation, clusterId);
-			}
+			observationDao.insert(cluster.getObservation(), clusterId);
 			break;
 		case "coordinates":
 			for (Coordinate coordinate : cluster.getCoordinates()) {
@@ -92,13 +91,13 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 
 		switch (cluster.getTagname()) {
 		case "obs":
-			for (Observation observation : cluster.getObservations()) {
-				if (observation.getId() != null) {
-					observationDao.update(observation);
-				} else {
-					observationDao.insert(observation, cluster.getId());
-				}
+			Observation observation = cluster.getObservation();
+			if (observation.getId() != null) {
+				observationDao.update(observation);
+			} else {
+				observationDao.insert(observation, cluster.getId());
 			}
+
 			break;
 		case "coordinates":
 			for (Coordinate coordinate : cluster.getCoordinates()) {
@@ -157,7 +156,7 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 			cluster.setCoordinates(coordinateDao.findCoordinatesInCluster(cluster));
 			cluster.setHeightDifferences(heightDifferenceDao.findHeightDifferencesInCluster(cluster));
 			cluster.setVectors(vectorDao.findVectorsInCluster(cluster));
-			cluster.setObservations(observationDao.findObservationsInCluster(cluster));
+			cluster.setObservation(observationDao.findObservationInCluster(cluster));
 
 			return cluster;
 		}

@@ -13,6 +13,5 @@ public interface ZenithAngleDao {
 
 	public void update(ZenithAngle zenithAngle);
 
-	public List<ZenithAngle> findZenithAnglesInObservation(
-			Observation observation);
+	public List<ZenithAngle> findZenithAnglesInObservation(Observation observation);
 }

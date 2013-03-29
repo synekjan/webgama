@@ -20,7 +20,7 @@
 			</div>
 			<div id="content">
 				<div class="panel_header">
-					<h2>#springMessage("navbar.calculations")</h2>
+					<h2>#springMessage("calculations.calculation.manager")</h2>
 				</div>
 				<div id="calculations">
 					<div id="my_calculations">
@@ -49,7 +49,7 @@
 
 								<div class="calculate_wrapper">
 									<form id="calculate_form_${calculation.id}">
-										<p>$calculation.progress</p>
+										<p>#springMessage("$calculation.progress")</p>
 										
 										<select name="language">
 											<option #if ($calculation.language == "en") selected #end value="en" title="#springMessage('en')">English</option>
@@ -153,11 +153,18 @@
 					type : "POST",
 					data : fields + "&id=" + id,
 					url : '#springUrl("/calculation/calculate")',
-					success : function(msg) {
-						btn.attr('disabled', 'disabled');
+					success : function(jqXHR) {
+						if (!jqXHR.error) {
+							btn.attr('disabled', 'disabled');
+						} else {
+							alert(jqXHR.message);
+						}	
+					},
+					error: function(jqXHR) {
+						alert(jqXHR.responseText);
 					}
 				});
-				//stops normal form submit
+				//stops normal form submit 
 				return false;
 			});
 

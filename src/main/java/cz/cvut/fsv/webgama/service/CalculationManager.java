@@ -1,10 +1,11 @@
 package cz.cvut.fsv.webgama.service;
 
 import cz.cvut.fsv.webgama.domain.Calculation;
+import cz.cvut.fsv.webgama.domain.ProcessOutput;
 
 public interface CalculationManager {
 	
-	public void calculate(Calculation calculation, String username);
+	public ProcessOutput calculate(Calculation calculation, String username);
 	
 	public void deleteCalculation(Long id);
 
