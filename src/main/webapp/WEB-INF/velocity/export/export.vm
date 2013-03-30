@@ -53,8 +53,8 @@
 						</p>
 						#end
 					<br>
-					<div style="border: 1px solid #DDD; width: 200px; height: 100px;">
-						<p>#springMessage('export.tip')</p>
+					<div class="info" style="width: 200px;">
+						#springMessage('export.tip')
 					</div>
 
 				</div>

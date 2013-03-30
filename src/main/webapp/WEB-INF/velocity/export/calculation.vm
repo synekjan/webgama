@@ -21,22 +21,49 @@
 			<div id="content">
 				<div class="panel_header">
 					<h2>#springMessage("navbar.export")</h2>
+					<h3>$calculation.name</h3>
 				</div>
 				<div id="export_wrap">
-					Calculation name: $calculation.name<br> Used algorithm:
-					$calculation.algorithm<br> Language: $calculation.language<br><br>
-
-
-					<textarea rows="20" readonly="readonly">$!calculation.output.textContent</textarea>
-
-					<div id="export_options">
-						Download:
-						<ul class="export_choose">
-							<li><a class="xml" href="#springUrl("/export/${calculation.id}/xml")">XML</a></li>
-							<li><a class="text" href="#springUrl("/export/${calculation.id}/text")">TEXT</a></li>
-							<li><a class="html" href="#springUrl("/export/${calculation.id}/html")">HTML</a></li>
-							<li><a class="svg" href="#springUrl("/export/${calculation.id}/svg")">SVG</a></li>
-						</ul>
+					<div id="parameters" class="export_box">
+						<div class="title">#springMessage("export.parameters.title")</div>
+						<table>
+							<tbody>
+								<tr>
+									<td>#springMessage("export.name"):</td>
+									<td>$calculation.name</td>
+								</tr>
+								<tr>
+									<td>#springMessage("export.owner"):</td>
+									<td>$calculation.user.username</td>
+								</tr>
+								<tr>
+									<td>#springMessage("export.algorithm"):</td>
+									<td>$calculation.algorithm</td>
+								</tr>
+								<tr>
+									<td>#springMessage("export.language"):</td>
+									<td>#springMessage("$calculation.language")</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div id="text_preview" class="export_box">
+						<div class="title">#springMessage("export.text.preview.title")</div>
+						<textarea rows="20" readonly="readonly">$!calculation.output.textContent</textarea>
+					</div>
+					<div id="download" class="export_box">
+						<div id="export_options">
+							<div class="title">
+								<div>#springMessage("export.download.title")</div>
+							</div>
+							<p>#springMessage("export.download.message"):</p>
+							<ul class="export_choose">
+								<li><a class="xml" href="#springUrl("/export/${calculation.id}/xml")">XML</a></li>
+								<li><a class="text" href="#springUrl("/export/${calculation.id}/text")">TEXT</a></li>
+								<li><a class="html" href="#springUrl("/export/${calculation.id}/html")">HTML</a></li>
+								<li><a class="svg" href="#springUrl("/export/${calculation.id}/svg")">SVG</a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>

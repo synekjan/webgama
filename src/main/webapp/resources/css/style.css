@@ -319,6 +319,11 @@ div#account_container div#delete {
 	font: 30px "Roboto Condensed", Arial, sans-serif;
 }
 
+.panel_header h3 {
+	font-size: 14px;
+	padding-left: 15px;
+}
+
 .form_hints {
 	border-top: 1px solid #DDD;
 	padding: 10px;
@@ -669,7 +674,7 @@ input.submit_btn:ACTIVE {
 }
 
 #overlay {
-	position:fixed;
+	position: fixed;
 	width: 300px;
 	height: 200px;
 	left: 50%;
@@ -694,7 +699,6 @@ input.submit_btn:ACTIVE {
 	width: 160px;
 	height: 20px;
 	margin: 30px auto;
-	
 }
 
 #overlay #loader_message {
@@ -706,13 +710,13 @@ input.submit_btn:ACTIVE {
 	opacity: 0.5;
 	background-color: #000;
 	z-index: 9990;
-  	position: absolute;
-  	top: 0;
+	position: absolute;
+	top: 0;
 	left: 0;
-  	height: 100%;
-  	width: 100%;
-  	content: "";
-  	visibility: hidden;
+	height: 100%;
+	width: 100%;
+	content: "";
+	visibility: hidden;
 }
 
 #login_container {
@@ -756,9 +760,9 @@ div.info,div.success,div.warning,div.error {
 }
 
 div.info {
-	color: #00529B;
-	background-color: #BDE5F8;
-	border-color: #60B2EF;
+	background-color: #CDF5FF;
+	border-color: #80D2FF;
+	color: #2072BB;
 }
 
 div.success {
@@ -954,7 +958,7 @@ div#wizard_buttons {
 	font-size: 18px;
 }
 
-.index_page #secondary #controls {
+.index_page #secondary #controls, .index_page #secondary #statistics {
 	margin: 20px auto 0 auto;
 	width: 200px;
 	border: 1px solid #DDD;
@@ -979,6 +983,10 @@ div#wizard_buttons {
 	font-weight: bold;
 	padding-bottom: 5px;
 	font-family: "Roboto Condensed", Arial, sans-serif;
+}
+
+.statistics_content {
+	min-height: 200px;
 }
 
 /* ---------------------- WELCOME PAGE HEADING -------------------*/
@@ -1244,7 +1252,7 @@ span.time {
 	
 }
 
-.window  {
+.window {
 	border: 1px solid #AAA;
 	border-radius: 3px;
 	margin-bottom: 15px;
@@ -1253,7 +1261,7 @@ span.time {
 	padding: 0;
 }
 
-div.title_bar {
+.adjustment_form div.title_bar {
 	height: 24px;
 	border-bottom: 1px solid #AAA;
 	padding-left: 10px;
@@ -1283,7 +1291,6 @@ div.title_bar {
 	padding: 10px 5px 5px 10px;
 }
 
-
 #points .point_form_element label {
 	margin-right: 5px;
 }
@@ -1298,12 +1305,17 @@ div.title_bar {
 	width: 110px;
 }
 
+.adjustment_form .focused {
+	border: 1px solid #4082C3;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6);
+}
 
-
-
-
-
-
+.adjustment_form .focused>div.title_bar {
+	background: -moz-linear-gradient(center top, #7ABCFD, #4082C3) repeat scroll 0 0 #4082C3;
+	color: white;
+	text-shadow: 0 -1px 1px #333333;
+	color: white;
+}
 
 /* ADJUSTMENT TOOLBAR  */
 div#side_toolbar {
@@ -1353,7 +1365,7 @@ div#collapse_link {
 
 /*  EXPORT  */
 #export_wrap {
-	padding: 10px;
+	padding: 20px 10px 0px 10px;
 }
 
 table#export {
@@ -1405,10 +1417,37 @@ table#export td a.clickable {
 	color: #4183C4;
 }
 
+.export_box {
+	border: 1px solid #DDD;
+	border-radius: 5px;
+	padding: 20px 10px;
+	margin-bottom: 30px;
+	position: relative;
+}
+
+.export_box .title {
+	font: 18px "Roboto Condensed", arial, sans-serif;
+	border: 1px solid #DDD;
+	background-color: #EEE;
+	padding: 3px 7px;
+	position: absolute;
+	top: -20px;
+	left: 10px;
+	overflow: visible;
+}
+
+#export_wrap #parameters table td {
+	padding: 3px 8px;
+}
+
+#export_wrap #parameters table>tbody>tr>td:FIRST-CHILD {
+	font-weight: bold;
+}
+
 #export_options {
-	width: 900px;
-	margin: 20px auto;
+	margin: 0 auto;
 	overflow: auto;
+	line-height: 2.5;
 }
 
 ul.export_choose a {
@@ -1420,9 +1459,8 @@ ul.export_choose a {
 	border-radius: 4px 4px 4px 4px;
 	float: left;
 	text-decoration: none;
-	font-size: 25px;
-	font-family: Roboto Condensed, sans-serif;
-	color: #777777;
+	font: 28px Roboto Condensed, sans-serif;
+	color: #777;
 	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 	text-shadow: 0 1px 0 #FFFFFF;
 }
@@ -1436,6 +1474,22 @@ ul.export_choose a:ACTIVE {
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4) inset;
 	padding-top: 22px;
 	height: 98px;
+}
+
+ul.export_choose a.xml {
+	background: url("../img/xml-logo.png") no-repeat scroll 90% 80% #F5F5F5;
+}
+
+ul.export_choose a.text {
+	background: url("../img/text-logo.png") no-repeat scroll 90% 80% #F5F5F5;
+}
+
+ul.export_choose a.html {
+	background: url("../img/html-logo.png") no-repeat scroll 90% 80% #F5F5F5;
+}
+
+ul.export_choose a.svg {
+	background: url("../img/svg-logo.png") no-repeat scroll 90% 80% #F5F5F5;
 }
 
 @font-face {

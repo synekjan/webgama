@@ -28,6 +28,7 @@ jQuery(document).on("click", "span.icon-close", function () {
 });
 
 
+//hiding toolbar 
 jQuery("#collapse_link").click(function () {
 	jQuery("#toolbar_content").toggle("slow");
 });

@@ -54,11 +54,17 @@
 									class="big_number">$ownCalculationCount</span></a>
 							</div>
 							<div class="shared_calculations">
-								<a href="#springUrl("/calculations#shared_calculations")">#springMessage("index.calculations.shared")<span class="big_number">0</span>
+								<a href="#springUrl("/calculations#shared_calculations")">#springMessage("index.calculations.shared")<span
+									class="big_number">0</span>
 								</a>
 							</div>
 						</div>
-
+					</div>
+					<div id="statistics">
+						<div class="small_panel_header">#springMessage("index.statistics")</div>
+						<div class="statistics_content">
+						
+						</div>
 					</div>
 				</div>
 			</div>

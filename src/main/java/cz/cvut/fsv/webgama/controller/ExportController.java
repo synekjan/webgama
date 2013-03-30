@@ -40,10 +40,10 @@ public class ExportController extends MultiActionController {
 
 		ModelAndView mav = new ModelAndView("/export/export");
 		String username = request.getUserPrincipal().getName();
-		
+
 		List<Calculation> calculations = adjustmentManager.getCalculationsbyUsername(username);
 		mav.addObject("calculations", calculations);
-		
+
 		return mav;
 	}
 
@@ -58,6 +58,10 @@ public class ExportController extends MultiActionController {
 		// Check if user has permission to edit
 		if (!request.getUserPrincipal().getName().equals(calculation.getUser().getUsername())) {
 			throw new PermissionDeniedException();
+		}
+		// Check if calculation is calculated
+		if (calculation.getOutput() == null) {
+			throw new ResourceNotFoundException();
 		}
 
 		return new ModelAndView("/export/calculation", "calculation", calculation);
@@ -75,6 +79,10 @@ public class ExportController extends MultiActionController {
 		// Check if user has permission to edit
 		if (!request.getUserPrincipal().getName().equals(calculation.getUser().getUsername())) {
 			throw new PermissionDeniedException();
+		}
+		// Check if calculation is calculated
+		if (calculation.getOutput() == null) {
+			throw new ResourceNotFoundException();
 		}
 		String username = request.getUserPrincipal().getName();
 
@@ -116,6 +124,10 @@ public class ExportController extends MultiActionController {
 		if (!request.getUserPrincipal().getName().equals(calculation.getUser().getUsername())) {
 			throw new PermissionDeniedException();
 		}
+		// Check if calculation is calculated
+		if (calculation.getOutput() == null) {
+			throw new ResourceNotFoundException();
+		}
 		String username = request.getUserPrincipal().getName();
 
 		File temporary = null;
@@ -156,6 +168,10 @@ public class ExportController extends MultiActionController {
 		if (!request.getUserPrincipal().getName().equals(calculation.getUser().getUsername())) {
 			throw new PermissionDeniedException();
 		}
+		// Check if calculation is calculated
+		if (calculation.getOutput() == null) {
+			throw new ResourceNotFoundException();
+		}
 		String username = request.getUserPrincipal().getName();
 
 		File temporary = null;
@@ -178,7 +194,7 @@ public class ExportController extends MultiActionController {
 		} finally {
 			temporary.delete();
 		}
-		
+
 		logger.info(username + " downloads calculation[" + id + "] as HTML.");
 		return null;
 	}
@@ -196,8 +212,12 @@ public class ExportController extends MultiActionController {
 		if (!request.getUserPrincipal().getName().equals(calculation.getUser().getUsername())) {
 			throw new PermissionDeniedException();
 		}
+		// Check if calculation is calculated
+		if (calculation.getOutput() == null) {
+			throw new ResourceNotFoundException();
+		}
 		String username = request.getUserPrincipal().getName();
-		
+
 		File temporary = null;
 		try {
 			temporary = File.createTempFile(calculation.getName(), ".svg");
@@ -222,5 +242,4 @@ public class ExportController extends MultiActionController {
 		logger.info(username + " downloads calculation[" + id + "] as SVG.");
 		return null;
 	}
-
 }

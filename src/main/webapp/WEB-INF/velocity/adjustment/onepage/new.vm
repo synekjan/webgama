@@ -713,12 +713,16 @@
 	<script>
 		jQuery(document).ready(function() {
 
-			/* jQuery("#points input").focus(function() {
-				 jQuery(this).css('border-color', '#8b66ac');
+			jQuery(document).on("focus","#points input, #points select, #clusters input, #clusters select", function() {
+				var element = jQuery(this).parents('.window');
+				element.addClass('focused');
 
-			  }).blur(function(){
-			       jQuery(this).css('border-color', '#555555');
-			}); */
+			});
+			jQuery(document).on("blur","#points input, #points select, #clusters input, #clusters select" , function() {
+				var element = jQuery(this).parents('.window');
+				element.removeClass('focused');
+			});
+			
 		});
 	</script>
 </body>

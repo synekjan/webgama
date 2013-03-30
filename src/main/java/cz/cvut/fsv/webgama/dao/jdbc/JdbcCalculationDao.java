@@ -59,7 +59,8 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 						calculation.getLanguage(), calculation.getAlgorithm(), calculation.getAngUnits(),
 						calculation.getLatitude(), calculation.getEllipsoid(), calculation.getTime().toDate(),
 						calculation.getId() });
-		inputDao.update(calculation.getInput());
+		inputDao.delete(calculation.getInput());
+		inputDao.insert(calculation.getInput(), calculation.getId());
 
 		if (calculation.getOutput() == null) {
 			Output output = outputDao.findOutputInCalculation(calculation);

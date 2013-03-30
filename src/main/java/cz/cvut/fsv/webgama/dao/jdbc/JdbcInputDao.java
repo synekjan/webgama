@@ -28,7 +28,7 @@ public class JdbcInputDao extends JdbcDaoSupport implements InputDao {
 		Object[] params = new Object[] { calculationId, input.getXmlContent(), input.getVersion() };
 
 		// Store last generated value from SERIAL PostgreSQL type [RETURNING
-		// syntax]
+		// syntax
 		Long inputId = getJdbcTemplate().queryForObject(sql, params, Long.class);
 
 		networkDao.insert(input.getNetwork(), inputId);
