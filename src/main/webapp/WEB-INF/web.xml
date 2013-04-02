@@ -89,9 +89,9 @@
 		<location>/resources/error400.html</location>
 	</error-page>
 	
-	<!-- <error-page>
+	<error-page>
 		<error-code>500</error-code>
 		<location>/resources/error500.html</location>
-	</error-page> -->
+	</error-page>
 	
 </web-app>

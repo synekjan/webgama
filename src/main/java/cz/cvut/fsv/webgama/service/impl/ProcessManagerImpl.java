@@ -14,6 +14,7 @@ import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 
+import cz.cvut.fsv.webgama.dao.CalculationDao;
 import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.domain.ProcessOutput;
 import cz.cvut.fsv.webgama.service.ProcessManager;
@@ -22,6 +23,8 @@ import cz.cvut.fsv.webgama.util.Generator;
 public class ProcessManagerImpl implements ProcessManager {
 
 	private String gamaFilePath;
+	
+	private CalculationDao calculationDao;
 
 	private static final Logger logger = LoggerFactory.getLogger(ProcessManagerImpl.class);
 
@@ -98,6 +101,8 @@ public class ProcessManagerImpl implements ProcessManager {
 		InputStreamReader errorStream = null;
 
 		try {
+			long startTime = System.nanoTime();
+			calculationDao.updateProgress(calculation, "calculating");
 			Process process = pb.start();
 			inputStream = new InputStreamReader(process.getInputStream(), "UTF-8");
 			errorStream = new InputStreamReader(process.getErrorStream(), "UTF-8");
@@ -105,7 +110,11 @@ public class ProcessManagerImpl implements ProcessManager {
 			String result = CharStreams.toString(inputStream);
 			String errorString = CharStreams.toString(errorStream);
 			int exitValue = process.waitFor();
-
+			long totalTime = (System.nanoTime() - startTime);
+			//running time in milliseconds
+			Double runningTime = Long.valueOf(totalTime).doubleValue()/1000000;
+			
+			processOutput.setRunningTime(runningTime);
 			processOutput.setExitValue(exitValue);
 			processOutput.setXmlResult(result);
 			processOutput.setErrorMessage(errorString);
@@ -147,6 +156,10 @@ public class ProcessManagerImpl implements ProcessManager {
 
 	public void setGamaFilePath(String gamaFilePath) {
 		this.gamaFilePath = gamaFilePath;
+	}
+
+	public void setCalculationDao(CalculationDao calculationDao) {
+		this.calculationDao = calculationDao;
 	}
 
 }

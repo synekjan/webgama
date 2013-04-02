@@ -344,6 +344,8 @@ xml_content		TEXT,
 text_content	TEXT,
 html_content	TEXT,
 svg_content		TEXT,
+running_time	DOUBLE PRECISION,
+last_error		TEXT,
 time			TIMESTAMP DEFAULT now()
 );
 

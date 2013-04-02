@@ -1,5 +1,7 @@
 package cz.cvut.fsv.webgama.service.impl;
 
+import org.joda.time.DateTime;
+
 import cz.cvut.fsv.webgama.dao.CalculationDao;
 import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.domain.Output;
@@ -34,10 +36,12 @@ public class CalculationManagerImpl implements CalculationManager {
 		output.setHtmlContent(processOutput.getHtmlResult());
 		output.setSvgContent(processOutput.getSvgResult());
 		output.setTextContent(processOutput.getTextResult());
+		output.setTime(new DateTime());
+		output.setRunningTime(processOutput.getRunningTime());
 		calculation.setOutput(output);
 		calculation.setProgress("calculated");
 
-		calculationDao.update(calculation);
+		calculationDao.updateOutput(calculation);
 
 		return processOutput;
 	}
@@ -45,6 +49,14 @@ public class CalculationManagerImpl implements CalculationManager {
 	@Override
 	public void deleteCalculation(Long id) {
 		calculationDao.deleteCalculationById(id);
+	}
+
+	@Override
+	public String checkCalculationProgress(Long id) {
+
+		String progress = calculationDao.findProgressById(id);
+	
+		return progress;
 	}
 
 	/*

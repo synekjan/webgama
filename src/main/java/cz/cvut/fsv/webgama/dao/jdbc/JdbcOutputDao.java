@@ -16,12 +16,12 @@ public class JdbcOutputDao extends JdbcDaoSupport implements OutputDao {
 
 	@Override
 	public void insert(Output output, Long calculationId) {
-		String sql = "INSERT INTO outputs (calculation_id, xml_content, text_content, html_content, svg_content) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO outputs (calculation_id, xml_content, text_content, html_content, svg_content, running_time) VALUES (?, ?, ?, ?, ?, ?)";
 
 		getJdbcTemplate().update(
 				sql,
 				new Object[] { calculationId, output.getXmlContent(), output.getTextContent(), output.getHtmlContent(),
-						output.getSvgContent() });
+						output.getSvgContent(), output.getRunningTime() });
 
 	}
 
@@ -37,12 +37,12 @@ public class JdbcOutputDao extends JdbcDaoSupport implements OutputDao {
 	@Override
 	public void update(Output output) {
 
-		String sql = "UPDATE outputs SET xml_content=?, text_content=?, html_content=?, svg_content=?, time=? WHERE output_id=?";
+		String sql = "UPDATE outputs SET xml_content=?, text_content=?, html_content=?, svg_content=?, running_time=?, time=? WHERE output_id=?";
 
 		getJdbcTemplate().update(
 				sql,
 				new Object[] { output.getXmlContent(), output.getTextContent(), output.getHtmlContent(),
-						output.getSvgContent(), output.getTime(), output.getId() });
+						output.getSvgContent(), output.getRunningTime(), output.getTime().toDate(), output.getId() });
 	}
 
 	@Override
@@ -71,6 +71,7 @@ public class JdbcOutputDao extends JdbcDaoSupport implements OutputDao {
 			output.setTextContent(rs.getString("text_content"));
 			output.setHtmlContent(rs.getString("html_content"));
 			output.setSvgContent(rs.getString("svg_content"));
+			output.setRunningTime(rs.getDouble("running_time"));
 			output.setTime(new DateTime(rs.getTimestamp("time").getTime()));
 
 			return output;

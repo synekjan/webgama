@@ -14,6 +14,8 @@ public class Output {
 
 	private String svgContent;
 
+	private Double runningTime;
+
 	private DateTime time;
 
 	public Long getId() {
@@ -54,6 +56,14 @@ public class Output {
 
 	public void setSvgContent(String svgContent) {
 		this.svgContent = svgContent;
+	}
+
+	public Double getRunningTime() {
+		return runningTime;
+	}
+
+	public void setRunningTime(Double runningTime) {
+		this.runningTime = runningTime;
 	}
 
 	public DateTime getTime() {

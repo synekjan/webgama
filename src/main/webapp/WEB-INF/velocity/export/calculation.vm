@@ -37,12 +37,16 @@
 									<td>$calculation.user.username</td>
 								</tr>
 								<tr>
+									<td>#springMessage("export.language"):</td>
+									<td>#springMessage("$calculation.language")</td>
+								</tr>
+								<tr>
 									<td>#springMessage("export.algorithm"):</td>
 									<td>$calculation.algorithm</td>
 								</tr>
 								<tr>
-									<td>#springMessage("export.language"):</td>
-									<td>#springMessage("$calculation.language")</td>
+									<td>#springMessage("export.angUnits"):</td>
+									<td>$calculation.angUnits</td>
 								</tr>
 							</tbody>
 						</table>

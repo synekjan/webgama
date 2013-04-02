@@ -36,6 +36,7 @@
 
 	<bean id="processManager" class="cz.cvut.fsv.webgama.service.impl.ProcessManagerImpl">
 		<property name="gamaFilePath" value="${gama.filepath}" />
+		<property name="calculationDao" ref="calculationDao" />
 	</bean>
 
 	<bean id="calculationManager" class="cz.cvut.fsv.webgama.service.impl.CalculationManagerImpl">

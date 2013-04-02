@@ -72,6 +72,7 @@
 		<property name="dateToolAttribute">
 			<value>dateTool</value>
 		</property>
+		<property name="toolboxConfigLocation" value="/WEB-INF/spring/toolbox.xml" />
 		<property name="attributes">
 			<map>
 				<entry key="authentication">

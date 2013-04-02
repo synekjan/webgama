@@ -14,6 +14,8 @@ public class ProcessOutput {
 
 	private String errorMessage;
 
+	private Double runningTime;
+
 	public Integer getExitValue() {
 		return exitValue;
 	}
@@ -66,4 +68,11 @@ public class ProcessOutput {
 		this.errorMessage = errorMessage;
 	}
 
+	public Double getRunningTime() {
+		return runningTime;
+	}
+
+	public void setRunningTime(Double runningTime) {
+		this.runningTime = runningTime;
+	}
 }

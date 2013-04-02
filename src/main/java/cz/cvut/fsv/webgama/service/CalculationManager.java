@@ -8,5 +8,7 @@ public interface CalculationManager {
 	public ProcessOutput calculate(Calculation calculation, String username);
 	
 	public void deleteCalculation(Long id);
+	
+	public String checkCalculationProgress(Long id);
 
 }

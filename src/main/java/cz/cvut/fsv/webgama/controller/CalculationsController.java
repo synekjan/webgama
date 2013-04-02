@@ -71,16 +71,33 @@ public class CalculationsController extends MultiActionController {
 
 		JsonResponse jsonResponse = new JsonResponse();
 
-		ProcessOutput output = calculationManager.calculate(calculation, username);
+		ProcessOutput processOutput = calculationManager.calculate(calculation, username);
 
-		if (output.getExitValue() != 0) {
+		if (processOutput.getExitValue() != 0) {
 			jsonResponse.setError(true);
-			jsonResponse.setMessage(output.getErrorMessage());
+			String errorStreamMessage = processOutput.getErrorMessage();
+			if (errorStreamMessage == null || "".equals(errorStreamMessage)) {
+				jsonResponse.setMessage(processOutput.getXmlResult());
+			} else {
+				jsonResponse.setMessage(errorStreamMessage);
+			}
+
 			return jsonResponse;
 		}
 
 		jsonResponse.setMessage("OK");
+		jsonResponse.setRunningTime(processOutput.getRunningTime());
 		return jsonResponse;
+	}
+
+	@RequestMapping(value = "/calculation/check", method = RequestMethod.POST)
+	protected @ResponseBody
+	String checkProgress(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response) {
+
+		/*String username = request.getUserPrincipal().getName();
+		adjustmentManager.getCalculationById(id);*/ //TODO - check calculations
+		
+		return "calculated";
 	}
 
 }

@@ -59,6 +59,7 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 						calculation.getLanguage(), calculation.getAlgorithm(), calculation.getAngUnits(),
 						calculation.getLatitude(), calculation.getEllipsoid(), calculation.getTime().toDate(),
 						calculation.getId() });
+
 		inputDao.delete(calculation.getInput());
 		inputDao.insert(calculation.getInput(), calculation.getId());
 
@@ -73,6 +74,29 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 			}
 			outputDao.update(calculation.getOutput());
 		}
+	}
+
+	@Override
+	public void updateOutput(Calculation calculation) {
+
+		String sql = "UPDATE calculations SET user_id=?, name=?, progress=?, language=?, algorithm=?, ang_units=?, latitude=?, ellipsoid=?, time=? WHERE calculation_id = ?";
+
+		getJdbcTemplate().update(
+				sql,
+				new Object[] { calculation.getUser().getId(), calculation.getName(), calculation.getProgress(),
+						calculation.getLanguage(), calculation.getAlgorithm(), calculation.getAngUnits(),
+						calculation.getLatitude(), calculation.getEllipsoid(), calculation.getTime().toDate(),
+						calculation.getId() });
+		
+		Output output = outputDao.findOutputInCalculation(calculation);
+		
+		if (output == null) {
+			outputDao.insert(calculation.getOutput(), calculation.getId());			
+		} else {
+			calculation.getOutput().setId(output.getId());
+			outputDao.update(calculation.getOutput());
+		}
+		
 	}
 
 	@Override
@@ -121,6 +145,7 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 
 	@Override
 	public boolean isCalculationIdInDB(Long id) {
+		
 		String sql = "SELECT * FROM calculations WHERE calculation_id = ?";
 		List<Calculation> ids = getJdbcTemplate().query(sql, new Object[] { id }, new CalculationMapper());
 
@@ -129,6 +154,23 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 		} else {
 			return true;
 		}
+	}
+	
+	@Override
+	public void updateProgress(Calculation calculation, String progress) {
+		
+		String sql = "UPDATE calculations SET progress=? WHERE calculation_id = ?";
+		getJdbcTemplate().update(sql, progress, calculation.getId());
+	}
+	
+	@Override
+	public String findProgressById(Long id) {
+		
+		String sql = "SELECT progress FROM calculations WHERE calculation_id = ?";
+		
+		String result = getJdbcTemplate().queryForObject(sql, new Object[] { id }, String.class);
+		
+		return result;
 	}
 
 	private class CalculationMapper implements RowMapper<Calculation> {
@@ -168,4 +210,5 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
+
 }

@@ -91,6 +91,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 				return processOutput;
 
 			input = inputParser.parseInput(file.getInputStream());
+			input.setXmlContent(stringFromStream);
 			calculation.setInput(input);
 
 			Output output = new Output();
@@ -98,6 +99,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 			output.setHtmlContent(processOutput.getHtmlResult());
 			output.setSvgContent(processOutput.getSvgResult());
 			output.setTextContent(processOutput.getTextResult());
+			output.setRunningTime(processOutput.getRunningTime());
 			calculation.setOutput(output);
 			calculation.setProgress("calculated");
 
@@ -174,7 +176,5 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 
 		calculation.setTime(new DateTime());
 		calculationDao.update(calculation);
-
 	}
-
 }

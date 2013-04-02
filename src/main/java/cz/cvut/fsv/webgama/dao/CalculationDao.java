@@ -12,6 +12,8 @@ public interface CalculationDao {
 	public void delete(Calculation calculation);
 
 	public void update(Calculation calculation);
+	
+	public void updateOutput(Calculation calculation);
 
 	public List<Calculation> getCalculationList();
 
@@ -24,5 +26,9 @@ public interface CalculationDao {
 	public void deleteCalculationById(Long id);
 
 	public boolean isCalculationIdInDB(Long id);
+	
+	public void updateProgress(Calculation calculation, String progress);
+	
+	public String findProgressById(Long id);
 
 }

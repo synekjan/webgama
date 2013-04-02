@@ -6,6 +6,16 @@ public class JsonResponse {
 
 	private String message;
 
+	private Double runningTime;
+
+	public Double getRunningTime() {
+		return runningTime;
+	}
+
+	public void setRunningTime(Double runningTime) {
+		this.runningTime = runningTime;
+	}
+
 	public boolean isError() {
 		return error;
 	}
