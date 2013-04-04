@@ -56,7 +56,7 @@ public class JdbcActivityDao extends JdbcDaoSupport implements ActivityDao {
 	@Override
 	public List<Activity> findRecentActivitiesByUser(User user) {
 
-		String sql = "SELECT * FROM activities WHERE user_id = ? ORDER BY time DESC LIMIT 15";
+		String sql = "SELECT * FROM activities WHERE user_id = ? ORDER BY time DESC LIMIT 10";
 
 		List<Activity> activities = getJdbcTemplate().query(sql, new Object[] { user.getId() }, new ActivityMapper());
 
