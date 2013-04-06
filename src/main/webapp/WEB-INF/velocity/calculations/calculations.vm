@@ -254,7 +254,7 @@
 							btn.closest('.primary_wrapper').find('.export_button').attr('href','#springUrl("/export/")' + id);
 						} else {
 							btn.closest('.primary_wrapper').find('.progress').html('#springMessage("not-calculated")');
-							btn.closest('.accor_content').prev('h3').find('.status_message').html('<span class="calculated">#springMessage("not-calculated")</span>');
+							btn.closest('.accor_content').prev('h3').find('.status_message').html('<span class="not-calculated">#springMessage("not-calculated")</span>');
 							alert(jqXHR.message);
 						}
 					}

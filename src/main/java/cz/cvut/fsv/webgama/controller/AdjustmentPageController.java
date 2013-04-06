@@ -1,5 +1,7 @@
 package cz.cvut.fsv.webgama.controller;
 
+import java.util.Locale;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -19,7 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import cz.cvut.fsv.webgama.domain.Calculation;
+import cz.cvut.fsv.webgama.domain.Cluster;
 import cz.cvut.fsv.webgama.domain.Input;
+import cz.cvut.fsv.webgama.domain.Observation;
+import cz.cvut.fsv.webgama.domain.Point;
 import cz.cvut.fsv.webgama.exception.PermissionDeniedException;
 import cz.cvut.fsv.webgama.exception.ResourceNotFoundException;
 import cz.cvut.fsv.webgama.form.AdjustmentPageForm;
@@ -46,6 +51,11 @@ public class AdjustmentPageController extends MultiActionController {
 		ModelAndView mav = new ModelAndView("/adjustment/onepage/new");
 
 		AdjustmentPageForm adjustmentForm = new AdjustmentPageForm();
+		adjustmentForm.getPoints().add(new Point());
+		Cluster cluster = new Cluster();
+		cluster.setTagname("obs");
+		cluster.setObservation(new Observation());
+		adjustmentForm.getClusters().add(cluster);
 
 		mav.addObject("input", adjustmentForm);
 
@@ -54,18 +64,19 @@ public class AdjustmentPageController extends MultiActionController {
 
 	@RequestMapping(value = { "", "new" }, method = RequestMethod.POST)
 	protected ModelAndView postNewInput(@Valid @ModelAttribute("input") AdjustmentPageForm adjustmentForm,
-			BindingResult result, HttpServletRequest request) {
+			BindingResult result, HttpServletRequest request, Locale locale) {
 
+		String username = request.getUserPrincipal().getName();
 		if (result.hasErrors()) {
-			String username = request.getUserPrincipal().getName();
+
 			logger.info("User[" + username + "] had errors[" + result.getErrorCount()
 					+ "] in adjustment one page form!");
 			return new ModelAndView("/adjustment/onepage/new", "errorCount", result.getErrorCount());
 		}
 
-		System.out.println(adjustmentForm.getSigmaAct());
-		System.out.println(adjustmentForm.getDescription());
+		adjustmentManager.insertNewCalculation(adjustmentForm, username, locale);
 
+		logger.info("User[" + username + "] successfully insert NEW calculation by one page form!");
 		return new ModelAndView("redirect:/calculations");
 	}
 
@@ -99,9 +110,8 @@ public class AdjustmentPageController extends MultiActionController {
 			@Valid @ModelAttribute("input") AdjustmentPageForm adjustmentForm, BindingResult result,
 			HttpServletRequest request) {
 
+		String username = request.getUserPrincipal().getName();
 		if (result.hasErrors()) {
-			String username = request.getUserPrincipal().getName();
-
 			logger.info("User[" + username + "] had errors[" + result.getErrorCount()
 					+ "] in adjustment one page form!");
 			return new ModelAndView("/adjustment/onepage/new", "errorCount", result.getErrorCount());
@@ -109,17 +119,8 @@ public class AdjustmentPageController extends MultiActionController {
 		Calculation calculation = adjustmentManager.getCalculationById(id);
 		adjustmentManager.updateInputInCalculation(adjustmentForm, calculation);
 
-		/*
-		 * for (Point point : adjustmentForm.getPoints()) {
-		 * System.out.print(point.getId() + " ");
-		 * System.out.print(point.getName() + " ");
-		 * 
-		 * System.out.print(point.getX() + " "); System.out.print(point.getY() +
-		 * " "); System.out.println(point.getZ() + " ");
-		 * 
-		 * System.out.println("--------"); }
-		 */
-
+		logger.info("User[" + username + "] successfully update input of calculation[" + id
+				+ "] adjustment one page form!");
 		return new ModelAndView("redirect:/calculations");
 	}
 

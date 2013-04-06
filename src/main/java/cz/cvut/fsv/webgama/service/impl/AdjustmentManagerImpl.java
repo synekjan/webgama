@@ -142,6 +142,56 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 
 	@Transactional
 	@Override
+	public void insertNewCalculation(AdjustmentPageForm adjustmentForm, String username, Locale locale) {
+
+		Calculation calculation = new Calculation();
+		Input input = new Input();
+		Network network = new Network();
+
+		network.setAxesXY(adjustmentForm.getAxesXY());
+		network.setAngles(adjustmentForm.getAngles());
+		network.setEpoch(adjustmentForm.getEpoch());
+		network.setDescription(adjustmentForm.getDescription());
+		network.setSigmaApr(adjustmentForm.getSigmaApr());
+		network.setConfPr(adjustmentForm.getConfPr());
+		network.setTolAbs(adjustmentForm.getTolAbs());
+		network.setSigmaAct(adjustmentForm.getSigmaAct());
+		network.setUpdateCC(adjustmentForm.getUpdateCC());
+		network.setDirectionStdev(adjustmentForm.getDirectionStdev());
+		network.setDistanceStdev(adjustmentForm.getDistanceStdev());
+		network.setAngleStdev(adjustmentForm.getAngleStdev());
+		network.setZenithAngleStdev(adjustmentForm.getZenithAngleStdev());
+		network.setPoints(adjustmentForm.getPoints());
+		network.setClusters(adjustmentForm.getClusters());
+		input.setNetwork(network);
+		input.setVersion("2.0");
+
+		// convert OutputStream to String and update xml_content in inputs table
+		OutputStream baos = new ByteArrayOutputStream(10000);
+		inputParser.composeInput(baos, input);
+		input.setXmlContent(baos.toString());
+
+		calculation.setInput(input);
+
+		// choose default language
+		if (locale.getLanguage().equals(new Locale("cs").getLanguage())) {
+			calculation.setLanguage("cz");
+		} else {
+			calculation.setLanguage("en");
+		}
+
+		// delete output -- need to be recalculated again
+		calculation.setOutput(null);
+		calculation.setProgress("not-calculated");
+		calculation.setUser(userDao.findUserByUsername(username));
+		calculation.setName("New Calculation");
+
+		calculationDao.insert(calculation);
+
+	}
+
+	@Transactional
+	@Override
 	public void updateInputInCalculation(AdjustmentPageForm adjustmentForm, Calculation calculation) {
 
 		Input input = calculation.getInput();

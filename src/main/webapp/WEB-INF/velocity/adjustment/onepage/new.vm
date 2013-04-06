@@ -211,27 +211,27 @@
 										</div>
 										<div class="window_content">
 											<div class="small_form_element">
-												<label class="required" for="from">#springMessage("observation.from"):</label>
+												<label class="required" for="clusters[$h].observation.from">#springMessage("observation.from"):</label>
 												<div class="input">
 													#springBind("input.clusters[$h].observation.from") <input
-														id="from" type="text" name="clusters[$h].observation.from"
+														id="clusters[$h].observation.from" type="text" name="clusters[$h].observation.from"
 														value="$!observation.from" /> #showElementErrors()
 												</div>
 											</div>
 											<div class="small_form_element">
-												<label for="orientation">#springMessage("observation.orientation"):</label>
+												<label for="clusters[$h].observation.orientation">#springMessage("observation.orientation"):</label>
 												<div class="input">
 													#springBind("input.clusters[$h].observation.orientation") <input
-														id="orientation" type="text"
+														id="clusters[$h].observation.orientation" type="text"
 														name="clusters[$h].observation.orientation"
 														value="$!observation.orientation" /> #showElementErrors()
 												</div>
 											</div>
 											<div class="small_form_element">
-												<label for="fromDh">#springMessage("observation.fromDh"):</label>
+												<label for="clusters[$h].observation.fromDh">#springMessage("observation.fromDh"):</label>
 												<div class="input">
 													#springBind("input.clusters[$h].observation.fromDh") <input
-														id="fromDh" type="text"
+														id="clusters[$h].observation.fromDh" type="text"
 														name="clusters[$h].observation.fromDh"
 														value="$!observation.fromDh" /> #showElementErrors()
 												</div>
@@ -534,7 +534,7 @@
 
 									<!-- COORDINATES -->
 									#elseif ($cluster.getCoordinates().size() != 0)
-									<div class="coordinates window">
+									<div class="coordinatesWrap window">
 										<span class="icon-close" role="button"></span>
 										#springFormHiddenInput("input.clusters[$h].tagname" "")
 										<div class="title_bar">
@@ -587,7 +587,7 @@
 
 									<!-- HEIGHT DIFFERENCE  -->
 									#elseif ($cluster.getHeightDifferences().size() != 0)
-									<div class="heightDifferences window">
+									<div class="heightDifferencesWrap window">
 										<span class="icon-close" role="button"></span>
 										#springFormHiddenInput("input.clusters[$h].tagname" "")
 										<div class="title_bar">
@@ -647,7 +647,7 @@
 
 									<!-- VECTORS  -->
 									#elseif ($cluster.getVectors().size() != 0)
-									<div class="vectors window">
+									<div class="vectorsWrap window">
 										<span class="icon-close" role="button"></span>
 										#springFormHiddenInput("input.clusters[$h].tagname" "")
 										<div class="title_bar">
@@ -728,6 +728,9 @@
 						</div>
 					</form>
 				</div>
+				 <div id="hints">
+				 
+				 </div>
 			</div>
 		</div>
 	</div>

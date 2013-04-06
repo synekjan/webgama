@@ -28,8 +28,10 @@ public class CalculationManagerImpl implements CalculationManager {
 
 		ProcessOutput processOutput = processManager.runExternalGama(calculation, username);
 
-		if (processOutput.getExitValue() != 0)
+		if (processOutput.getExitValue() != 0) {
+			calculationDao.updateProgress(calculation, "not-calculated");
 			return processOutput;
+		}
 		
 		Output output = new Output();
 		output.setXmlContent(processOutput.getXmlResult());

@@ -21,6 +21,8 @@ public interface AdjustmentManager {
 
 	public boolean isCalculationIdInDB(Long id);
 	
+	public void insertNewCalculation(AdjustmentPageForm adjustmentForm, String username, Locale locale);
+	
 	public void updateInputInCalculation(AdjustmentPageForm adjustmentForm, Calculation calculation);
 
 }

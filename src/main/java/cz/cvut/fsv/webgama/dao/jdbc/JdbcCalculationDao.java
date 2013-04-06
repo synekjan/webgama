@@ -36,7 +36,6 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 						calculation.getLatitude(), calculation.getEllipsoid() }, Long.class);
 
 		inputDao.insert(calculation.getInput(), calculationId);
-		outputDao.insert(calculation.getOutput(), calculationId);
 	}
 
 	@Override
