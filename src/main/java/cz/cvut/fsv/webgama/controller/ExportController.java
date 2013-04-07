@@ -85,10 +85,11 @@ public class ExportController extends MultiActionController {
 			throw new ResourceNotFoundException();
 		}
 		String username = request.getUserPrincipal().getName();
-
+		String filename = calculation.getName().replaceAll(" ", "_").toLowerCase();
+		
 		File temporary = null;
 		try {
-			temporary = File.createTempFile(calculation.getName(), ".xml");
+			temporary = File.createTempFile(filename, ".xml");
 			temporary.deleteOnExit();
 			FileUtils.writeStringToFile(temporary, calculation.getOutput().getXmlContent());
 		} catch (IOException e) {
@@ -96,7 +97,7 @@ public class ExportController extends MultiActionController {
 		}
 
 		response.setContentType("text/xml");
-		response.setHeader("Content-Disposition", "attachment; filename=" + calculation.getName() + ".xml");
+		response.setHeader("Content-Disposition", "attachment; filename=" + filename + ".xml");
 		response.setContentLength(Long.valueOf(temporary.length()).intValue());
 
 		try (InputStream in = new FileInputStream(temporary); OutputStream out = response.getOutputStream();) {
@@ -129,10 +130,11 @@ public class ExportController extends MultiActionController {
 			throw new ResourceNotFoundException();
 		}
 		String username = request.getUserPrincipal().getName();
+		String filename = calculation.getName().replaceAll(" ", "_").toLowerCase();
 
 		File temporary = null;
 		try {
-			temporary = File.createTempFile(calculation.getName(), ".txt");
+			temporary = File.createTempFile(filename, ".txt");
 			temporary.deleteOnExit();
 			FileUtils.writeStringToFile(temporary, calculation.getOutput().getTextContent());
 		} catch (IOException e) {
@@ -140,7 +142,7 @@ public class ExportController extends MultiActionController {
 		}
 
 		response.setContentType("text/plain");
-		response.setHeader("Content-Disposition", "attachment; filename=" + calculation.getName() + ".txt");
+		response.setHeader("Content-Disposition", "attachment; filename=" + filename + ".txt");
 		response.setContentLength(Long.valueOf(temporary.length()).intValue());
 
 		try (InputStream in = new FileInputStream(temporary); OutputStream out = response.getOutputStream();) {
@@ -173,10 +175,11 @@ public class ExportController extends MultiActionController {
 			throw new ResourceNotFoundException();
 		}
 		String username = request.getUserPrincipal().getName();
+		String filename = calculation.getName().replaceAll(" ", "_").toLowerCase();
 
 		File temporary = null;
 		try {
-			temporary = File.createTempFile(calculation.getName(), ".html");
+			temporary = File.createTempFile(filename, ".html");
 			temporary.deleteOnExit();
 			FileUtils.writeStringToFile(temporary, calculation.getOutput().getHtmlContent());
 		} catch (IOException e) {
@@ -184,7 +187,7 @@ public class ExportController extends MultiActionController {
 		}
 
 		response.setContentType("text/html");
-		response.setHeader("Content-Disposition", "attachment; filename=" + calculation.getName() + ".html");
+		response.setHeader("Content-Disposition", "attachment; filename=" + filename + ".html");
 		response.setContentLength(Long.valueOf(temporary.length()).intValue());
 
 		try (InputStream in = new FileInputStream(temporary); OutputStream out = response.getOutputStream();) {
@@ -217,10 +220,11 @@ public class ExportController extends MultiActionController {
 			throw new ResourceNotFoundException();
 		}
 		String username = request.getUserPrincipal().getName();
+		String filename = calculation.getName().replaceAll(" ", "_").toLowerCase();
 
 		File temporary = null;
 		try {
-			temporary = File.createTempFile(calculation.getName(), ".svg");
+			temporary = File.createTempFile(filename, ".svg");
 			temporary.deleteOnExit();
 			FileUtils.writeStringToFile(temporary, calculation.getOutput().getSvgContent());
 		} catch (IOException e) {
@@ -228,7 +232,7 @@ public class ExportController extends MultiActionController {
 		}
 
 		response.setContentType("image/svg+xml");
-		response.setHeader("Content-Disposition", "attachment; filename=" + calculation.getName() + ".svg");
+		response.setHeader("Content-Disposition", "attachment; filename=" + filename + ".svg");
 		response.setContentLength(Long.valueOf(temporary.length()).intValue());
 
 		try (InputStream in = new FileInputStream(temporary); OutputStream out = response.getOutputStream();) {
