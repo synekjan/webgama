@@ -42,9 +42,9 @@ public class UserRegistrationValidator implements Validator {
 
 		// checks if passwords are same
 		if (!userForm.getPassword().equals(userForm.getConfirmPassword())) {
-			errors.rejectValue("password", "NotMatch", "passwords are not same");
+			errors.rejectValue("password", "NotMatch", "passwords are not the same");
 			errors.rejectValue("confirmPassword", "NotMatch",
-					"passwords are not same");
+					"passwords are not the same");
 		}
 
 	}
