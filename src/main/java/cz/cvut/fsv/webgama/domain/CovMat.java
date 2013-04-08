@@ -1,14 +1,21 @@
 package cz.cvut.fsv.webgama.domain;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class CovMat {
 
 	private Long id;
 
+	@Min(0)
+	@NotNull
 	private Integer dim;
 
+	@Min(0)
+	@NotNull
 	private Integer band;
 
-	// private Double[] val;
+	private String values;
 
 	public Integer getDim() {
 		return dim;
@@ -34,10 +41,11 @@ public class CovMat {
 		this.band = band;
 	}
 
-	/*
-	 * public Double[][] getVal() { return val; }
-	 * 
-	 * public void setVal(Double[][] val) { this.val = val; }
-	 */
+	public String getValues() {
+		return values;
+	}
 
+	public void setValues(String values) {
+		this.values = values;
+	}
 }

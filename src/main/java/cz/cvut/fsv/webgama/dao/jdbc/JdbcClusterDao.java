@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import cz.cvut.fsv.webgama.dao.ClusterDao;
 import cz.cvut.fsv.webgama.dao.CoordinateDao;
+import cz.cvut.fsv.webgama.dao.CovMatDao;
 import cz.cvut.fsv.webgama.dao.HeightDifferenceDao;
 import cz.cvut.fsv.webgama.dao.ObservationDao;
 import cz.cvut.fsv.webgama.dao.VectorDao;
@@ -25,21 +26,26 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 	private HeightDifferenceDao heightDifferenceDao;
 	private VectorDao vectorDao;
 	private ObservationDao observationDao;
+	private CovMatDao covMatDao;
 
-	public void setCoordinateDao(JdbcCoordinateDao coordinateDao) {
+	public void setCoordinateDao(CoordinateDao coordinateDao) {
 		this.coordinateDao = coordinateDao;
 	}
 
-	public void setHeightDifferenceDao(JdbcHeightDifferenceDao heightDifferenceDao) {
+	public void setHeightDifferenceDao(HeightDifferenceDao heightDifferenceDao) {
 		this.heightDifferenceDao = heightDifferenceDao;
 	}
 
-	public void setVectorDao(JdbcVectorDao vectorDao) {
+	public void setVectorDao(VectorDao vectorDao) {
 		this.vectorDao = vectorDao;
 	}
 
 	public void setObservationDao(ObservationDao observationDao) {
 		this.observationDao = observationDao;
+	}
+
+	public void setCovMatDao(CovMatDao covMatDao) {
+		this.covMatDao = covMatDao;
 	}
 
 	@Override
@@ -49,6 +55,9 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 
 		Long clusterId = getJdbcTemplate().queryForObject(sql, new Object[] { networkId, cluster.getTagname() },
 				Long.class);
+
+		if (cluster.getCovMat() != null)
+			covMatDao.insert(cluster.getCovMat(), clusterId);
 
 		switch (cluster.getTagname()) {
 		case "obs":
@@ -131,6 +140,8 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 			break;
 		}
 
+		// TODO - covmat update
+
 	}
 
 	@Override
@@ -152,7 +163,7 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 
 			cluster.setId(rs.getLong("cluster_id"));
 			cluster.setTagname(rs.getString("tagname"));
-			/* cluster.setCovmat(rs.getObject("covmat_id")); */
+			cluster.setCovMat(covMatDao.findCovMatForCluster(cluster));
 			cluster.setCoordinates(coordinateDao.findCoordinatesInCluster(cluster));
 			cluster.setHeightDifferences(heightDifferenceDao.findHeightDifferencesInCluster(cluster));
 			cluster.setVectors(vectorDao.findVectorsInCluster(cluster));

@@ -376,6 +376,10 @@ div#about_container .right_menu .menu_header {
 	border-bottom: 1px solid #DDD;
 	background-color: #F1F1F1;
 	background: -moz-linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
+	background: -ms-linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
+	background: -webkit-linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
+	background: -o-linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
+	background: linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
 	padding: 5px;
 	text-align: center;
 }
@@ -503,6 +507,14 @@ div.form_element_errors li {
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+.covmat_values {
+	padding: 5px;
+}
+
+.covmat_values textarea {
+	height: 120px;
+}
+
 input[type=text],input[type=password] {
 	border: 1px solid #BBBBBB;
 	border-radius: 1px 1px 1px 1px;
@@ -585,13 +597,13 @@ input.submit_btn {
 	margin-top: 10px;
 }
 
-input.submit_btn:HOVER, .calculate_box button:HOVER  {
+input.submit_btn:HOVER,.calculate_box button:HOVER {
 	background-color: #328FC9;
 	background-image: linear-gradient(#37A3EB, #1171BF);
 	background-repeat: repeat-x;
 }
 
-input.submit_btn:ACTIVE, .calculate_box button:ACTIVE  {
+input.submit_btn:ACTIVE,.calculate_box button:ACTIVE {
 	background-color: #2B6DAE;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) inset;
 }
@@ -687,7 +699,7 @@ input.submit_btn:ACTIVE, .calculate_box button:ACTIVE  {
 	opacity: 1;
 	z-index: 9999;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-	font-weight:  bold;
+	font-weight: bold;
 	color: #777;
 }
 
@@ -797,6 +809,10 @@ div.error {
 
 .adjustment_form .icon-close {
 	margin: 0;
+}
+
+.adjustment_form .focused .icon-close {
+	
 }
 
 div#adjustment_options {
@@ -1304,7 +1320,6 @@ p.not_added {
 	background-repeat: repeat-x;
 }
 
-
 .result_box {
 	width: 180px;
 }
@@ -1324,9 +1339,9 @@ p.not_added {
 	color: #BBB;
 	cursor: pointer;
 }
+
 .result_box_disabled .export_button:HOVER {
 	border-color: #CCC;
-	
 }
 
 .delete_button {
@@ -1387,6 +1402,10 @@ span.calculating {
 .accordion .ui-accordion-header {
 	background-color: #e9e9e9;
 	background: -moz-linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
+	background: -ms-linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
+	background: -webkit-linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
+	background: -o-linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
+	background: linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
 	margin-top: 2px;
 	padding: 10px;
 	border: 1px solid #ddd;
@@ -1398,6 +1417,10 @@ span.calculating {
 
 .accordion .ui-accordion-header:HOVER {
 	background: -moz-linear-gradient(top, #F1F1F1, #d7d7d7) repeat scroll 0 0 #e9e9e9;
+	background: -ms-linear-gradient(top, #F1F1F1, #d7d7d7) repeat scroll 0 0 #e9e9e9;
+	background: -webkit-linear-gradient(top, #F1F1F1, #d7d7d7) repeat scroll 0 0 #e9e9e9;
+	background: -o-linear-gradient(top, #F1F1F1, #d7d7d7) repeat scroll 0 0 #e9e9e9;
+	background: linear-gradient(top, #F1F1F1, #d7d7d7) repeat scroll 0 0 #e9e9e9;
 }
 
 /* .accordion .ui-accordion-header-active {
@@ -1427,6 +1450,10 @@ span.time {
 	border-bottom: 1px solid #AAA;
 	padding-left: 10px;
 	background: -moz-linear-gradient(top, #F1F1F1, #d7d7d7) repeat scroll 0 0 #e9e9e9;
+	background: -ms-linear-gradient(top, #F1F1F1, #d7d7d7) repeat scroll 0 0 #e9e9e9;
+	background: -webkit-linear-gradient(top, #F1F1F1, #d7d7d7) repeat scroll 0 0 #e9e9e9;
+	background: -o-linear-gradient(top, #F1F1F1, #d7d7d7) repeat scroll 0 0 #e9e9e9;
+	background: linear-gradient(top, #F1F1F1, #d7d7d7) repeat scroll 0 0 #e9e9e9;
 }
 
 .adjustment_form div.title_bar input {
@@ -1467,15 +1494,18 @@ span.time {
 }
 
 .adjustment_form .focused {
-	border: 1px solid #4082C3;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6);
+	border: 1px solid #60A2E3;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 10px rgba(82, 168, 236, 0.6);
 }
 
 .adjustment_form .focused>div.title_bar {
-	background: -moz-linear-gradient(center top, #7ABCFD, #4082C3) repeat scroll 0 0 #4082C3;
+	background: -moz-linear-gradient(top, #7ABCFD, #4082C3) repeat scroll 0 0 #4082C3;
+	background: -ms-linear-gradient(top, #7ABCFD, #4082C3) repeat scroll 0 0 #4082C3;
+	background: -webkit-linear-gradient(top, #7ABCFD, #4082C3) repeat scroll 0 0 #4082C3;
+	background: -o-linear-gradient(top, #7ABCFD, #4082C3) repeat scroll 0 0 #4082C3;
+	background: linear-gradient(top, #7ABCFD, #4082C3) repeat scroll 0 0 #4082C3;
 	color: white;
 	text-shadow: 0 -1px 1px #333333;
-	color: white;
 }
 
 /* ADJUSTMENT TOOLBAR  */
@@ -1509,7 +1539,11 @@ div#toolbar_header {
 	text-align: center;
 	border-bottom: 1px solid #CCCCCC;
 	background-color: #e9e9e9;
-	background-image: -moz-linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
+	background: -moz-linear-gradient(top, #fafafa, #DADADA) repeat scroll 0 0 #e9e9e9;
+	background: -ms-linear-gradient(top, #fafafa, #DADADA) repeat scroll 0 0 #e9e9e9;
+	background: -webkit-linear-gradient(top, #fafafa, #DADADA) repeat scroll 0 0 #e9e9e9;
+	background: -o-linear-gradient(top, #fafafa, #DADADA) repeat scroll 0 0 #e9e9e9;
+	background: linear-gradient(top, #fafafa, #DADADA) repeat scroll 0 0 #e9e9e9;
 	cursor: move;
 }
 

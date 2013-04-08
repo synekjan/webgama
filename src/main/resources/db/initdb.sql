@@ -10,10 +10,9 @@ DROP TABLE height_differences CASCADE;
 DROP TABLE vectors CASCADE;
 DROP TABLE coordinates CASCADE;
 DROP TABLE observations CASCADE;
+DROP TABLE covmats CASCADE;
 DROP TABLE clusters CASCADE;
 DROP TABLE points CASCADE;
-DROP TABLE covmat_values CASCADE;
-DROP TABLE covmats CASCADE;
 DROP TABLE networks CASCADE;
 DROP TABLE input_privileges CASCADE;
 DROP TABLE outputs CASCADE;
@@ -199,25 +198,18 @@ fix				VARCHAR(3),
 adj				VARCHAR(3)
 );
 
-CREATE TABLE covmats (
-covmat_id 		BIGSERIAL PRIMARY KEY,
-dim 			INTEGER NOT NULL,
-band 			INTEGER NOT NULL
-);
-
-CREATE TABLE covmat_values (
-covmat_value_id BIGSERIAL PRIMARY KEY,
-covmat_id 		BIGINT NOT NULL REFERENCES covmats(covmat_id) ON DELETE CASCADE,
-rind 			INTEGER NOT NULL,
-cind 			INTEGER NOT NULL,
-val 			DOUBLE PRECISION
-);
-
 CREATE TABLE clusters (
 cluster_id 		BIGSERIAL PRIMARY KEY,
 network_id		BIGINT NOT NULL REFERENCES networks(network_id) ON DELETE CASCADE,
-tagname			VARCHAR(20) NOT NULL check (tagname in ('obs', 'coordinates', 'vectors', 'height-differences')),
-covmat_id		BIGINT REFERENCES covmats(covmat_id)
+tagname			VARCHAR(20) NOT NULL check (tagname in ('obs', 'coordinates', 'vectors', 'height-differences'))
+);
+
+CREATE TABLE covmats (
+covmat_id 		BIGSERIAL PRIMARY KEY,
+cluster_id		BIGINT NOT NULL REFERENCES clusters(cluster_id) ON DELETE CASCADE,
+dim 			INTEGER NOT NULL,
+band 			INTEGER NOT NULL,
+values			TEXT NOT NULL
 );
 
 CREATE TABLE height_differences (
@@ -390,8 +382,6 @@ GRANT ALL ON vectors TO synekjan;
 GRANT ALL ON vectors_vector_id_seq TO synekjan;
 GRANT ALL ON covmats TO synekjan;
 GRANT ALL ON covmats_covmat_id_seq TO synekjan;
-GRANT ALL ON covmat_values TO synekjan;
-GRANT ALL ON covmat_values_covmat_value_id_seq TO synekjan;
 GRANT ALL ON clusters TO synekjan;
 GRANT ALL ON clusters_cluster_id_seq TO synekjan;
 GRANT ALL ON input_privileges TO synekjan;

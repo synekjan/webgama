@@ -101,6 +101,7 @@ public class AdjustmentPageController extends MultiActionController {
 		AdjustmentPageForm adjustmentForm = new AdjustmentPageForm(input);
 
 		mav.addObject("input", adjustmentForm);
+		mav.addObject("calculationName", calculation.getName());
 
 		return mav;
 	}

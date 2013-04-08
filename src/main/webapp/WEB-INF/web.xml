@@ -36,12 +36,10 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
-	
-	<!-- <session-config>
-	<session-timeout>1</session-timeout>
-	</session-config> -->
-	
-	
+
+	<!-- <session-config> <session-timeout>1</session-timeout> </session-config> -->
+
+
 	<!-- *************** SPRING SECURITY Filter ****************** -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
@@ -52,7 +50,7 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 	<!-- Reads request input using UTF-8 encoding -->
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
@@ -72,7 +70,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	
+
 	<!-- ****************** ERROR PAGES MAPPINGS ******************* -->
 	<error-page>
 		<error-code>404</error-code>
@@ -83,15 +81,15 @@
 		<error-code>403</error-code>
 		<location>/resources/error403.html</location>
 	</error-page>
-	
+
 	<error-page>
 		<error-code>400</error-code>
 		<location>/resources/error400.html</location>
 	</error-page>
-	
-	<error-page>
+
+	<!-- <error-page>
 		<error-code>500</error-code>
 		<location>/resources/error500.html</location>
-	</error-page>
-	
+	</error-page> -->
+
 </web-app>

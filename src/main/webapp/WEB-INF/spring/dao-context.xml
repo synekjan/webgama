@@ -81,7 +81,12 @@
 		<property name="coordinateDao" ref="coordinateDao" />
 		<property name="heightDifferenceDao" ref="heightDifferenceDao" />
 		<property name="vectorDao" ref="vectorDao" />
-		<property name="observationDao" ref="observationDao"></property>
+		<property name="observationDao" ref="observationDao" />
+		<property name="covMatDao" ref="covMatDao"></property>
+	</bean>
+
+	<bean id="covMatDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcCovMatDao">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 	<bean id="coordinateDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcCoordinateDao">

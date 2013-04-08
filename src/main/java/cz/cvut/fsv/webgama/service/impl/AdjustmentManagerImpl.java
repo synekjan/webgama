@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Locale;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -184,7 +186,9 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		calculation.setOutput(null);
 		calculation.setProgress("not-calculated");
 		calculation.setUser(userDao.findUserByUsername(username));
-		calculation.setName("New Calculation");
+		DateTime dt = new DateTime();
+		DateTimeFormatter fmt = ISODateTimeFormat.date();
+		calculation.setName("New Calculation " + fmt.print(dt));
 
 		calculationDao.insert(calculation);
 

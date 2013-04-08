@@ -77,6 +77,9 @@ public class StAXInputParser implements InputParser {
 			String currentTagName = null;
 			// description builder
 			StringBuilder descriptionBuilder = new StringBuilder();
+			// is event in cov-mat?
+			boolean isInCovMat = false;
+			StringBuilder covMatBuilder = null;
 
 			while (eventReader.hasNext()) {
 
@@ -472,22 +475,40 @@ public class StAXInputParser implements InputParser {
 						continue;
 					}
 
-					// TODO -- DOPLNIT COVMAT PARSOVANI
 					if ("cov-mat".equals(startElement.getName().getLocalPart())) {
 
 						covMat = new CovMat();
+						isInCovMat = true;
+						covMatBuilder = new StringBuilder();
 
-						if (currentTagName.equals("obs")) {
+						@SuppressWarnings("unchecked")
+						Iterator<Attribute> attributes = startElement.getAttributes();
+						while (attributes.hasNext()) {
+							Attribute attribute = attributes.next();
 
-						} else if (currentTagName.equals("height-differences")) {
-
-						} else if (currentTagName.equals("coordinates")) {
-
-						} else if (currentTagName.equals("vectors")) {
-
-						} else {
-							logger.debug("Unrecognized CovMat parent node");
+							if ("dim".equals(attribute.getName().getLocalPart())) {
+								covMat.setDim(Integer.parseInt(attribute.getValue()));
+								continue;
+							}
+							if ("band".equals(attribute.getName().getLocalPart())) {
+								covMat.setBand(Integer.parseInt(attribute.getValue()));
+								continue;
+							}
 						}
+
+						/*
+						 * if (currentTagName.equals("obs")) {
+						 * 
+						 * } else if
+						 * (currentTagName.equals("height-differences")) {
+						 * 
+						 * } else if (currentTagName.equals("coordinates")) {
+						 * 
+						 * } else if (currentTagName.equals("vectors")) {
+						 * 
+						 * } else {
+						 * logger.debug("Unrecognized CovMat parent node"); }
+						 */
 
 						continue;
 					}
@@ -667,9 +688,10 @@ public class StAXInputParser implements InputParser {
 						continue;
 					}
 
-					// TODO -MATICE
 					if ("cov-mat".equals(endElement.getName().getLocalPart())) {
 
+						covMat.setValues(covMatBuilder.toString());
+						isInCovMat = false;
 						if (currentTagName.equals("obs")) {
 							cluster.setCovMat(covMat);
 						} else if (currentTagName.equals("height-differences")) {
@@ -722,6 +744,12 @@ public class StAXInputParser implements InputParser {
 
 					if ("description".equals(currentTagName)) {
 						descriptionBuilder.append(characters.getData());
+						continue;
+					}
+
+					if (isInCovMat) {
+						covMatBuilder.append(characters.getData());
+						continue;
 					}
 
 					break;
@@ -1028,6 +1056,19 @@ public class StAXInputParser implements InputParser {
 						eventWriter.add(eventFactory.createEndElement("", "", "z-angle"));
 						eventWriter.add(endLine);
 					}
+					
+					if (cluster.getCovMat() != null) {
+						// <cov-mat>
+						eventWriter.add(eventFactory.createStartElement("", "", "cov-mat"));
+						eventWriter.add(eventFactory.createAttribute("dim", cluster.getCovMat().getDim().toString()));
+						eventWriter.add(eventFactory.createAttribute("band", cluster.getCovMat().getBand().toString()));
+						eventWriter.add(endLine);
+						eventWriter.add(eventFactory.createCharacters(cluster.getCovMat().getValues()));
+						eventWriter.add(endLine);
+						// </cov-mat>
+						eventWriter.add(eventFactory.createEndElement("", "", "cov-mat"));
+						eventWriter.add(endLine);
+					}
 
 					// </obs>
 					eventWriter.add(eventFactory.createEndElement("", "", "obs"));
@@ -1061,7 +1102,19 @@ public class StAXInputParser implements InputParser {
 						eventWriter.add(endLine);
 					}
 
-					// TODO - tady doplnit MATICI
+					if (cluster.getCovMat() != null) {
+						// <cov-mat>
+						eventWriter.add(eventFactory.createStartElement("", "", "cov-mat"));
+						eventWriter.add(eventFactory.createAttribute("dim", cluster.getCovMat().getDim().toString()));
+						eventWriter.add(eventFactory.createAttribute("band", cluster.getCovMat().getBand().toString()));
+						eventWriter.add(endLine);
+						eventWriter.add(eventFactory.createCharacters(cluster.getCovMat().getValues()));
+						eventWriter.add(endLine);
+						// </cov-mat>
+						eventWriter.add(eventFactory.createEndElement("", "", "cov-mat"));
+						eventWriter.add(endLine);
+					}
+
 					// </coordinates>
 					eventWriter.add(eventFactory.createEndElement("", "", "coordinates"));
 					eventWriter.add(endLine);
@@ -1099,7 +1152,19 @@ public class StAXInputParser implements InputParser {
 
 					}
 
-					// TODO - tady doplnit MATICI
+					if (cluster.getCovMat() != null) {
+						// <cov-mat>
+						eventWriter.add(eventFactory.createStartElement("", "", "cov-mat"));
+						eventWriter.add(eventFactory.createAttribute("dim", cluster.getCovMat().getDim().toString()));
+						eventWriter.add(eventFactory.createAttribute("band", cluster.getCovMat().getBand().toString()));
+						eventWriter.add(endLine);
+						eventWriter.add(eventFactory.createCharacters(cluster.getCovMat().getValues()));
+						eventWriter.add(endLine);
+						// </cov-mat>
+						eventWriter.add(eventFactory.createEndElement("", "", "cov-mat"));
+						eventWriter.add(endLine);
+					}
+					
 					// </height-differences>
 					eventWriter.add(eventFactory.createEndElement("", "", "height-differences"));
 					eventWriter.add(endLine);
@@ -1137,7 +1202,19 @@ public class StAXInputParser implements InputParser {
 
 					}
 
-					// TODO - tady doplnit MATICI
+					if (cluster.getCovMat() != null) {
+						// <cov-mat>
+						eventWriter.add(eventFactory.createStartElement("", "", "cov-mat"));
+						eventWriter.add(eventFactory.createAttribute("dim", cluster.getCovMat().getDim().toString()));
+						eventWriter.add(eventFactory.createAttribute("band", cluster.getCovMat().getBand().toString()));
+						eventWriter.add(endLine);
+						eventWriter.add(eventFactory.createCharacters(cluster.getCovMat().getValues()));
+						eventWriter.add(endLine);
+						// </cov-mat>
+						eventWriter.add(eventFactory.createEndElement("", "", "cov-mat"));
+						eventWriter.add(endLine);
+					}
+					
 					// </vectors>
 					eventWriter.add(eventFactory.createEndElement("", "", "vectors"));
 					eventWriter.add(endLine);

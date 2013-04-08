@@ -60,9 +60,9 @@ $(document).ready(function() {
 		jQuery('.adjustment_form').find('.focused').removeClass('focused');
 		jQuery(this).parents('.window').addClass('focused');
 	});
-	jQuery(document).on("blur", ".points input, .points select, .clusters input, .clusters select", function() {
+	/*jQuery(document).on("blur", ".points input, .points select, .clusters input, .clusters select", function() {
 		jQuery(this).parents('.window').removeClass('focused');
-	});
+	});*/
 	
 	jQuery(document).on("click", ".title_bar", function() {
 		jQuery('.adjustment_form').find('.focused').removeClass('focused');
@@ -157,10 +157,6 @@ $(document).ready(function() {
 		container.find(".zenithAngles").append(renderZenithAngle(clusterIndex, zenithAngleIndex));
 	});
 	
-	
-	
-	
-	
 	//add height differences wrap click event 
 	jQuery("button.add_heightDifferences").click(function () {
 		var clusterIndex = jQuery(".clusters").children().length;
@@ -226,6 +222,20 @@ $(document).ready(function() {
 		var vectorIndex = container.find(".vectors").children().length;
 		container.find(".vectors").append(renderVector(clusterIndex, vectorIndex));
 	});
+	
+	jQuery("button.add_covMat").click(function () {
+		var container = jQuery('.clusters').children('.focused');
+		if (container.length == 0) {
+			return false;
+		}
+		var regex = /\[([0-9]+)\]/;
+		var matches = container.find('input:hidden').prop('id').match(regex);
+		if (matches) {
+		    var clusterIndex = matches[1];
+		}
+		container.find(".covMatWrap").html(renderCovMat(clusterIndex));
+	});
+	
 	
 	
 });

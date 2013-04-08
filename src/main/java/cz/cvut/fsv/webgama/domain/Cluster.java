@@ -11,6 +11,7 @@ public class Cluster {
 
 	private String tagname;
 
+	@Valid
 	private CovMat covMat;
 
 	@Valid
