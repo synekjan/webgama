@@ -60,10 +60,13 @@ public class IndexController {
 		} else {
 			
 			Long userCount = userManager.getUserCount();
-
+			ModelAndView mav = new ModelAndView("welcome", "userCount", userCount);
+			mav.addObject("locale", locale);
+			mav.addObject("pointCount", adjustmentManager.getPointCount());
+			
 			logger.info("Welcome page was requested from IP: "
 					+ request.getRemoteHost());
-			return new ModelAndView("welcome", "userCount", userCount);
+			return mav;
 		}
 	}
 

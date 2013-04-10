@@ -110,6 +110,8 @@ public class ProcessManagerImpl implements ProcessManager {
 			String result = CharStreams.toString(inputStream);
 			String errorString = CharStreams.toString(errorStream);
 			int exitValue = process.waitFor();
+			
+			
 			long totalTime = (System.nanoTime() - startTime);
 			//running time in milliseconds
 			Double runningTime = Long.valueOf(totalTime).doubleValue()/1000000;

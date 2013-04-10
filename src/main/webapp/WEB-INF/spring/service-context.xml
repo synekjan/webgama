@@ -32,6 +32,7 @@
 		<property name="inputParser" ref="inputParser" />
 		<property name="userDao" ref="userDao" />
 		<property name="processManager" ref="processManager" />
+		<property name="pointDao" ref="pointDao" />
 	</bean>
 
 	<bean id="processManager" class="cz.cvut.fsv.webgama.service.impl.ProcessManagerImpl">

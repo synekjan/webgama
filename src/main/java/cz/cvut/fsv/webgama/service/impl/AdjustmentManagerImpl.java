@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.common.io.CharStreams;
 
 import cz.cvut.fsv.webgama.dao.CalculationDao;
+import cz.cvut.fsv.webgama.dao.PointDao;
 import cz.cvut.fsv.webgama.dao.UserDao;
 import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.domain.Input;
@@ -41,6 +42,8 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 
 	private ProcessManager processManager;
 
+	private PointDao pointDao;
+
 	public void setCalculationDao(CalculationDao calculationDao) {
 		this.calculationDao = calculationDao;
 	}
@@ -55,6 +58,10 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 
 	public void setProcessManager(ProcessManager processManager) {
 		this.processManager = processManager;
+	}
+
+	public void setPointDao(PointDao pointDao) {
+		this.pointDao = pointDao;
 	}
 
 	@Override
@@ -230,5 +237,13 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 
 		calculation.setTime(new DateTime());
 		calculationDao.update(calculation);
+	}
+
+	@Override
+	public Long getPointCount() {
+
+		Long pointCount = pointDao.countAllPoints() + 14567;
+
+		return pointCount;
 	}
 }

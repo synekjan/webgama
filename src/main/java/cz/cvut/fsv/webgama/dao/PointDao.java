@@ -14,4 +14,6 @@ public interface PointDao {
 	public void update(Point point);
 
 	public List<Point> findPointsInNetwork(Network network);
+	
+	public Long countAllPoints();
 }

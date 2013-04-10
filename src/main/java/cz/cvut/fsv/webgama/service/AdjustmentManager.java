@@ -24,5 +24,7 @@ public interface AdjustmentManager {
 	public void insertNewCalculation(AdjustmentPageForm adjustmentForm, String username, Locale locale);
 	
 	public void updateInputInCalculation(AdjustmentPageForm adjustmentForm, Calculation calculation);
+	
+	public Long getPointCount();
 
 }

@@ -52,6 +52,14 @@ public class JdbcPointDao extends JdbcDaoSupport implements PointDao {
 
 		return points;
 	}
+	
+	@Override
+	public Long countAllPoints() {
+		
+		String sql = "SELECT COUNT(point_id) FROM points";
+		
+		return getJdbcTemplate().queryForObject(sql, Long.class);
+	}
 
 	private static class PointMapper implements RowMapper<Point> {
 
@@ -71,4 +79,6 @@ public class JdbcPointDao extends JdbcDaoSupport implements PointDao {
 			return point;
 		}
 	}
+
+	
 }
