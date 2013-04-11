@@ -125,7 +125,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 	@Override
 	public List<Calculation> getCalculationsbyUsername(String username) {
 
-		return calculationDao.findCalculationsByUser(userDao.findUserByUsername(username));
+		return calculationDao.findCalculationsOnlyByUser(userDao.findUserByUsername(username));
 	}
 
 	@Transactional

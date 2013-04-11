@@ -56,7 +56,7 @@ $(document).ready(function() {
 	});
 	
 	//Adjustment elements highlighting
-	jQuery(document).on("focus",".points input, .points select, .clusters input, .clusters select", function() {
+	jQuery(document).on("focus",".points input, .points select, .clusters input, .clusters select, .clusters textarea", function() {
 		jQuery('.adjustment_form').find('.focused').removeClass('focused');
 		jQuery(this).parents('.window').addClass('focused');
 	});

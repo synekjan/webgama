@@ -18,6 +18,8 @@ public interface CalculationDao {
 	public List<Calculation> getCalculationList();
 
 	public List<Calculation> findCalculationsByUser(User user);
+	
+	public List<Calculation> findCalculationsOnlyByUser(User user);
 
 	public Calculation findCalculationById(Long id);
 

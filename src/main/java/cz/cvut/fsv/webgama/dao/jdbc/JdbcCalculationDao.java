@@ -36,7 +36,7 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 						calculation.getLatitude(), calculation.getEllipsoid() }, Long.class);
 
 		inputDao.insert(calculation.getInput(), calculationId);
-		
+
 		if (calculation.getOutput() != null) {
 			outputDao.insert(calculation.getOutput(), calculationId);
 		}
@@ -90,16 +90,16 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 						calculation.getLanguage(), calculation.getAlgorithm(), calculation.getAngUnits(),
 						calculation.getLatitude(), calculation.getEllipsoid(), calculation.getTime().toDate(),
 						calculation.getId() });
-		
+
 		Output output = outputDao.findOutputInCalculation(calculation);
-		
+
 		if (output == null) {
-			outputDao.insert(calculation.getOutput(), calculation.getId());			
+			outputDao.insert(calculation.getOutput(), calculation.getId());
 		} else {
 			calculation.getOutput().setId(output.getId());
 			outputDao.update(calculation.getOutput());
 		}
-		
+
 	}
 
 	@Override
@@ -121,6 +121,16 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 		return calculations;
 	}
 
+	@Override
+	public List<Calculation> findCalculationsOnlyByUser(User user) {
+		String sql = "SELECT * FROM calculations WHERE user_id = ? ORDER BY time DESC";
+		
+		List<Calculation> calculations = getJdbcTemplate().query(sql, new Object[] { user.getId() },
+				new CalculationPartialMapper());
+		
+		return calculations;
+	}
+	
 	@Override
 	public Calculation findCalculationById(Long id) {
 		String sql = "SELECT * FROM calculations WHERE calculation_id = ?";
@@ -148,7 +158,7 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 
 	@Override
 	public boolean isCalculationIdInDB(Long id) {
-		
+
 		String sql = "SELECT * FROM calculations WHERE calculation_id = ?";
 		List<Calculation> ids = getJdbcTemplate().query(sql, new Object[] { id }, new CalculationMapper());
 
@@ -158,21 +168,21 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 			return true;
 		}
 	}
-	
+
 	@Override
 	public void updateProgress(Calculation calculation, String progress) {
-		
+
 		String sql = "UPDATE calculations SET progress=? WHERE calculation_id = ?";
 		getJdbcTemplate().update(sql, progress, calculation.getId());
 	}
-	
+
 	@Override
 	public String findProgressById(Long id) {
-		
+
 		String sql = "SELECT progress FROM calculations WHERE calculation_id = ?";
-		
+
 		String result = getJdbcTemplate().queryForObject(sql, new Object[] { id }, String.class);
-		
+
 		return result;
 	}
 
@@ -202,6 +212,32 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 
 	}
 
+	private class CalculationPartialMapper implements RowMapper<Calculation> {
+
+		@Override
+		public Calculation mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+			Calculation calculation = new Calculation();
+
+			calculation.setId(rs.getLong("calculation_id"));
+			calculation.setUser(userDao.findUserById(rs.getInt("user_id")));
+			calculation.setName(rs.getString("name"));
+			calculation.setProgress(rs.getString("progress"));
+			calculation.setLanguage(rs.getString("language"));
+			calculation.setAlgorithm(rs.getString("algorithm"));
+			calculation.setAngUnits(rs.getInt("ang_units"));
+			calculation.setLatitude(rs.getObject("latitude") != null ? rs.getDouble("latitude") : null);
+			calculation.setEllipsoid(rs.getString("ellipsoid"));
+			calculation.setTime(new DateTime(rs.getTimestamp("time").getTime()));
+			calculation.setInput(null);
+			calculation.setOutput("calculated".equals(calculation.getProgress()) ? outputDao
+					.findOutputInCalculation(calculation) : null);
+
+			return calculation;
+		}
+
+	}
+
 	public void setInputDao(InputDao inputDao) {
 		this.inputDao = inputDao;
 	}
@@ -213,5 +249,4 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-
 }

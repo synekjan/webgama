@@ -4,6 +4,68 @@
 #parse("include.vm")
 <title>#springMessage("navbar.calculations") |
 	#springMessage("application.name")</title>
+	
+	<script>
+		jQuery(document).ready(function() {
+
+			jQuery("button.delete_button").click(function() {
+				var id = jQuery(this).attr("data");
+				jQuery.ajax({
+					type : "POST",
+					data : "id=" + id,
+					url : '#springUrl("/calculation/delete")',
+					success : function(msg) {
+						var object = jQuery(".calculation_" + id);
+						object.fadeOut(500, function() {
+							jQuery(this).remove();
+						});
+					}
+				});
+			});
+
+		jQuery("button.calculate_button").click(function(e) {
+				var id = jQuery(this).attr("data");
+				var btn = jQuery(this);
+				var fields = btn.parent().serialize();
+				jQuery.ajax({
+					type : "POST",
+					data : fields + "&id=" + id,
+					url : '#springUrl("/calculation/calculate")',
+					beforeSend : function() {
+						btn.attr('disabled', 'disabled');
+						btn.closest('.accor_content').prev('h3').find('.status_message').html('<span class="calculating">#springMessage("calculating")</span>');
+						btn.html('#springMessage("calculations.button.calculating")')
+						btn.closest('.primary_wrapper').find('.running-time').html('');
+						btn.closest('.primary_wrapper').find('.progress').html('#springMessage("calculating")');
+						btn.closest('.primary_wrapper').find('.result_box').addClass('result_box_disabled');
+						btn.closest('.primary_wrapper').find('.export_button').removeAttr('href');
+					},
+					success : function(jqXHR) {
+						if (!jqXHR.error) {
+							btn.removeAttr('disabled');
+							btn.closest('.accor_content').prev('h3').find('.status_message').html('<span class="calculated">#springMessage("calculated")</span>');
+							btn.html('#springMessage("calculations.button.recalculate")')
+							btn.closest('.primary_wrapper').find('.running-time').html(jqXHR.runningTime.toFixed(2) + " ms");
+							btn.closest('.primary_wrapper').find('.progress').html('#springMessage("calculated")');
+							btn.closest('.primary_wrapper').find('.result_box').removeClass('result_box_disabled');
+							btn.closest('.primary_wrapper').find('.export_button').attr('href','#springUrl("/export/")' + id);
+						} else {
+							btn.closest('.primary_wrapper').find('.progress').html('#springMessage("not-calculated")');
+							btn.closest('.accor_content').prev('h3').find('.status_message').html('<span class="not-calculated">#springMessage("not-calculated")</span>');
+							alert(jqXHR.message);
+						}
+					}
+				});
+				//stops normal form submit 
+				return false;
+			});
+
+		/* window.setInterval(function(){
+			  location.reload();
+		}, 5000); */
+		
+		});
+	</script>
 </head>
 <body>
 	<div id="wrapper">
@@ -52,11 +114,11 @@
 											<tbody>
 												<tr>
 													<td>#springMessage("adjustment.onepage.points"):</td>
-													<td>$calculation.input.network.points.size()</td>
+													<td>$!calculation.input.network.points.size()</td>
 												</tr>
 												<tr>
 													<td>#springMessage("adjustment.onepage.clusters"):</td>
-													<td>$calculation.input.network.clusters.size()</td>
+													<td>$!calculation.input.network.clusters.size()</td>
 												</tr>
 											</tbody>
 										</table>
@@ -208,66 +270,6 @@
 	</div>
 	</div>
 	#parse("footer.vm")
-	<script>
-		jQuery(document).ready(function() {
-
-			jQuery("button.delete_button").click(function() {
-				var id = jQuery(this).attr("data");
-				jQuery.ajax({
-					type : "POST",
-					data : "id=" + id,
-					url : '#springUrl("/calculation/delete")',
-					success : function(msg) {
-						var object = jQuery(".calculation_" + id);
-						object.fadeOut(500, function() {
-							jQuery(this).remove();
-						});
-					}
-				});
-			});
-
-		jQuery("button.calculate_button").click(function(e) {
-				var id = jQuery(this).attr("data");
-				var btn = jQuery(this);
-				var fields = btn.parent().serialize();
-				jQuery.ajax({
-					type : "POST",
-					data : fields + "&id=" + id,
-					url : '#springUrl("/calculation/calculate")',
-					beforeSend : function() {
-						btn.attr('disabled', 'disabled');
-						btn.closest('.accor_content').prev('h3').find('.status_message').html('<span class="calculating">#springMessage("calculating")</span>');
-						btn.html('#springMessage("calculations.button.calculating")')
-						btn.closest('.primary_wrapper').find('.running-time').html('');
-						btn.closest('.primary_wrapper').find('.progress').html('#springMessage("calculating")');
-						btn.closest('.primary_wrapper').find('.result_box').addClass('result_box_disabled');
-						btn.closest('.primary_wrapper').find('.export_button').removeAttr('href');
-					},
-					success : function(jqXHR) {
-						if (!jqXHR.error) {
-							btn.removeAttr('disabled');
-							btn.closest('.accor_content').prev('h3').find('.status_message').html('<span class="calculated">#springMessage("calculated")</span>');
-							btn.html('#springMessage("calculations.button.recalculate")')
-							btn.closest('.primary_wrapper').find('.running-time').html(jqXHR.runningTime.toFixed(2) + " ms");
-							btn.closest('.primary_wrapper').find('.progress').html('#springMessage("calculated")');
-							btn.closest('.primary_wrapper').find('.result_box').removeClass('result_box_disabled');
-							btn.closest('.primary_wrapper').find('.export_button').attr('href','#springUrl("/export/")' + id);
-						} else {
-							btn.closest('.primary_wrapper').find('.progress').html('#springMessage("not-calculated")');
-							btn.closest('.accor_content').prev('h3').find('.status_message').html('<span class="not-calculated">#springMessage("not-calculated")</span>');
-							alert(jqXHR.message);
-						}
-					}
-				});
-				//stops normal form submit 
-				return false;
-			});
-
-		/* window.setInterval(function(){
-			  location.reload();
-		}, 5000); */
-		
-		});
-	</script>
+	
 </body>
 </html>
