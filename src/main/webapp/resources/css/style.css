@@ -489,6 +489,10 @@ div.form_element_errors {
 	margin-left: 3px;
 }
 
+.title_bar div.form_element_errors {
+	width: 200px;
+}
+
 div.form_element_errors ul {
 	list-style-type: disc;
 	padding: 2px 6px 2px 18px;
@@ -1149,7 +1153,7 @@ div#welcome_container {
 	width: 300px;
 }
 
-#welcome_container div h1{
+#welcome_container div h1 {
 	font-size: 18px;
 	color: #328FC9;
 }
@@ -1157,7 +1161,6 @@ div#welcome_container {
 div#whats_webgama {
 	width: 540px;
 }
-
 
 /* -------------- CALCULATIONS ----------------------- */
 #calculations {
