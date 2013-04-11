@@ -17,6 +17,7 @@ DROP TABLE networks CASCADE;
 DROP TABLE input_privileges CASCADE;
 DROP TABLE outputs CASCADE;
 DROP TABLE inputs CASCADE;
+DROP TABLE calculation_statistics CASCADE;
 DROP TABLE calculations CASCADE;
 
 DROP TABLE authorities CASCADE;
@@ -156,6 +157,13 @@ ang_units		INTEGER,
 latitude		DOUBLE PRECISION,
 ellipsoid		VARCHAR(20),
 time 			TIMESTAMP DEFAULT now()
+);
+
+CREATE TABLE calculation_statistics (
+calculation_statistic_id	BIGSERIAL PRIMARY KEY,
+calculation_id 	BIGINT NOT NULL REFERENCES calculations(calculation_id) ON DELETE CASCADE,
+points			INTEGER NOT NULL,
+clusters		INTEGER NOT NULL
 );
 
 
@@ -356,6 +364,8 @@ time			TIMESTAMP NOT NULL DEFAULT now()
  ****************/
 GRANT ALL ON calculations TO synekjan;
 GRANT ALL ON calculations_calculation_id_seq TO synekjan;
+GRANT ALL ON calculation_statistics TO synekjan;
+GRANT ALL ON calculation_statistics_calculation_statistic_id_seq TO synekjan;
 GRANT ALL ON inputs TO synekjan;
 GRANT ALL ON inputs_input_id_seq TO synekjan;
 GRANT ALL ON networks TO synekjan;

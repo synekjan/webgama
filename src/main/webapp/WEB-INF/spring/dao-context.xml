@@ -55,6 +55,12 @@
 		<property name="inputDao" ref="inputDao" />
 		<property name="outputDao" ref="outputDao" />
 		<property name="userDao" ref="userDao" />
+		<property name="calculationStatisticDao" ref="calculationStatisticDao" />
+	</bean>
+
+	<bean id="calculationStatisticDao"
+		class="cz.cvut.fsv.webgama.dao.jdbc.JdbcCalculationStatisticDao">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 	<bean id="outputDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcOutputDao">

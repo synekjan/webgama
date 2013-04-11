@@ -9,10 +9,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import cz.cvut.fsv.webgama.dao.CalculationDao;
+import cz.cvut.fsv.webgama.dao.CalculationStatisticDao;
 import cz.cvut.fsv.webgama.dao.InputDao;
 import cz.cvut.fsv.webgama.dao.OutputDao;
 import cz.cvut.fsv.webgama.dao.UserDao;
 import cz.cvut.fsv.webgama.domain.Calculation;
+import cz.cvut.fsv.webgama.domain.CalculationStatistic;
 import cz.cvut.fsv.webgama.domain.Output;
 import cz.cvut.fsv.webgama.domain.User;
 
@@ -23,6 +25,8 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 	private OutputDao outputDao;
 
 	private UserDao userDao;
+
+	private CalculationStatisticDao calculationStatisticDao;
 
 	@Override
 	public void insert(Calculation calculation) {
@@ -36,6 +40,8 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 						calculation.getLatitude(), calculation.getEllipsoid() }, Long.class);
 
 		inputDao.insert(calculation.getInput(), calculationId);
+		//insert calculation statistics
+		calculationStatisticDao.insert(insertStatistics(calculation), calculationId);
 
 		if (calculation.getOutput() != null) {
 			outputDao.insert(calculation.getOutput(), calculationId);
@@ -65,6 +71,8 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 
 		inputDao.delete(calculation.getInput());
 		inputDao.insert(calculation.getInput(), calculation.getId());
+		//update calculation statistic
+		calculationStatisticDao.update(updateStatistics(calculation));
 
 		if (calculation.getOutput() == null) {
 			Output output = outputDao.findOutputInCalculation(calculation);
@@ -124,13 +132,13 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 	@Override
 	public List<Calculation> findCalculationsOnlyByUser(User user) {
 		String sql = "SELECT * FROM calculations WHERE user_id = ? ORDER BY time DESC";
-		
+
 		List<Calculation> calculations = getJdbcTemplate().query(sql, new Object[] { user.getId() },
 				new CalculationPartialMapper());
-		
+
 		return calculations;
 	}
-	
+
 	@Override
 	public Calculation findCalculationById(Long id) {
 		String sql = "SELECT * FROM calculations WHERE calculation_id = ?";
@@ -212,6 +220,7 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 
 	}
 
+	//RowMapper for getting calculation without input part
 	private class CalculationPartialMapper implements RowMapper<Calculation> {
 
 		@Override
@@ -228,6 +237,8 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 			calculation.setAngUnits(rs.getInt("ang_units"));
 			calculation.setLatitude(rs.getObject("latitude") != null ? rs.getDouble("latitude") : null);
 			calculation.setEllipsoid(rs.getString("ellipsoid"));
+			calculation.setCalculationStatistic(calculationStatisticDao
+					.findCalculationStatisticInCalculation(calculation));
 			calculation.setTime(new DateTime(rs.getTimestamp("time").getTime()));
 			calculation.setInput(null);
 			calculation.setOutput("calculated".equals(calculation.getProgress()) ? outputDao
@@ -236,6 +247,20 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 			return calculation;
 		}
 
+	}
+	//helper method for inserting calculation statistic
+	private CalculationStatistic insertStatistics(Calculation calculation) {
+		CalculationStatistic statistic = new CalculationStatistic();
+		statistic.setPoints(calculation.getInput().getNetwork().getPoints().size());
+		statistic.setClusters(calculation.getInput().getNetwork().getClusters().size());
+		return statistic;
+	}
+	//helper method for updating calculation statistic
+	private CalculationStatistic updateStatistics(Calculation calculation) {
+		CalculationStatistic statistic = calculationStatisticDao.findCalculationStatisticInCalculation(calculation);
+		statistic.setPoints(calculation.getInput().getNetwork().getPoints().size());
+		statistic.setClusters(calculation.getInput().getNetwork().getClusters().size());
+		return statistic;
 	}
 
 	public void setInputDao(InputDao inputDao) {
@@ -248,5 +273,9 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
+	}
+
+	public void setCalculationStatisticDao(CalculationStatisticDao calculationStatisticDao) {
+		this.calculationStatisticDao = calculationStatisticDao;
 	}
 }

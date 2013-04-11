@@ -22,6 +22,8 @@ public class Calculation {
 
 	private String ellipsoid;
 
+	private CalculationStatistic calculationStatistic;
+
 	private DateTime time;
 
 	private Input input;
@@ -98,6 +100,14 @@ public class Calculation {
 
 	public void setEllipsoid(String ellipsoid) {
 		this.ellipsoid = ellipsoid;
+	}
+
+	public CalculationStatistic getCalculationStatistic() {
+		return calculationStatistic;
+	}
+
+	public void setCalculationStatistic(CalculationStatistic calculationStatistic) {
+		this.calculationStatistic = calculationStatistic;
 	}
 
 	public DateTime getTime() {

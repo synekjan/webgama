@@ -114,11 +114,11 @@
 											<tbody>
 												<tr>
 													<td>#springMessage("adjustment.onepage.points"):</td>
-													<td>$!calculation.input.network.points.size()</td>
+													<td>$!calculation.calculationStatistic.points</td>
 												</tr>
 												<tr>
 													<td>#springMessage("adjustment.onepage.clusters"):</td>
-													<td>$!calculation.input.network.clusters.size()</td>
+													<td>$!calculation.calculationStatistic.clusters</td>
 												</tr>
 											</tbody>
 										</table>
