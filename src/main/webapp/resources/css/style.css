@@ -401,6 +401,10 @@ div#about_container .right_menu .menu_header {
 	padding-left: 5px;
 }
 
+#about_content .content {
+	padding: 10px;
+}
+
 /* ------------------ FORMS ------------------ */
 fieldset {
 	border-top: 1px solid #DDDDDD;
