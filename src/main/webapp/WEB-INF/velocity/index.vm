@@ -23,20 +23,15 @@
 						<div class="title">#springMessage("index.welcome.title")</div>
 						<div class="today">#springMessage("index.welcome.today.is")
 							$date</div>
-						<div class="whatsnext">
-							<h1>#springMessage("index.welcome.whatsnext")</h1>
-							<ul>
-								<li><a href="#springUrl("/adjustment")">#springMessage("index.welcome.whatsnext.start.adjustment")</a></li>
-								<li><a href="#springUrl("/account/personal")">#springMessage("index.welcome.whatsnext.tell.us")</a></li>
-							</ul>
-						</div>
 					</div>
 					<div id="activities">
-						<h1>#springMessage("index.activity.header")</h1>
+						<h1>#springMessage("index.activity.header"):</h1>
 						<div class="activity_list">
 							#foreach ($activity in $activities)
 							<div class="activity">
-								${foreach.index}. #springMessage($activity.message) <span
+								<div class="line"></div>
+								
+								#springMessage($activity.message) <span
 									title="$dateTool.format(" yyyy-MM-dd
 									HH:mm:ss",$activity.time.toDate())" class="time">$timeFormatter.periodFromNow($activity.time,
 									$locale)</span>
@@ -63,7 +58,27 @@
 					<div id="statistics">
 						<div class="small_panel_header">#springMessage("index.statistics")</div>
 						<div class="statistics_content">
-						
+							<table>
+								<tbody>
+									<tr>
+										<td>#springMessage("adjustment.onepage.points"):</td>
+										<td>$pointCount</td>
+									</tr>
+									<tr>
+										<td>#springMessage("adjustment.onepage.clusters"):</td>
+										<td>$clusterCount</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div id="whatsnext">
+						<div class="small_panel_header">#springMessage("index.welcome.whatsnext")</div>
+						<div id="whatsnext_content">
+							<ul>
+								<li><a href="#springUrl("/adjustment")">#springMessage("index.welcome.whatsnext.start.adjustment")</a></li>
+								<li><a href="#springUrl("/account/personal")">#springMessage("index.welcome.whatsnext.tell.us")</a></li>
+							</ul>
 						</div>
 					</div>
 				</div>

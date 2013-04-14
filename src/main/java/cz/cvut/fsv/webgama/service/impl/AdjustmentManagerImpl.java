@@ -26,6 +26,7 @@ import cz.cvut.fsv.webgama.domain.Input;
 import cz.cvut.fsv.webgama.domain.Network;
 import cz.cvut.fsv.webgama.domain.Output;
 import cz.cvut.fsv.webgama.domain.ProcessOutput;
+import cz.cvut.fsv.webgama.domain.User;
 import cz.cvut.fsv.webgama.form.AdjustmentPageForm;
 import cz.cvut.fsv.webgama.parser.InputParser;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
@@ -133,7 +134,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager, Serializable {
 
 	@Transactional
 	@Override
-	public long getCalculationCountbyUsername(String username) {
+	public long getCalculationCountByUsername(String username) {
 
 		return calculationDao.countCalculationsByUser(userDao.findUserByUsername(username));
 	}
@@ -287,10 +288,26 @@ public class AdjustmentManagerImpl implements AdjustmentManager, Serializable {
 	}
 
 	@Override
-	public Long getPointCount() {
+	public Long getAllPointCount() {
 
 		Long pointCount = pointDao.countAllPoints() + 14567;
 
 		return pointCount;
+	}
+
+	@Override
+	public Long getPointCountByUsername(String username) {
+		
+		User user = userDao.findUserByUsername(username);
+		Long count = calculationDao.countPointsByUser(user.getId());
+		return count == null ? 0 : count;
+	}
+
+	@Override
+	public Long getClusterCountByUsername(String username) {
+		
+		User user = userDao.findUserByUsername(username);
+		Long count = calculationDao.countClustersByUser(user.getId());
+		return count == null ? 0 : count;
 	}
 }

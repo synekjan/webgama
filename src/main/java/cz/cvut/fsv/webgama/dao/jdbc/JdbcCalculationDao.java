@@ -167,6 +167,22 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 	}
 
 	@Override
+	public Long countPointsByUser(Long userId) {
+		
+		String sql = "SELECT SUM(points) FROM calculation_statistics A JOIN calculations B ON A.calculation_id = B.calculation_id WHERE user_id = ?";
+		
+		return getJdbcTemplate().queryForObject(sql, new Object[] {userId}, Long.class);
+	}
+
+	@Override
+	public Long countClustersByUser(Long userId) {
+		
+		String sql = "SELECT SUM(clusters) FROM calculation_statistics A JOIN calculations B ON A.calculation_id = B.calculation_id WHERE user_id = ?";
+		
+		return getJdbcTemplate().queryForObject(sql, new Object[] {userId}, Long.class);
+	}
+
+	@Override
 	public void deleteCalculationById(Long id) {
 
 		String sql = "DELETE FROM calculations WHERE calculation_id = ?";
@@ -289,4 +305,5 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 	public void setCalculationStatisticDao(CalculationStatisticDao calculationStatisticDao) {
 		this.calculationStatisticDao = calculationStatisticDao;
 	}
+
 }

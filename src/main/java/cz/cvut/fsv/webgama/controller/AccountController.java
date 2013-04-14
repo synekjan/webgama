@@ -61,7 +61,7 @@ public class AccountController extends MultiActionController {
 		String username = request.getUserPrincipal().getName();
 		User user = userManager.getUser(username);
 		mav.addObject("user", user);
-		mav.addObject("userCalculationCount", adjustmentManager.getCalculationCountbyUsername(username));
+		mav.addObject("userCalculationCount", adjustmentManager.getCalculationCountByUsername(username));
 
 		logger.info("User[" + username + "] checked own account information");
 		return mav;
@@ -137,7 +137,7 @@ public class AccountController extends MultiActionController {
 		ModelAndView mav = new ModelAndView("/account/delete/delete");
 		String username = request.getUserPrincipal().getName();
 
-		mav.addObject("userCalculationCount", adjustmentManager.getCalculationCountbyUsername(username));
+		mav.addObject("userCalculationCount", adjustmentManager.getCalculationCountByUsername(username));
 		logger.info("User[" + username + "] thought about deleting account");
 		return mav;
 	}

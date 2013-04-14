@@ -18,7 +18,7 @@ public interface AdjustmentManager {
 
 	public Calculation getCalculationById(long id);
 
-	public long getCalculationCountbyUsername(String username);
+	public long getCalculationCountByUsername(String username);
 
 	public boolean isCalculationIdInDB(Long id);
 
@@ -28,6 +28,10 @@ public interface AdjustmentManager {
 
 	public void handleWizardForm(Input input, String username, Locale locale);
 
-	public Long getPointCount();
+	public Long getAllPointCount();
+	
+	public Long getPointCountByUsername(String username);
+	
+	public Long getClusterCountByUsername(String username);
 
 }

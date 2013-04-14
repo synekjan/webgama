@@ -50,7 +50,10 @@ public class IndexController {
 			ModelAndView mav = new ModelAndView("index");
 			mav.addObject("date", dateTime);
 			
-			mav.addObject("ownCalculationCount", adjustmentManager.getCalculationCountbyUsername(username));
+			mav.addObject("ownCalculationCount", adjustmentManager.getCalculationCountByUsername(username));
+
+			mav.addObject("pointCount", adjustmentManager.getPointCountByUsername(username));
+			mav.addObject("clusterCount", adjustmentManager.getClusterCountByUsername(username));
 			
 			mav.addObject("locale", locale);
 			mav.addObject("timeFormatter", timeFormatter);
@@ -62,7 +65,7 @@ public class IndexController {
 			Long userCount = userManager.getUserCount();
 			ModelAndView mav = new ModelAndView("welcome", "userCount", userCount);
 			mav.addObject("locale", locale);
-			mav.addObject("pointCount", adjustmentManager.getPointCount());
+			mav.addObject("pointCount", adjustmentManager.getAllPointCount());
 			
 			logger.info("Welcome page was requested from IP: "
 					+ request.getRemoteHost());
@@ -81,7 +84,10 @@ public class IndexController {
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("date", dateTime);
 		
-		mav.addObject("ownCalculationCount", adjustmentManager.getCalculationCountbyUsername(username));
+		mav.addObject("ownCalculationCount", adjustmentManager.getCalculationCountByUsername(username));
+		
+		mav.addObject("pointCount", adjustmentManager.getPointCountByUsername(username));
+		mav.addObject("clusterCount", adjustmentManager.getClusterCountByUsername(username));
 		
 		mav.addObject("locale", locale);
 		mav.addObject("timeFormatter", timeFormatter);

@@ -26,6 +26,10 @@ public interface CalculationDao {
 	public Calculation findCalculationByInputId(Long id);
 
 	public Long countCalculationsByUser(User user);
+	
+	public Long countPointsByUser(Long userId);
+	
+	public Long countClustersByUser(Long userId);
 
 	public void deleteCalculationById(Long id);
 
