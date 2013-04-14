@@ -41,7 +41,7 @@
 								<td><a #if ($calculation.progress == "calculated") href="#springUrl("/export/${calculation.id}")" class="clickable" #end><span class="$calculation.progress">#springMessage("$calculation.progress")</span></a></td>
 								<td><a #if ($calculation.progress == "calculated") href="#springUrl("/export/${calculation.id}")" class="clickable" #end>$calculation.name</a></td>
 								<td><a #if ($calculation.progress == "calculated") href="#springUrl("/export/${calculation.id}")" class="clickable" #end>#springMessage("$calculation.language")</a></td>
-								<td><a #if ($calculation.progress == "calculated") href="#springUrl("/export/${calculation.id}")" class="clickable" #end>$calculation.algorithm</a></td>
+								<td><a #if ($calculation.progress == "calculated") href="#springUrl("/export/${calculation.id}")" class="clickable" #end>$!calculation.algorithm</a></td>
 								<td><a #if ($calculation.progress == "calculated") href="#springUrl("/export/${calculation.id}")" class="clickable" #end>$dateTool.format("yyyy-MM-dd HH:mm:ss",$calculation.time.toDate())</a></td>
 							</tr>
 							#end

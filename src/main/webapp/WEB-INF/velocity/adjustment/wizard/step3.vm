@@ -1,16 +1,92 @@
 <div id="wizard_panel">
 	<div id="wizard_header">
-		<h3>STEP 3</h3>
+		<h3>#springMessage("adjustment.onepage.points")</h3>
+		<h4><span class="current">3</span>/<span class="total">4</span></h4>
 	</div>
+	<div id="wizard_breadcrumbs"></div>
+	<div class="advice">
+		#springMessage("adjustment.wizard.advice.points")</div>
 	<div id="wizard_form">
-		<form action="">
-			<label for="name">STEP 3:</label> <input id="name" type="text" />
-		</form>
-
-		<div id="wizard_buttons">
-			<input id="previous" class="previous_btn step1" type="submit"
-				value="Previous"> <input id="next" class="next_btn step1"
-				type="submit" value="Next">
+		#springBind("input.*")#if(${status.error})
+		<div class="error">
+			#springArgMessage("form.has.arg.errors", $errorCount) <span
+				class="icon-close" role="button"></span>
 		</div>
+		#end
+		<div class="form_hints">#springMessage("bold.is.required")</div>
+		<form action="" method="post">
+			<div class="adjustment_form">
+				<fieldset>
+					<legend>#springMessage("adjustment.onepage.points")</legend>
+					<div class="points">
+						#foreach ($point in $input.points) #set( $i = "${foreach.index}" )
+						<div class="point window">
+							<span class="icon-close" role="button"></span>
+							#springFormHiddenInput("input.points[$i].id" "")
+							<div class="title_bar">
+								<label class="required" for="points[$i].name">#springMessage("adjustment.onepage.point"):</label>
+								#springBind("input.points[$i].name") <input type="text"
+									id="points[$i].name" name="points[$i].name"
+									value="$!point.name" /> #showElementErrors()
+							</div>
+							<div class="window_content">
+								<div class="point_form_element">
+									<label for="points[$i].x">X:</label>
+									#springBind("input.points[$i].x") <input id="points[$i].x"
+										type="text" name="points[$i].x" value="$!point.x" />
+									#showElementErrors()
+								</div>
+								<div class="point_form_element">
+									<label for="points[$i].y">Y:</label>
+									#springBind("input.points[$i].y") <input id="points[$i].y"
+										type="text" name="points[$i].y" value="$!point.y" />
+									#showElementErrors()
+								</div>
+								<div class="point_form_element">
+									<label for="points[$i].z">Z:</label>
+									#springFormInput("input.points[$i].z", "")#showElementErrors()
+								</div>
+								<div class="point_form_element">
+									<label for="points[$i].fix">Fix:</label>
+									#springBind("input.points[$i].fix")<select id="points[$i].fix"
+										name="points[$i].fix">
+										<option value=""></option>
+										<option value="xy" #if ($point.fix== "xy") selected #end>xy</option>
+										<option value="XY" #if ($point.fix== "XY") selected #end>XY</option>
+										<option value="z" #if ($point.fix== "z") selected #end>z</option>
+										<option value="Z" #if ($point.fix== "Z") selected #end>Z</option>
+										<option value="xyz" #if ($point.fix== "xyz") selected #end>xyz</option>
+										<option value="XYZ" #if ($point.fix== "XYZ") selected #end>XYZ</option>
+										<option value="xyZ" #if ($point.fix== "xyZ") selected #end>xyZ</option>
+										<option value="XYz" #if ($point.fix== "XYz") selected #end>XYz</option>
+									</select> #showElementErrors()
+								</div>
+								<div class="point_form_element">
+									<label for="points[$i].adj">Adj:</label>
+									#springBind("input.points[$i].adj")<select id="points[$i].adj"
+										name="points[$i].adj">
+										<option value=""></option>
+										<option value="xy" #if ($point.adj== "xy") selected #end>xy</option>
+										<option value="XY" #if ($point.adj== "XY") selected #end>XY</option>
+										<option value="z" #if ($point.adj== "z") selected #end>z</option>
+										<option value="Z" #if ($point.adj== "Z") selected #end>Z</option>
+										<option value="xyz" #if ($point.adj== "xyz") selected #end>xyz</option>
+										<option value="XYZ" #if ($point.adj== "XYZ") selected #end>XYZ</option>
+										<option value="xyZ" #if ($point.adj== "xyZ") selected #end>xyZ</option>
+										<option value="XYz" #if ($point.adj== "XYz") selected #end>XYz</option>
+									</select> #showElementErrors()
+								</div>
+							</div>
+						</div>
+						#end
+					</div>
+				</fieldset>
+			</div>
+			<div id="wizard_buttons">
+				<input id="previous" class="step3" type="submit" value="Previous">
+				<input id="next" class="step3" type="submit" value="Next">
+
+			</div>
+		</form>
 	</div>
 </div>

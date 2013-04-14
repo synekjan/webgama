@@ -102,7 +102,7 @@
 											<option value="no" #if ($input.updateCC== "no") selected #end>#springMessage("no")</option>
 											<option value="yes" #if ($input.updateCC==
 												"yes") selected #end>#springMessage("yes")</option>
-										</select> #showElementErrors()
+										</select>
 									</div>
 								</div>
 							</fieldset>

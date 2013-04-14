@@ -1,16 +1,88 @@
 <div id="wizard_panel">
 	<div id="wizard_header">
-		<h3>STEP 2</h3>
+		<h3>#springMessage("adjustment.onepage.network.parameters")</h3>
+		<h4><span class="current">2</span>/<span class="total">4</span></h4>
 	</div>
+	<div id="wizard_breadcrumbs"></div>
+	<div class="advice">
+		#springMessage("adjustment.wizard.advice.network.parameters")</div>
 	<div id="wizard_form">
-		<form action="">
-			<label for="name">STEP 2:</label> <input id="name" type="text" />
-		</form>
-
-		<div id="wizard_buttons">
-			<input id="previous" class="previous_btn step1" type="submit"
-				value="Previous"> <input id="next" class="next_btn step1"
-				type="submit" value="Next">
+		#springBind("input.*")#if(${status.error})
+		<div class="error">
+			#springArgMessage("form.has.arg.errors", $errorCount) <span
+				class="icon-close" role="button"></span>
 		</div>
+		#end
+		<div class="form_hints">#springMessage("bold.is.required")</div>
+		<form action="" method="post">
+			<div class="adjustment_form">
+				<fieldset>
+					<legend>#springMessage("adjustment.onepage.network.parameters")</legend>
+					<div class="medium_form_element">
+						<label for="sigmaApr">#springMessage("input.sigmaApr"):</label>
+
+						<div class="input">#springFormInput("input.sigmaApr"
+							'placeholder="10"') #showElementErrors()</div>
+					</div>
+					<div class="medium_form_element">
+						<label for="confPr">#springMessage("input.confPr"):</label>
+						<div class="input">#springFormInput("input.confPr",
+							'placeholder="0.95"') #showElementErrors()</div>
+					</div>
+					<div class="medium_form_element">
+						<label for="tolAbs">#springMessage("input.tolAbs"):</label>
+						<div class="input">#springFormInput("input.tolAbs",
+							'placeholder="1000"') #showElementErrors()</div>
+					</div>
+					<div class="medium_form_element">
+						<label for="sigma-act">#springMessage("input.sigmaAct"):</label>
+						<div class="input">
+							<select id="sigma-act" name="sigmaAct">
+								<option value="aposteriori" #if ($input.sigmaAct==
+									"aposteriori") selected #end>Aposteriori</option>
+								<option value="apriori" #if ($input.sigmaAct==
+									"apriori") selected #end>Apriori</option>
+							</select>
+						</div>
+					</div>
+					<div class="medium_form_element">
+						<label for="updateCC">#springMessage("input.updateCC"):</label>
+						<div class="input">
+							<select id="updateCC" name="updateCC">
+								<option value="no" #if ($input.updateCC== "no") selected #end>#springMessage("no")</option>
+								<option value="yes" #if ($input.updateCC== "yes") selected #end>#springMessage("yes")</option>
+							</select>
+						</div>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>#springMessage("adjustment.onepage.optional.parameters")</legend>
+					<div class="medium_form_element">
+						<label for="directionStdev">#springMessage("input.directionStdev"):</label>
+						<div class="input">#springFormInput("input.directionStdev",
+							"") #showElementErrors()</div>
+					</div>
+					<div class="medium_form_element">
+						<label for="angleStdev">#springMessage("input.angleStdev"):</label>
+						<div class="input">#springFormInput("input.angleStdev", "")
+							#showElementErrors()</div>
+					</div>
+					<div class="medium_form_element">
+						<label for="zenithAngleStdev">#springMessage("input.zenithAngleStdev"):</label>
+						<div class="input">#springFormInput("input.zenithAngleStdev",
+							"") #showElementErrors()</div>
+					</div>
+					<div class="medium_form_element">
+						<label for="distanceStdev">#springMessage("input.distanceStdev"):</label>
+						<div class="input">#springFormInput("input.distanceStdev",
+							"") #showElementErrors()</div>
+					</div>
+				</fieldset>
+			</div>
+			<div id="wizard_buttons">
+				<input id="previous" class="step2" type="submit" value="Previous">
+				<input id="next" class="step2" type="submit" value="Next">
+			</div>
+		</form>
 	</div>
 </div>

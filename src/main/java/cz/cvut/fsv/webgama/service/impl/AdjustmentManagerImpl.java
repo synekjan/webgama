@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
@@ -30,7 +31,9 @@ import cz.cvut.fsv.webgama.parser.InputParser;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
 import cz.cvut.fsv.webgama.service.ProcessManager;
 
-public class AdjustmentManagerImpl implements AdjustmentManager {
+public class AdjustmentManagerImpl implements AdjustmentManager, Serializable {
+
+	private static final long serialVersionUID = 6430214896290153174L;
 
 	private static final Logger logger = LoggerFactory.getLogger(AdjustmentManagerImpl.class);
 
@@ -237,6 +240,50 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 
 		calculation.setTime(new DateTime());
 		calculationDao.update(calculation);
+	}
+
+	@Transactional
+	@Override
+	public void handleWizardForm(Input input, String username, Locale locale) {
+
+		Calculation calculation = null;
+		if (input.getId() == null) {
+			calculation = new Calculation();
+		} else {
+			calculation = calculationDao.findCalculationByInputId(input.getId());
+		}
+		input.setVersion("2.0");
+
+		// convert OutputStream to String and update xml_content in inputs table
+		OutputStream baos = new ByteArrayOutputStream(10000);
+		inputParser.composeInput(baos, input);
+		input.setXmlContent(baos.toString());
+
+		calculation.setInput(input);
+
+		// choose default language
+		if (locale.getLanguage().equals(new Locale("cs").getLanguage())) {
+			calculation.setLanguage("cz");
+		} else {
+			calculation.setLanguage("en");
+		}
+
+		// delete output -- need to be recalculated again
+		calculation.setOutput(null);
+		calculation.setProgress("not-calculated");
+		calculation.setUser(userDao.findUserByUsername(username));
+		DateTime dt = new DateTime();
+		DateTimeFormatter fmt = ISODateTimeFormat.date();
+		calculation.setTime(new DateTime());
+
+		if (input.getId() == null) {
+			calculation.setName("New Calculation " + fmt.print(dt));
+			calculationDao.insert(calculation);
+
+		} else {
+			calculationDao.update(calculation);
+		}
+
 	}
 
 	@Override

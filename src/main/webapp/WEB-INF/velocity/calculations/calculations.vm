@@ -211,7 +211,8 @@
 												</tr>
 												<tr>
 													<td>#springMessage("calculations.lastError"):</td>
-													<td>#springMessage("calculations.none")</td>
+													<td><!-- #springMessage("calculations.none") --><span class="error_img"></span> </td>
+													
 												</tr>
 												<tr>
 													<td>#springMessage("calculations.progress"):</td>

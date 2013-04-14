@@ -40,7 +40,7 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 						calculation.getLatitude(), calculation.getEllipsoid() }, Long.class);
 
 		inputDao.insert(calculation.getInput(), calculationId);
-		//insert calculation statistics
+		// insert calculation statistics
 		calculationStatisticDao.insert(insertStatistics(calculation), calculationId);
 
 		if (calculation.getOutput() != null) {
@@ -71,7 +71,7 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 
 		inputDao.delete(calculation.getInput());
 		inputDao.insert(calculation.getInput(), calculation.getId());
-		//update calculation statistic
+		// update calculation statistic
 		calculationStatisticDao.update(updateStatistics(calculation));
 
 		if (calculation.getOutput() == null) {
@@ -149,6 +149,15 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 	}
 
 	@Override
+	public Calculation findCalculationByInputId(Long id) {
+		String sql = "SELECT A.calculation_id, user_id, name, progress, language, algorithm, ang_units, latitude, ellipsoid, A.time FROM calculations A JOIN inputs B ON A.calculation_id = B.calculation_id WHERE input_id = ?";
+
+		Calculation calculation = getJdbcTemplate().queryForObject(sql, new Object[] { id }, new CalculationPartialMapper());
+
+		return calculation;
+	}
+
+	@Override
 	public Long countCalculationsByUser(User user) {
 
 		String sql = "SELECT COUNT(calculation_id) FROM calculations WHERE user_id = ?";
@@ -220,7 +229,7 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 
 	}
 
-	//RowMapper for getting calculation without input part
+	// RowMapper for getting calculation without input part
 	private class CalculationPartialMapper implements RowMapper<Calculation> {
 
 		@Override
@@ -248,14 +257,16 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 		}
 
 	}
-	//helper method for inserting calculation statistic
+
+	// helper method for inserting calculation statistic
 	private CalculationStatistic insertStatistics(Calculation calculation) {
 		CalculationStatistic statistic = new CalculationStatistic();
 		statistic.setPoints(calculation.getInput().getNetwork().getPoints().size());
 		statistic.setClusters(calculation.getInput().getNetwork().getClusters().size());
 		return statistic;
 	}
-	//helper method for updating calculation statistic
+
+	// helper method for updating calculation statistic
 	private CalculationStatistic updateStatistics(Calculation calculation) {
 		CalculationStatistic statistic = calculationStatisticDao.findCalculationStatisticInCalculation(calculation);
 		statistic.setPoints(calculation.getInput().getNetwork().getPoints().size());

@@ -22,6 +22,8 @@ public interface CalculationDao {
 	public List<Calculation> findCalculationsOnlyByUser(User user);
 
 	public Calculation findCalculationById(Long id);
+	
+	public Calculation findCalculationByInputId(Long id);
 
 	public Long countCalculationsByUser(User user);
 

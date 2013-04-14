@@ -1,15 +1,60 @@
 <div id="wizard_panel">
 	<div id="wizard_header">
-		<h3>STEP 1</h3>
+		<h3>#springMessage("adjustment.onepage.network.definition")</h3>
+		<h4>
+			<span class="current">1</span>/<span class="total">4</span>
+		</h4>
 	</div>
+	<div id="wizard_breadcrumbs"></div>
+	<div class="advice">
+		#springMessage("adjustment.wizard.advice.network.definition")</div>
 	<div id="wizard_form">
-		<form action="">
-			<label for="name">STEP 1:</label> <input id="name" name="name" type="text" />
+		#springBind("input.*")#if(${status.error})
+		<div class="error">
+			#springArgMessage("form.has.arg.errors", $errorCount) <span
+				class="icon-close" role="button"></span>
+		</div>
+		#end
+		<div class="form_hints">#springMessage("bold.is.required")</div>
+		<form action="" method="post">
+			<div class="adjustment_form">
+				<fieldset>
+					<legend>#springMessage("adjustment.onepage.network.definition")</legend>
+					<div class="medium_form_element">
+						<label for="axesXY">#springMessage("input.axesXY"):</label>
+						<div class="input">#springFormInput("input.axesXY",'placeholder="ne"')
+							#showElementErrors()</div>
+					</div>
+					<div class="medium_form_element">
+						<label for="angles">#springMessage("input.angles"):</label>
+						<div class="input">
+							<select id="sigma-act" name="angles">
+								<option value="left-handed" #if ($input.angles==
+									"left-handed") selected #end>Left-Handed</option>
+								<option value="right-handed" #if ($input.angles==
+									"right-handed") selected #end>Right-Handed</option>
+							</select> #showElementErrors()
+						</div>
+					</div>
+					<div class="medium_form_element">
+						<label for="epoch">#springMessage("input.epoch"):</label>
+						<div class="input">#springFormInput("input.epoch",
+							'placeholder="0"') #showElementErrors()</div>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>#springMessage("adjustment.onepage.network.description")</legend>
+					<div class="medium_form_element">
+						<label for="description">#springMessage("input.description"):</label>
+						<div class="input">#springFormTextarea("input.description",
+							"") #showElementErrors()</div>
+					</div>
+				</fieldset>
+			</div>
+			<div id="wizard_buttons">
+				<input id="next" class="step1" name="next" type="submit"
+					value="Next">
+			</div>
 		</form>
-
-		<div id="wizard_buttons">
-									<input id="previous" class="previous_btn step1" type="submit" value="Previous">
-									<input id="next" class="next_btn step1" type="submit" value="Next">
-								</div>
 	</div>
 </div>

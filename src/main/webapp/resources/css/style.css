@@ -325,7 +325,7 @@ div#account_container div#delete {
 
 .form_hints {
 	border-top: 1px solid #DDD;
-	padding: 10px;
+	padding: 5px;
 }
 
 .form_hints p {
@@ -555,9 +555,11 @@ input[type=text]:focus,input[type=password]:focus,textarea:focus {
 }
 
 input[type=submit],input[type=reset],a.button {
-	background-color: #FAFAFA;
-	background-image: linear-gradient(to bottom, #FFFFFF, #E6E6E6);
-	background-repeat: repeat-x;
+	background: -moz-linear-gradient(top, #FFFFFF, #E6E6E6) repeat-x scroll 0 0 #FAFAFA;
+	background: -ms-linear-gradient(top, #FFFFFF, #E6E6E6) repeat-x scroll 0 0 #FAFAFA;
+	background: -webkit-linear-gradient(top, #FFFFFF, #E6E6E6) repeat-x scroll 0 0 #FAFAFA;
+	background: -o-linear-gradient(top, #FFFFFF, #E6E6E6) repeat-x scroll 0 0 #FAFAFA;
+	background: linear-gradient(top, #FFFFFF, #E6E6E6) repeat-x scroll 0 0 #FAFAFA;
 	border: 1px solid #CCCCCC;
 	border-radius: 4px 4px 4px 4px;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
@@ -585,9 +587,11 @@ input[type=submit]:ACTIVE,input[type=reset]:ACTIVE,a.button:ACTIVE {
 }
 
 input.submit_btn {
-	background-color: #2B6DAE;
-	background-image: linear-gradient(#5A9CDD, #3072B3);
-	background-repeat: repeat-x;
+	background: -moz-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: -ms-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: -webkit-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: -o-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
 	border: 1px solid #51A0B3;
 	border-radius: 4px 4px 4px 4px;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
@@ -600,9 +604,11 @@ input.submit_btn {
 }
 
 input.submit_btn:HOVER,.calculate_box button:HOVER {
-	background-color: #328FC9;
-	background-image: linear-gradient(#37A3EB, #1171BF);
-	background-repeat: repeat-x;
+	background: -moz-linear-gradient(top, #37A3EB, #1171BF) repeat-x scroll 0 0 #328FC9;
+	background: -ms-linear-gradient(top, #37A3EB, #1171BF) repeat-x scroll 0 0 #328FC9;
+	background: -webkit-linear-gradient(top, #37A3EB, #1171BF) repeat-x scroll 0 0 #328FC9;
+	background: -o-linear-gradient(top, #37A3EB, #1171BF) repeat-x scroll 0 0 #328FC9;
+	background: linear-gradient(top, #37A3EB, #1171BF) repeat-x scroll 0 0 #328FC9;
 }
 
 input.submit_btn:ACTIVE,.calculate_box button:ACTIVE {
@@ -650,17 +656,21 @@ input.submit_btn:ACTIVE,.calculate_box button:ACTIVE {
 }
 
 #signup_btn:HOVER {
-	background-color: #60B044;
-	background-image: linear-gradient(#8ADD6D, #60B044);
-	background-repeat: repeat-x;
+	background: -moz-linear-gradient(top, #8ADD6D, #60B044) repeat-x scroll 0 0 #60B044;
+	background: -ms-linear-gradient(top, #8ADD6D, #60B044) repeat-x scroll 0 0 #60B044;
+	background: -webkit-linear-gradient(top, #8ADD6D, #60B044) repeat-x scroll 0 0 #60B044;
+	background: -o-linear-gradient(top, #8ADD6D, #60B044) repeat-x scroll 0 0 #60B044;
+	background: linear-gradient(top, #8ADD6D, #60B044) repeat-x scroll 0 0 #60B044;
 	border-color: #4A993E;
 	text-decoration: none;
 }
 
 #signup_btn:ACTIVE {
-	background-color: #4C8B36;
-	background-image: linear-gradient(#69D344, #4C8B36);
-	background-repeat: repeat-x;
+	background: -moz-linear-gradient(top, #69D344, #4C8B36) repeat-x scroll 0 0 #4C8B36;
+	background: -ms-linear-gradient(top, #69D344, #4C8B36) repeat-x scroll 0 0 #4C8B36;
+	background: -webkit-linear-gradient(top, #69D344, #4C8B36) repeat-x scroll 0 0 #4C8B36;
+	background: -o-linear-gradient(top, #69D344, #4C8B36) repeat-x scroll 0 0 #4C8B36;
+	background: linear-gradient(top, #69D344, #4C8B36) repeat-x scroll 0 0 #4C8B36;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
 }
 
@@ -883,11 +893,37 @@ div#wizard_panel {
 div#wizard_header {
 	border-bottom: 1px solid #DDDDDD;
 	padding: 10px;
+	margin-bottom: 2px;
+	overflow: auto;
 }
 
 div#wizard_header h3 {
-	font-size: 22px;
+	font-size: 26px;
 	font-family: Roboto Condensed, sans-serif;
+	float: left;
+}
+
+div#wizard_header h4 {
+	font-size: 26px;
+	font-family: Roboto Condensed, sans-serif;
+	float: right;
+}
+
+div#wizard_header h4 .current {
+	position: relative;
+	bottom: 5px;
+	font-weight: bold;
+}
+
+div#wizard_header h4 .total {
+	position: relative;
+	top: 5px;
+}
+
+div.advice {
+	padding: 10px;
+	border-bottom: 1px solid #DDD;
+	font-size: 14px;
 }
 
 div#wizard_form {
@@ -898,29 +934,51 @@ div#wizard_buttons {
 	margin-top: 20px;
 	border-top: 1px solid #DDDDDD;
 	padding: 20px 10px 10px 10px;
+	overflow: auto;
 }
 
-.next_btn,.previous_btn {
+#wizard_buttons #next,#wizard_buttons #previous {
 	display: inline-block;
 	cursor: pointer;
 	padding: 8px 10px;
 	border: 1px solid #CCCCCC;
-	background-color: #FAFAFA;
-	background-image: linear-gradient(to bottom, #FAFAFA, #EAEAEA);
-	background-repeat: repeat-x;
+	background: -moz-linear-gradient(top, #FFFFFF, #EAEAEA) repeat-x scroll 0 0 #FAFAFA;
+	background: -ms-linear-gradient(top, #FFFFFF, #EAEAEA) repeat-x scroll 0 0 #FAFAFA;
+	background: -webkit-linear-gradient(top, #FFFFFF, #EAEAEA) repeat-x scroll 0 0 #FAFAFA;
+	background: -o-linear-gradient(top, #FFFFFF, #EAEAEA) repeat-x scroll 0 0 #FAFAFA;
+	background: linear-gradient(top, #FFFFFF, #EAEAEA) repeat-x scroll 0 0 #FAFAFA;
 	min-width: 80px;
 	text-align: center;
-	font-size: 15px;
+	font-size: 14px;
 	font-weight: bold;
 }
 
-.next_btn {
-	border-radius: 3px 15px 15px 3px;
+#wizard_buttons #next {
+	/* border-radius: 3px 15px 15px 3px; */
 	float: right;
 }
 
-.previous_btn {
-	border-radius: 15px 3px 3px 15px;
+#wizard_buttons #previous {
+	/* border-radius: 15px 3px 3px 15px; */
+	
+}
+
+#wizard_buttons #submit {
+	float: right;
+	background: -moz-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: -ms-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: -webkit-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: -o-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	border: 1px solid #51A0B3;
+	border-radius: 4px 4px 4px 4px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+	color: #FFFFFF;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px 15px;
+	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.25);
+	margin-top: 10px;
 }
 
 /* ----------------- INDEX ----------------------  */
@@ -1274,9 +1332,11 @@ p.not_added {
 }
 
 .link_button {
-	background-color: #FAFAFA;
-	background-image: linear-gradient(to bottom, #FFFFFF, #E6E6E6);
-	background-repeat: repeat-x;
+	background: -moz-linear-gradient(top, #FFFFFF, #E6E6E6) repeat-x scroll 0 0 #FAFAFA;
+	background: -ms-linear-gradient(top, #FFFFFF, #E6E6E6) repeat-x scroll 0 0 #FAFAFA;
+	background: -webkit-linear-gradient(top, #FFFFFF, #E6E6E6) repeat-x scroll 0 0 #FAFAFA;
+	background: -o-linear-gradient(top, #FFFFFF, #E6E6E6) repeat-x scroll 0 0 #FAFAFA;
+	background: linear-gradient(top, #FFFFFF, #E6E6E6) repeat-x scroll 0 0 #FAFAFA;
 	border: 1px solid #CCCCCC;
 	border-radius: 3px;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
@@ -1314,9 +1374,11 @@ p.not_added {
 	bottom: -12px;
 	right: 85px;
 	z-index: 10;
-	background-color: #2B6DAE;
-	background-image: linear-gradient(#5A9CDD, #3072B3);
-	background-repeat: repeat-x;
+	background: -moz-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: -ms-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: -webkit-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: -o-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
 	border: 1px solid #51A0B3;
 	border-radius: 3px;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
@@ -1332,9 +1394,11 @@ p.not_added {
 }
 
 .calculate_box button:DISABLED:HOVER {
-	background-color: #2B6DAE;
-	background-image: linear-gradient(#5A9CDD, #3072B3);
-	background-repeat: repeat-x;
+	background: -moz-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: -ms-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: -webkit-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: -o-linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
+	background: linear-gradient(top, #5A9CDD, #3072B3) repeat-x scroll 0 0 #2B6DAE;
 }
 
 .result_box {
@@ -1343,6 +1407,14 @@ p.not_added {
 
 .result_box .progress {
 	font-weight: bold;
+}
+
+.result_box span.error_img {
+	width: 20px;
+	height: 17px;
+	background: url("../img/error.png") no-repeat scroll 100% 100% #FFF;
+	display: inline-block;
+	margin-bottom: -4px;
 }
 
 .result_box_disabled {
