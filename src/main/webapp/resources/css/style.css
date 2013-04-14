@@ -346,7 +346,7 @@ div#about_container {
 div#about_container .right_menu {
 	border: 1px solid #DDD;
 	float: left;
-	margin: 10px 20px 10px 0px;
+	margin: 10px 40px 10px 0px;
 	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.05);
 	min-width: 200px;
 }
@@ -383,8 +383,12 @@ div#about_container .right_menu .menu_header {
 }
 
 #about_content {
-	width: 700px;
+	width: 680px;
 	float: left;
+}
+
+#about_content .content {
+	padding: 10px;
 }
 
 /* ------------------ FORMS ------------------ */

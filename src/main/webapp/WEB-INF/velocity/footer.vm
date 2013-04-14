@@ -3,7 +3,7 @@
 	 	<div id="upper">
 	 		<a href="#springUrl("/about")" class="footer">#springMessage("about")</a>
 	 		<a href="#" class="footer">#springMessage("documentation")</a>
-		 	<a href="#" class="footer">#springMessage("report.bug")</a>
+		 	<a href="#springUrl("/report/bug")" class="footer">#springMessage("report.bug")</a>
 		 	<a href="#" class="footer">#springMessage("contact.and.support")</a>
 	 	</div>
 	 	<div id="bottom">

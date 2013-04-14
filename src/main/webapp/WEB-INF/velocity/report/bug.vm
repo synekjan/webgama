@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+#parse("include.vm")
+<title>#springMessage("report.bug")</title>
+</head>
+<body>
+	<div id="wrapper">
+		#parse("header.vm")
+		<div id="container">
+			<div id="about_container">
+				<div class="right_menu">
+					<ul>
+						<span class="active_menu"><li><a href="#springUrl("/report/bug")">#springMessage("report.bug")</a></li></span>
+					</ul>
+				</div>
+				<div id="about_content">
+					<div class="panel_header">
+						<h2>#springMessage("report.bug")</h2>
+					</div>
+					<div class="content">
+						#springMessage("report.bug.message")
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	#parse("footer.vm")
+</body>
+</html>
