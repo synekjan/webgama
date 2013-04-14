@@ -2,29 +2,27 @@
 <html>
 <head>
 #parse("include.vm")
-<title>#springMessage("about.author")</title>
+<title>#springMessage("about.contact")</title>
 </head>
 <body>
 	<div id="wrapper">
 		#parse("header.vm")
-
 		<div id="container">
 			<div id="about_container">
 				<div class="right_menu">
 					<ul>
 						<li><a href="#springUrl("/about/project")">#springMessage("about.project")</a></li>
 						<li><a href="#springUrl("/about/cvut")">#springMessage("about.organization")</a></li>
-						<span class="active_menu"><li><a href="#springUrl("/about/author")">#springMessage("about.author")</a></li></span>
-						<li><a href="#springUrl("/about/thanks")">#springMessage("about.thanks")</a></li>
-						<li><a href="#springUrl("/about/contact")">#springMessage("about.contact")</a></li>
+						<li><a href="#springUrl("/about/author")">#springMessage("about.author")</a></li></span>
+						<li><a href="#springUrl("/about/thanks")">#springMessage("about.thanks")</a></li></span>
+						<span class="active_menu"><li><a href="#springUrl("/about/contact")">#springMessage("about.contact")</a></li></span>
 					</ul>
 				</div>
 				<div id="about_content">
 					<div class="panel_header">
-						<h2>#springMessage("about.author")</h2>
+						<h2>#springMessage("about.contact")</h2>
 					</div>
 					<div class="content">
-						<h1>Jendik Synků</h1>
 					</div>
 				</div>
 			</div>

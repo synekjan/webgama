@@ -38,5 +38,17 @@ public class AboutController extends MultiActionController {
 
 		return new ModelAndView("/about/author");
 	}
+	
+	@RequestMapping(value = "/contact", method = RequestMethod.GET)
+	protected ModelAndView showContact() {
+
+		return new ModelAndView("/about/contact");
+	}
+	
+	@RequestMapping(value = "/thanks", method = RequestMethod.GET)
+	protected ModelAndView showThanks() {
+
+		return new ModelAndView("/about/thanks");
+	}
 
 }
