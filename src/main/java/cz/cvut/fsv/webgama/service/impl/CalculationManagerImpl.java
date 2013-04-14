@@ -28,22 +28,27 @@ public class CalculationManagerImpl implements CalculationManager {
 
 		ProcessOutput processOutput = processManager.runExternalGama(calculation, username);
 
-		if (processOutput.getExitValue() != 0) {
-			calculationDao.updateProgress(calculation, "not-calculated");
-			return processOutput;
-		}
-		
 		Output output = new Output();
-		output.setXmlContent(processOutput.getXmlResult());
-		output.setHtmlContent(processOutput.getHtmlResult());
-		output.setSvgContent(processOutput.getSvgResult());
-		output.setTextContent(processOutput.getTextResult());
 		output.setTime(new DateTime());
 		output.setRunningTime(processOutput.getRunningTime());
-		calculation.setOutput(output);
-		calculation.setProgress("calculated");
-
-		calculationDao.updateOutput(calculation);
+		if (processOutput.getExitValue() != 0) {
+			String errorStreamMessage = processOutput.getErrorMessage();
+			if (errorStreamMessage == null || "".equals(errorStreamMessage)) {
+				output.setLastError(processOutput.getXmlResult());
+			} else {
+				output.setLastError(errorStreamMessage);
+			}
+			calculation.setOutput(output);
+			calculationDao.updateOutput(calculation);
+		} else {
+			output.setXmlContent(processOutput.getXmlResult());
+			output.setHtmlContent(processOutput.getHtmlResult());
+			output.setSvgContent(processOutput.getSvgResult());
+			output.setTextContent(processOutput.getTextResult());
+			calculation.setOutput(output);
+			calculation.setProgress("calculated");
+			calculationDao.updateOutput(calculation);
+		}
 
 		return processOutput;
 	}
@@ -57,7 +62,7 @@ public class CalculationManagerImpl implements CalculationManager {
 	public String checkCalculationProgress(Long id) {
 
 		String progress = calculationDao.findProgressById(id);
-	
+
 		return progress;
 	}
 

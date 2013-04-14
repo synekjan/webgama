@@ -49,10 +49,15 @@
 							btn.closest('.primary_wrapper').find('.progress').html('#springMessage("calculated")');
 							btn.closest('.primary_wrapper').find('.result_box').removeClass('result_box_disabled');
 							btn.closest('.primary_wrapper').find('.export_button').attr('href','#springUrl("/export/")' + id);
+							btn.closest('.primary_wrapper').find('.output_error').html('#springMessage("calculations.none")');							
 						} else {
 							btn.closest('.primary_wrapper').find('.progress').html('#springMessage("not-calculated")');
 							btn.closest('.accor_content').prev('h3').find('.status_message').html('<span class="not-calculated">#springMessage("not-calculated")</span>');
+							btn.closest('.primary_wrapper').find('.running-time').html(jqXHR.runningTime.toFixed(2) + " ms");
+							btn.closest('.primary_wrapper').find('.output_error').html('<span class="error_img"></span><div class="error_message_bubble">' + jqXHR.message + '</div>');	
 							alert(jqXHR.message);
+							btn.html('#springMessage("calculations.button.recalculate")')
+							btn.removeAttr('disabled');
 						}
 					}
 				});
@@ -200,7 +205,6 @@
 									</div>
 									<div class="result_box #if ($calculation.progress != "calculated") result_box_disabled #end">
 										<div class="box_title">#springMessage("calculations.result")</div>
-
 										<table>
 											<tbody>
 												<tr>
@@ -211,12 +215,19 @@
 												</tr>
 												<tr>
 													<td>#springMessage("calculations.lastError"):</td>
-													<td><!-- #springMessage("calculations.none") --><span class="error_img"></span> </td>
-													
+													<td><div class="output_error">
+													#if (!$calculation.output.lastError)
+													#springMessage("calculations.none")
+													#else
+													<span class="error_img"></span> 
+													<div class="error_message_bubble"><p>$calculation.output.lastError</p></div>
+													#end
+													</div>
+													</td>
 												</tr>
 												<tr>
 													<td>#springMessage("calculations.progress"):</td>
-													<td nowrap<span class="progress">#springMessage("$calculation.progress")</span></td>
+													<td nowrap><span class="progress">#springMessage("$calculation.progress")</span></td>
 												</tr>
 											</tbody>
 										</table>
@@ -227,6 +238,7 @@
 												/export/${calculation.id}")" #end>#springMessage("calculations.export")</a>
 										</div>
 									</div>
+									<div style="clear: both;"></div>
 									<button class="delete_button link_button"
 										data="${calculation.id}">#springMessage("calculations.delete")</button>
 								</div>
@@ -271,6 +283,5 @@
 	</div>
 	</div>
 	#parse("footer.vm")
-	
 </body>
 </html>

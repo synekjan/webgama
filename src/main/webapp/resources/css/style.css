@@ -603,7 +603,7 @@ input.submit_btn {
 	margin-top: 10px;
 }
 
-input.submit_btn:HOVER,.calculate_box button:HOVER {
+input.submit_btn:HOVER,.calculate_box button:HOVER, #wizard_buttons #submit:HOVER {
 	background: -moz-linear-gradient(top, #37A3EB, #1171BF) repeat-x scroll 0 0 #328FC9;
 	background: -ms-linear-gradient(top, #37A3EB, #1171BF) repeat-x scroll 0 0 #328FC9;
 	background: -webkit-linear-gradient(top, #37A3EB, #1171BF) repeat-x scroll 0 0 #328FC9;
@@ -611,7 +611,7 @@ input.submit_btn:HOVER,.calculate_box button:HOVER {
 	background: linear-gradient(top, #37A3EB, #1171BF) repeat-x scroll 0 0 #328FC9;
 }
 
-input.submit_btn:ACTIVE,.calculate_box button:ACTIVE {
+input.submit_btn:ACTIVE,.calculate_box button:ACTIVE, #wizard_buttons #submit:ACTIVE {
 	background-color: #2B6DAE;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) inset;
 }
@@ -1292,7 +1292,6 @@ p.not_added {
 }
 
 #calculations .primary_wrapper {
-	overflow: auto;
 	padding: 5px;
 	position: relative;
 }
@@ -1409,12 +1408,36 @@ p.not_added {
 	font-weight: bold;
 }
 
+.output_error {
+	position: relative;
+}
+
 .result_box span.error_img {
 	width: 20px;
 	height: 17px;
 	background: url("../img/error.png") no-repeat scroll 100% 100% #FFF;
 	display: inline-block;
 	margin-bottom: -4px;
+}
+
+.result_box span.error_img:HOVER {
+	cursor: pointer;
+}
+
+.error_message_bubble {
+	display: none;
+	width: 300px;
+	padding: 5px 10px;
+	position: absolute;
+	top: 5px;
+	left: 30px;
+	border: 1px solid #BBB;
+	background-color: #FFF;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	border-radius: 3px;
+	color: #555;
+	oveflow: hidden;
+	z-index: 10;
 }
 
 .result_box_disabled {

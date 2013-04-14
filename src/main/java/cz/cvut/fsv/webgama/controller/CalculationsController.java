@@ -72,7 +72,8 @@ public class CalculationsController extends MultiActionController {
 		JsonResponse jsonResponse = new JsonResponse();
 
 		ProcessOutput processOutput = calculationManager.calculate(calculation, username);
-
+		jsonResponse.setRunningTime(processOutput.getRunningTime());
+		
 		if (processOutput.getExitValue() != 0) {
 			jsonResponse.setError(true);
 			String errorStreamMessage = processOutput.getErrorMessage();
@@ -81,12 +82,10 @@ public class CalculationsController extends MultiActionController {
 			} else {
 				jsonResponse.setMessage(errorStreamMessage);
 			}
-
 			return jsonResponse;
 		}
 
 		jsonResponse.setMessage("OK");
-		jsonResponse.setRunningTime(processOutput.getRunningTime());
 		return jsonResponse;
 	}
 

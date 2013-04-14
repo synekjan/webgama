@@ -152,7 +152,8 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 	public Calculation findCalculationByInputId(Long id) {
 		String sql = "SELECT A.calculation_id, user_id, name, progress, language, algorithm, ang_units, latitude, ellipsoid, A.time FROM calculations A JOIN inputs B ON A.calculation_id = B.calculation_id WHERE input_id = ?";
 
-		Calculation calculation = getJdbcTemplate().queryForObject(sql, new Object[] { id }, new CalculationPartialMapper());
+		Calculation calculation = getJdbcTemplate().queryForObject(sql, new Object[] { id },
+				new CalculationPartialMapper());
 
 		return calculation;
 	}
@@ -250,8 +251,7 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 					.findCalculationStatisticInCalculation(calculation));
 			calculation.setTime(new DateTime(rs.getTimestamp("time").getTime()));
 			calculation.setInput(null);
-			calculation.setOutput("calculated".equals(calculation.getProgress()) ? outputDao
-					.findOutputInCalculation(calculation) : null);
+			calculation.setOutput(outputDao.findOutputInCalculation(calculation));
 
 			return calculation;
 		}

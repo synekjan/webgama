@@ -16,6 +16,8 @@ public class Output {
 
 	private Double runningTime;
 
+	private String lastError;
+
 	private DateTime time;
 
 	public Long getId() {
@@ -64,6 +66,14 @@ public class Output {
 
 	public void setRunningTime(Double runningTime) {
 		this.runningTime = runningTime;
+	}
+
+	public String getLastError() {
+		return lastError;
+	}
+
+	public void setLastError(String lastError) {
+		this.lastError = lastError;
 	}
 
 	public DateTime getTime() {
