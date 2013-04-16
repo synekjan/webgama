@@ -46,12 +46,6 @@ $(document).ready(function() {
 				});
 			});
 			
-			/*$(".error_img").hover(function(){
-				$(this).siblings().first().show();
-			}, function() {
-				$(this).siblings().first().hide();
-			});*/
-			
 			jQuery(document).on('mouseenter', '.error_img', function(){
 				$(this).siblings().first().show();
 			}).on('mouseleave', '.error_img', function() {
@@ -62,6 +56,8 @@ $(document).ready(function() {
 			$(".draggable").draggable({
 				handle : "#toolbar_header"
 			});
+			
+			/*$('#side_toolbar').animate({width: 'toggle'},20000);*/
 
 			// delete element click event
 			jQuery(document).on("click", "span.icon-close", function() {

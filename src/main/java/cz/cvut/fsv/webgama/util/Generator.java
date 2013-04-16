@@ -4,7 +4,11 @@ import java.util.UUID;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-public class Generator {
+public final class Generator {
+
+	private Generator() {
+
+	}
 
 	public static String generatePassword() {
 

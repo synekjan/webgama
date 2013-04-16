@@ -389,20 +389,17 @@ div#about_container .right_menu .menu_header {
 
 #about_content .content {
 	padding: 0px 10px;
+	margin-top: -20px;
 }
 
 #about_content .content h1 {
 	font: 18px "Roboto Condensed", sans-serif;
-	padding: 20px 5px 10px 0px;
+	padding: 30px 5px 10px 0px;
 	color: #4183C4;
 }
 
 #about_content .content p {
 	padding-left: 5px;
-}
-
-#about_content .content {
-	padding: 10px;
 }
 
 /* ------------------ FORMS ------------------ */
@@ -1032,6 +1029,10 @@ div#wizard_buttons {
 	padding: 10px;
 }
 
+#whatsnext_content li {
+	margin: 3px
+}
+
 #activities {
 	margin: 10px;
 }
@@ -1229,22 +1230,51 @@ ul.pagination li a:HOVER {
 
 /* ---------------- WELCOME PAGE  --------------------- */
 div#welcome_container {
-	padding: 40px 0 141px 0;
+	padding: 20px 0 141px 0;
 }
 
 #welcome_container div {
 	display: inline-block;
 	vertical-align: top;
+	margin: 40px;
+}
+
+.wide_text {
+	width: 480px;
+	height: 180px;
+	font-size: 14px;
+}
+
+.wide_text h1 {
+	margin-bottom: 20px;
+	font-size: 20px;
+	color: #1C79B3;
+}
+
+.wide_text p {
+	padding-left: 5px;
+	line-height: 1.5;
+}
+
+.wide_text ul {
+	list-style: disc;
+	margin: 10px 0px 10px 40px;
+}
+
+.narrow_image {
 	width: 300px;
+	height: 180px;
 }
 
-#welcome_container div h1 {
-	font-size: 18px;
-	color: #328FC9;
+#browsers {
+	background: url("../img/browsers.png") no-repeat center;
 }
 
-div#whats_webgama {
-	width: 540px;
+#points_img {
+	background: url("../img/points.png") no-repeat center;
+	border: 1px solid #DDD;
+	height: 165px;
+	border-radius: 4px;
 }
 
 /* -------------- CALCULATIONS ----------------------- */
@@ -1638,6 +1668,7 @@ span.time {
 }
 
 .adjustment_form .focused>div.title_bar {
+	background-color: #4082C3;
 	background: -moz-linear-gradient(top, #7ABCFD, #4082C3) repeat scroll 0 0 #4082C3;
 	background: -ms-linear-gradient(top, #7ABCFD, #4082C3) repeat scroll 0 0 #4082C3;
 	background: -webkit-linear-gradient(top, #7ABCFD, #4082C3) repeat scroll 0 0 #4082C3;

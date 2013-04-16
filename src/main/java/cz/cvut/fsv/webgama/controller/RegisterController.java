@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,6 +28,8 @@ public class RegisterController extends MultiActionController {
 
 	@Inject
 	private UserRegistrationValidator registrationValidator;
+	
+	private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
 
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView showRegistrationForm(HttpServletRequest request,
@@ -52,6 +56,7 @@ public class RegisterController extends MultiActionController {
 
 		userManager.registerUser(userForm, request);
 
+		logger.info("User[" + userForm.getUsername() + "] REGISTERED his account");
 		return new ModelAndView("redirect:/register/success");
 	}
 

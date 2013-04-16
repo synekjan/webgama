@@ -23,8 +23,7 @@
 		</connectionSource>
 	</appender>
 
-	<appender name="rollingFile"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
      		 <!-- daily rollover -->
 			<fileNamePattern>/opt/apache-tomcat-7.0.27/logs/webgama.%d{yyyy-MM-dd}.log</fileNamePattern>

@@ -19,7 +19,7 @@
 						<h2>#springMessage("report.bug")</h2>
 					</div>
 					<div class="content">
-						#springMessage("report.bug.message")
+						<p style="margin-top: 30px;">#springMessage("report.bug.message")</p>
 					</div>
 				</div>
 			</div>

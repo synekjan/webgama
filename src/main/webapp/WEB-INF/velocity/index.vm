@@ -78,6 +78,7 @@
 							<ul>
 								<li><a href="#springUrl("/adjustment")">#springMessage("index.welcome.whatsnext.start.adjustment")</a></li>
 								<li><a href="#springUrl("/account/personal")">#springMessage("index.welcome.whatsnext.tell.us")</a></li>
+								<li><a href="#springUrl("/calculations")">#springMessage("index.welcome.whatsnext.manage.calculations")</a></li>
 							</ul>
 						</div>
 					</div>
