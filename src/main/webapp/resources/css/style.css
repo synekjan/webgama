@@ -1385,7 +1385,35 @@ p.not_added {
 
 .button_wrap {
 	text-align: center;
+	position: relative;
 }
+
+.button_wrap button.pushed {
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) inset;
+}
+
+.edit_choose {
+	display: none;
+	width: 100px;
+	height: 70px;
+	padding: 5px 10px;
+	position: absolute;
+	top: -30px;
+	right: -120px;
+	border: 1px solid #BBB;
+	background-color: #FFF;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	border-radius: 3px;
+	color: #555;
+	z-index: 100;
+}
+
+.edit_choose a {
+	margin: 5px;
+	display: inline-block;
+}
+
+
 
 .link_button {
 	background: -moz-linear-gradient(top, #FFFFFF, #E6E6E6) repeat-x scroll 0 0 #FAFAFA;

@@ -128,7 +128,11 @@
 											</tbody>
 										</table>
 										<div class="button_wrap">
-											<a class="edit_button link_button" href="#springUrl("/adjustment/onepage/${calculation.id}")">#springMessage("calculations.edit")</a>
+											<button class="edit_button link_button">#springMessage("calculations.edit")</button>
+											<div class="edit_choose">
+												<a class="link_button" href="#springUrl("/adjustment/wizard/${calculation.id}")">#springMessage("adjustment.wizard")</a><br>
+												<a class="link_button" href="#springUrl("/adjustment/onepage/${calculation.id}")">#springMessage("adjustment.onepage")</a>
+											</div>
 										</div>
 									</div>
 
@@ -193,7 +197,7 @@
 													</select>
 												</div>
 											</div>
-											
+
 											<button class="calculate_button" #if ($calculation.progress==
 												"calculating") disabled #end data="${calculation.id}">#if
 												($calculation.progress == "calculated")
@@ -216,14 +220,14 @@
 												<tr>
 													<td>#springMessage("calculations.lastError"):</td>
 													<td><div class="output_error">
-													#if (!$calculation.output.lastError)
-													#springMessage("calculations.none")
-													#else
-													<span class="error_img"></span> 
-													<div class="error_message_bubble"><p>$calculation.output.lastError</p></div>
-													#end
-													</div>
-													</td>
+															#if (!$calculation.output.lastError)
+															#springMessage("calculations.none") #else <span
+																class="error_img"></span>
+															<div class="error_message_bubble">
+																<p>$calculation.output.lastError</p>
+															</div>
+															#end
+														</div></td>
 												</tr>
 												<tr>
 													<td>#springMessage("calculations.progress"):</td>
@@ -253,8 +257,7 @@
 						<h4>#springMessage("calculations.shared.calculations")</h4>
 						#if ($sharedCalculations.isEmpty())
 						<p class="not_added">
-							#springMessage("calculations.shared.calculations.notshared")
-						</p>
+							#springMessage("calculations.shared.calculations.notshared")</p>
 						#else
 						<div class="accordion">
 							#foreach ($calculation in $sharedCalculations)

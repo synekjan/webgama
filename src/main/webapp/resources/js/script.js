@@ -51,6 +51,12 @@ $(document).ready(function() {
 			}).on('mouseleave', '.error_img', function() {
 				$(this).siblings().first().hide();
 			});
+			
+			jQuery('.edit_button').click(function() {
+				var $button = $(this);
+				$button.siblings().first().toggle();
+				$button.toggleClass('pushed');
+			});
 
 
 			$(".draggable").draggable({
