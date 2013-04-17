@@ -29,6 +29,7 @@ import cz.cvut.fsv.webgama.domain.ProcessOutput;
 import cz.cvut.fsv.webgama.domain.User;
 import cz.cvut.fsv.webgama.form.AdjustmentPageForm;
 import cz.cvut.fsv.webgama.parser.InputParser;
+import cz.cvut.fsv.webgama.service.ActivityManager;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
 import cz.cvut.fsv.webgama.service.ProcessManager;
 
@@ -48,6 +49,8 @@ public class AdjustmentManagerImpl implements AdjustmentManager, Serializable {
 
 	private PointDao pointDao;
 
+	private ActivityManager activityManager;
+
 	public void setCalculationDao(CalculationDao calculationDao) {
 		this.calculationDao = calculationDao;
 	}
@@ -66,6 +69,10 @@ public class AdjustmentManagerImpl implements AdjustmentManager, Serializable {
 
 	public void setPointDao(PointDao pointDao) {
 		this.pointDao = pointDao;
+	}
+
+	public void setActivityManager(ActivityManager activityManager) {
+		this.activityManager = activityManager;
 	}
 
 	@Override
@@ -280,7 +287,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager, Serializable {
 		if (input.getId() == null) {
 			calculation.setName("New Calculation " + fmt.print(dt));
 			calculationDao.insert(calculation);
-
+			activityManager.recordActivity(username, "activity.calculation.created");
 		} else {
 			calculationDao.update(calculation);
 		}
@@ -297,7 +304,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager, Serializable {
 
 	@Override
 	public Long getPointCountByUsername(String username) {
-		
+
 		User user = userDao.findUserByUsername(username);
 		Long count = calculationDao.countPointsByUser(user.getId());
 		return count == null ? 0 : count;
@@ -305,7 +312,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager, Serializable {
 
 	@Override
 	public Long getClusterCountByUsername(String username) {
-		
+
 		User user = userDao.findUserByUsername(username);
 		Long count = calculationDao.countClustersByUser(user.getId());
 		return count == null ? 0 : count;

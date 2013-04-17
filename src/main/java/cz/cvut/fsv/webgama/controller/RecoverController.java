@@ -3,6 +3,8 @@ package cz.cvut.fsv.webgama.controller;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import cz.cvut.fsv.webgama.form.PasswordRecoveryForm;
 import cz.cvut.fsv.webgama.form.UsernameRecoveryForm;
+import cz.cvut.fsv.webgama.service.ActivityManager;
 import cz.cvut.fsv.webgama.service.MailManager;
 import cz.cvut.fsv.webgama.validator.PasswordRecoveryValidator;
 import cz.cvut.fsv.webgama.validator.UsernameRecoveryValidator;
@@ -29,6 +32,11 @@ public class RecoverController extends MultiActionController {
 
 	@Inject
 	private UsernameRecoveryValidator usernameValidator;
+	
+	@Inject
+	private ActivityManager activityManager;
+	
+	private static final Logger logger = LoggerFactory.getLogger(RecoverController.class);
 
 	@RequestMapping(value = "/username", method = RequestMethod.GET)
 	public ModelAndView showUsernameRecovery() {
@@ -65,7 +73,7 @@ public class RecoverController extends MultiActionController {
 	public ModelAndView showPasswordRecovery() {
 
 		PasswordRecoveryForm userForm = new PasswordRecoveryForm();
-
+		
 		return new ModelAndView("/recover/password", "user", userForm);
 	}
 
@@ -81,7 +89,9 @@ public class RecoverController extends MultiActionController {
 		}
 
 		mailManager.recoverPassword(userForm);
-
+		
+		activityManager.recordActivity(userForm.getUsername(), "activity.password.resetted");
+		logger.info("User[" + userForm.getUsername() + "] RESETTED his password");
 		return new ModelAndView("redirect:/recover/password/success");
 	}
 

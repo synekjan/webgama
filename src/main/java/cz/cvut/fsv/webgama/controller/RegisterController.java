@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import cz.cvut.fsv.webgama.form.UserRegistrationForm;
+import cz.cvut.fsv.webgama.service.ActivityManager;
 import cz.cvut.fsv.webgama.service.UserManager;
 import cz.cvut.fsv.webgama.validator.UserRegistrationValidator;
 
@@ -28,6 +29,9 @@ public class RegisterController extends MultiActionController {
 
 	@Inject
 	private UserRegistrationValidator registrationValidator;
+	
+	@Inject
+	private ActivityManager activityManager;
 	
 	private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
 
@@ -56,6 +60,7 @@ public class RegisterController extends MultiActionController {
 
 		userManager.registerUser(userForm, request);
 
+		activityManager.recordActivity(userForm.getUsername(), "activity.user.registered");
 		logger.info("User[" + userForm.getUsername() + "] REGISTERED his account");
 		return new ModelAndView("redirect:/register/success");
 	}

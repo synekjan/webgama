@@ -28,6 +28,7 @@ import cz.cvut.fsv.webgama.domain.Point;
 import cz.cvut.fsv.webgama.exception.PermissionDeniedException;
 import cz.cvut.fsv.webgama.exception.ResourceNotFoundException;
 import cz.cvut.fsv.webgama.form.AdjustmentPageForm;
+import cz.cvut.fsv.webgama.service.ActivityManager;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
 
 @Controller
@@ -36,6 +37,9 @@ public class AdjustmentPageController extends MultiActionController {
 
 	@Inject
 	private AdjustmentManager adjustmentManager;
+	
+	@Inject
+	private ActivityManager activityManager;
 
 	private static final Logger logger = LoggerFactory.getLogger(AdjustmentPageController.class);
 
@@ -75,7 +79,8 @@ public class AdjustmentPageController extends MultiActionController {
 		}
 
 		adjustmentManager.insertNewCalculation(adjustmentForm, username, locale);
-
+		
+		activityManager.recordActivity(username, "activity.calculation.created");
 		logger.info("User[" + username + "] successfully insert NEW calculation by one page form!");
 		return new ModelAndView("redirect:/calculations");
 	}
