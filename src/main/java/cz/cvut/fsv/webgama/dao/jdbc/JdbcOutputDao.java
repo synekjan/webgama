@@ -58,6 +58,20 @@ public class JdbcOutputDao extends JdbcDaoSupport implements OutputDao {
 			return outputs.get(0);
 		}
 	}
+	
+	@Override
+	public Output findOutputWithoutResultsInCalculation(Calculation calculation) {
+
+		String sql = "SELECT * FROM outputs WHERE calculation_id =?";
+
+		List<Output> outputs = getJdbcTemplate().query(sql, new Object[] { calculation.getId() }, new OutputPartialMapper());
+
+		if (outputs.isEmpty()) {
+			return null;
+		} else {
+			return outputs.get(0);
+		}
+	}
 
 	private class OutputMapper implements RowMapper<Output> {
 
@@ -71,6 +85,22 @@ public class JdbcOutputDao extends JdbcDaoSupport implements OutputDao {
 			output.setTextContent(rs.getString("text_content"));
 			output.setHtmlContent(rs.getString("html_content"));
 			output.setSvgContent(rs.getString("svg_content"));
+			output.setRunningTime(rs.getDouble("running_time"));
+			output.setLastError(rs.getString("last_error"));
+			output.setTime(new DateTime(rs.getTimestamp("time").getTime()));
+
+			return output;
+		}
+	}
+	
+	private class OutputPartialMapper implements RowMapper<Output> {
+
+		@Override
+		public Output mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+			Output output = new Output();
+
+			output.setId(rs.getLong("output_id"));
 			output.setRunningTime(rs.getDouble("running_time"));
 			output.setLastError(rs.getString("last_error"));
 			output.setTime(new DateTime(rs.getTimestamp("time").getTime()));

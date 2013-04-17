@@ -12,5 +12,7 @@ public interface OutputDao {
 	public void update(Output output);
 
 	public Output findOutputInCalculation(Calculation calculation);
+	
+	public Output findOutputWithoutResultsInCalculation(Calculation calculation);
 
 }

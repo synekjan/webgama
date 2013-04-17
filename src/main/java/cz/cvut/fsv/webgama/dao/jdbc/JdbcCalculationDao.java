@@ -267,7 +267,7 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 					.findCalculationStatisticInCalculation(calculation));
 			calculation.setTime(new DateTime(rs.getTimestamp("time").getTime()));
 			calculation.setInput(null);
-			calculation.setOutput(outputDao.findOutputInCalculation(calculation));
+			calculation.setOutput(outputDao.findOutputWithoutResultsInCalculation(calculation));
 
 			return calculation;
 		}
