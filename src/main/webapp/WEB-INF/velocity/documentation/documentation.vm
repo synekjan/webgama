@@ -9,7 +9,7 @@
 		#parse("header.vm")
 		<div id="container">
 			<div id="container">
-				<div id="content">
+				<div id="documentation_content">
 					<div class="panel_header">
 						<h2>#springMessage("documentation")</h2>
 					</div>

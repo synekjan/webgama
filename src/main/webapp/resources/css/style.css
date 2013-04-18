@@ -226,6 +226,10 @@ div#content {
 	margin: 10px;
 }
 
+div#documentation_content {
+	margin: 20px;
+}
+
 /* ----------------------------------   ACCOUNT MANAGEMENT   -------------------------------------*/
 div#account_container,div#admin_container {
 	padding: 10px;
@@ -340,7 +344,7 @@ div#account_container div#delete {
 div#about_container {
 	margin: 40px 10px 20px 10px;
 	text-shadow: 0 1px 0 #FFFFFF;
-	overflow: auto;
+	overflow: hidden;
 }
 
 div#about_container .right_menu {
@@ -394,12 +398,16 @@ div#about_container .right_menu .menu_header {
 
 #about_content .content h1 {
 	font: 18px "Roboto Condensed", sans-serif;
-	padding: 30px 5px 10px 0px;
+	padding: 20px 5px 10px 0px;
 	color: #4183C4;
 }
 
 #about_content .content p {
 	padding-left: 5px;
+}
+
+#general_thank {
+	margin-top: 30px;
 }
 
 /* ------------------ FORMS ------------------ */
