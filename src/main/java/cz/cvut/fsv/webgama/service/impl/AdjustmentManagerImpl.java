@@ -206,10 +206,14 @@ public class AdjustmentManagerImpl implements AdjustmentManager, Serializable {
 		calculation.setUser(userDao.findUserByUsername(username));
 		DateTime dt = new DateTime();
 		DateTimeFormatter fmt = ISODateTimeFormat.date();
-		calculation.setName("New Calculation " + fmt.print(dt));
+		if (locale.getLanguage().equals(new Locale("cs").getLanguage())) {
+			calculation.setName("Nový Výpočet " + fmt.print(dt));
+		} else {
+			calculation.setName("New Calculation " + fmt.print(dt));
+		}
 
 		calculationDao.insert(calculation);
-
+		activityManager.recordActivity(username, "activity.calculation.created");
 	}
 
 	@Transactional
@@ -282,10 +286,14 @@ public class AdjustmentManagerImpl implements AdjustmentManager, Serializable {
 		calculation.setUser(userDao.findUserByUsername(username));
 		DateTime dt = new DateTime();
 		DateTimeFormatter fmt = ISODateTimeFormat.date();
-		calculation.setTime(new DateTime());
+		calculation.setTime(dt);
 
 		if (input.getId() == null) {
-			calculation.setName("New Calculation " + fmt.print(dt));
+			if (locale.getLanguage().equals(new Locale("cs").getLanguage())) {
+				calculation.setName("Nový Výpočet " + fmt.print(dt));
+			} else {
+				calculation.setName("New Calculation " + fmt.print(dt));
+			}
 			calculationDao.insert(calculation);
 			activityManager.recordActivity(username, "activity.calculation.created");
 		} else {
