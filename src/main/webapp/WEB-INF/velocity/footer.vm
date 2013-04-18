@@ -2,7 +2,7 @@
 	<div id="footer_inner_wrapper">
 	 	<div id="upper">
 	 		<a href="#springUrl("/about")" class="footer">#springMessage("about")</a>
-	 		<a href="#" class="footer">#springMessage("documentation")</a>
+	 		<a href="#springUrl("/documentation")" class="footer">#springMessage("documentation")</a>
 		 	<a href="#springUrl("/report/bug")" class="footer">#springMessage("report.bug")</a>
 		 	<a href="#springUrl("/about/contact")" class="footer">#springMessage("contact.and.support")</a>
 	 	</div>

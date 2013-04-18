@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+#parse("include.vm")
+<title>#springMessage("documentation")</title>
+</head>
+<body>
+	<div id="wrapper">
+		#parse("header.vm")
+		<div id="container">
+			<div id="container">
+				<div id="content">
+					<div class="panel_header">
+						<h2>#springMessage("documentation")</h2>
+					</div>
+					#springMessage("documentation.message"): <a
+						href="#springUrl('/resources/doc/diploma-thesis.pdf')"><i>diploma-thesis.pdf</i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	#parse("footer.vm")
+</body>
+</html>
