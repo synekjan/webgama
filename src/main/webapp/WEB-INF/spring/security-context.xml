@@ -17,6 +17,7 @@
 		<intercept-url pattern="/recover/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/confirm/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/about/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/documentation/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/signin*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
 		<intercept-url pattern="/**" access="ROLE_USER" />

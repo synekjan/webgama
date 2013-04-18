@@ -10,6 +10,12 @@
 		<property name="targetMethod" value="clearConfirmations" />
 	</bean>
 	
+	<bean id="deleteDisabledUsersJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="userDao" />
+		<property name="targetMethod" value="deleteDisabledUsers" />
+	</bean>
+	
 	<bean id="eraseTmpJobDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="fileEraser" />
@@ -29,12 +35,19 @@
 		<property name="cronExpression" value="${quartz.eraseTmp.cron}" />
 	</bean>
 	
+	<bean id="deleteDisabledUsersTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="deleteDisabledUsersJobDetail" />
+		<property name="startDelay" value="${quartz.deleteDisabledUsers.startDelay}" />
+		<property name="cronExpression" value="${quartz.deleteDisabledUsers.cron}" />
+	</bean>
+	
 	<!-- Register trigger -->
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
 				<ref bean="clearConfirmationsJobTrigger" />
 				<ref bean="eraseTmpTrigger" />
+				<ref bean="deleteDisabledUsersTrigger" />
 			</list>
 		</property>
 	</bean>

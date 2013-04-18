@@ -36,5 +36,7 @@ public interface UserDao {
 	public List<Confirmation> findConfirmationsByUUID(String uuid);
 
 	public void clearConfirmations();
+	
+	public void deleteDisabledUsers();
 
 }

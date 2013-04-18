@@ -202,4 +202,15 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 		}
 	}
 
+	@Override
+	public void deleteDisabledUsers() {
+		
+		String sql = "DELETE FROM users WHERE date_created < (CURRENT_DATE - INTERVAL '3 days') AND enabled = 'FALSE';";
+		
+		int count = getJdbcTemplate().update(sql);
+		
+		logger.info(count + " disabled users were deleted 3 days after their registration");
+		
+	}
+
 }

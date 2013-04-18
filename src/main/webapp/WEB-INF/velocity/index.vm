@@ -30,10 +30,10 @@
 							#foreach ($activity in $activities)
 							<div class="activity">
 								<div class="line"></div>
-								
+
 								#springMessage($activity.message) <span
-									title="$dateTool.format(" yyyy-MM-dd
-									HH:mm:ss",$activity.time.toDate())" class="time">$timeFormatter.periodFromNow($activity.time,
+									title='$dateTool.format("yyyy-MM-dd HH:mm:ss",$activity.time.toDate())'
+									class="time">$timeFormatter.periodFromNow($activity.time,
 									$locale)</span>
 							</div>
 							#end
