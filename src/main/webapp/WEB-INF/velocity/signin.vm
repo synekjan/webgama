@@ -5,9 +5,9 @@
 #parse("include.vm")
 <title>#springMessage("sign.in.header") - #springMessage("application.name")</title>
 <script>
-#[[	$(document).ready(function() {
-		$("#username").focus();
-	}); ]]#	
+jQuery(document).ready(function() {
+		jQuery("#username").focus();
+});
 </script>
 </head>
 <body>

@@ -101,7 +101,7 @@
 	jQuery(document).on("click", "#submit", function() {
 		var data = jQuery(".adjustment_form").parent().serialize();
 		var step = jQuery(this).prop("class");
-		wizardAjaxPostSubmit("#springUrl("/adjustment/wizard/")" + step, "#springUrl("/calculations")", data);
+		wizardAjaxPostSubmit('#springUrl("/adjustment/wizard/")'+ step, '#springUrl("/calculations")', data);
 		return false;
 	});
 	</script>

@@ -41,7 +41,7 @@ import cz.cvut.fsv.webgama.service.AdjustmentManager;
 public class AdjustmentWizardController extends MultiActionController implements Serializable {
 
 	@Inject
-	private AdjustmentManager adjustmentManager;
+	private transient AdjustmentManager adjustmentManager;
 
 	private static final long serialVersionUID = 5171649431095330184L;
 
