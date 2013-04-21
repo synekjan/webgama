@@ -274,16 +274,17 @@
 						#end
 					</div>
 				</div>
-				<div id="quick_links">
-					<div class="small_panel_header">#springMessage("navbar.adjustment")</div>
-					<div class="content">
-						<a class="new_button" href="#springUrl("/adjustment")">#springMessage("calculations.adjustment.new")</a>
+				<div id="left_column">
+					<div id="quick_links">
+						<div class="small_panel_header">#springMessage("navbar.adjustment")</div>
+						<div class="content">
+							<a class="new_button" href="#springUrl("/adjustment")">#springMessage("calculations.adjustment.new")</a>
+						</div>
 					</div>
+					<div class="info">#springMessage('calculations.info.covMat')</div>
 				</div>
-
 			</div>
 		</div>
-	</div>
 	</div>
 	#parse("footer.vm")
 </body>

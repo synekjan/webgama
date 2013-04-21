@@ -1298,13 +1298,17 @@ p.not_added {
 	padding: 5px;
 }
 
-#quick_links {
+#left_column {
 	display: inline-block;
-	width: 200px;
+	width: 220px;
+	vertical-align: top;
+	padding: 10px;
+}
+
+#quick_links {
 	border: 1px solid #DDD;
 	border-radius: 4px;
-	vertical-align: top;
-	margin: 20px 20px;
+	margin: 20px 0;
 }
 
 #quick_links div.content {
@@ -1422,8 +1426,6 @@ p.not_added {
 	margin: 5px;
 	display: inline-block;
 }
-
-
 
 .link_button {
 	background: -moz-linear-gradient(top, #FFFFFF, #E6E6E6) repeat-x scroll 0 0 #FAFAFA;
