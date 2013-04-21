@@ -1,10 +1,14 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class SlopeDistance {
+public class SlopeDistance implements Serializable {
+
+	private static final long serialVersionUID = -1785191537986551053L;
 
 	private Long id;
 

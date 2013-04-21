@@ -1,10 +1,14 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Direction {
+public class Direction implements Serializable {
+
+	private static final long serialVersionUID = 7589773890531853403L;
 
 	private Long id;
 

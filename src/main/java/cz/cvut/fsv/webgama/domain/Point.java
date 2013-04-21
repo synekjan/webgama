@@ -1,8 +1,12 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.io.Serializable;
+
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Point {
+public class Point implements Serializable {
+
+	private static final long serialVersionUID = -3185124980021394586L;
 
 	private Long id;
 

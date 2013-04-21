@@ -1,10 +1,14 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class HeightDifference {
+public class HeightDifference implements Serializable {
+
+	private static final long serialVersionUID = 5115758771811489351L;
 
 	private Long id;
 

@@ -1,5 +1,6 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,9 @@ import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Observation {
+public class Observation implements Serializable {
+
+	private static final long serialVersionUID = 5770684445246083336L;
 
 	private Long id;
 

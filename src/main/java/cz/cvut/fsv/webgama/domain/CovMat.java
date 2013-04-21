@@ -1,9 +1,13 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-public class CovMat {
+public class CovMat implements Serializable {
+
+	private static final long serialVersionUID = -1035228047025655513L;
 
 	private Long id;
 

@@ -1,11 +1,14 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
-public class Cluster {
+public class Cluster implements Serializable {
+
+	private static final long serialVersionUID = -5896985241356300456L;
 
 	private Long id;
 

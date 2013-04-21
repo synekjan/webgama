@@ -1,10 +1,14 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class ZenithAngle {
+public class ZenithAngle implements Serializable {
+
+	private static final long serialVersionUID = -2740277080833250866L;
 
 	private Long id;
 

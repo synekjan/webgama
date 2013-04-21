@@ -1,8 +1,12 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.io.Serializable;
+
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Coordinate {
+public class Coordinate implements Serializable {
+
+	private static final long serialVersionUID = 2806170317667032497L;
 
 	private Long id;
 

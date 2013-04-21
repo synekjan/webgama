@@ -1,10 +1,14 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Vector {
+public class Vector implements Serializable {
+
+	private static final long serialVersionUID = -4578626510871706109L;
 
 	private Long id;
 

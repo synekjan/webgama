@@ -1,9 +1,12 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Network {
+public class Network implements Serializable {
+
+	private static final long serialVersionUID = -4048418596512716587L;
 
 	private Long id;
 
