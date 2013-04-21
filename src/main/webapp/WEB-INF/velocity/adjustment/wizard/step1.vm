@@ -22,18 +22,28 @@
 					<legend>#springMessage("adjustment.onepage.network.definition")</legend>
 					<div class="medium_form_element">
 						<label for="axesXY">#springMessage("input.axesXY"):</label>
-						<div class="input">#springFormInput("input.axesXY",'placeholder="ne"')
-							#showElementErrors()</div>
+						<div class="input">
+							<select id="axesXY" name="axesXY">
+								<option value="ne" #if ($input.axesXY== "ne") selected #end>#springMessage("input.axesXY.ne")</option>
+								<option value="sw" #if ($input.axesXY== "sw") selected #end>#springMessage("input.axesXY.sw")</option>
+								<option value="es" #if ($input.axesXY== "es") selected #end>#springMessage("input.axesXY.es")</option>
+								<option value="wn" #if ($input.axesXY== "wn") selected #end>#springMessage("input.axesXY.wn")</option>
+								<option value="en" #if ($input.axesXY== "en") selected #end>#springMessage("input.axesXY.en")</option>
+								<option value="wn" #if ($input.axesXY== "wn") selected #end>#springMessage("input.axesXY.wn")</option>
+								<option value="se" #if ($input.axesXY== "se") selected #end>#springMessage("input.axesXY.se")</option>
+								<option value="ws" #if ($input.axesXY== "ws") selected #end>#springMessage("input.axesXY.ws")</option>
+							</select>
+						</div>
 					</div>
 					<div class="medium_form_element">
 						<label for="angles">#springMessage("input.angles"):</label>
 						<div class="input">
-							<select id="sigma-act" name="angles">
+							<select id="angles" name="angles">
 								<option value="left-handed" #if ($input.angles==
-									"left-handed") selected #end>Left-Handed</option>
+									"left-handed") selected #end>#springMessage("input.angles.left-handed")</option>
 								<option value="right-handed" #if ($input.angles==
-									"right-handed") selected #end>Right-Handed</option>
-							</select> #showElementErrors()
+									"right-handed") selected #end>#springMessage("input.angles.right-handed")</option>
+							</select>
 						</div>
 					</div>
 					<div class="medium_form_element">

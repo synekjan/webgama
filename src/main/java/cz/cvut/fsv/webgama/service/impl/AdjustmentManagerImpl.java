@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
@@ -33,9 +32,7 @@ import cz.cvut.fsv.webgama.service.ActivityManager;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
 import cz.cvut.fsv.webgama.service.ProcessManager;
 
-public class AdjustmentManagerImpl implements AdjustmentManager, Serializable {
-
-	private static final long serialVersionUID = 6430214896290153174L;
+public class AdjustmentManagerImpl implements AdjustmentManager {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdjustmentManagerImpl.class);
 

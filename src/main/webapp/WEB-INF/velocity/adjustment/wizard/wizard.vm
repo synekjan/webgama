@@ -25,12 +25,13 @@
 					<div id="wizard_panel">
 						<div id="wizard_header">
 							<h3>#springMessage("adjustment.onepage.network.definition")</h3>
-							<h4><span class="current">1</span>/<span class="total">4</span></h4>
+							<h4>
+								<span class="current">1</span>/<span class="total">4</span>
+							</h4>
 						</div>
 						<div id="wizard_breadcrumbs"></div>
 						<div class="advice">
-							#springMessage("adjustment.wizard.advice.network.definition")
-						</div>
+							#springMessage("adjustment.wizard.advice.network.definition")</div>
 						<div id="wizard_form">
 							#springBind("input.*")#if(${status.error})
 							<div class="error">
@@ -45,17 +46,27 @@
 										<legend>#springMessage("adjustment.onepage.network.definition")</legend>
 										<div class="medium_form_element">
 											<label for="axesXY">#springMessage("input.axesXY"):</label>
-											<div class="input">#springFormInput("input.axesXY",'placeholder="ne"')
-												#showElementErrors()</div>
+											<div class="input">
+												<select id="axesXY" name="axesXY">
+													<option value="ne" #if ($input.axesXY== "ne") selected #end>#springMessage("input.axesXY.ne")</option>
+													<option value="sw" #if ($input.axesXY== "sw") selected #end>#springMessage("input.axesXY.sw")</option>
+													<option value="es" #if ($input.axesXY== "es") selected #end>#springMessage("input.axesXY.es")</option>
+													<option value="wn" #if ($input.axesXY== "wn") selected #end>#springMessage("input.axesXY.wn")</option>
+													<option value="en" #if ($input.axesXY== "en") selected #end>#springMessage("input.axesXY.en")</option>
+													<option value="wn" #if ($input.axesXY== "wn") selected #end>#springMessage("input.axesXY.wn")</option>
+													<option value="se" #if ($input.axesXY== "se") selected #end>#springMessage("input.axesXY.se")</option>
+													<option value="ws" #if ($input.axesXY== "ws") selected #end>#springMessage("input.axesXY.ws")</option>
+												</select>
+											</div>
 										</div>
 										<div class="medium_form_element">
 											<label for="angles">#springMessage("input.angles"):</label>
 											<div class="input">
 												<select id="sigma-act" name="angles">
 													<option value="left-handed" #if ($input.angles==
-														"left-handed") selected #end>Left-Handed</option>
+														"left-handed") selected #end>#springMessage("input.angles.left-handed")</option>
 													<option value="right-handed" #if ($input.angles==
-														"right-handed") selected #end>Right-Handed</option>
+														"right-handed") selected #end>#springMessage("input.angles.right-handed")</option>
 												</select> #showElementErrors()
 											</div>
 										</div>
@@ -75,7 +86,8 @@
 									</fieldset>
 								</div>
 								<div id="wizard_buttons">
-									<input id="next" class="step1" name="next" type="submit" value="Next">
+									<input id="next" class="step1" name="next" type="submit"
+										value="Next">
 								</div>
 							</form>
 						</div>
@@ -86,24 +98,30 @@
 	</div>
 	#parse("footer.vm") #parse("toolbar.vm")
 	<script>
-	jQuery(document).on("click", "#next", function() {
-		var data = jQuery(".adjustment_form").parent().serialize();
-		var step = jQuery(this).prop("class");
-		wizardAjaxPostNext("#springUrl("/adjustment/wizard/")" + step, data);
-		return false;
-	});
-	jQuery(document).on("click", "#previous", function() {
-		var data = jQuery(".adjustment_form").parent().serialize();
-		var step = jQuery(this).prop("class");
-		wizardAjaxPostPrevious("#springUrl("/adjustment/wizard/")" + step, data);
-		return false;
-	});
-	jQuery(document).on("click", "#submit", function() {
-		var data = jQuery(".adjustment_form").parent().serialize();
-		var step = jQuery(this).prop("class");
-		wizardAjaxPostSubmit('#springUrl("/adjustment/wizard/")'+ step, '#springUrl("/calculations")', data);
-		return false;
-	});
+		jQuery(document).on("click","#next",function() {
+					var data = jQuery(".adjustment_form").parent().serialize();
+					var step = jQuery(this).prop("class");
+					wizardAjaxPostNext('#springUrl("/adjustment/wizard/")' + step, data);
+					return false;
+				});
+		jQuery(document).on(
+				"click",
+				"#previous",
+				function() {
+					var data = jQuery(".adjustment_form").parent().serialize();
+					var step = jQuery(this).prop("class");
+					wizardAjaxPostPrevious('#springUrl("/adjustment/wizard/")' + step, data);
+					return false;
+				});
+		jQuery(document).on(
+				"click",
+				"#submit",
+				function() {
+					var data = jQuery(".adjustment_form").parent().serialize();
+					var step = jQuery(this).prop("class");
+					wizardAjaxPostSubmit('#springUrl("/adjustment/wizard/")'+ step, '#springUrl("/calculations")', data);
+					return false;
+				});
 	</script>
 </body>
 </html>
