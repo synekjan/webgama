@@ -22,7 +22,7 @@
 					<h2>#springMessage("adjustment.wizard.form.name")</h2>
 				</div>
 				<div id="wizard">
-					<div id="wizard_panel">
+					<div id="wizard_panel" class="wizard_first">
 						<div id="wizard_header">
 							<h3>#springMessage("adjustment.onepage.network.definition")</h3>
 							<h4>
@@ -87,7 +87,7 @@
 								</div>
 								<div id="wizard_buttons">
 									<input id="next" class="step1" name="next" type="submit"
-										value="Next">
+										value="#springMessage("adjustment.wizard.next")">
 								</div>
 							</form>
 						</div>

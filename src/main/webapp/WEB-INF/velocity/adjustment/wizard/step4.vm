@@ -1,4 +1,4 @@
-<div id="wizard_panel">
+<div id="wizard_panel" class="wizard_last">
 	<div id="wizard_header">
 		<h3>#springMessage("adjustment.onepage.clusters")</h3>
 		<h4><span class="current">4</span>/<span class="total">4</span></h4>
@@ -646,8 +646,8 @@
 				</fieldset>
 			</div>
 			<div id="wizard_buttons">
-				<input id="previous" class="step4" type="submit" value="Previous">
-				<input id="submit" class="step4" type="submit" value="Submit">
+				<input id="previous" class="step4" type="submit" value="#springMessage("adjustment.wizard.previous")">
+				<input id="submit" class="step4" type="submit" value="#springMessage("adjustment.wizard.submit")">
 			</div>
 		</form>
 	</div>

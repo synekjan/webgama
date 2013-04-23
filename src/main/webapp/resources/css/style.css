@@ -373,19 +373,6 @@ div#about_container .right_menu {
 	text-shadow: 0 -1px 1px #555555;
 }
 
-div#about_container .right_menu .menu_header {
-	font-size: 16px;
-	border-bottom: 1px solid #DDD;
-	background-color: #F1F1F1;
-	background: -moz-linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
-	background: -ms-linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
-	background: -webkit-linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
-	background: -o-linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
-	background: linear-gradient(top, #fafafa, #e5e5e5) repeat scroll 0 0 #e9e9e9;
-	padding: 5px;
-	text-align: center;
-}
-
 #about_content {
 	width: 680px;
 	float: left;
@@ -794,7 +781,8 @@ input.submit_btn:ACTIVE,.calculate_box button:ACTIVE,#wizard_buttons #submit:ACT
 }
 
 #onepage {
-	background-color: #F5F5F5
+	background-color: #F5F5F5;
+	background: url("../img/onepage.png") no-repeat scroll 97% 100% #F5F5F5;
 }
 
 #signup_container {
@@ -956,7 +944,7 @@ div#wizard_form {
 }
 
 div#wizard_buttons {
-	margin-top: 20px;
+	margin-top: 30px;
 	border-top: 1px solid #DDDDDD;
 	padding: 20px 10px 10px 10px;
 	overflow: auto;
@@ -976,6 +964,7 @@ div#wizard_buttons {
 	text-align: center;
 	font-size: 14px;
 	font-weight: bold;
+	width: 100px;
 }
 
 #wizard_buttons #next {
@@ -1001,9 +990,27 @@ div#wizard_buttons {
 	color: #FFFFFF;
 	font-size: 14px;
 	font-weight: bold;
-	padding: 5px 15px;
+	padding: 8px 10px;
 	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.25);
-	margin-top: 10px;
+	width: 100px;
+}
+
+.wizard_first {
+	background: url("../img/big-arrow-right.png") no-repeat scroll 97% 100% #F5F5F5;
+}
+
+.wizard_middle {
+	background-image: url("../img/big-arrow-left.png"), url("../img/big-arrow-right.png"); 
+	background-repeat: no-repeat;
+	background-position:  3% 100%, 97% 100%; 
+	background-color:  #F5F5F5;
+}
+
+.wizard_last {
+	background-image: url("../img/big-arrow-left.png"), url("../img/wizard.png"); 
+	background-repeat: no-repeat;
+	background-position:  3% 100%, 97% 100%; 
+	background-color:  #F5F5F5;
 }
 
 /* ----------------- INDEX ----------------------  */

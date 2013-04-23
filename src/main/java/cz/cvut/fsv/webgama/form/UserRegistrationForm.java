@@ -1,5 +1,7 @@
 package cz.cvut.fsv.webgama.form;
 
+import javax.validation.constraints.Pattern;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -8,6 +10,7 @@ public class UserRegistrationForm {
 
 	@NotBlank
 	@Length(min = 3, max = 30)
+	@Pattern(regexp = "[^\\s]+", message="Pattern.username")
 	private String username;
 
 	@NotBlank

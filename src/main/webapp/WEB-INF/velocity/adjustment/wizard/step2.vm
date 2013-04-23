@@ -1,4 +1,4 @@
-<div id="wizard_panel">
+<div id="wizard_panel" class="wizard_middle">
 	<div id="wizard_header">
 		<h3>#springMessage("adjustment.onepage.network.parameters")</h3>
 		<h4><span class="current">2</span>/<span class="total">4</span></h4>
@@ -80,8 +80,8 @@
 				</fieldset>
 			</div>
 			<div id="wizard_buttons">
-				<input id="previous" class="step2" type="submit" value="Previous">
-				<input id="next" class="step2" type="submit" value="Next">
+				<input id="previous" class="step2" type="submit" value="#springMessage("adjustment.wizard.previous")">
+				<input id="next" class="step2" type="submit" value="#springMessage("adjustment.wizard.next")">
 			</div>
 		</form>
 	</div>

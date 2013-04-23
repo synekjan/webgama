@@ -1,3 +1,4 @@
 <script>
 location.href = "#springUrl("/calculations")";
 </script>
+<p>#springMessage("loading")</p>
