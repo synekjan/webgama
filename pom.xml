@@ -285,12 +285,10 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.3</version>
 				<configuration>
-					<warName>webgama</warName>
+					<warName>ROOT</warName>
 				</configuration>
 
 			</plugin>
-
-
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

@@ -1,31 +1,36 @@
-<div id="side_toolbar" class="resizable draggable">
+<div id="side_toolbar" class="draggable docked">
 
 	<div id="toolbar">
 		<div id="toolbar_header">
 			<h1>Toolbar</h1>
+			<span class="icon-close-toolbar"></span>
 		</div>
 		<div id="toolbar_content">
 		
-		<button class="add_point">Add Point</button>
+		<button class="add_point parent" title="#springMessage("toolbar.add.point")">#springMessage("adjustment.onepage.point")</button>
 		
-		<button class="add_observation">Add Observation</button>
-		<button class="add_direction">Add Direction</button>
-		<button class="add_distance">Add Distance</button>
-		<button class="add_angle">Add Angle</button>
-		<button class="add_slopeDistance">Add Slope Distance</button>
-		<button class="add_zenithAngle">Add Zenith Angle</button>
+		<div class="group">
+		<button class="add_observation parent" title="#springMessage("toolbar.add.observation")">#springMessage("adjustment.onepage.observation")</button>
+		<button class="add_direction child" title="#springMessage("toolbar.add.direction")">#springMessage("adjustment.onepage.direction")</button>
+		<button class="add_distance child" title="#springMessage("toolbar.add.distance")">#springMessage("adjustment.onepage.distance")</button>
+		<button class="add_angle child" title="#springMessage("toolbar.add.angle")">#springMessage("adjustment.onepage.angle")</button>
+		<button class="add_slopeDistance child" title="#springMessage("toolbar.add.slopeDistance")">#springMessage("adjustment.onepage.slopeDistance")</button>
+		<button class="add_zenithAngle child" title="#springMessage("toolbar.add.zenithAngle")">#springMessage("adjustment.onepage.zenithAngle")</button>
+		</div>
+		<div class="group">
+		<button class="add_heightDifferences parent" title="#springMessage("toolbar.add.heightDifferences")">#springMessage("adjustment.onepage.heightDifferences")</button>
+		<button class="add_heightDifference child" title="#springMessage("toolbar.add.heightDifference")">#springMessage("adjustment.onepage.heightDifference")</button>
+		</div>
+		<div class="group">
+		<button class="add_coordinates parent" title="#springMessage("toolbar.add.coordinates")">#springMessage("adjustment.onepage.coordinates")</button>
+		<button class="add_coordinate child" title="#springMessage("toolbar.add.coordinate")">#springMessage("adjustment.onepage.coordinate")</button>
+		</div>
+		<div class="group">
+		<button class="add_vectors parent" title="#springMessage("toolbar.add.vectors")">#springMessage("adjustment.onepage.vectors")</button>
+		<button class="add_vector child" title="#springMessage("toolbar.add.vector")">#springMessage("adjustment.onepage.vector")</button>
+		</div>
 		
-		<button class="add_heightDifferences">Add Height Differences</button>
-		<button class="add_heightDifference">Add Height Difference</button>
-		
-		<button class="add_coordinates">Add Coordinates</button>
-		<button class="add_coordinate">Add Coordinate</button>
-
-		<button class="add_vectors">Add Vectors</button>
-		<button class="add_vector">Add Vector</button>
-		
-		<button class="add_covMat">Add Covariance Matrix</button>
-		
+		<button class="add_covMat parent" title="#springMessage("toolbar.add.covMat")">#springMessage("adjustment.onepage.covMat")</button>
 		
 		</div>
 	</div>
@@ -34,9 +39,43 @@
 <script>
 jQuery(document).ready(function() {
 
-//hiding toolbar 
-jQuery("#collapse_link").click(function () {
-	jQuery("#toolbar_content").toggle("slow");
+	//hiding toolbar 
+	jQuery("#side_toolbar").delay(2000).animate({
+		left: '-200',
+		opacity: '0.65'
+		}, 500, function() {
+			
+		});
+	
+	jQuery(document).on('mouseenter', '.docked', function(){
+		jQuery(this).stop(true, true).animate({
+		left: '0',
+		opacity: '1'
+		}, 500, function() {
+			
+		});
+	}).on('mouseleave', '.docked', function() {
+		jQuery(this).stop(true, true).delay(2000).animate({
+			left: '-200',
+			opacity: '0.65'
+			}, 500, function() {
+				
+			});
+	});
+	
+	jQuery(".icon-close-toolbar").click(function () {
+	
+	jQuery("#side_toolbar").animate({
+		left: '0',
+		top: '200'
+		}, 500, function() {
+			jQuery(this).addClass('docked').delay(1000).animate({
+				left: '-200',
+				opacity: '0.65'
+				}, 500, function() {
+					
+				});
+		});
 });
 
 });

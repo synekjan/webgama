@@ -61,7 +61,7 @@ public class StAXInputParserTest {
 		assertTrue(str.contains("<dh from=\"1\" to=\"2\" val=\"0.061\" stdev=\"3.9\""));
 		assertTrue(str.contains("val=\"266.666543\""));
 		assertTrue(str.contains("to=\"3\" val=\"160.814358\""));
-		System.out.println(str);
+		/*System.out.println(str);*/
 	}
 
 }

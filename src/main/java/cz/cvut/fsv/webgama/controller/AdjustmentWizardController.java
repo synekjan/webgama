@@ -41,7 +41,7 @@ import cz.cvut.fsv.webgama.service.AdjustmentManager;
 public class AdjustmentWizardController extends MultiActionController implements Serializable {
 
 	@Inject
-	private transient AdjustmentManager adjustmentManager;
+	private AdjustmentManager adjustmentManager;
 
 	private static final long serialVersionUID = 5171649431095330184L;
 
@@ -77,7 +77,7 @@ public class AdjustmentWizardController extends MultiActionController implements
 
 		// Check if path variable is in database otherwise throw 404 HTTP Status
 		// code
-		if (id <= 0 || !adjustmentManager.isCalculationIdInDB(id)) {
+		if (id <= 0L || !adjustmentManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
 
@@ -88,7 +88,7 @@ public class AdjustmentWizardController extends MultiActionController implements
 		}
 
 		ModelAndView mav = new ModelAndView("/adjustment/wizard/wizard");
-		input = adjustmentManager.getCalculationById(id).getInput();
+		this.input = adjustmentManager.getCalculationById(id).getInput();
 		NetworkDefinitionWizardForm form = new NetworkDefinitionWizardForm(input);
 		mav.addObject("input", form);
 		return mav;

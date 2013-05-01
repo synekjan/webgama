@@ -41,7 +41,7 @@
 				<div class="slide">
 					<div class="image">
 						<img alt="Test picture" width="600" height="400"
-							title="#springMessage("application.name")" src="#springUrl("/resources/img/webgama-slide.png")">
+							title="#springMessage("application.name")" src="#springUrl("/resources/img/webgama-slide02.png")">
 					</div>
 					<div class="text">
 						<h1>Amazing feature</h1>
@@ -56,7 +56,7 @@
 				</div>
 				<div class="slide">
 					<div class="image">
-						<img alt="Test picture" title="#springMessage("application.name")" src="#springUrl("/resources/img/webgama-slide.png")">
+						<img alt="Test picture" title="#springMessage("application.name")" src="#springUrl("/resources/img/webgama-slide01.png")">
 					</div>
 					<div class="text">
 						<h1>Less Amazing feature</h1>

@@ -60,10 +60,12 @@ $(document).ready(function() {
 
 
 			$(".draggable").draggable({
-				handle : "#toolbar_header"
+				handle : "#toolbar_header",
+				start: function( event, ui ) {
+					jQuery("#side_toolbar").removeClass('docked');
+				}
 			});
 			
-			/*$('#side_toolbar').animate({width: 'toggle'},20000);*/
 
 			// delete element click event
 			jQuery(document).on("click", "span.icon-close", function() {
