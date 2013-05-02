@@ -35,19 +35,34 @@
 		</div>
 	</div>
 </div>
+<div id="handwritten-arrow">
+	<img alt="Arrow" src="#springUrl('/resources/img/handwritten-arrow.png')">
+</div>
 
 <script>
 jQuery(document).ready(function() {
 
+	function animateArrow() {
+		jQuery('#handwritten-arrow').animate({
+			left: '90',
+			}, 500, function() {
+				jQuery(this).animate({left:'60'},500, function() {
+					animateArrow();
+				});						
+			});
+	}
+	
 	//hiding toolbar 
-	jQuery("#side_toolbar").delay(2000).animate({
+	jQuery("#side_toolbar").delay(1000).animate({
 		left: '-200',
 		opacity: '0.65'
 		}, 500, function() {
-			
+			jQuery('#handwritten-arrow').fadeIn();
+			animateArrow();    
 		});
 	
 	jQuery(document).on('mouseenter', '.docked', function(){
+		jQuery('#handwritten-arrow').hide();
 		jQuery(this).stop(true, true).animate({
 		left: '0',
 		opacity: '1'

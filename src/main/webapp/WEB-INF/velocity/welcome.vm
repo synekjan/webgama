@@ -27,14 +27,11 @@
 							title="#springMessage("application.name")" src="#springUrl("/resources/img/webgama-slide.png")">
 					</div>
 					<div class="text">
-						<h1>Version 0.1 is out!</h1>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua. Ut enim ad minim veniam</p>
-						<p>quis nostrud exercitation ullamco laboris nisi ut aliquip
-							ex ea commodo consequat.</p>
+						<h1>#springMessage("welcome.slideshow.slide1.header")</h1>
+						<p>#springMessage("welcome.slideshow.slide1.message")</p>
+						<p>#springMessage("welcome.slideshow.slide1.message1")</p>
 						<div class="more">
-							<a href="#">#springMessage("welcome.slideshow.show.more")</a>
+							<a href="#springUrl('/about/project')">#springMessage("welcome.slideshow.show.more")</a>
 						</div>
 					</div>
 				</div>
@@ -44,11 +41,8 @@
 							title="#springMessage("application.name")" src="#springUrl("/resources/img/webgama-slide02.png")">
 					</div>
 					<div class="text">
-						<h1>Amazing feature</h1>
-						<p>Sed ut perspiciatis unde omnis iste natus error sit
-							voluptatem accusantium doloremque laudantium, totam rem aperiam,
-							eaque ipsa quae ab illo inventore veritatis et quasi architecto
-							beatae vitae dicta sunt explicabo.</p>
+						<h1>#springMessage("welcome.slideshow.slide2.header")</h1>
+						<p>#springMessage("welcome.slideshow.slide2.message")</p>
 						<div class="more">
 							<a href="#">#springMessage("welcome.slideshow.learn.more")</a>
 						</div>
@@ -59,14 +53,14 @@
 						<img alt="Test picture" title="#springMessage("application.name")" src="#springUrl("/resources/img/webgama-slide01.png")">
 					</div>
 					<div class="text">
-						<h1>Less Amazing feature</h1>
-						<p>At vero eos et accusamus et iusto odio dignissimos ducimus
-							qui blanditiis praesentium voluptatum deleniti atque corrupti
-							quos dolores et quas molestias excepturi sint occaecati
-							cupiditate non provident.</p>
-						<div class="more">
-							<a href="#">#springMessage("welcome.slideshow.learn.more")</a>
-						</div>
+						<h1>#springMessage("welcome.slideshow.slide3.header")</h1>
+						<p>#springMessage("welcome.slideshow.slide3.message")</p>
+						<ul>
+							<li>Text</li>
+							<li>XML</li>
+							<li>HTML</li>
+							<li>SVG</li>
+						</ul>
 					</div>
 				</div>
 			</div>
