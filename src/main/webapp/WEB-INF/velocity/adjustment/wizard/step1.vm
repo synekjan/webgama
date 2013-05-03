@@ -21,7 +21,7 @@
 				<fieldset>
 					<legend>#springMessage("adjustment.onepage.network.definition")</legend>
 					<div class="medium_form_element">
-						<label for="axesXY">#springMessage("input.axesXY"):</label>
+						<label for="axesXY" class="axesXY">#springMessage("input.axesXY"):</label>
 						<div class="input">
 							<select id="axesXY" name="axesXY">
 								<option value="ne" #if ($input.axesXY== "ne") selected #end>#springMessage("input.axesXY.ne")</option>
@@ -36,7 +36,7 @@
 						</div>
 					</div>
 					<div class="medium_form_element">
-						<label for="angles">#springMessage("input.angles"):</label>
+						<label for="angles" class="angles">#springMessage("input.angles"):</label>
 						<div class="input">
 							<select id="angles" name="angles">
 								<option value="left-handed" #if ($input.angles==
@@ -47,7 +47,7 @@
 						</div>
 					</div>
 					<div class="medium_form_element">
-						<label for="epoch">#springMessage("input.epoch"):</label>
+						<label for="epoch" class="epoch">#springMessage("input.epoch"):</label>
 						<div class="input">#springFormInput("input.epoch",
 							'placeholder="0"') #showElementErrors()</div>
 					</div>
@@ -55,7 +55,7 @@
 				<fieldset>
 					<legend>#springMessage("adjustment.onepage.network.description")</legend>
 					<div class="medium_form_element">
-						<label for="description">#springMessage("input.description"):</label>
+						<label for="description" class="description">#springMessage("input.description"):</label>
 						<div class="input">#springFormTextarea("input.description",
 							"") #showElementErrors()</div>
 					</div>

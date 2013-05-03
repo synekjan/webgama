@@ -1021,6 +1021,30 @@ div#wizard_buttons {
 	background-color: #F5F5F5;
 }
 
+/* ------------------ ADJUSTMENT ADVICES --------------------  */
+#wizard_form .adjustment_form label {
+	cursor: help;
+	diplay: block;
+}
+
+#advices {
+	display: none;
+}
+
+.advice_box {
+	display: none;
+	position: fixed;
+	top: 100px;
+	left: 500px;
+	border: 1px solid #BBBBBB;
+	background-color: #FFFFFF;
+	z-index: 100;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	padding: 5px 10px;
+	border-radius: 3px;
+	max-width: 300px;
+}
+
 /* ----------------- INDEX ----------------------  */
 .index_page #primary {
 	display: inline-block;
@@ -1193,7 +1217,7 @@ div#slides {
 }
 
 .slide ul {
-	margin-left: 30px; 
+	margin-left: 30px;
 	list-style: disc;
 }
 

@@ -24,30 +24,30 @@
 							<span class="icon-close" role="button"></span>
 							#springFormHiddenInput("input.points[$i].id" "")
 							<div class="title_bar">
-								<label class="required" for="points[$i].name">#springMessage("adjustment.onepage.point"):</label>
+								<label class="point-name required" for="points[$i].name">#springMessage("adjustment.onepage.point"):</label>
 								#springBind("input.points[$i].name") <input type="text"
 									id="points[$i].name" name="points[$i].name"
 									value="$!point.name" /> #showElementErrors()
 							</div>
 							<div class="window_content">
 								<div class="point_form_element">
-									<label for="points[$i].x">X:</label>
+									<label for="points[$i].x" class="point-x">X:</label>
 									#springBind("input.points[$i].x") <input id="points[$i].x"
 										type="text" name="points[$i].x" value="$!point.x" />
 									#showElementErrors()
 								</div>
 								<div class="point_form_element">
-									<label for="points[$i].y">Y:</label>
+									<label for="points[$i].y" class="point-y">Y:</label>
 									#springBind("input.points[$i].y") <input id="points[$i].y"
 										type="text" name="points[$i].y" value="$!point.y" />
 									#showElementErrors()
 								</div>
 								<div class="point_form_element">
-									<label for="points[$i].z">Z:</label>
+									<label for="points[$i].z" class="point-z">Z:</label>
 									#springFormInput("input.points[$i].z", "")#showElementErrors()
 								</div>
 								<div class="point_form_element">
-									<label for="points[$i].fix">Fix:</label>
+									<label for="points[$i].fix" class="point-fix">Fix:</label>
 									#springBind("input.points[$i].fix")<select id="points[$i].fix"
 										name="points[$i].fix">
 										<option value=""></option>
@@ -62,7 +62,7 @@
 									</select> #showElementErrors()
 								</div>
 								<div class="point_form_element">
-									<label for="points[$i].adj">Adj:</label>
+									<label for="points[$i].adj" class="point-adj">Adj:</label>
 									#springBind("input.points[$i].adj")<select id="points[$i].adj"
 										name="points[$i].adj">
 										<option value=""></option>

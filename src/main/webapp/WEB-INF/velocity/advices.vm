@@ -1,0 +1,98 @@
+<div class="advice_box"></div>
+<div id="advices">
+<div class="axesXY">#springMessage("input.axesXY.advice")</div>
+<div class="angles">#springMessage("input.angles.advice")</div>
+<div class="epoch">#springMessage("input.epoch.advice")</div>
+<div class="description">#springMessage("input.description.advice")</div>
+<div class="sigmaApr">#springMessage("input.sigmaApr.advice")</div>
+<div class="confPr">#springMessage("input.confPr.advice")</div>
+<div class="tolAbs">#springMessage("input.tolAbs.advice")</div>
+<div class="sigmaAct">#springMessage("input.sigmaAct.advice")</div>
+<div class="updateCC">#springMessage("input.updateCC.advice")</div>
+<div class="directionStdev">#springMessage("input.directionStdev.advice")</div>
+<div class="angleStdev">#springMessage("input.angleStdev.advice")</div>
+<div class="zenithAngleStdev">#springMessage("input.zenithAngleStdev.advice")</div>
+<div class="distanceStdev">#springMessage("input.distanceStdev.advice")</div>
+<div class="point-name">#springMessage("point.name.advice")</div>
+<div class="point-x">#springMessage("point.x.advice")</div>
+<div class="point-y">#springMessage("point.y.advice")</div>
+<div class="point-z">#springMessage("point.z.advice")</div>
+<div class="point-fix">#springMessage("point.fix.advice")</div>
+<div class="point-adj">#springMessage("point.adj.advice")</div>
+<div class="observation-from">#springMessage("observation.from.advice")</div>
+<div class="observation-orientation">#springMessage("observation.orientation.advice")</div>
+<div class="observation-fromDh">#springMessage("observation.fromDh.advice")</div>
+<div class="direction-to">#springMessage("direction.to.advice")</div>
+<div class="direction-val">#springMessage("direction.val.advice")</div>
+<div class="direction-stdev">#springMessage("direction.stdev.advice")</div>
+<div class="direction-fromDh">#springMessage("direction.fromDh.advice")</div>
+<div class="direction-toDh">#springMessage("direction.toDh.advice")</div>
+<div class="distance-from">#springMessage("distance.from.advice")</div>
+<div class="distance-to">#springMessage("distance.to.advice")</div>
+<div class="distance-val">#springMessage("distance.val.advice")</div>
+<div class="distance-stdev">#springMessage("distance.stdev.advice")</div>
+<div class="distance-fromDh">#springMessage("distance.fromDh.advice")</div>
+<div class="distance-toDh">#springMessage("distance.toDh.advice")</div>
+<div class="angle-from">#springMessage("angle.from.advice")</div>
+<div class="angle-bs">#springMessage("angle.bs.advice")</div>
+<div class="angle-fs">#springMessage("angle.fs.advice")</div>
+<div class="angle-val">#springMessage("angle.val.advice")</div>
+<div class="angle-stdev">#springMessage("angle.stdev.advice")</div>
+<div class="angle-fromDh">#springMessage("angle.fromDh.advice")</div>
+<div class="angle-bsDh">#springMessage("angle.bsDh.advice")</div>
+<div class="angle-fsDh">#springMessage("angle.fsDh.advice")</div>
+<div class="slopeDistance-from">#springMessage("slopeDistance.from.advice")</div>
+<div class="slopeDistance-to">#springMessage("slopeDistance.to.advice")</div>
+<div class="slopeDistance-val">#springMessage("slopeDistance.val.advice")</div>
+<div class="slopeDistance-stdev">#springMessage("slopeDistance.stdev.advice")</div>
+<div class="slopeDistance-fromDh">#springMessage("slopeDistance.fromDh.advice")</div>
+<div class="slopeDistance-toDh">#springMessage("slopeDistance.toDh.advice")</div>
+<div class="zenithAngle-from">#springMessage("zenithAngle.from.advice")</div>
+<div class="zenithAngle-to">#springMessage("zenithAngle.to.advice")</div>
+<div class="zenithAngle-val">#springMessage("zenithAngle.val.advice")</div>
+<div class="zenithAngle-stdev">#springMessage("zenithAngle.stdev.advice")</div>
+<div class="zenithAngle-fromDh">#springMessage("zenithAngle.fromDh.advice")</div>
+<div class="zenithAngle-toDh">#springMessage("zenithAngle.toDh.advice")</div>
+<div class="heightDifference-from">#springMessage("heightDifference.from.advice")</div>
+<div class="heightDifference-to">#springMessage("heightDifference.to.advice")</div>
+<div class="heightDifference-val">#springMessage("heightDifference.val.advice")</div>
+<div class="heightDifference-stdev">#springMessage("heightDifference.stdev.advice")</div>
+<div class="heightDifference-dist">#springMessage("heightDifference.dist.advice")</div>
+<div class="vector-from">#springMessage("vector.from.advice")</div>
+<div class="vector-to">#springMessage("vector.to.advice")</div>
+<div class="vector-dx">#springMessage("vector.dx.advice")</div>
+<div class="vector-dy">#springMessage("vector.dy.advice")</div>
+<div class="vector-dz">#springMessage("vector.dz.advice")</div>
+<div class="vector-fromDh">#springMessage("vector.fromDh.advice")</div>
+<div class="vector-toDh">#springMessage("vector.toDh.advice")</div>
+<div class="covMat-dim">#springMessage("covMat.dim.advice")</div>
+<div class="covMat-band">#springMessage("covMat.band.advice")</div>
+<div class="observation">#springMessage("observation.advice")</div>
+<div class="direction">#springMessage("direction.advice")</div>
+<div class="distance">#springMessage("distance.advice")</div>
+<div class="angle">#springMessage("angle.advice")</div>
+<div class="slopeDistance">#springMessage("slopeDistance.advice")</div>
+<div class="zenithAngle">#springMessage("zenithAngle.advice")</div>
+<div class="heightDifference">#springMessage("heightDifference.advice")</div>
+<div class="heightDifferences-">#springMessage("heightDifferences.advice")</div>
+<div class="vector">#springMessage("vector.advice")</div>
+<div class="vectors-">#springMessage("vectors.advice")</div>
+<div class="coordinates-">#springMessage("coordinates.advice")</div>
+<div class="coordinate">#springMessage("coordinate.advice")</div>
+<div class="covMat">#springMessage("covMat.advice")</div>
+</div>
+<script>
+jQuery(document).on('mouseenter', '#wizard_form .adjustment_form label', function(e){
+	var element = jQuery(this).prop('class').split(' ')[0];
+	var text = jQuery('#advices .' + element).html();
+	jQuery('.advice_box').html(null).html(text).stop(true, true).delay(1000).css({top: e.clientY + 10, left: e.clientX + 10}).fadeIn();
+	
+	
+}).on('mouseleave', '#wizard_form .adjustment_form label', function() {
+	jQuery('.advice_box').stop(true,true).fadeOut();
+});
+
+
+
+
+</script>

@@ -3,7 +3,6 @@
  ****************/
 
 INSERT INTO users (username,password,enabled) VALUES ('admin','c4737b4b5e1d23be81810b2e1346e8d2b6c9bdaa8122c5d9545cc8be4e8edf133a0fa313d187b6ef',TRUE);
-INSERT INTO users (username,password,enabled) VALUES ('user','e65e74111ce740e7c8d7128f8613f8b4097134e4a1effe22599df7a9d9925cd27326df67894022d0',TRUE);
 INSERT INTO users (username,password,enabled,firstname,lastname,email,telephone,street,number,city,zipcode,state) VALUES ('pepa','ac906a053c63114a477bc10d5c20ca36265a5c4650a2a347edf91d00203b5b0ede46e48178219a10',TRUE,'Josef','Vonásek','josef@vonasek.cz','777111222','Lipská', 80,'Prague','51401','Czech Republic');
 INSERT INTO users (username,password,enabled,firstname,lastname,email,telephone,street,number,city,zipcode,state) VALUES ('radek','0b0479e3f5bdb4897ac1877f5618f7252807bf0973d9ae8a7690b485f1e8770acddce677b271674b',TRUE,'Radek','Pomalý','radek@pomaly.cz','776890543','Mostecká', 30,'Pětipsy','22098','Czech Republic');
 INSERT INTO users (username,password,enabled,firstname,lastname,email,telephone,street,number,city,zipcode,state) VALUES ('ivona','3dc00fe010448c891c2662c7635d7a46df2bfee364a554e65e50bf3841e07e3bdce5ee43a9930143',TRUE,'Ivona','Lichá','ivona@licha.cz','603764290','Luční', 55,'Ostrava','42921','Czech Republic');
