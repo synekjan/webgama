@@ -56,6 +56,7 @@
 		<property name="outputDao" ref="outputDao" />
 		<property name="userDao" ref="userDao" />
 		<property name="calculationStatisticDao" ref="calculationStatisticDao" />
+		<property name="calculationPrivilegeDao" ref="calculationPrivilegeDao" />
 	</bean>
 
 	<bean id="calculationStatisticDao"
@@ -63,6 +64,17 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
+	<bean id="privilegeDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcPrivilegeDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="calculationPrivilegeDao"
+		class="cz.cvut.fsv.webgama.dao.jdbc.JdbcCalculationPrivilegeDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="userDao" ref="userDao" />
+		<property name="privilegeDao" ref="privilegeDao" />
+	</bean>
+	
 	<bean id="outputDao" class="cz.cvut.fsv.webgama.dao.jdbc.JdbcOutputDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>

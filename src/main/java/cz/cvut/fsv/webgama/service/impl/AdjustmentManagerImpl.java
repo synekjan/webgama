@@ -138,9 +138,23 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 
 	@Transactional
 	@Override
-	public long getCalculationCountByUsername(String username) {
+	public List<Calculation> getSharedCalculationsbyUsername(String username) {
+
+		return calculationDao.findSharedCalculationsOnlyByUser(userDao.findUserByUsername(username));
+	}
+
+	@Transactional
+	@Override
+	public Long getCalculationCountByUsername(String username) {
 
 		return calculationDao.countCalculationsByUser(userDao.findUserByUsername(username));
+	}
+
+	@Transactional
+	@Override
+	public Long getSharedCalculationCountByUsername(String username) {
+
+		return calculationDao.countSharedCalculationsByUser(userDao.findUserByUsername(username));
 	}
 
 	@Transactional
@@ -258,6 +272,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		Calculation calculation = null;
 		if (input.getId() == null) {
 			calculation = new Calculation();
+			calculation.setUser(userDao.findUserByUsername(username));
 		} else {
 			calculation = calculationDao.findCalculationByInputId(input.getId());
 		}
@@ -280,7 +295,6 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		// delete output -- need to be recalculated again
 		calculation.setOutput(null);
 		calculation.setProgress("not-calculated");
-		calculation.setUser(userDao.findUserByUsername(username));
 		DateTime dt = new DateTime();
 		DateTimeFormatter fmt = ISODateTimeFormat.date();
 		calculation.setTime(dt);
@@ -322,4 +336,6 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		Long count = calculationDao.countClustersByUser(user.getId());
 		return count == null ? 0 : count;
 	}
+
+
 }

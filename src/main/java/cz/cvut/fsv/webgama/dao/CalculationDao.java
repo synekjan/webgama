@@ -20,12 +20,16 @@ public interface CalculationDao {
 	public List<Calculation> findCalculationsByUser(User user);
 	
 	public List<Calculation> findCalculationsOnlyByUser(User user);
+	
+	public List<Calculation> findSharedCalculationsOnlyByUser(User user);
 
 	public Calculation findCalculationById(Long id);
 	
 	public Calculation findCalculationByInputId(Long id);
 
 	public Long countCalculationsByUser(User user);
+	
+	public Long countSharedCalculationsByUser(User user);
 	
 	public Long countPointsByUser(Long userId);
 	

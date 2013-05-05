@@ -39,5 +39,7 @@ public interface UserManager {
 	public void confirmEmailAddress(String uuid);
 	
 	public Long getUserCount();
+	
+	public List<String> getUsernamesByTerm(String term);
 
 }

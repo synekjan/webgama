@@ -15,13 +15,17 @@ public interface AdjustmentManager {
 	public ProcessOutput adjustFromFile(MultipartFile file, String username, Locale locale);
 
 	public List<Calculation> getCalculationsbyUsername(String username);
+	
+	public List<Calculation> getSharedCalculationsbyUsername(String username);
 
 	public Calculation getCalculationById(long id);
 
-	public long getCalculationCountByUsername(String username);
+	public Long getCalculationCountByUsername(String username);
+	
+	public Long getSharedCalculationCountByUsername(String username);
 
 	public boolean isCalculationIdInDB(Long id);
-
+	
 	public void insertNewCalculation(AdjustmentPageForm adjustmentForm, String username, Locale locale);
 
 	public void updateInputInCalculation(AdjustmentPageForm adjustmentForm, Calculation calculation);
@@ -33,5 +37,4 @@ public interface AdjustmentManager {
 	public Long getPointCountByUsername(String username);
 	
 	public Long getClusterCountByUsername(String username);
-
 }

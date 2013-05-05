@@ -1,11 +1,13 @@
 package cz.cvut.fsv.webgama.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +20,7 @@ import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.domain.ProcessOutput;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
 import cz.cvut.fsv.webgama.service.CalculationManager;
+import cz.cvut.fsv.webgama.service.UserManager;
 import cz.cvut.fsv.webgama.util.JsonResponse;
 import cz.cvut.fsv.webgama.util.TimeFormatter;
 
@@ -33,15 +36,21 @@ public class CalculationsController extends MultiActionController {
 	@Inject
 	private CalculationManager calculationManager;
 
+	@Inject
+	private UserManager userManager;
+
+	@Inject
+	private MessageSource messageSource;
+
 	@RequestMapping(value = "/calculations", method = RequestMethod.GET)
 	protected ModelAndView calculationList(HttpServletRequest request, Locale locale) {
 
 		ModelAndView mav = new ModelAndView("/calculations/calculations");
+		String username = request.getUserPrincipal().getName();
 
-		mav.addObject("myCalculations",
-				adjustmentManager.getCalculationsbyUsername(request.getUserPrincipal().getName()));
+		mav.addObject("myCalculations", adjustmentManager.getCalculationsbyUsername(username));
 
-		mav.addObject("sharedCalculations", adjustmentManager.getCalculationsbyUsername("pepa"));
+		mav.addObject("sharedCalculations", adjustmentManager.getSharedCalculationsbyUsername(username));
 
 		mav.addObject("locale", locale);
 		mav.addObject("timeFormatter", timeFormatter);
@@ -73,7 +82,7 @@ public class CalculationsController extends MultiActionController {
 
 		ProcessOutput processOutput = calculationManager.calculate(calculation, username);
 		jsonResponse.setRunningTime(processOutput.getRunningTime());
-		
+
 		if (processOutput.getExitValue() != 0) {
 			jsonResponse.setError(true);
 			String errorStreamMessage = processOutput.getErrorMessage();
@@ -89,14 +98,74 @@ public class CalculationsController extends MultiActionController {
 		return jsonResponse;
 	}
 
-	@RequestMapping(value = "/calculation/check", method = RequestMethod.POST)
+	@RequestMapping(value = "/calculation/share", method = RequestMethod.POST)
 	protected @ResponseBody
-	String checkProgress(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response) {
+	JsonResponse shareCalculation(@RequestParam String user, @RequestParam Long id, Locale locale,
+			HttpServletRequest request, HttpServletResponse response) {
 
-		/*String username = request.getUserPrincipal().getName();
-		adjustmentManager.getCalculationById(id);*/ //TODO - check calculations
+		String username = request.getUserPrincipal().getName();
+		JsonResponse jsonResponse = new JsonResponse();
+
+		//I cant share to myself
+		if (username.equals(user)) {
+			jsonResponse.setError(true);
+			jsonResponse.setMessage(messageSource
+					.getMessage("privilege.error.has.access", new Object[] { user }, locale));
+			return jsonResponse;
+		}
 		
-		return "calculated";
+		Long privilegeId = calculationManager.insertUserPrivelegeToCalculation(id, user);
+
+		//user not in db
+		if (privilegeId == -1L) {
+			jsonResponse.setError(true);
+			jsonResponse.setMessage(messageSource
+					.getMessage("privilege.error.not.found", new Object[] { user }, locale));
+			return jsonResponse;
+		}
+		//user already has access
+		if (privilegeId == -2L) {
+			jsonResponse.setError(true);
+			jsonResponse.setMessage(messageSource
+					.getMessage("privilege.error.has.access", new Object[] { user }, locale));
+			return jsonResponse;
+		}
+
+		jsonResponse.setError(false);
+		jsonResponse.setRunningTime(privilegeId.doubleValue());
+		jsonResponse.setMessage("OK");
+		return jsonResponse;
 	}
+
+	@RequestMapping(value = "/calculation/privilege/delete", method = RequestMethod.POST)
+	protected @ResponseBody
+	String deleteCalculationPrivilege(@RequestParam Long id, HttpServletRequest request) {
+
+		calculationManager.deleteCalculationPrivilege(id);
+
+		return "OK";
+	}
+
+	@RequestMapping(value = "/calculation/user/find", method = RequestMethod.GET)
+	protected @ResponseBody
+	List<String> getUserList(@RequestParam("term") String term, HttpServletRequest request) {
+
+		term.toLowerCase();
+		List<String> list = userManager.getUsernamesByTerm(term);
+
+		return list;
+	}
+
+	/*
+	 * @RequestMapping(value = "/calculation/check", method =
+	 * RequestMethod.POST) protected @ResponseBody String
+	 * checkProgress(@RequestParam Long id, HttpServletRequest request,
+	 * HttpServletResponse response) {
+	 * 
+	 * String username = request.getUserPrincipal().getName();
+	 * adjustmentManager.getCalculationById(id);
+	 * 
+	 * return "calculated"; }
+	 */
 
 }

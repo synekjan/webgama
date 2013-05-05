@@ -64,7 +64,53 @@
 				//stops normal form submit 
 				return false;
 			});
+		
+		jQuery(document).on("click", "span.icon-close-privilege", function() {
+			var parent = jQuery(this).parent();
+			var privilegeId = parent.attr('data');
 
+			jQuery.ajax({
+				type : "POST",
+				data : "id=" + privilegeId,
+				url : '#springUrl("/calculation/privilege/delete")',
+				success : function(msg) {
+					parent.fadeOut(500, function() {
+						jQuery(this).remove();
+					});
+				}
+			});
+		});
+		
+		jQuery('button.share_button').click(function() {
+			var button = jQuery(this);
+			var user = button.siblings().first().val();
+			var id = button.attr("data");
+			var error = button.parent().find('.error');
+			if (user == "") {
+				return false;
+			}
+			error.html('').hide();
+			jQuery.ajax({
+				type : "POST",
+				data : "user=" + user + "&id=" + id,
+				url : '#springUrl("/calculation/share")',
+				success : function(jqXHR) {
+					if (!jqXHR.error) {
+						var item = jQuery('<div class="privilege" data="' + jqXHR.runningTime + '"><span class="icon-close-privilege"></span>' + user + '</div>').fadeIn(500).css("display","inline-block");
+						button.parent().parent().find('.privileges_wrap').append(item);
+					} else {
+						error.html(jqXHR.message).show();
+						
+					}
+				}
+			});
+		});
+		
+		jQuery(".sharing").autocomplete({
+			source: '#springUrl("/calculation/user/find")',
+			minLength: 3,
+			delay: 200
+		});
 		/* window.setInterval(function(){
 			  location.reload();
 		}, 5000); */
@@ -246,7 +292,22 @@
 									<button class="delete_button link_button"
 										data="${calculation.id}">#springMessage("calculations.delete")</button>
 								</div>
-								<div class="secondary_wrapper"></div>
+								<div class="secondary_wrapper">
+								<div class="box_title">#springMessage("calculations.sharing")</div>
+								<div class="add_privilege_wrap"> 
+									<input type="text" class="sharing" placeholder="#springMessage("user.username")...">
+									<button class="share_button link_button" data="${calculation.id}">#springMessage("calculations.sharing.submit")</button>
+									<div class="error"></div>
+								</div>
+								<div class="privileges_wrap">
+								#foreach ($calculationPrivilege in $calculation.calculationPrivileges)
+									<div class="privilege" data="$calculationPrivilege.id">
+										<span class="icon-close-privilege"></span>
+										$calculationPrivilege.user.username
+									</div>								
+								#end
+								</div>
+								</div>
 							</div>
 
 							#end
@@ -261,14 +322,159 @@
 						#else
 						<div class="accordion">
 							#foreach ($calculation in $sharedCalculations)
-							<h3>
-								$calculation.name <span class="time" title="$dateTool.format("yyyy-MM-ddHH:mm:ss",$calculation.time.toDate())">$timeFormatter.periodFromNow($calculation.time,
-									$locale)</span>
+							<h3 class="calculation_${calculation.id}">
+
+								$calculation.name [$calculation.user.username]<span class="time" title="$dateTool.format("yyyy-MM-dd HH:mm:ss",$calculation.time.toDate())"> #if
+									($timeFormatter.periodFromNow($calculation.time, $locale) ==
+									"") #springMessage("now") #else
+									$timeFormatter.periodFromNow($calculation.time, $locale) #end </span>
+								<div class="status_message">
+									<span class="$calculation.progress">#springMessage("$calculation.progress")</span>
+								</div>
 							</h3>
-							<div class="accor_content">
-								<p>Cras dictum. Pellentesque habitant morbi tristique
-									senectus et netus et malesuada fames ac turpis egestas.</p>
+							<div class="accor_content calculation_${calculation.id}">
+
+								<div class="primary_wrapper">
+
+									<div class="input_box">
+										<div class="box_title">#springMessage("calculations.input")</div>
+
+										<table>
+											<tbody>
+												<tr>
+													<td>#springMessage("adjustment.onepage.points"):</td>
+													<td>$!calculation.calculationStatistic.points</td>
+												</tr>
+												<tr>
+													<td>#springMessage("adjustment.onepage.clusters"):</td>
+													<td>$!calculation.calculationStatistic.clusters</td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="button_wrap">
+											<button class="edit_button link_button">#springMessage("calculations.edit")</button>
+											<div class="edit_choose">
+												<a class="link_button" href="#springUrl("/adjustment/wizard/${calculation.id}")">#springMessage("adjustment.wizard")</a><br>
+												<a class="link_button" href="#springUrl("/adjustment/onepage/${calculation.id}")">#springMessage("adjustment.onepage")</a>
+											</div>
+										</div>
+									</div>
+
+									<div class="calculate_box">
+										<div class="box_title">#springMessage("calculations.calculation")</div>
+										<form id="calculate_form_${calculation.id}">
+
+											<div class="small_form_element">
+												<label for="language_${calculation.id}">#springMessage("export.language"):</label>
+												<div class="input">
+													<select name="language" id="language_${calculation.id}">
+														<option #if ($calculation.language== "en") selected #end
+															value="en" title="#springMessage('en')">English</option>
+														<option #if ($calculation.language== "ca") selected #end
+															value="ca" title="#springMessage('ca')">Català</option>
+														<option #if ($calculation.language== "cz") selected #end
+															value="cz" title="#springMessage('cz')">Česky</option>
+														<option #if ($calculation.language== "du") selected #end
+															value="du" title="#springMessage('du')">Nederlands</option>
+														<option #if ($calculation.language== "es") selected #end
+															value="es" title="#springMessage('es')">Español</option>
+														<option #if ($calculation.language== "fi") selected #end
+															value="fi" title="#springMessage('fi')">Suomi</option>
+														<option #if ($calculation.language== "fr") selected #end
+															value="fr" title="#springMessage('fr')">Français</option>
+														<option #if ($calculation.language== "hu") selected #end
+															value="hu" title="#springMessage('hu')">Magyar</option>
+														<option #if ($calculation.language== "ru") selected #end
+															value="ru" title="#springMessage('ru')">Pусский</option>
+														<option #if ($calculation.language== "ua") selected #end
+															value="ua" title="#springMessage('ua')">Український</option>
+														<option #if ($calculation.language== "zh") selected #end
+															value="zh" title="#springMessage('zh')">简体中文</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="small_form_element">
+												<label for="algorithm_${calculation.id}">#springMessage("export.algorithm"):</label>
+												<div class="input">
+													<select name="algorithm" id="algorithm_${calculation.id}">
+														<option #if ($calculation.algorithm== "svd") selected #end
+															value="svd">SVD</option>
+														<option #if ($calculation.algorithm== "gso") selected #end
+															value="gso">GSO</option>
+														<option #if ($calculation.algorithm==
+															"cholesky") selected #end value="cholesky">Cholesky</option>
+														<option #if ($calculation.algorithm==
+															"envelope") selected #end value="envelope">Envelope</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="small_form_element">
+												<label for="angUnits_${calculation.id}">#springMessage("export.angUnits"):</label>
+												<div class="input">
+													<select name="angUnits" id="angUnits_${calculation.id}">
+														<option #if ($calculation.algorithm== "400") selected #end
+															value="400">400</option>
+														<option #if ($calculation.algorithm== "360") selected #end
+															value="360">360</option>
+													</select>
+												</div>
+											</div>
+
+											<button class="calculate_button" #if ($calculation.progress==
+												"calculating") disabled #end data="${calculation.id}">#if
+												($calculation.progress == "calculated")
+												#springMessage("calculations.button.recalculate") #elseif
+												($calculation.progress == "not-calculated")
+												#springMessage("calculations.button.calculate") #else
+												#springMessage("calculations.button.calculating") #end</button>
+										</form>
+									</div>
+									<div class="result_box #if ($calculation.progress != "calculated") result_box_disabled #end">
+										<div class="box_title">#springMessage("calculations.result")</div>
+										<table>
+											<tbody>
+												<tr>
+													<td nowrap>#springMessage("calculations.runningTime"):</td>
+													<td><span class="running-time">#if
+															($calculation.output.runningTime)
+															$!math.roundTo(2,$calculation.output.runningTime) ms #end</span></td>
+												</tr>
+												<tr>
+													<td>#springMessage("calculations.lastError"):</td>
+													<td><div class="output_error">
+															#if (!$calculation.output.lastError)
+															#springMessage("calculations.none") #else <span
+																class="error_img"></span>
+															<div class="error_message_bubble">
+																<p>$calculation.output.lastError</p>
+															</div>
+															#end
+														</div></td>
+												</tr>
+												<tr>
+													<td>#springMessage("calculations.progress"):</td>
+													<td nowrap><span class="progress">#springMessage("$calculation.progress")</span></td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="button_wrap">
+											<a class="export_button link_button"
+												#if ($calculation.progress==
+												"calculated") href="#springUrl("
+												/export/${calculation.id}")" #end>#springMessage("calculations.export")</a>
+										</div>
+									</div>
+									<div style="clear: both;"></div>
+									<!-- <button class="delete_button link_button"
+										data="${calculation.id}">#springMessage("calculations.delete")</button> -->
+								</div>
+								<!-- <div class="secondary_wrapper">
+								
+								</div> -->
 							</div>
+
 							#end
 						</div>
 						#end

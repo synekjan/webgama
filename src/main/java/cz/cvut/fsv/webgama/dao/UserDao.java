@@ -38,5 +38,7 @@ public interface UserDao {
 	public void clearConfirmations();
 	
 	public void deleteDisabledUsers();
+	
+	public List<User> findUsersByUsernameTerm(String term);
 
 }

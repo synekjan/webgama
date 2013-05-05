@@ -1,8 +1,5 @@
 package cz.cvut.fsv.webgama.controller;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,27 +20,17 @@ public class AdjustmentController extends MultiActionController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	protected ModelAndView adjust(HttpServletRequest request) {
-
-		long startTime = System.nanoTime();
 		ModelAndView mav = new ModelAndView("/adjustment/adjustment");
-		Calendar cal = Calendar.getInstance();
-
-		Date date = new Date();
-		mav.addObject("date", date);
-		mav.addObject("cal", cal.get(Calendar.MILLISECOND));
-
-		double time = (double) (System.nanoTime() - startTime) / 1000000;
-		mav.addObject("time", time);
 
 		return mav;
 	}
 
-	/*@RequestMapping(value = "/{name}", method = RequestMethod.GET)
-	protected @ResponseBody
-	User getJSON(@PathVariable String name) {
-
-		User user = userManager.getUser(name);
-
-		return user;
-	}*/
+	/*
+	 * @RequestMapping(value = "/{name}", method = RequestMethod.GET) protected
+	 * @ResponseBody User getJSON(@PathVariable String name) {
+	 * 
+	 * User user = userManager.getUser(name);
+	 * 
+	 * return user; }
+	 */
 }

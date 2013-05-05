@@ -14,7 +14,7 @@ DROP TABLE covmats CASCADE;
 DROP TABLE clusters CASCADE;
 DROP TABLE points CASCADE;
 DROP TABLE networks CASCADE;
-DROP TABLE input_privileges CASCADE;
+DROP TABLE calculation_privileges CASCADE;
 DROP TABLE outputs CASCADE;
 DROP TABLE inputs CASCADE;
 DROP TABLE calculation_statistics CASCADE;
@@ -329,11 +329,12 @@ INSERT INTO privileges (privilege_id, privilege) VALUES (2, 'CHANGE');
 INSERT INTO privileges (privilege_id, privilege) VALUES (3, 'FULL');
 
 /* SHARING inputs */
-CREATE TABLE input_privileges (
-input_privilege_id BIGSERIAL PRIMARY KEY,
+CREATE TABLE calculation_privileges (
+calculation_privilege_id BIGSERIAL PRIMARY KEY,
 user_id			BIGINT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE, 
 calculation_id	BIGINT NOT NULL REFERENCES calculations(calculation_id) ON DELETE CASCADE,
-privilege_id	INTEGER NOT NULL REFERENCES privileges(privilege_id)
+privilege_id	INTEGER NOT NULL REFERENCES privileges(privilege_id) DEFAULT 2,
+CONSTRAINT cross_unique UNIQUE(user_id,calculation_id)
 );
 
 -----  OUTPUT PART  -----
@@ -394,8 +395,8 @@ GRANT ALL ON covmats TO synekjan;
 GRANT ALL ON covmats_covmat_id_seq TO synekjan;
 GRANT ALL ON clusters TO synekjan;
 GRANT ALL ON clusters_cluster_id_seq TO synekjan;
-GRANT ALL ON input_privileges TO synekjan;
-GRANT ALL ON input_privileges_input_privilege_id_seq TO synekjan;
+GRANT ALL ON calculation_privileges TO synekjan;
+GRANT ALL ON calculation_privileges_calculation_privilege_id_seq TO synekjan;
 GRANT ALL ON privileges TO synekjan;
 GRANT ALL ON outputs TO synekjan;
 GRANT ALL ON outputs_output_id_seq TO synekjan;

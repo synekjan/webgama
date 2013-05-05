@@ -1,5 +1,6 @@
 package cz.cvut.fsv.webgama.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -100,15 +101,13 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	@Transactional
-	public void registerUser(UserRegistrationForm userForm,
-			HttpServletRequest request) {
+	public void registerUser(UserRegistrationForm userForm, HttpServletRequest request) {
 
 		User user = new User();
 
 		user.setUsername(userForm.getUsername());
 		// encodes password with salted-hash
-		user.setPassword(new StandardPasswordEncoder().encode(userForm
-				.getPassword()));
+		user.setPassword(new StandardPasswordEncoder().encode(userForm.getPassword()));
 		user.setFirstName(userForm.getFirstName());
 		user.setLastName(userForm.getLastName());
 		user.setEmail(userForm.getEmail());
@@ -122,11 +121,9 @@ public class UserManagerImpl implements UserManager {
 		userDao.insert(user);
 
 		String uuid = Generator.generateConfirmationID();
-		String URL = request.getRequestURL().toString()
-				.replace("/register", "");
+		String URL = request.getRequestURL().toString().replace("/register", "");
 
-		Long user_id = userDao.findUserByUsername(userForm.getUsername())
-				.getId();
+		Long user_id = userDao.findUserByUsername(userForm.getUsername()).getId();
 		userDao.insertConfirmationID(uuid, user_id);
 
 		mailManager.sendConfirmationEmail(userForm, uuid, URL);
@@ -189,7 +186,7 @@ public class UserManagerImpl implements UserManager {
 		userDao.deleteConfirmationID(uuid);
 		userDao.updateEnabled(user);
 	}
-	
+
 	@Override
 	@Transactional
 	public Long getUserCount() {
@@ -209,5 +206,15 @@ public class UserManagerImpl implements UserManager {
 		this.mailManager = mailManager;
 	}
 
+	@Override
+	public List<String> getUsernamesByTerm(String term) {
+
+		List<User> users = userDao.findUsersByUsernameTerm(term);
+		List<String> list = new ArrayList<>();
+		for (User user : users) {
+			list.add(user.getUsername());
+		}
+		return list;
+	}
 
 }

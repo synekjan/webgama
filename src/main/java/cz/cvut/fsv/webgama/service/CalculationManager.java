@@ -9,6 +9,12 @@ public interface CalculationManager {
 	
 	public void deleteCalculation(Long id);
 	
+	public void deleteCalculationPrivilege(Long id);
+	
 	public String checkCalculationProgress(Long id);
+	
+	public boolean hasUserPrivilegeToCalculation(Long id, String username);
+	
+	public Long insertUserPrivelegeToCalculation(Long calculationId, String username);
 
 }

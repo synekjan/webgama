@@ -26,12 +26,16 @@ import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.exception.PermissionDeniedException;
 import cz.cvut.fsv.webgama.exception.ResourceNotFoundException;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
+import cz.cvut.fsv.webgama.service.CalculationManager;
 
 @Controller
 public class ExportController extends MultiActionController {
 
 	@Inject
 	private AdjustmentManager adjustmentManager;
+
+	@Inject
+	private CalculationManager calculationManager;
 
 	private static final Logger logger = LoggerFactory.getLogger(ExportController.class);
 
@@ -42,6 +46,8 @@ public class ExportController extends MultiActionController {
 		String username = request.getUserPrincipal().getName();
 
 		List<Calculation> calculations = adjustmentManager.getCalculationsbyUsername(username);
+		calculations.addAll(adjustmentManager.getSharedCalculationsbyUsername(username));
+
 		mav.addObject("calculations", calculations);
 
 		return mav;
@@ -50,13 +56,15 @@ public class ExportController extends MultiActionController {
 	@RequestMapping(value = "/export/{id}", method = RequestMethod.GET)
 	protected ModelAndView exportCalculation(@PathVariable Long id, HttpServletRequest request) {
 
+		String username = request.getUserPrincipal().getName();
+
 		// Check if path variable is in database otherwise throw 404 HTTP error
 		if (id <= 0 || !adjustmentManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
 		Calculation calculation = adjustmentManager.getCalculationById(id);
 		// Check if user has permission to edit
-		if (!request.getUserPrincipal().getName().equals(calculation.getUser().getUsername())) {
+		if (!calculationManager.hasUserPrivilegeToCalculation(id, username)) {
 			throw new PermissionDeniedException();
 		}
 		// Check if calculation is calculated
@@ -71,22 +79,23 @@ public class ExportController extends MultiActionController {
 	protected ModelAndView exportCalculationToXML(@PathVariable Long id, HttpServletRequest request,
 			HttpServletResponse response) {
 
+		String username = request.getUserPrincipal().getName();
+
 		// Check if path variable is in database otherwise throw 404 HTTP error
 		if (id <= 0 || !adjustmentManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
 		Calculation calculation = adjustmentManager.getCalculationById(id);
 		// Check if user has permission to edit
-		if (!request.getUserPrincipal().getName().equals(calculation.getUser().getUsername())) {
+		if (!calculationManager.hasUserPrivilegeToCalculation(id, username)) {
 			throw new PermissionDeniedException();
 		}
 		// Check if calculation is calculated
 		if (calculation.getOutput() == null) {
 			throw new ResourceNotFoundException();
 		}
-		String username = request.getUserPrincipal().getName();
 		String filename = calculation.getName().replaceAll(" ", "_").toLowerCase();
-		
+
 		File temporary = null;
 		try {
 			temporary = File.createTempFile(filename, ".xml");
@@ -116,20 +125,22 @@ public class ExportController extends MultiActionController {
 	protected ModelAndView exportCalculationToText(@PathVariable Long id, HttpServletRequest request,
 			HttpServletResponse response) {
 
+		String username = request.getUserPrincipal().getName();
+
 		// Check if path variable is in database otherwise throw 404 HTTP error
 		if (id <= 0 || !adjustmentManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
 		Calculation calculation = adjustmentManager.getCalculationById(id);
 		// Check if user has permission to edit
-		if (!request.getUserPrincipal().getName().equals(calculation.getUser().getUsername())) {
+		if (!calculationManager.hasUserPrivilegeToCalculation(id, username)) {
 			throw new PermissionDeniedException();
 		}
 		// Check if calculation is calculated
 		if (calculation.getOutput() == null) {
 			throw new ResourceNotFoundException();
 		}
-		String username = request.getUserPrincipal().getName();
+
 		String filename = calculation.getName().replaceAll(" ", "_").toLowerCase();
 
 		File temporary = null;
@@ -161,20 +172,22 @@ public class ExportController extends MultiActionController {
 	protected ModelAndView exportCalculationToHTML(@PathVariable Long id, HttpServletRequest request,
 			HttpServletResponse response) {
 
+		String username = request.getUserPrincipal().getName();
+
 		// Check if path variable is in database otherwise throw 404 HTTP error
 		if (id <= 0 || !adjustmentManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
 		Calculation calculation = adjustmentManager.getCalculationById(id);
 		// Check if user has permission to edit
-		if (!request.getUserPrincipal().getName().equals(calculation.getUser().getUsername())) {
+		if (!calculationManager.hasUserPrivilegeToCalculation(id, username)) {
 			throw new PermissionDeniedException();
 		}
 		// Check if calculation is calculated
 		if (calculation.getOutput() == null) {
 			throw new ResourceNotFoundException();
 		}
-		String username = request.getUserPrincipal().getName();
+
 		String filename = calculation.getName().replaceAll(" ", "_").toLowerCase();
 
 		File temporary = null;
@@ -206,20 +219,22 @@ public class ExportController extends MultiActionController {
 	protected ModelAndView exportCalculationToSVG(@PathVariable Long id, HttpServletRequest request,
 			HttpServletResponse response) {
 
+		String username = request.getUserPrincipal().getName();
+
 		// Check if path variable is in database otherwise throw 404 HTTP error
 		if (id <= 0 || !adjustmentManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
 		Calculation calculation = adjustmentManager.getCalculationById(id);
 		// Check if user has permission to edit
-		if (!request.getUserPrincipal().getName().equals(calculation.getUser().getUsername())) {
+		if (!calculationManager.hasUserPrivilegeToCalculation(id, username)) {
 			throw new PermissionDeniedException();
 		}
 		// Check if calculation is calculated
 		if (calculation.getOutput() == null) {
 			throw new ResourceNotFoundException();
 		}
-		String username = request.getUserPrincipal().getName();
+
 		String filename = calculation.getName().replaceAll(" ", "_").toLowerCase();
 
 		File temporary = null;

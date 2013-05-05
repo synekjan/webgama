@@ -83,7 +83,6 @@
 				</ul>
 			</div>
 			<div id="points_img" class="narrow_image">
-				
 			</div>
 			<div id="browsers" class="narrow_image">
 				
@@ -99,6 +98,11 @@
 					<li>Safari</li>
 				</ul>
 			</div>
+			<div id="work_as_team" class="wide_text">
+				<h1>#springMessage("welcome.work.as.team.header")</h1>
+				<p>#springMessage("welcome.work.as.team.message")</p>
+			</div>
+			<div id="sharing_img" class="narrow_image">
 		</div>
 	</div>
 	<div id="heading_store" style="display: none;">

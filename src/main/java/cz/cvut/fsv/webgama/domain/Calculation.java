@@ -1,5 +1,7 @@
 package cz.cvut.fsv.webgama.domain;
 
+import java.util.List;
+
 import org.joda.time.DateTime;
 
 public class Calculation {
@@ -23,6 +25,8 @@ public class Calculation {
 	private String ellipsoid;
 
 	private CalculationStatistic calculationStatistic;
+
+	private List<CalculationPrivilege> calculationPrivileges;
 
 	private DateTime time;
 
@@ -108,6 +112,14 @@ public class Calculation {
 
 	public void setCalculationStatistic(CalculationStatistic calculationStatistic) {
 		this.calculationStatistic = calculationStatistic;
+	}
+
+	public List<CalculationPrivilege> getCalculationPrivileges() {
+		return calculationPrivileges;
+	}
+
+	public void setCalculationPrivileges(List<CalculationPrivilege> calculationPrivileges) {
+		this.calculationPrivileges = calculationPrivileges;
 	}
 
 	public DateTime getTime() {

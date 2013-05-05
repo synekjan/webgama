@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.domain.Cluster;
 import cz.cvut.fsv.webgama.domain.Input;
 import cz.cvut.fsv.webgama.domain.Network;
@@ -34,6 +33,7 @@ import cz.cvut.fsv.webgama.form.NetworkDefinitionWizardForm;
 import cz.cvut.fsv.webgama.form.NetworkParametersWizardForm;
 import cz.cvut.fsv.webgama.form.PointsWizardForm;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
+import cz.cvut.fsv.webgama.service.CalculationManager;
 
 @Controller
 @Scope("session")
@@ -42,6 +42,9 @@ public class AdjustmentWizardController extends MultiActionController implements
 
 	@Inject
 	private AdjustmentManager adjustmentManager;
+	
+	@Inject
+	private CalculationManager calculationManager;
 
 	private static final long serialVersionUID = 5171649431095330184L;
 
@@ -80,10 +83,9 @@ public class AdjustmentWizardController extends MultiActionController implements
 		if (id <= 0L || !adjustmentManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
-
-		Calculation calculation = adjustmentManager.getCalculationById(id);
+		String username = request.getUserPrincipal().getName();
 		// Check if user has permission to edit
-		if (!request.getUserPrincipal().getName().equals(calculation.getUser().getUsername())) {
+		if (!calculationManager.hasUserPrivilegeToCalculation(id, username)) {
 			throw new PermissionDeniedException();
 		}
 

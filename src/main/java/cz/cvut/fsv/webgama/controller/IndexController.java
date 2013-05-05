@@ -51,6 +51,7 @@ public class IndexController {
 			mav.addObject("date", dateTime);
 			
 			mav.addObject("ownCalculationCount", adjustmentManager.getCalculationCountByUsername(username));
+			mav.addObject("sharedCalculationCount", adjustmentManager.getSharedCalculationCountByUsername(username));
 
 			mav.addObject("pointCount", adjustmentManager.getPointCountByUsername(username));
 			mav.addObject("clusterCount", adjustmentManager.getClusterCountByUsername(username));
@@ -85,6 +86,7 @@ public class IndexController {
 		mav.addObject("date", dateTime);
 		
 		mav.addObject("ownCalculationCount", adjustmentManager.getCalculationCountByUsername(username));
+		mav.addObject("sharedCalculationCount", adjustmentManager.getSharedCalculationCountByUsername(username));
 		
 		mav.addObject("pointCount", adjustmentManager.getPointCountByUsername(username));
 		mav.addObject("clusterCount", adjustmentManager.getClusterCountByUsername(username));

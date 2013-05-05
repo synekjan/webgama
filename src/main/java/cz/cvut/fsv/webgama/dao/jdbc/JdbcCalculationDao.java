@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import cz.cvut.fsv.webgama.dao.CalculationDao;
+import cz.cvut.fsv.webgama.dao.CalculationPrivilegeDao;
 import cz.cvut.fsv.webgama.dao.CalculationStatisticDao;
 import cz.cvut.fsv.webgama.dao.InputDao;
 import cz.cvut.fsv.webgama.dao.OutputDao;
@@ -27,6 +28,8 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 	private UserDao userDao;
 
 	private CalculationStatisticDao calculationStatisticDao;
+
+	private CalculationPrivilegeDao calculationPrivilegeDao;
 
 	@Override
 	public void insert(Calculation calculation) {
@@ -138,6 +141,16 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 
 		return calculations;
 	}
+	
+	@Override
+	public List<Calculation> findSharedCalculationsOnlyByUser(User user) {
+		String sql = "SELECT * FROM calculations A JOIN calculation_privileges B ON A.calculation_id = B.calculation_id WHERE B.user_id = ? ORDER BY A.time DESC";
+		
+		List<Calculation> calculations = getJdbcTemplate().query(sql, new Object[] { user.getId() },
+				new CalculationPartialMapper());
+		
+		return calculations;
+	}
 
 	@Override
 	public Calculation findCalculationById(Long id) {
@@ -165,21 +178,29 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 
 		return getJdbcTemplate().queryForObject(sql, new Object[] { user.getId() }, Long.class);
 	}
+	
+	@Override
+	public Long countSharedCalculationsByUser(User user) {
+		
+		String sql = "SELECT COUNT(A.calculation_id) FROM calculations A JOIN calculation_privileges B ON A.calculation_id = B.calculation_id WHERE B.user_id = ?";
+		
+		return getJdbcTemplate().queryForObject(sql, new Object[] { user.getId() }, Long.class);
+	}
 
 	@Override
 	public Long countPointsByUser(Long userId) {
-		
+
 		String sql = "SELECT SUM(points) FROM calculation_statistics A JOIN calculations B ON A.calculation_id = B.calculation_id WHERE user_id = ?";
-		
-		return getJdbcTemplate().queryForObject(sql, new Object[] {userId}, Long.class);
+
+		return getJdbcTemplate().queryForObject(sql, new Object[] { userId }, Long.class);
 	}
 
 	@Override
 	public Long countClustersByUser(Long userId) {
-		
+
 		String sql = "SELECT SUM(clusters) FROM calculation_statistics A JOIN calculations B ON A.calculation_id = B.calculation_id WHERE user_id = ?";
-		
-		return getJdbcTemplate().queryForObject(sql, new Object[] {userId}, Long.class);
+
+		return getJdbcTemplate().queryForObject(sql, new Object[] { userId }, Long.class);
 	}
 
 	@Override
@@ -265,6 +286,7 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 			calculation.setEllipsoid(rs.getString("ellipsoid"));
 			calculation.setCalculationStatistic(calculationStatisticDao
 					.findCalculationStatisticInCalculation(calculation));
+			calculation.setCalculationPrivileges(calculationPrivilegeDao.findAllPrivilegesforCalculation(calculation));
 			calculation.setTime(new DateTime(rs.getTimestamp("time").getTime()));
 			calculation.setInput(null);
 			calculation.setOutput(outputDao.findOutputWithoutResultsInCalculation(calculation));
@@ -306,4 +328,9 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 		this.calculationStatisticDao = calculationStatisticDao;
 	}
 
+	public void setCalculationPrivilegeDao(CalculationPrivilegeDao calculationPrivilegeDao) {
+		this.calculationPrivilegeDao = calculationPrivilegeDao;
+	}
+
+	
 }

@@ -50,7 +50,7 @@
 							</div>
 							<div class="shared_calculations">
 								<a href="#springUrl("/calculations#shared_calculations")">#springMessage("index.calculations.shared")<span
-									class="big_number">0</span>
+									class="big_number">$sharedCalculationCount</span>
 								</a>
 							</div>
 						</div>

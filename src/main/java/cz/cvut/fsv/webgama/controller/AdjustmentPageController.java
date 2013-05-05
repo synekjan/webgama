@@ -30,6 +30,7 @@ import cz.cvut.fsv.webgama.exception.ResourceNotFoundException;
 import cz.cvut.fsv.webgama.form.AdjustmentPageForm;
 import cz.cvut.fsv.webgama.service.ActivityManager;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
+import cz.cvut.fsv.webgama.service.CalculationManager;
 
 @Controller
 @RequestMapping("/adjustment/onepage")
@@ -37,9 +38,12 @@ public class AdjustmentPageController extends MultiActionController {
 
 	@Inject
 	private AdjustmentManager adjustmentManager;
-	
+
 	@Inject
 	private ActivityManager activityManager;
+	
+	@Inject
+	private CalculationManager calculationManager;
 
 	private static final Logger logger = LoggerFactory.getLogger(AdjustmentPageController.class);
 
@@ -79,7 +83,7 @@ public class AdjustmentPageController extends MultiActionController {
 		}
 
 		adjustmentManager.insertNewCalculation(adjustmentForm, username, locale);
-		
+
 		activityManager.recordActivity(username, "activity.calculation.created");
 		logger.info("User[" + username + "] successfully insert NEW calculation by one page form!");
 		return new ModelAndView("redirect:/calculations");
@@ -93,15 +97,15 @@ public class AdjustmentPageController extends MultiActionController {
 		if (id <= 0 || !adjustmentManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
-
-		Calculation calculation = adjustmentManager.getCalculationById(id);
+		String username = request.getUserPrincipal().getName();
 		// Check if user has permission to edit
-		if (!request.getUserPrincipal().getName().equals(calculation.getUser().getUsername())) {
+		if (!calculationManager.hasUserPrivilegeToCalculation(id, username)) {
 			throw new PermissionDeniedException();
 		}
 
 		ModelAndView mav = new ModelAndView("/adjustment/onepage/new");
 
+		Calculation calculation = adjustmentManager.getCalculationById(id);
 		Input input = calculation.getInput();
 		AdjustmentPageForm adjustmentForm = new AdjustmentPageForm(input);
 

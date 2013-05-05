@@ -44,6 +44,9 @@
 	<bean id="calculationManager" class="cz.cvut.fsv.webgama.service.impl.CalculationManagerImpl">
 		<property name="calculationDao" ref="calculationDao" />
 		<property name="processManager" ref="processManager" />
+		<property name="calculationPrivilegeDao" ref="calculationPrivilegeDao" />
+		<property name="adjustmentManager" ref="adjustmentManager" />
+		<property name="userManager" ref="userManager" />
 	</bean>
 
 	<bean id="activityManager" class="cz.cvut.fsv.webgama.service.impl.ActivityManagerImpl">
