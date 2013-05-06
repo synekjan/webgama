@@ -36,5 +36,7 @@ public interface CalculationManager {
 	public Long getPointCountByUsername(String username);
 
 	public Long getClusterCountByUsername(String username);
+	
+	public void changeCalculationName(Long id, String name);
 
 }

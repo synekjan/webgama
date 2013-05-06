@@ -42,5 +42,7 @@ public interface CalculationDao {
 	public void updateProgress(Calculation calculation, String progress);
 	
 	public String findProgressById(Long id);
+	
+	public void updateCalculationName(Long id, String name);
 
 }

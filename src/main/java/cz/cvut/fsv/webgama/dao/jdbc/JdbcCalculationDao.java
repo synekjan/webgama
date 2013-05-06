@@ -141,14 +141,14 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 
 		return calculations;
 	}
-	
+
 	@Override
 	public List<Calculation> findSharedCalculationsOnlyByUser(User user) {
 		String sql = "SELECT * FROM calculations A JOIN calculation_privileges B ON A.calculation_id = B.calculation_id WHERE B.user_id = ? ORDER BY A.time DESC";
-		
+
 		List<Calculation> calculations = getJdbcTemplate().query(sql, new Object[] { user.getId() },
 				new CalculationPartialMapper());
-		
+
 		return calculations;
 	}
 
@@ -178,12 +178,12 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 
 		return getJdbcTemplate().queryForObject(sql, new Object[] { user.getId() }, Long.class);
 	}
-	
+
 	@Override
 	public Long countSharedCalculationsByUser(User user) {
-		
+
 		String sql = "SELECT COUNT(A.calculation_id) FROM calculations A JOIN calculation_privileges B ON A.calculation_id = B.calculation_id WHERE B.user_id = ?";
-		
+
 		return getJdbcTemplate().queryForObject(sql, new Object[] { user.getId() }, Long.class);
 	}
 
@@ -239,6 +239,15 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 		String result = getJdbcTemplate().queryForObject(sql, new Object[] { id }, String.class);
 
 		return result;
+	}
+
+	@Override
+	public void updateCalculationName(Long id, String name) {
+
+		String sql = "UPDATE calculations SET name=? WHERE calculation_id = ?";
+
+		getJdbcTemplate().update(sql, name, id);
+
 	}
 
 	private class CalculationMapper implements RowMapper<Calculation> {
@@ -332,5 +341,4 @@ public class JdbcCalculationDao extends JdbcDaoSupport implements CalculationDao
 		this.calculationPrivilegeDao = calculationPrivilegeDao;
 	}
 
-	
 }

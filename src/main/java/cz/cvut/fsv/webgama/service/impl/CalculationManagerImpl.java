@@ -177,6 +177,7 @@ public class CalculationManagerImpl implements CalculationManager {
 		return calculationDao.isCalculationIdInDB(id);
 	}
 
+	@Transactional
 	@Override
 	public Long getAllPointCount() {
 
@@ -185,6 +186,7 @@ public class CalculationManagerImpl implements CalculationManager {
 		return pointCount;
 	}
 
+	@Transactional
 	@Override
 	public Long getPointCountByUsername(String username) {
 
@@ -193,12 +195,21 @@ public class CalculationManagerImpl implements CalculationManager {
 		return count == null ? 0 : count;
 	}
 
+	@Transactional
 	@Override
 	public Long getClusterCountByUsername(String username) {
 
 		User user = userManager.getUser(username);
 		Long count = calculationDao.countClustersByUser(user.getId());
 		return count == null ? 0 : count;
+	}
+
+	@Transactional
+	@Override
+	public void changeCalculationName(Long id, String name) {
+		
+		calculationDao.updateCalculationName(id, name);
+		
 	}
 
 	/*

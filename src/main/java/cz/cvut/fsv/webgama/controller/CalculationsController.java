@@ -18,6 +18,8 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.domain.ProcessOutput;
+import cz.cvut.fsv.webgama.exception.PermissionDeniedException;
+import cz.cvut.fsv.webgama.exception.ResourceNotFoundException;
 import cz.cvut.fsv.webgama.service.CalculationManager;
 import cz.cvut.fsv.webgama.service.UserManager;
 import cz.cvut.fsv.webgama.util.JsonResponse;
@@ -138,6 +140,25 @@ public class CalculationsController extends MultiActionController {
 	String deleteCalculationPrivilege(@RequestParam Long id, HttpServletRequest request) {
 
 		calculationManager.deleteCalculationPrivilege(id);
+
+		return "OK";
+	}
+
+	@RequestMapping(value = "/calculation/rename", method = RequestMethod.POST)
+	protected @ResponseBody
+	String renameCalculation(@RequestParam Long id, @RequestParam String name, HttpServletRequest request) {
+
+		String username = request.getUserPrincipal().getName();
+		// Check if path variable is in database otherwise throw 404 HTTP error
+		if (id <= 0 || !calculationManager.isCalculationIdInDB(id)) {
+			throw new ResourceNotFoundException();
+		}
+		// Check if user has permission to edit
+		if (!calculationManager.hasUserPrivilegeToCalculation(id, username)) {
+			throw new PermissionDeniedException();
+		}
+
+		calculationManager.changeCalculationName(id, name);
 
 		return "OK";
 	}
