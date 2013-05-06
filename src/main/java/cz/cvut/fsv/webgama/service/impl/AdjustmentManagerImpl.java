@@ -4,11 +4,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.Locale;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +27,11 @@ import cz.cvut.fsv.webgama.parser.InputParser;
 import cz.cvut.fsv.webgama.service.ActivityManager;
 import cz.cvut.fsv.webgama.service.AdjustmentManager;
 import cz.cvut.fsv.webgama.service.ProcessManager;
+import cz.cvut.fsv.webgama.util.Generator;
 
-public class AdjustmentManagerImpl implements AdjustmentManager {
+public class AdjustmentManagerImpl implements AdjustmentManager,Serializable {
+
+	private static final long serialVersionUID = 3079679944045465378L;
 
 	private static final Logger logger = LoggerFactory.getLogger(AdjustmentManagerImpl.class);
 
@@ -164,13 +166,7 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		calculation.setOutput(null);
 		calculation.setProgress("not-calculated");
 		calculation.setUser(userDao.findUserByUsername(username));
-		DateTime dt = new DateTime();
-		DateTimeFormatter fmt = ISODateTimeFormat.date();
-		if (locale.getLanguage().equals(new Locale("cs").getLanguage())) {
-			calculation.setName("Nový Výpočet " + fmt.print(dt));
-		} else {
-			calculation.setName("New Calculation " + fmt.print(dt));
-		}
+		calculation.setName(Generator.generateCalculationName(locale));
 
 		calculationDao.insert(calculation);
 		activityManager.recordActivity(username, "activity.calculation.created");
@@ -244,22 +240,14 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		// delete output -- need to be recalculated again
 		calculation.setOutput(null);
 		calculation.setProgress("not-calculated");
-		DateTime dt = new DateTime();
-		DateTimeFormatter fmt = ISODateTimeFormat.date();
-		calculation.setTime(dt);
+		calculation.setTime(new DateTime());
 
 		if (input.getId() == null) {
-			if (locale.getLanguage().equals(new Locale("cs").getLanguage())) {
-				calculation.setName("Nový Výpočet " + fmt.print(dt));
-			} else {
-				calculation.setName("New Calculation " + fmt.print(dt));
-			}
+			calculation.setName(Generator.generateCalculationName(locale));
 			calculationDao.insert(calculation);
 			activityManager.recordActivity(username, "activity.calculation.created");
 		} else {
 			calculationDao.update(calculation);
 		}
-
 	}
-
 }
