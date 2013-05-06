@@ -18,7 +18,6 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.domain.ProcessOutput;
-import cz.cvut.fsv.webgama.service.AdjustmentManager;
 import cz.cvut.fsv.webgama.service.CalculationManager;
 import cz.cvut.fsv.webgama.service.UserManager;
 import cz.cvut.fsv.webgama.util.JsonResponse;
@@ -26,9 +25,6 @@ import cz.cvut.fsv.webgama.util.TimeFormatter;
 
 @Controller
 public class CalculationsController extends MultiActionController {
-
-	@Inject
-	private AdjustmentManager adjustmentManager;
 
 	@Inject
 	private TimeFormatter timeFormatter;
@@ -48,9 +44,9 @@ public class CalculationsController extends MultiActionController {
 		ModelAndView mav = new ModelAndView("/calculations/calculations");
 		String username = request.getUserPrincipal().getName();
 
-		mav.addObject("myCalculations", adjustmentManager.getCalculationsbyUsername(username));
+		mav.addObject("myCalculations", calculationManager.getCalculationsbyUsername(username));
 
-		mav.addObject("sharedCalculations", adjustmentManager.getSharedCalculationsbyUsername(username));
+		mav.addObject("sharedCalculations", calculationManager.getSharedCalculationsbyUsername(username));
 
 		mav.addObject("locale", locale);
 		mav.addObject("timeFormatter", timeFormatter);
@@ -73,7 +69,7 @@ public class CalculationsController extends MultiActionController {
 			HttpServletResponse response) {
 
 		String username = request.getUserPrincipal().getName();
-		Calculation calculation = adjustmentManager.getCalculationById(id);
+		Calculation calculation = calculationManager.getCalculationById(id);
 		calculation.setLanguage(language);
 		calculation.setAlgorithm(algorithm);
 		calculation.setAngUnits(angUnits);
@@ -106,28 +102,28 @@ public class CalculationsController extends MultiActionController {
 		String username = request.getUserPrincipal().getName();
 		JsonResponse jsonResponse = new JsonResponse();
 
-		//I cant share to myself
+		// I cant share to myself
 		if (username.equals(user)) {
 			jsonResponse.setError(true);
-			jsonResponse.setMessage(messageSource
-					.getMessage("privilege.error.has.access", new Object[] { user }, locale));
+			jsonResponse.setMessage(messageSource.getMessage("privilege.error.has.access", new Object[] { user },
+					locale));
 			return jsonResponse;
 		}
-		
+
 		Long privilegeId = calculationManager.insertUserPrivelegeToCalculation(id, user);
 
-		//user not in db
+		// user not in db
 		if (privilegeId == -1L) {
 			jsonResponse.setError(true);
 			jsonResponse.setMessage(messageSource
 					.getMessage("privilege.error.not.found", new Object[] { user }, locale));
 			return jsonResponse;
 		}
-		//user already has access
+		// user already has access
 		if (privilegeId == -2L) {
 			jsonResponse.setError(true);
-			jsonResponse.setMessage(messageSource
-					.getMessage("privilege.error.has.access", new Object[] { user }, locale));
+			jsonResponse.setMessage(messageSource.getMessage("privilege.error.has.access", new Object[] { user },
+					locale));
 			return jsonResponse;
 		}
 

@@ -42,7 +42,7 @@ public class AdjustmentWizardController extends MultiActionController implements
 
 	@Inject
 	private AdjustmentManager adjustmentManager;
-	
+
 	@Inject
 	private CalculationManager calculationManager;
 
@@ -80,7 +80,7 @@ public class AdjustmentWizardController extends MultiActionController implements
 
 		// Check if path variable is in database otherwise throw 404 HTTP Status
 		// code
-		if (id <= 0L || !adjustmentManager.isCalculationIdInDB(id)) {
+		if (id <= 0L || !calculationManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
 		String username = request.getUserPrincipal().getName();
@@ -90,7 +90,7 @@ public class AdjustmentWizardController extends MultiActionController implements
 		}
 
 		ModelAndView mav = new ModelAndView("/adjustment/wizard/wizard");
-		this.input = adjustmentManager.getCalculationById(id).getInput();
+		this.input = calculationManager.getCalculationById(id).getInput();
 		NetworkDefinitionWizardForm form = new NetworkDefinitionWizardForm(input);
 		mav.addObject("input", form);
 		return mav;
@@ -207,7 +207,7 @@ public class AdjustmentWizardController extends MultiActionController implements
 			return new ModelAndView("/adjustment/wizard/step4", "errorCount", result.getErrorCount());
 		}
 		clustersForm.enrichInput(this.input);
-		
+
 		adjustmentManager.handleWizardForm(this.input, username, locale);
 
 		ModelAndView mav = new ModelAndView("/adjustment/wizard/stepFinish");

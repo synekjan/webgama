@@ -25,14 +25,10 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.exception.PermissionDeniedException;
 import cz.cvut.fsv.webgama.exception.ResourceNotFoundException;
-import cz.cvut.fsv.webgama.service.AdjustmentManager;
 import cz.cvut.fsv.webgama.service.CalculationManager;
 
 @Controller
 public class ExportController extends MultiActionController {
-
-	@Inject
-	private AdjustmentManager adjustmentManager;
 
 	@Inject
 	private CalculationManager calculationManager;
@@ -45,8 +41,8 @@ public class ExportController extends MultiActionController {
 		ModelAndView mav = new ModelAndView("/export/export");
 		String username = request.getUserPrincipal().getName();
 
-		List<Calculation> calculations = adjustmentManager.getCalculationsbyUsername(username);
-		calculations.addAll(adjustmentManager.getSharedCalculationsbyUsername(username));
+		List<Calculation> calculations = calculationManager.getCalculationsbyUsername(username);
+		calculations.addAll(calculationManager.getSharedCalculationsbyUsername(username));
 
 		mav.addObject("calculations", calculations);
 
@@ -59,10 +55,10 @@ public class ExportController extends MultiActionController {
 		String username = request.getUserPrincipal().getName();
 
 		// Check if path variable is in database otherwise throw 404 HTTP error
-		if (id <= 0 || !adjustmentManager.isCalculationIdInDB(id)) {
+		if (id <= 0 || !calculationManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
-		Calculation calculation = adjustmentManager.getCalculationById(id);
+		Calculation calculation = calculationManager.getCalculationById(id);
 		// Check if user has permission to edit
 		if (!calculationManager.hasUserPrivilegeToCalculation(id, username)) {
 			throw new PermissionDeniedException();
@@ -82,10 +78,10 @@ public class ExportController extends MultiActionController {
 		String username = request.getUserPrincipal().getName();
 
 		// Check if path variable is in database otherwise throw 404 HTTP error
-		if (id <= 0 || !adjustmentManager.isCalculationIdInDB(id)) {
+		if (id <= 0 || !calculationManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
-		Calculation calculation = adjustmentManager.getCalculationById(id);
+		Calculation calculation = calculationManager.getCalculationById(id);
 		// Check if user has permission to edit
 		if (!calculationManager.hasUserPrivilegeToCalculation(id, username)) {
 			throw new PermissionDeniedException();
@@ -128,10 +124,10 @@ public class ExportController extends MultiActionController {
 		String username = request.getUserPrincipal().getName();
 
 		// Check if path variable is in database otherwise throw 404 HTTP error
-		if (id <= 0 || !adjustmentManager.isCalculationIdInDB(id)) {
+		if (id <= 0 || !calculationManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
-		Calculation calculation = adjustmentManager.getCalculationById(id);
+		Calculation calculation = calculationManager.getCalculationById(id);
 		// Check if user has permission to edit
 		if (!calculationManager.hasUserPrivilegeToCalculation(id, username)) {
 			throw new PermissionDeniedException();
@@ -175,10 +171,10 @@ public class ExportController extends MultiActionController {
 		String username = request.getUserPrincipal().getName();
 
 		// Check if path variable is in database otherwise throw 404 HTTP error
-		if (id <= 0 || !adjustmentManager.isCalculationIdInDB(id)) {
+		if (id <= 0 || !calculationManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
-		Calculation calculation = adjustmentManager.getCalculationById(id);
+		Calculation calculation = calculationManager.getCalculationById(id);
 		// Check if user has permission to edit
 		if (!calculationManager.hasUserPrivilegeToCalculation(id, username)) {
 			throw new PermissionDeniedException();
@@ -222,10 +218,10 @@ public class ExportController extends MultiActionController {
 		String username = request.getUserPrincipal().getName();
 
 		// Check if path variable is in database otherwise throw 404 HTTP error
-		if (id <= 0 || !adjustmentManager.isCalculationIdInDB(id)) {
+		if (id <= 0 || !calculationManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
-		Calculation calculation = adjustmentManager.getCalculationById(id);
+		Calculation calculation = calculationManager.getCalculationById(id);
 		// Check if user has permission to edit
 		if (!calculationManager.hasUserPrivilegeToCalculation(id, username)) {
 			throw new PermissionDeniedException();

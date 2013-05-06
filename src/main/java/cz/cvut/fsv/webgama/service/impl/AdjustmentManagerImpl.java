@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.List;
 import java.util.Locale;
 
 import org.joda.time.DateTime;
@@ -18,14 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.common.io.CharStreams;
 
 import cz.cvut.fsv.webgama.dao.CalculationDao;
-import cz.cvut.fsv.webgama.dao.PointDao;
 import cz.cvut.fsv.webgama.dao.UserDao;
 import cz.cvut.fsv.webgama.domain.Calculation;
 import cz.cvut.fsv.webgama.domain.Input;
 import cz.cvut.fsv.webgama.domain.Network;
 import cz.cvut.fsv.webgama.domain.Output;
 import cz.cvut.fsv.webgama.domain.ProcessOutput;
-import cz.cvut.fsv.webgama.domain.User;
 import cz.cvut.fsv.webgama.form.AdjustmentPageForm;
 import cz.cvut.fsv.webgama.parser.InputParser;
 import cz.cvut.fsv.webgama.service.ActivityManager;
@@ -44,8 +41,6 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 
 	private ProcessManager processManager;
 
-	private PointDao pointDao;
-
 	private ActivityManager activityManager;
 
 	public void setCalculationDao(CalculationDao calculationDao) {
@@ -62,10 +57,6 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 
 	public void setProcessManager(ProcessManager processManager) {
 		this.processManager = processManager;
-	}
-
-	public void setPointDao(PointDao pointDao) {
-		this.pointDao = pointDao;
 	}
 
 	public void setActivityManager(ActivityManager activityManager) {
@@ -127,48 +118,6 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		}
 
 		return processOutput;
-	}
-
-	@Transactional
-	@Override
-	public List<Calculation> getCalculationsbyUsername(String username) {
-
-		return calculationDao.findCalculationsOnlyByUser(userDao.findUserByUsername(username));
-	}
-
-	@Transactional
-	@Override
-	public List<Calculation> getSharedCalculationsbyUsername(String username) {
-
-		return calculationDao.findSharedCalculationsOnlyByUser(userDao.findUserByUsername(username));
-	}
-
-	@Transactional
-	@Override
-	public Long getCalculationCountByUsername(String username) {
-
-		return calculationDao.countCalculationsByUser(userDao.findUserByUsername(username));
-	}
-
-	@Transactional
-	@Override
-	public Long getSharedCalculationCountByUsername(String username) {
-
-		return calculationDao.countSharedCalculationsByUser(userDao.findUserByUsername(username));
-	}
-
-	@Transactional
-	@Override
-	public Calculation getCalculationById(long id) {
-
-		return calculationDao.findCalculationById(id);
-	}
-
-	@Transactional
-	@Override
-	public boolean isCalculationIdInDB(Long id) {
-
-		return calculationDao.isCalculationIdInDB(id);
 	}
 
 	@Transactional
@@ -312,30 +261,5 @@ public class AdjustmentManagerImpl implements AdjustmentManager {
 		}
 
 	}
-
-	@Override
-	public Long getAllPointCount() {
-
-		Long pointCount = pointDao.countAllPoints() + 14567;
-
-		return pointCount;
-	}
-
-	@Override
-	public Long getPointCountByUsername(String username) {
-
-		User user = userDao.findUserByUsername(username);
-		Long count = calculationDao.countPointsByUser(user.getId());
-		return count == null ? 0 : count;
-	}
-
-	@Override
-	public Long getClusterCountByUsername(String username) {
-
-		User user = userDao.findUserByUsername(username);
-		Long count = calculationDao.countClustersByUser(user.getId());
-		return count == null ? 0 : count;
-	}
-
 
 }

@@ -21,7 +21,7 @@ import cz.cvut.fsv.webgama.domain.User;
 import cz.cvut.fsv.webgama.form.UserForm;
 import cz.cvut.fsv.webgama.form.UserPasswordChangeForm;
 import cz.cvut.fsv.webgama.service.ActivityManager;
-import cz.cvut.fsv.webgama.service.AdjustmentManager;
+import cz.cvut.fsv.webgama.service.CalculationManager;
 import cz.cvut.fsv.webgama.service.LoginManager;
 import cz.cvut.fsv.webgama.service.UserManager;
 import cz.cvut.fsv.webgama.validator.UserPasswordChangeValidator;
@@ -40,7 +40,7 @@ public class AccountController extends MultiActionController {
 	private ActivityManager activityManager;
 
 	@Inject
-	private AdjustmentManager adjustmentManager;
+	private CalculationManager calculationManager;
 
 	@Inject
 	private UserPasswordChangeValidator passwordValidator;
@@ -61,7 +61,7 @@ public class AccountController extends MultiActionController {
 		String username = request.getUserPrincipal().getName();
 		User user = userManager.getUser(username);
 		mav.addObject("user", user);
-		mav.addObject("userCalculationCount", adjustmentManager.getCalculationCountByUsername(username));
+		mav.addObject("userCalculationCount", calculationManager.getCalculationCountByUsername(username));
 
 		logger.info("User[" + username + "] checked own account information");
 		return mav;
@@ -137,7 +137,7 @@ public class AccountController extends MultiActionController {
 		ModelAndView mav = new ModelAndView("/account/delete/delete");
 		String username = request.getUserPrincipal().getName();
 
-		mav.addObject("userCalculationCount", adjustmentManager.getCalculationCountByUsername(username));
+		mav.addObject("userCalculationCount", calculationManager.getCalculationCountByUsername(username));
 		logger.info("User[" + username + "] thought about deleting account");
 		return mav;
 	}

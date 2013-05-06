@@ -1,6 +1,5 @@
 package cz.cvut.fsv.webgama.service;
 
-import java.util.List;
 import java.util.Locale;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -14,27 +13,10 @@ public interface AdjustmentManager {
 
 	public ProcessOutput adjustFromFile(MultipartFile file, String username, Locale locale);
 
-	public List<Calculation> getCalculationsbyUsername(String username);
-	
-	public List<Calculation> getSharedCalculationsbyUsername(String username);
-
-	public Calculation getCalculationById(long id);
-
-	public Long getCalculationCountByUsername(String username);
-	
-	public Long getSharedCalculationCountByUsername(String username);
-
-	public boolean isCalculationIdInDB(Long id);
-	
 	public void insertNewCalculation(AdjustmentPageForm adjustmentForm, String username, Locale locale);
 
 	public void updateInputInCalculation(AdjustmentPageForm adjustmentForm, Calculation calculation);
 
 	public void handleWizardForm(Input input, String username, Locale locale);
 
-	public Long getAllPointCount();
-	
-	public Long getPointCountByUsername(String username);
-	
-	public Long getClusterCountByUsername(String username);
 }

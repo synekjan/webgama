@@ -41,7 +41,7 @@ public class AdjustmentPageController extends MultiActionController {
 
 	@Inject
 	private ActivityManager activityManager;
-	
+
 	@Inject
 	private CalculationManager calculationManager;
 
@@ -94,7 +94,7 @@ public class AdjustmentPageController extends MultiActionController {
 
 		// Check if path variable is in database otherwise throw 404 HTTP Status
 		// code
-		if (id <= 0 || !adjustmentManager.isCalculationIdInDB(id)) {
+		if (id <= 0 || !calculationManager.isCalculationIdInDB(id)) {
 			throw new ResourceNotFoundException();
 		}
 		String username = request.getUserPrincipal().getName();
@@ -105,7 +105,7 @@ public class AdjustmentPageController extends MultiActionController {
 
 		ModelAndView mav = new ModelAndView("/adjustment/onepage/new");
 
-		Calculation calculation = adjustmentManager.getCalculationById(id);
+		Calculation calculation = calculationManager.getCalculationById(id);
 		Input input = calculation.getInput();
 		AdjustmentPageForm adjustmentForm = new AdjustmentPageForm(input);
 
@@ -126,7 +126,7 @@ public class AdjustmentPageController extends MultiActionController {
 					+ "] in adjustment one page form!");
 			return new ModelAndView("/adjustment/onepage/new", "errorCount", result.getErrorCount());
 		}
-		Calculation calculation = adjustmentManager.getCalculationById(id);
+		Calculation calculation = calculationManager.getCalculationById(id);
 		adjustmentManager.updateInputInCalculation(adjustmentForm, calculation);
 
 		logger.info("User[" + username + "] successfully update input of calculation[" + id
