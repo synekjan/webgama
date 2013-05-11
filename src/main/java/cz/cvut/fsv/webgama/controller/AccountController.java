@@ -131,6 +131,7 @@ public class AccountController extends MultiActionController {
 		return new ModelAndView("/account/password/change", "success", true);
 	}
 
+	//DELETING ACCOUT
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView deleteUserForm(HttpServletRequest request) {
 

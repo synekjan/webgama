@@ -4,176 +4,6 @@
 #parse("include.vm")
 <title>#springMessage("navbar.calculations") |
 	#springMessage("application.name")</title>
-	
-	<script>
-		jQuery(document).ready(function() {
-
-			jQuery("button.delete_button").click(function() {
-				var id = jQuery(this).attr("data");
-				jQuery.ajax({
-					type : "POST",
-					data : "id=" + id,
-					url : '#springUrl("/calculation/delete")',
-					success : function(msg) {
-						var object = jQuery(".calculation_" + id);
-						object.fadeOut(500, function() {
-							jQuery(this).remove();
-						});
-					}
-				});
-			});
-
-		jQuery("button.calculate_button").click(function(e) {
-				var id = jQuery(this).attr("data");
-				var btn = jQuery(this);
-				var fields = btn.parent().serialize();
-				jQuery.ajax({
-					type : "POST",
-					data : fields + "&id=" + id,
-					url : '#springUrl("/calculation/calculate")',
-					beforeSend : function() {
-						btn.attr('disabled', 'disabled');
-						btn.closest('.accor_content').prev('h3').find('.status_message').html('<span class="calculating">#springMessage("calculating")</span>');
-						btn.html('#springMessage("calculations.button.calculating")');
-						btn.closest('.primary_wrapper').find('.running-time').html('');
-						btn.closest('.primary_wrapper').find('.progress').html('#springMessage("calculating")');
-						btn.closest('.primary_wrapper').find('.result_box').addClass('result_box_disabled');
-						btn.closest('.primary_wrapper').find('.export_button').removeAttr('href');
-					},
-					success : function(jqXHR) {
-						if (!jqXHR.error) {
-							btn.removeAttr('disabled');
-							btn.closest('.accor_content').prev('h3').find('.status_message').html('<span class="calculated">#springMessage("calculated")</span>');
-							btn.html('#springMessage("calculations.button.recalculate")');
-							btn.closest('.primary_wrapper').find('.running-time').html(jqXHR.runningTime.toFixed(2) + " ms");
-							btn.closest('.primary_wrapper').find('.progress').html('#springMessage("calculated")');
-							btn.closest('.primary_wrapper').find('.result_box').removeClass('result_box_disabled');
-							btn.closest('.primary_wrapper').find('.export_button').attr('href','#springUrl("/export/")' + id);
-							btn.closest('.primary_wrapper').find('.output_error').html('#springMessage("calculations.none")');							
-						} else {
-							btn.closest('.primary_wrapper').find('.progress').html('#springMessage("not-calculated")');
-							btn.closest('.accor_content').prev('h3').find('.status_message').html('<span class="not-calculated">#springMessage("not-calculated")</span>');
-							btn.closest('.primary_wrapper').find('.running-time').html(jqXHR.runningTime.toFixed(2) + " ms");
-							btn.closest('.primary_wrapper').find('.output_error').html('<span class="error_img"></span><div class="error_message_bubble">' + jqXHR.message + '</div>');	
-							alert(jqXHR.message);
-							btn.html('#springMessage("calculations.button.recalculate")');
-							btn.removeAttr('disabled');
-						}
-					}
-				});
-				//stops normal form submit 
-				return false;
-			});
-		
-		jQuery(document).on("click", "span.icon-close-privilege", function() {
-			var parent = jQuery(this).parent();
-			var privilegeId = parent.attr('data');
-
-			jQuery.ajax({
-				type : "POST",
-				data : "id=" + privilegeId,
-				url : '#springUrl("/calculation/privilege/delete")',
-				success : function(msg) {
-					parent.fadeOut(500, function() {
-						jQuery(this).remove();
-					});
-				}
-			});
-		});
-		
-		jQuery('button.share_button').click(function() {
-			var button = jQuery(this);
-			var user = button.siblings().first().val();
-			var id = button.attr("data");
-			var error = button.parent().find('.error');
-			if (user == "") {
-				return false;
-			}
-			error.html('').hide();
-			jQuery.ajax({
-				type : "POST",
-				data : "user=" + user + "&id=" + id,
-				url : '#springUrl("/calculation/share")',
-				success : function(jqXHR) {
-					if (!jqXHR.error) {
-						var item = jQuery('<div class="privilege" data="' + jqXHR.runningTime + '"><span class="icon-close-privilege"></span>' + user + '</div>').fadeIn(500).css("display","inline-block");
-						button.parent().parent().find('.privileges_wrap').append(item);
-					} else {
-						error.html(jqXHR.message).show();
-						
-					}
-				}
-			});
-		});
-		
-		jQuery(".sharing").autocomplete({
-			source: '#springUrl("/calculation/user/find")',
-			minLength: 3,
-			delay: 200
-		});
-		
-		
-		 function checkLength( name, min, max ) {
-			 if ( name.length > max || name.length < min ) {
-			 return false;
-			 } else {
-			 return true;
-			 }
-			 }
-		
-		
-		var element;
-		jQuery("#name_change_form").dialog({
-			 autoOpen: false,
-			 height: 150,
-			 width: 250,
-	         modal: true,
-	         draggable:true, 
-	         resizable:false,
-	         open: function( event, ui ) {
-	        	 jQuery(this).find('input').val(jQuery(this).data('name'));
-	        	 element = jQuery(this).find('input');
-	         },
-			 buttons: {
-				 "#springMessage('calculations.rename.dialog.submit')": function() {
-					var name = element.val();
-					var bool = checkLength( name, 3, 50 )
-					var parent = jQuery(this).data('parent');
-					 if (bool) {
-					 jQuery.ajax({
-							type : "POST",
-							data : "id=" + jQuery(this).data('calculationId') + "&name=" + name,
-							url : '#springUrl("/calculation/rename")',
-							success : function(jqXHR) {
-								parent.html(name + '<div class="edit_name_img"></div>');
-							}
-						});
-					 
-				 	jQuery( this ).dialog( "close" );
-					 } else {
-						 jQuery('.jserror').html('#springMessage("calculations.rename.dialog.error")').fadeIn();
-					 }
-				 	},
-				 "#springMessage('calculations.rename.dialog.cancel')": function() {
-				 	jQuery( this ).dialog( "close" );
-				 	}
-				 },
-		});
-		
-		jQuery(document).on("click", ".accordion h3 .edit_name_img", function() {
-			jQuery("#name_change_form").data('calculationId', jQuery(this).parent().attr('data'));
-			jQuery("#name_change_form").data('name', jQuery(this).parent().text());
-			jQuery("#name_change_form").data('parent', jQuery(this).parent());
-			jQuery('.jserror').hide();
-			jQuery("#name_change_form").dialog( "open" );
-		});
-		
-		/* window.setInterval(function(){
-			  location.reload();
-		}, 5000); */
-		
-		});
-	</script>
 </head>
 <body>
 	<div id="wrapper">
@@ -556,5 +386,174 @@
 		</div>
 	</div>
 	#parse("footer.vm")
+		<script>
+		jQuery(document).ready(function() {
+
+			jQuery("button.delete_button").click(function() {
+				var id = jQuery(this).attr("data");
+				jQuery.ajax({
+					type : "POST",
+					data : "id=" + id,
+					url : '#springUrl("/calculation/delete")',
+					success : function(msg) {
+						var object = jQuery(".calculation_" + id);
+						object.fadeOut(500, function() {
+							jQuery(this).remove();
+						});
+					}
+				});
+			});
+
+		jQuery("button.calculate_button").click(function(e) {
+				var id = jQuery(this).attr("data");
+				var btn = jQuery(this);
+				var fields = btn.parent().serialize();
+				jQuery.ajax({
+					type : "POST",
+					data : fields + "&id=" + id,
+					url : '#springUrl("/calculation/calculate")',
+					beforeSend : function() {
+						btn.attr('disabled', 'disabled');
+						btn.closest('.accor_content').prev('h3').find('.status_message').html('<span class="calculating">#springMessage("calculating")</span>');
+						btn.html('#springMessage("calculations.button.calculating")');
+						btn.closest('.primary_wrapper').find('.running-time').html('');
+						btn.closest('.primary_wrapper').find('.progress').html('#springMessage("calculating")');
+						btn.closest('.primary_wrapper').find('.result_box').addClass('result_box_disabled');
+						btn.closest('.primary_wrapper').find('.export_button').removeAttr('href');
+					},
+					success : function(jqXHR) {
+						if (!jqXHR.error) {
+							btn.removeAttr('disabled');
+							btn.closest('.accor_content').prev('h3').find('.status_message').html('<span class="calculated">#springMessage("calculated")</span>');
+							btn.html('#springMessage("calculations.button.recalculate")');
+							btn.closest('.primary_wrapper').find('.running-time').html(jqXHR.runningTime.toFixed(2) + " ms");
+							btn.closest('.primary_wrapper').find('.progress').html('#springMessage("calculated")');
+							btn.closest('.primary_wrapper').find('.result_box').removeClass('result_box_disabled');
+							btn.closest('.primary_wrapper').find('.export_button').attr('href','#springUrl("/export/")' + id);
+							btn.closest('.primary_wrapper').find('.output_error').html('#springMessage("calculations.none")');							
+						} else {
+							btn.closest('.primary_wrapper').find('.progress').html('#springMessage("not-calculated")');
+							btn.closest('.accor_content').prev('h3').find('.status_message').html('<span class="not-calculated">#springMessage("not-calculated")</span>');
+							btn.closest('.primary_wrapper').find('.running-time').html(jqXHR.runningTime.toFixed(2) + " ms");
+							btn.closest('.primary_wrapper').find('.output_error').html('<span class="error_img"></span><div class="error_message_bubble">' + jqXHR.message + '</div>');	
+							alert(jqXHR.message);
+							btn.html('#springMessage("calculations.button.recalculate")');
+							btn.removeAttr('disabled');
+						}
+					}
+				});
+				//stops normal form submit 
+				return false;
+			});
+		
+		jQuery(document).on("click", "span.icon-close-privilege", function() {
+			var parent = jQuery(this).parent();
+			var privilegeId = parent.attr('data');
+
+			jQuery.ajax({
+				type : "POST",
+				data : "id=" + privilegeId,
+				url : '#springUrl("/calculation/privilege/delete")',
+				success : function(msg) {
+					parent.fadeOut(500, function() {
+						jQuery(this).remove();
+					});
+				}
+			});
+		});
+		
+		jQuery('button.share_button').click(function() {
+			var button = jQuery(this);
+			var user = button.siblings().first().val();
+			var id = button.attr("data");
+			var error = button.parent().find('.error');
+			if (user == "") {
+				return false;
+			}
+			error.html('').hide();
+			jQuery.ajax({
+				type : "POST",
+				data : "user=" + user + "&id=" + id,
+				url : '#springUrl("/calculation/share")',
+				success : function(jqXHR) {
+					if (!jqXHR.error) {
+						var item = jQuery('<div class="privilege" data="' + jqXHR.runningTime + '"><span class="icon-close-privilege"></span>' + user + '</div>').fadeIn(500).css("display","inline-block");
+						button.parent().parent().find('.privileges_wrap').append(item);
+					} else {
+						error.html(jqXHR.message).show();
+						
+					}
+				}
+			});
+		});
+		
+		jQuery(".sharing").autocomplete({
+			source: '#springUrl("/calculation/user/find")',
+			minLength: 3,
+			delay: 200
+		});
+		
+		
+		 function checkLength( name, min, max ) {
+			 if ( name.length > max || name.length < min ) {
+			 return false;
+			 } else {
+			 return true;
+			 }
+			 }
+		
+		
+		var element;
+		jQuery("#name_change_form").dialog({
+			 autoOpen: false,
+			 height: 150,
+			 width: 250,
+	         modal: true,
+	         draggable:true, 
+	         resizable:false,
+	         open: function( event, ui ) {
+	        	 jQuery(this).find('input').val(jQuery(this).data('name'));
+	        	 element = jQuery(this).find('input');
+	         },
+			 buttons: {
+				 "#springMessage('calculations.rename.dialog.submit')": function() {
+					var name = element.val();
+					var bool = checkLength( name, 3, 50 )
+					var parent = jQuery(this).data('parent');
+					 if (bool) {
+					 jQuery.ajax({
+							type : "POST",
+							data : "id=" + jQuery(this).data('calculationId') + "&name=" + name,
+							url : '#springUrl("/calculation/rename")',
+							success : function(jqXHR) {
+								parent.html(name + '<div class="edit_name_img"></div>');
+							}
+						});
+					 
+				 	jQuery( this ).dialog( "close" );
+					 } else {
+						 jQuery('.jserror').html('#springMessage("calculations.rename.dialog.error")').fadeIn();
+					 }
+				 	},
+				 "#springMessage('calculations.rename.dialog.cancel')": function() {
+				 	jQuery( this ).dialog( "close" );
+				 	}
+				 },
+		});
+		
+		jQuery(document).on("click", ".accordion h3 .edit_name_img", function() {
+			jQuery("#name_change_form").data('calculationId', jQuery(this).parent().attr('data'));
+			jQuery("#name_change_form").data('name', jQuery(this).parent().text());
+			jQuery("#name_change_form").data('parent', jQuery(this).parent());
+			jQuery('.jserror').hide();
+			jQuery("#name_change_form").dialog( "open" );
+		});
+		
+		/* window.setInterval(function(){
+			  location.reload();
+		}, 5000); */
+		
+		});
+	</script>
 </body>
 </html>

@@ -44,7 +44,7 @@
 						<h1>#springMessage("welcome.slideshow.slide2.header")</h1>
 						<p>#springMessage("welcome.slideshow.slide2.message")</p>
 						<div class="more">
-							<a href="#">#springMessage("welcome.slideshow.learn.more")</a>
+							<a href="http://en.wikipedia.org/wiki/HTTP_Secure">#springMessage("welcome.slideshow.learn.more")</a>
 						</div>
 					</div>
 				</div>
