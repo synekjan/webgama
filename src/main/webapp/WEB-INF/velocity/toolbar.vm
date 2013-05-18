@@ -1,4 +1,4 @@
-<div id="side_toolbar" class="draggable docked">
+<div id="side_toolbar" class="resizable draggable docked">
 
 	<div id="toolbar">
 		<div id="toolbar_header">
@@ -6,10 +6,9 @@
 			<span class="icon-close-toolbar"></span>
 		</div>
 		<div id="toolbar_content">
-
 			<button class="add_point parent" title="#springMessage("adjustment.onepage.point")">
 				<div id="point-icon" class="toolbar-icon"></div>
-			</button><br>
+			</button>
 			<button class="add_observation parent" title="#springMessage("adjustment.onepage.observation")">
 				<div id="observation-icon" class="toolbar-icon"></div>
 			</button>
@@ -27,6 +26,9 @@
 			</button>
 			<button class="add_zenithAngle child" title="#springMessage("adjustment.onepage.zenithAngle")">
 				<div id="zenithAngle-icon" class="toolbar-icon"></div>
+			</button>
+			<button class="add_covMat parent" title="#springMessage("adjustment.onepage.covMat")">
+				<div id="covMat-icon" class="toolbar-icon"></div>
 			</button>
 			<button class="add_heightDifferences parent" title="#springMessage("adjustment.onepage.heightDifferences")">
 				<div id="heightDifferences-icon" class="toolbar-icon"></div>
@@ -46,10 +48,6 @@
 			<button class="add_vector child" title="#springMessage("adjustment.onepage.vector")">
 				<div id="vector-icon" class="toolbar-icon"></div>
 			</button>
-			<button class="add_covMat parent" title="#springMessage("adjustment.onepage.covMat")">
-				<div id="covMat-icon" class="toolbar-icon"></div>
-			</button>
-
 		</div>
 	</div>
 </div>
@@ -61,7 +59,12 @@
 <script>
 	jQuery(document).ready(function() {
 
-		function animateArrow() {
+		/* jQuery('.resizable').resizable({
+			 minHeight: 80,
+			 minWidth: 110
+		}); */
+		
+		/* function animateArrow() {
 			jQuery('#handwritten-arrow').delay(500).animate({
 				left : '80',
 			}, 500, function() {
@@ -71,15 +74,15 @@
 					animateArrow();
 				});
 			});
-		}
+		} */
 
 		//hiding toolbar 
 		jQuery("#side_toolbar").delay(1000).animate({
 			left : '-70',
 			opacity : '0.5'
 		}, 500, function() {
-			jQuery('#handwritten-arrow').fadeIn();
-			animateArrow();
+			/* jQuery('#handwritten-arrow').fadeIn();
+			animateArrow(); */
 		});
 
 		jQuery(document).on('mouseenter', '.docked', function() {
