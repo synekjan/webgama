@@ -12,7 +12,6 @@
 				<div class="right_menu">
 					<ul>
 						<span class="active_menu"><li><a href="#springUrl("/about/project")">#springMessage("about.project")</a></li></span>
-						<li><a href="#springUrl("/about/cvut")">#springMessage("about.organization")</a></li>
 						<li><a href="#springUrl("/about/author")">#springMessage("about.author")</a></li>
 						<li><a href="#springUrl("/about/thanks")">#springMessage("about.thanks")</a></li>
 						<li><a href="#springUrl("/about/contact")">#springMessage("about.contact")</a></li>

@@ -27,11 +27,11 @@ public class AboutController extends MultiActionController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/cvut", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/cvut", method = RequestMethod.GET)
 	protected ModelAndView showAboutCVUT() {
 
 		return new ModelAndView("/about/cvut");
-	}
+	}*/
 
 	@RequestMapping(value = "/author", method = RequestMethod.GET)
 	protected ModelAndView showAboutAuthor() {
