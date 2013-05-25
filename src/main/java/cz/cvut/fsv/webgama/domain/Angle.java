@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class Angle implements Serializable {
@@ -21,7 +22,8 @@ public class Angle implements Serializable {
 	private String fs;
 
 	@NotNull
-	private Double val;
+	@Length(max = 30)
+	private String val;
 
 	private Double stdev;
 
@@ -63,11 +65,11 @@ public class Angle implements Serializable {
 		this.fs = fs;
 	}
 
-	public Double getVal() {
+	public String getVal() {
 		return val;
 	}
 
-	public void setVal(Double val) {
+	public void setVal(String val) {
 		this.val = val;
 	}
 

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class Direction implements Serializable {
@@ -16,7 +17,8 @@ public class Direction implements Serializable {
 	private String to;
 
 	@NotNull
-	private Double val;
+	@Length(max = 30)
+	private String val;
 
 	private Double stdev;
 
@@ -40,11 +42,11 @@ public class Direction implements Serializable {
 		this.to = to;
 	}
 
-	public Double getVal() {
+	public String getVal() {
 		return val;
 	}
 
-	public void setVal(Double val) {
+	public void setVal(String val) {
 		this.val = val;
 	}
 

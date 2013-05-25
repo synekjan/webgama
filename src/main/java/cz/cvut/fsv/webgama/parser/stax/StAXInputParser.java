@@ -105,7 +105,7 @@ public class StAXInputParser implements InputParser {
 								continue;
 							}
 							if ("val".equals(attribute.getName().getLocalPart())) {
-								direction.setVal(Double.parseDouble(attribute.getValue()));
+								direction.setVal(attribute.getValue());
 								continue;
 							}
 							if ("stdev".equals(attribute.getName().getLocalPart())) {
@@ -182,7 +182,7 @@ public class StAXInputParser implements InputParser {
 								continue;
 							}
 							if ("val".equals(attribute.getName().getLocalPart())) {
-								angle.setVal(Double.parseDouble(attribute.getValue()));
+								angle.setVal(attribute.getValue());
 								continue;
 							}
 							if ("stdev".equals(attribute.getName().getLocalPart())) {
@@ -259,7 +259,7 @@ public class StAXInputParser implements InputParser {
 								continue;
 							}
 							if ("val".equals(attribute.getName().getLocalPart())) {
-								zenithAngle.setVal(Double.parseDouble(attribute.getValue()));
+								zenithAngle.setVal(attribute.getValue());
 								continue;
 							}
 							if ("stdev".equals(attribute.getName().getLocalPart())) {
