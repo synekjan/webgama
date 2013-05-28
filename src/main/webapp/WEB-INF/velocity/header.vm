@@ -9,9 +9,14 @@
 				<li class="dropdown"><a id="locales" class="dropdown-toggle"
 					href>#springMessage("localization") <i class="caret"></i></a>
 					<div id="locale_dropdown">
-						<a href="?locale=cs_CZ">#springMessage('czech.republic')</a> <a
-							href="?locale=en_GB">#springMessage('great.britain')</a> <a
-							href="?locale=en_US">#springMessage('united.states')</a>
+						<a href="?locale=en_AU">Australia</a>
+						<a href="?locale=en_CA">Canada</a>
+						<a href="?locale=cs_CZ">Česká Republika</a>
+						<a href="?locale=en_IN">India</a>
+						<a href="?locale=en_NZ">New Zealand</a>
+						<a href="?locale=en_ZA">South Africa</a>
+						<a href="?locale=en_GB">United Kingdom</a> 
+						<a href="?locale=en_US">United States</a>
 					</div></li>
 				<li class="dropdown"><a id="account"
 					class="dropdown-toggle bold" href>$authentication.username <i
@@ -30,9 +35,14 @@
 				<li class="dropdown"><a id="locales" class="dropdown-toggle"
 					href>#springMessage("localization") <i class="caret"></i></a>
 					<div id="locale_dropdown">
-						<a href="?locale=cs_CZ">#springMessage('czech.republic')</a> <a
-							href="?locale=en_GB">#springMessage('great.britain')</a> <a
-							href="?locale=en_US">#springMessage('united.states')</a>
+						<a href="?locale=en_AU">Australia</a>
+						<a href="?locale=en_CA">Canada</a>
+						<a href="?locale=cs_CZ">Česká Republika</a>
+						<a href="?locale=en_IN">India</a>
+						<a href="?locale=en_NZ">New Zealand</a>
+						<a href="?locale=en_ZA">South Africa</a>
+						<a href="?locale=en_GB">United Kingdom</a> 
+						<a href="?locale=en_US">United States</a>
 					</div></li>
 				<li><a class="bold" href="#springUrl("/register")">#springMessage("sign.up")</a></li>
 				<li><a class="bold" href="#springUrl("/signin")">#springMessage("sign.in")</a></li>
