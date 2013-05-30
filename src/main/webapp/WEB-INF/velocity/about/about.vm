@@ -22,7 +22,7 @@
 						<h2>#springMessage("about.project")</h2>
 					</div>
 					<div class="content">
-					
+						<div id="general_message">#springMessage("about.project.message")</div>
 					</div>
 				</div>
 			</div>
