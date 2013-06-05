@@ -53,7 +53,8 @@
 					</div>
 					<div id="text_preview" class="export_box">
 						<div class="title">#springMessage("export.text.preview.title")</div>
-						<textarea rows="20" readonly="readonly">$!calculation.output.textContent</textarea>
+						<iframe src="#springUrl("/export/${calculation.id}/html-preview")" width="100%" height="350px" frameborder="0" title="Kliknutim zobraz cele v nove zalozce"></iframe>
+						<!-- <textarea rows="20" readonly="readonly">$!calculation.output.textContent</textarea> -->
 					</div>
 					<div id="download" class="export_box">
 						<div id="export_options">
@@ -75,9 +76,9 @@
 	</div>
 	#parse("footer.vm")
 	<script>
-		jQuery(function() {
-			jQuery("#tabs").tabs();
-		});
+	
+	
+	
 	</script>
 </body>
 </html>

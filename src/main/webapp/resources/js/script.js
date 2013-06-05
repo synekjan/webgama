@@ -103,7 +103,7 @@ $(document).ready(function() {
 					function() {
 						jQuery('.adjustment_form').find('.focused')
 						.removeClass('focused');
-						var element = jQuery(this).parents('.window')
+						jQuery(this).parents('.window')
 						.addClass('focused');
 					});
 

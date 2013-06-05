@@ -71,6 +71,28 @@ public class ExportController extends MultiActionController {
 		return new ModelAndView("/export/calculation", "calculation", calculation);
 	}
 
+	@RequestMapping(value = "/export/{id}/html-preview", method = RequestMethod.GET)
+	protected ModelAndView showHtmlPreview(@PathVariable Long id, HttpServletRequest request) {
+
+		String username = request.getUserPrincipal().getName();
+
+		// Check if path variable is in database otherwise throw 404 HTTP error
+		if (id <= 0 || !calculationManager.isCalculationIdInDB(id)) {
+			throw new ResourceNotFoundException();
+		}
+		Calculation calculation = calculationManager.getCalculationById(id);
+		// Check if user has permission to edit
+		if (!calculationManager.hasUserPrivilegeToCalculation(id, username)) {
+			throw new PermissionDeniedException();
+		}
+		// Check if calculation is calculated
+		if (calculation.getOutput() == null) {
+			throw new ResourceNotFoundException();
+		}
+
+		return new ModelAndView("/export/html-preview", "htmlPreview", calculation.getOutput().getHtmlContent());
+	}
+
 	@RequestMapping(value = "/export/{id}/xml", method = RequestMethod.GET)
 	protected ModelAndView exportCalculationToXML(@PathVariable Long id, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -257,4 +279,5 @@ public class ExportController extends MultiActionController {
 		logger.info(username + " downloads calculation[" + id + "] as SVG.");
 		return null;
 	}
+
 }

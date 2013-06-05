@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cz.cvut.fsv</groupId>
 	<artifactId>webgama</artifactId>
-	<version>0.0.6-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>war</packaging>
 	<name>webgama</name>
 	<description>Web interface for GNU Gama</description>

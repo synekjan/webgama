@@ -518,7 +518,7 @@
 			 buttons: {
 				 "#springMessage('calculations.rename.dialog.submit')": function() {
 					var name = element.val();
-					var bool = checkLength( name, 3, 50 )
+					var bool = checkLength( name, 3, 50 );
 					var parent = jQuery(this).data('parent');
 					 if (bool) {
 					 jQuery.ajax({
