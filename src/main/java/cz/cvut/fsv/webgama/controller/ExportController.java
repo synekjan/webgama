@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -112,7 +115,10 @@ public class ExportController extends MultiActionController {
 		if (calculation.getOutput() == null) {
 			throw new ResourceNotFoundException();
 		}
-		String filename = calculation.getName().replaceAll(" ", "_").toLowerCase();
+		
+		DateTime dt = new DateTime();
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyyMMdd-HHmm");
+		String filename = "wexport_" + fmt.print(dt);
 
 		File temporary = null;
 		try {
@@ -159,7 +165,9 @@ public class ExportController extends MultiActionController {
 			throw new ResourceNotFoundException();
 		}
 
-		String filename = calculation.getName().replaceAll(" ", "_").toLowerCase();
+		DateTime dt = new DateTime();
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyyMMdd-HHmm");
+		String filename = "wexport_" + fmt.print(dt);
 
 		File temporary = null;
 		try {
@@ -206,7 +214,9 @@ public class ExportController extends MultiActionController {
 			throw new ResourceNotFoundException();
 		}
 
-		String filename = calculation.getName().replaceAll(" ", "_").toLowerCase();
+		DateTime dt = new DateTime();
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyyMMdd-HHmm");
+		String filename = "wexport_" + fmt.print(dt);
 
 		File temporary = null;
 		try {
@@ -253,7 +263,9 @@ public class ExportController extends MultiActionController {
 			throw new ResourceNotFoundException();
 		}
 
-		String filename = calculation.getName().replaceAll(" ", "_").toLowerCase();
+		DateTime dt = new DateTime();
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyyMMdd-HHmm");
+		String filename = "wexport_" + fmt.print(dt);
 
 		File temporary = null;
 		try {
