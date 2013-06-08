@@ -1,4 +1,5 @@
-$(document).ready(function() {
+$(document).ready(
+		function() {
 			// DROPDOWN MENU behaviour
 			$('a#account').click(function() {
 				$('#locale_dropdown').slideUp(200);
@@ -45,33 +46,31 @@ $(document).ready(function() {
 					heightStyle : "content"
 				});
 			});
-			
-			jQuery(document).on('mouseenter', '.error_img', function(){
+
+			jQuery(document).on('mouseenter', '.error_img', function() {
 				$(this).siblings().first().show();
 			}).on('mouseleave', '.error_img', function() {
 				$(this).siblings().first().hide();
 			});
-			
+
 			jQuery('.edit_button').click(function() {
 				var $button = $(this);
 				$button.siblings('.edit_choose').toggle();
 				$button.toggleClass('pushed');
 			});
-			
+
 			jQuery('.export_input_button').click(function() {
 				var $button = $(this);
 				$button.siblings('.export_input_choose').toggle();
 				$button.toggleClass('pushed');
 			});
 
-
 			$(".draggable").draggable({
 				handle : "#toolbar_header",
-				start: function( event, ui ) {
+				start : function(event, ui) {
 					jQuery("#side_toolbar").removeClass('docked');
 				}
 			});
-			
 
 			// delete element click event
 			jQuery(document).on("click", "span.icon-close", function() {
@@ -85,33 +84,20 @@ $(document).ready(function() {
 			});
 
 			// Adjustment elements highlighting
-			jQuery(document)
-			.on(
-					"focus",
-					".points input, .points select, .clusters input, .clusters select, .clusters textarea",
-					function() {
-						jQuery('.adjustment_form').find(
-						'.focused').removeClass(
-						'focused');
-						jQuery(this).parents('.window')
-						.addClass('focused');
+			jQuery(document).on("focus",
+					".points input, .points select, .clusters input, .clusters select, .clusters textarea", function() {
+						jQuery('.adjustment_form').find('.focused').removeClass('focused');
+						jQuery(this).parents('.window').addClass('focused');
 					});
 			/*
-			 * jQuery(document).on("blur", ".points input, .points
-			 * select, .clusters input, .clusters select", function() {
-			 * jQuery(this).parents('.window').removeClass('focused');
-			 * });
+			 * jQuery(document).on("blur", ".points input, .points select, .clusters input, .clusters select",
+			 * function() { jQuery(this).parents('.window').removeClass('focused'); });
 			 */
 
-			jQuery(document).on(
-					"click",
-					".title_bar",
-					function() {
-						jQuery('.adjustment_form').find('.focused')
-						.removeClass('focused');
-						jQuery(this).parents('.window')
-						.addClass('focused');
-					});
+			jQuery(document).on("click", ".title_bar", function() {
+				jQuery('.adjustment_form').find('.focused').removeClass('focused');
+				jQuery(this).parents('.window').addClass('focused');
+			});
 
 			// TOOLBAR BUTTON EVENTS
 			// add point click event
@@ -121,242 +107,175 @@ $(document).ready(function() {
 			});
 
 			// add observation click event
-			jQuery("button.add_observation").click(
-					function() {
-						var clusterIndex = jQuery(".clusters")
-						.children().length;
-						jQuery(".clusters").append(
-								renderObservation(clusterIndex));
-					});
+			jQuery("button.add_observation").click(function() {
+				var clusterIndex = jQuery(".clusters").children().length;
+				jQuery(".clusters").append(renderObservation(clusterIndex));
+			});
 
 			// add direction click event
-			jQuery("button.add_direction").click(
-					function() {
-						var container = jQuery('.clusters').children(
-						'.focused');
-						if (container.length == 0) {
-							return false;
-						}
-						var regex = /\[([0-9]+)\]/;
-						var matches = container.find('input:hidden')
-						.prop('id').match(regex);
-						if (matches) {
-							var clusterIndex = matches[1];
-						}
-						var directionIndex = container.find(
-								".directions").children().length;
-						container.find(".directions").append(
-								renderDirection(clusterIndex,
-										directionIndex));
-					});
+			jQuery("button.add_direction").click(function() {
+				var container = jQuery('.clusters').children('.focused');
+				if (container.length == 0) {
+					return false;
+				}
+				var regex = /\[([0-9]+)\]/;
+				var matches = container.find('input:hidden').prop('id').match(regex);
+				var clusterIndex = null;
+				if (matches) {
+					clusterIndex = matches[1];
+				}
+				var directionIndex = container.find(".directions").children().length;
+				container.find(".directions").append(renderDirection(clusterIndex, directionIndex));
+			});
 
 			// add distance click event
-			jQuery("button.add_distance").click(
-					function() {
-						var container = jQuery('.clusters').children(
-						'.focused');
-						if (container.length == 0) {
-							return false;
-						}
-						var regex = /\[([0-9]+)\]/;
-						var matches = container.find('input:hidden')
-						.prop('id').match(regex);
-						if (matches) {
-							var clusterIndex = matches[1];
-						}
-						var distanceIndex = container
-						.find(".distances").children().length;
-						container.find(".distances").append(
-								renderDistance(clusterIndex,
-										distanceIndex));
-					});
+			jQuery("button.add_distance").click(function() {
+				var container = jQuery('.clusters').children('.focused');
+				if (container.length == 0) {
+					return false;
+				}
+				var regex = /\[([0-9]+)\]/;
+				var matches = container.find('input:hidden').prop('id').match(regex);
+				var clusterIndex = null;
+				if (matches) {
+					clusterIndex = matches[1];
+				}
+				var distanceIndex = container.find(".distances").children().length;
+				container.find(".distances").append(renderDistance(clusterIndex, distanceIndex));
+			});
 
 			// add angle click event
-			jQuery("button.add_angle").click(
-					function() {
-						var container = jQuery('.clusters').children(
-						'.focused');
-						if (container.length == 0) {
-							return false;
-						}
-						var regex = /\[([0-9]+)\]/;
-						var matches = container.find('input:hidden')
-						.prop('id').match(regex);
-						if (matches) {
-							var clusterIndex = matches[1];
-						}
-						var angleIndex = container.find(".angles")
-						.children().length;
-						container.find(".angles").append(
-								renderAngle(clusterIndex, angleIndex));
-					});
+			jQuery("button.add_angle").click(function() {
+				var container = jQuery('.clusters').children('.focused');
+				if (container.length == 0) {
+					return false;
+				}
+				var regex = /\[([0-9]+)\]/;
+				var matches = container.find('input:hidden').prop('id').match(regex);
+				var clusterIndex = null;
+				if (matches) {
+					clusterIndex = matches[1];
+				}
+				var angleIndex = container.find(".angles").children().length;
+				container.find(".angles").append(renderAngle(clusterIndex, angleIndex));
+			});
 
 			// add slope distancce click event
-			jQuery("button.add_slopeDistance").click(
-					function() {
-						var container = jQuery('.clusters').children(
-						'.focused');
-						if (container.length == 0) {
-							return false;
-						}
-						var regex = /\[([0-9]+)\]/;
-						var matches = container.find('input:hidden')
-						.prop('id').match(regex);
-						if (matches) {
-							var clusterIndex = matches[1];
-						}
-						var slopeDistanceIndex = container.find(
-								".slopeDistances").children().length;
-						container.find(".slopeDistances").append(
-								renderSlopeDistance(clusterIndex,
-										slopeDistanceIndex));
-					});
+			jQuery("button.add_slopeDistance").click(function() {
+				var container = jQuery('.clusters').children('.focused');
+				if (container.length == 0) {
+					return false;
+				}
+				var regex = /\[([0-9]+)\]/;
+				var matches = container.find('input:hidden').prop('id').match(regex);
+				var clusterIndex = null;
+				if (matches) {
+					clusterIndex = matches[1];
+				}
+				var slopeDistanceIndex = container.find(".slopeDistances").children().length;
+				container.find(".slopeDistances").append(renderSlopeDistance(clusterIndex, slopeDistanceIndex));
+			});
 
 			// add zenith angle click event
-			jQuery("button.add_zenithAngle").click(
-					function() {
-						var container = jQuery('.clusters').children(
-						'.focused');
-						if (container.length == 0) {
-							return false;
-						}
-						var regex = /\[([0-9]+)\]/;
-						var matches = container.find('input:hidden')
-						.prop('id').match(regex);
-						if (matches) {
-							var clusterIndex = matches[1];
-						}
-						var zenithAngleIndex = container.find(
-								".zenithAngles").children().length;
-						container.find(".zenithAngles").append(
-								renderZenithAngle(clusterIndex,
-										zenithAngleIndex));
-					});
+			jQuery("button.add_zenithAngle").click(function() {
+				var container = jQuery('.clusters').children('.focused');
+				if (container.length == 0) {
+					return false;
+				}
+				var regex = /\[([0-9]+)\]/;
+				var matches = container.find('input:hidden').prop('id').match(regex);
+				var clusterIndex = null;
+				if (matches) {
+					clusterIndex = matches[1];
+				}
+				var zenithAngleIndex = container.find(".zenithAngles").children().length;
+				container.find(".zenithAngles").append(renderZenithAngle(clusterIndex, zenithAngleIndex));
+			});
 
 			// add height differences wrap click event
-			jQuery("button.add_heightDifferences").click(
-					function() {
-						var clusterIndex = jQuery(".clusters")
-						.children().length;
-						var container = jQuery(
-								renderHeightDifferences(clusterIndex))
-								.appendTo('.clusters');
-						container.find(".heightDifferences")
-						.append(
-								renderHeightDifference(
-										clusterIndex, 0));
-					});
+			jQuery("button.add_heightDifferences").click(function() {
+				var clusterIndex = jQuery(".clusters").children().length;
+				var container = jQuery(renderHeightDifferences(clusterIndex)).appendTo('.clusters');
+				container.find(".heightDifferences").append(renderHeightDifference(clusterIndex, 0));
+			});
 
 			// add height difference click event
-			jQuery("button.add_heightDifference")
-			.click(
+			jQuery("button.add_heightDifference").click(
 					function() {
-						var container = jQuery('.clusters')
-						.children('.focused');
+						var container = jQuery('.clusters').children('.focused');
 						if (container.length == 0) {
 							return false;
 						}
 						var regex = /\[([0-9]+)\]/;
-						var matches = container.find(
-						'input:hidden').prop('id')
-						.match(regex);
+						var matches = container.find('input:hidden').prop('id').match(regex);
+						var clusterIndex = null;
 						if (matches) {
-							var clusterIndex = matches[1];
+							clusterIndex = matches[1];
 						}
-						var heightDifferenceIndex = container
-						.find(".heightDifferences")
-						.children().length;
-						container
-						.find(".heightDifferences")
-						.append(
-								renderHeightDifference(
-										clusterIndex,
-										heightDifferenceIndex));
+						var heightDifferenceIndex = container.find(".heightDifferences").children().length;
+						container.find(".heightDifferences").append(
+								renderHeightDifference(clusterIndex, heightDifferenceIndex));
 					});
 
 			// add coordinates wrap click event
-			jQuery("button.add_coordinates").click(
-					function() {
-						var clusterIndex = jQuery(".clusters")
-						.children().length;
-						var container = jQuery(
-								renderCoordinates(clusterIndex))
-								.appendTo('.clusters');
-						container.find(".coordinates").append(
-								renderCoordinate(clusterIndex, 0));
-					});
+			jQuery("button.add_coordinates").click(function() {
+				var clusterIndex = jQuery(".clusters").children().length;
+				var container = jQuery(renderCoordinates(clusterIndex)).appendTo('.clusters');
+				container.find(".coordinates").append(renderCoordinate(clusterIndex, 0));
+			});
 
 			// add coordinate click event
-			jQuery("button.add_coordinate").click(
-					function() {
-						var container = jQuery('.clusters').children(
-						'.focused');
-						if (container.length == 0) {
-							return false;
-						}
-						var regex = /\[([0-9]+)\]/;
-						var matches = container.find('input:hidden')
-						.prop('id').match(regex);
-						if (matches) {
-							var clusterIndex = matches[1];
-						}
-						var coordinateIndex = container.find(
-								".coordinates").children().length;
-						container.find(".coordinates").append(
-								renderCoordinate(clusterIndex,
-										coordinateIndex));
-					});
+			jQuery("button.add_coordinate").click(function() {
+				var container = jQuery('.clusters').children('.focused');
+				if (container.length == 0) {
+					return false;
+				}
+				var regex = /\[([0-9]+)\]/;
+				var matches = container.find('input:hidden').prop('id').match(regex);
+				var clusterIndex = null;
+				if (matches) {
+					clusterIndex = matches[1];
+				}
+				var coordinateIndex = container.find(".coordinates").children().length;
+				container.find(".coordinates").append(renderCoordinate(clusterIndex, coordinateIndex));
+			});
 
 			// add vectors wrap click event
-			jQuery("button.add_vectors").click(
-					function() {
-						var clusterIndex = jQuery(".clusters")
-						.children().length;
-						var container = jQuery(
-								renderVectors(clusterIndex)).appendTo(
-										'.clusters');
-						container.find(".vectors").append(
-								renderVector(clusterIndex, 0));
-					});
+			jQuery("button.add_vectors").click(function() {
+				var clusterIndex = jQuery(".clusters").children().length;
+				var container = jQuery(renderVectors(clusterIndex)).appendTo('.clusters');
+				container.find(".vectors").append(renderVector(clusterIndex, 0));
+			});
 
 			// add vector click event
-			jQuery("button.add_vector").click(
-					function() {
-						var container = jQuery('.clusters').children(
-						'.focused');
-						if (container.length == 0) {
-							return false;
-						}
-						var regex = /\[([0-9]+)\]/;
-						var matches = container.find('input:hidden')
-						.prop('id').match(regex);
-						if (matches) {
-							var clusterIndex = matches[1];
-						}
-						var vectorIndex = container.find(".vectors")
-						.children().length;
-						container.find(".vectors")
-						.append(
-								renderVector(clusterIndex,
-										vectorIndex));
-					});
+			jQuery("button.add_vector").click(function() {
+				var container = jQuery('.clusters').children('.focused');
+				if (container.length == 0) {
+					return false;
+				}
+				var regex = /\[([0-9]+)\]/;
+				var matches = container.find('input:hidden').prop('id').match(regex);
+				var clusterIndex = null;
+				if (matches) {
+					clusterIndex = matches[1];
+				}
+				var vectorIndex = container.find(".vectors").children().length;
+				container.find(".vectors").append(renderVector(clusterIndex, vectorIndex));
+			});
 
-			jQuery("button.add_covMat").click(
-					function() {
-						var container = jQuery('.clusters').children(
-						'.focused');
-						if (container.length == 0) {
-							return false;
-						}
-						var regex = /\[([0-9]+)\]/;
-						var matches = container.find('input:hidden')
-						.prop('id').match(regex);
-						if (matches) {
-							var clusterIndex = matches[1];
-						}
-						container.find(".covMatWrap").html(
-								renderCovMat(clusterIndex));
-					});
+			jQuery("button.add_covMat").click(function() {
+				var container = jQuery('.clusters').children('.focused');
+				if (container.length == 0) {
+					return false;
+				}
+				var regex = /\[([0-9]+)\]/;
+				var matches = container.find('input:hidden').prop('id').match(regex);
+				var clusterIndex = null;
+				if (matches) {
+					clusterIndex = matches[1];
+				}
+				container.find(".covMatWrap").html(renderCovMat(clusterIndex));
+			});
 
 		});
 
@@ -420,27 +339,21 @@ function updateIds(container) {
 	var str = container.prop('class').split(' ')[0];
 	var regex = new RegExp(str + "\\[[0-9]+\\]");
 
-	container.children().each(
-			function(index) {
-				// update inputs
-				jQuery(this).find('input, select').each(
-						function() {
-							var name = jQuery(this).prop('name').replace(regex,
-									str + '[' + index + ']');
-							jQuery(this).prop('name', name);
+	container.children().each(function(index) {
+		// update inputs
+		jQuery(this).find('input, select').each(function() {
+			var name = jQuery(this).prop('name').replace(regex, str + '[' + index + ']');
+			jQuery(this).prop('name', name);
 
-							var id = jQuery(this).prop('id').replace(regex,
-									str + '[' + index + ']');
-							jQuery(this).prop('id', id);
-						});
-				// update labels
-				jQuery(this).find('label').each(
-						function() {
-							var _for = jQuery(this).prop('for').replace(regex,
-									str + '[' + index + ']');
-							jQuery(this).prop('for', _for);
+			var id = jQuery(this).prop('id').replace(regex, str + '[' + index + ']');
+			jQuery(this).prop('id', id);
+		});
+		// update labels
+		jQuery(this).find('label').each(function() {
+			var _for = jQuery(this).prop('for').replace(regex, str + '[' + index + ']');
+			jQuery(this).prop('for', _for);
 
-						});
+		});
 
-			});
+	});
 }

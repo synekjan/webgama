@@ -20,7 +20,7 @@ public class JdbcInputDaoTest {
 	@Test
 	public void testInsert() {
 	
-		//JdbcTemplate jdbcTemplate = new JdbcTemplate(db); //TODO Spring JDBC doc uplne dole
+		//JdbcTemplate jdbcTemplate = new JdbcTemplate(db);
 	}
 
 	@Test

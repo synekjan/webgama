@@ -140,7 +140,7 @@ public class JdbcClusterDao extends JdbcDaoSupport implements ClusterDao {
 			break;
 		}
 
-		// TODO - covmat update
+		
 
 	}
 

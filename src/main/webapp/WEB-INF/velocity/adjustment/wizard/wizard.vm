@@ -39,7 +39,8 @@
 									class="icon-close" role="button"></span>
 							</div>
 							#end
-							<div class="form_hints">#springMessage("bold.is.required"), #springMessage("mouseover.for.advice")</div>
+							<div class="form_hints">#springMessage("bold.is.required"),
+								#springMessage("mouseover.for.advice")</div>
 							<form action="" method="post">
 								<div class="adjustment_form">
 									<fieldset>
@@ -98,30 +99,24 @@
 	</div>
 	#parse("footer.vm") #parse("toolbar.vm") #parse("advices.vm")
 	<script>
-		jQuery(document).on("click","#next",function() {
-					var data = jQuery(".adjustment_form").parent().serialize();
-					var step = jQuery(this).prop("class");
-					wizardAjaxPostNext('#springUrl("/adjustment/wizard/")' + step, data);
-					return false;
-				});
-		jQuery(document).on(
-				"click",
-				"#previous",
-				function() {
-					var data = jQuery(".adjustment_form").parent().serialize();
-					var step = jQuery(this).prop("class");
-					wizardAjaxPostPrevious('#springUrl("/adjustment/wizard/")' + step, data);
-					return false;
-				});
-		jQuery(document).on(
-				"click",
-				"#submit",
-				function() {
-					var data = jQuery(".adjustment_form").parent().serialize();
-					var step = jQuery(this).prop("class");
-					wizardAjaxPostSubmit('#springUrl("/adjustment/wizard/")'+ step, '#springUrl("/calculations")', data);
-					return false;
-				});
+		jQuery(document).on("click", "#next", function() {
+			var data = jQuery(".adjustment_form").parent().serialize();
+			var step = jQuery(this).prop("class");
+			wizardAjaxPostNext('#springUrl("/adjustment/wizard/")' + step, data);
+			return false;
+		});
+		jQuery(document).on("click", "#previous", function() {
+			var data = jQuery(".adjustment_form").parent().serialize();
+			var step = jQuery(this).prop("class");
+			wizardAjaxPostPrevious('#springUrl("/adjustment/wizard/")' + step, data);
+			return false;
+		});
+		jQuery(document).on("click", "#submit", function() {
+			var data = jQuery(".adjustment_form").parent().serialize();
+			var step = jQuery(this).prop("class");
+			wizardAjaxPostSubmit('#springUrl("/adjustment/wizard/")' + step, '#springUrl("/calculations")', data);
+			return false;
+		});
 	</script>
 </body>
 </html>

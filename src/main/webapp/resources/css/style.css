@@ -2172,7 +2172,7 @@ a.ui-state-focus {
 		format('woff');
 }
 
-#name_change_form {
+#name_change_form, #delete_calc_form {
 	padding: 20px 10px;
 }
 

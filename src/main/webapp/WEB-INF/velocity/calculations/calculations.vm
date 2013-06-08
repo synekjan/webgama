@@ -248,6 +248,10 @@
 												<a class="link_button" href="#springUrl("/adjustment/wizard/${calculation.id}")">#springMessage("adjustment.wizard")</a><br>
 												<a class="link_button" href="#springUrl("/adjustment/onepage/${calculation.id}")">#springMessage("adjustment.onepage")</a>
 											</div>
+											<button class="export_input_button link_button">Export</button>
+											<div class="export_input_choose">
+												<a class="link_button" href="#springUrl("/export/${calculation.id}/xml-input")">XML</a>
+											</div>
 										</div>
 									</div>
 
@@ -390,7 +394,7 @@
 		</div>
 	</div>
 	#parse("footer.vm")
-		<script>
+	<script>
 		jQuery(document).ready(function() {
 
 			jQuery("button.delete_button").click(function() {
@@ -507,7 +511,7 @@
 			 }
 		
 		
-		var element;
+		var element = null;
 		jQuery("#name_change_form").dialog({
 			 autoOpen: false,
 			 height: 150,
