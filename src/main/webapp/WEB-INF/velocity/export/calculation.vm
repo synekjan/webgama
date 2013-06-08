@@ -2,8 +2,7 @@
 <html>
 <head>
 #parse("include.vm")
-<title>#springMessage("navbar.export") -
-	#springMessage("application.name")</title>
+<title>#springMessage("navbar.export") - #springMessage("application.name")</title>
 </head>
 <body>
 	<div id="wrapper">
@@ -53,8 +52,17 @@
 					</div>
 					<div id="text_preview" class="export_box">
 						<div class="title">#springMessage("export.text.preview.title")</div>
-						<iframe src="#springUrl("/export/${calculation.id}/html-preview")" width="100%" height="350px" frameborder="0" title="Kliknutim zobraz cele v nove zalozce"></iframe>
-						<!-- <textarea rows="20" readonly="readonly">$!calculation.output.textContent</textarea> -->
+						<div id="text_preview_content">
+							<div class="preview">
+								<iframe src="#springUrl("/export/${calculation.id}/html-preview")" width="100%" height="350px" frameborder="0"></iframe>
+							</div>
+							<div class="svg">
+								<div class="small_panel_header">#springMessage("export.text.preview.svg.header")</div>
+								<div class="svg_content">
+									<a class="link_button" href="#springUrl("/export/${calculation.id}/svg-preview")" target="_target">#springMessage("export.text.preview.svg.show")</a>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div id="download" class="export_box">
 						<div id="export_options">
@@ -76,9 +84,7 @@
 	</div>
 	#parse("footer.vm")
 	<script>
-	
-	
-	
+		
 	</script>
 </body>
 </html>

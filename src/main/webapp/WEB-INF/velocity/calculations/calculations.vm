@@ -379,7 +379,7 @@
 					<div id="quick_links">
 						<div class="small_panel_header">#springMessage("navbar.adjustment")</div>
 						<div class="content">
-							<a class="new_button" href="#springUrl("/adjustment")">#springMessage("calculations.adjustment.new")</a>
+							<a class="link_button" href="#springUrl("/adjustment")">#springMessage("calculations.adjustment.new")</a>
 						</div>
 					</div>
 					<div class="info">#springMessage('calculations.info.covMat')</div>
