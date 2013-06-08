@@ -66,6 +66,10 @@
 												<a class="link_button" href="#springUrl("/adjustment/wizard/${calculation.id}")">#springMessage("adjustment.wizard")</a><br>
 												<a class="link_button" href="#springUrl("/adjustment/onepage/${calculation.id}")">#springMessage("adjustment.onepage")</a>
 											</div>
+											<button class="export_input_button link_button">Export</button>
+											<div class="export_input_choose">
+												<a class="link_button" href="#springUrl("/export/${calculation.id}/xml-input")">XML</a>
+											</div>
 										</div>
 									</div>
 

@@ -54,7 +54,13 @@ $(document).ready(function() {
 			
 			jQuery('.edit_button').click(function() {
 				var $button = $(this);
-				$button.siblings().first().toggle();
+				$button.siblings('.edit_choose').toggle();
+				$button.toggleClass('pushed');
+			});
+			
+			jQuery('.export_input_button').click(function() {
+				var $button = $(this);
+				$button.siblings('.export_input_choose').toggle();
 				$button.toggleClass('pushed');
 			});
 

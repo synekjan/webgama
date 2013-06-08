@@ -1458,7 +1458,7 @@ p.not_added {
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) inset;
 }
 
-.edit_choose {
+.edit_choose, .export_input_choose {
 	display: none;
 	width: 100px;
 	height: 70px;
@@ -1474,7 +1474,16 @@ p.not_added {
 	z-index: 100;
 }
 
-.edit_choose a {
+.export_input_choose {
+	height: 35px;
+    top: 25px;
+    width: 80px;
+	right: -100px;
+	z-index: 99;
+}
+
+
+.edit_choose a, .export_input_choose a {
 	margin: 5px;
 	display: inline-block;
 }
@@ -1608,10 +1617,14 @@ p.not_added {
 }
 
 .delete_button {
-	position: absolute;
-	top: 135px;
-	left: 34px;
 	cursor: pointer;
+    position: absolute;
+    right: 80px;
+    top: 155px;
+}
+
+.export_input_button {
+	margin: 12px 0 5px 0;
 }
 
 .status_message {

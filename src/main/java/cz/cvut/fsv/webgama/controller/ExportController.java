@@ -96,6 +96,51 @@ public class ExportController extends MultiActionController {
 		return new ModelAndView("/export/html-preview", "htmlPreview", calculation.getOutput().getHtmlContent());
 	}
 
+	@RequestMapping(value = "/export/{id}/xml-input", method = RequestMethod.GET)
+	protected ModelAndView exportInputToXML(@PathVariable Long id, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		String username = request.getUserPrincipal().getName();
+
+		// Check if path variable is in database otherwise throw 404 HTTP error
+		if (id <= 0 || !calculationManager.isCalculationIdInDB(id)) {
+			throw new ResourceNotFoundException();
+		}
+		Calculation calculation = calculationManager.getCalculationById(id);
+		// Check if user has permission to edit
+		if (!calculationManager.hasUserPrivilegeToCalculation(id, username)) {
+			throw new PermissionDeniedException();
+		}
+
+		DateTime dt = new DateTime();
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyyMMdd-HHmm");
+		String filename = "gnu_gama_feed_" + fmt.print(dt);
+
+		File temporary = null;
+		try {
+			temporary = File.createTempFile(filename, ".gkf");
+			temporary.deleteOnExit();
+			FileUtils.writeStringToFile(temporary, calculation.getInput().getXmlContent());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		response.setContentType("text/xml");
+		response.setHeader("Content-Disposition", "attachment; filename=" + filename + ".gkf");
+		response.setContentLength(Long.valueOf(temporary.length()).intValue());
+
+		try (InputStream in = new FileInputStream(temporary); OutputStream out = response.getOutputStream();) {
+			FileCopyUtils.copy(in, out);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			temporary.delete();
+		}
+
+		logger.info(username + " downloads input part of calculation[" + id + "] as GKF.");
+		return null;
+	}
+
 	@RequestMapping(value = "/export/{id}/xml", method = RequestMethod.GET)
 	protected ModelAndView exportCalculationToXML(@PathVariable Long id, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -115,7 +160,7 @@ public class ExportController extends MultiActionController {
 		if (calculation.getOutput() == null) {
 			throw new ResourceNotFoundException();
 		}
-		
+
 		DateTime dt = new DateTime();
 		DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyyMMdd-HHmm");
 		String filename = "wexport_" + fmt.print(dt);
